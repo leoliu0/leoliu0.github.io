@@ -9,10 +9,11 @@ date:   2020-09-16 14:03:37 +1000
 <h4 style="color:DodgerBlue">on Products and Intellectual Properties</h4>
 
 Product Commercialization (with Wing Wah Tham and Elvira Sojli) [SSRN](https://google.com.au), [Data](https://google.com.au)
+Process Innovation (with Wing Wah Tham and Elvira Sojli) [SSRN](https://google.com.au), [Data](https://google.com.au)
 
-Patents to Products: a Machine Learning Approach (with Wing Wah Tham and Elvira Sojli) [SSRN](https://google.com.au), [Data](https://google.com.au)
+%% Patents to Products: a Machine Learning Approach (with Wing Wah Tham and Elvira Sojli) [SSRN](https://google.com.au), [Data](https://google.com.au)
 
-Intellectual Property and Products (with Wing Wah Tham and Elvira Sojli) [SSRN](https://google.com.au), [Data](https://google.com.au)
+%% Intellectual Property and Products (with Wing Wah Tham and Elvira Sojli) [SSRN](https://google.com.au), [Data](https://google.com.au)
 
 <h4 style="color:DodgerBlue">on Institutional Investors</h4>
 Hedge Fund Activism and Stakeholders' relationship (with Raphael Park) [SSRN](https://google.com.au), [Data](https://google.com.au)
