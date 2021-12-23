@@ -4,7 +4,11 @@
 
 layout: home
 ---
+<div>
 Leo is a recent doctorate graduate from the University of New South Wales, School of Banking and Finance. My main research interests are laid in the intersection of corporate finance, industry organization and innovation. I am interested in measuring innovation at the individual, firm and economy level and studying how innovation affects firm value, economic growth and productivity. In addition, I am interested in using advanced statistical and machine learning techniques in applied finance, economics and management studies.
-	
-<img align="right" src="leo.png" width="200">
 
+</div>
+
+<div>
+<img align="right" src="leo.png" width="200">
+</div>	
