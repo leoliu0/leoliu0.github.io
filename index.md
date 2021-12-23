@@ -7,5 +7,5 @@ layout: home
 
 Leo is a PhD graduate from UNSW Business School, School of Banking of Finance. His primary research interest is in applied industry organization and corporate finance.
 
-![](leo.png)
+<img align="left" src="leo.png" width="200">
 
