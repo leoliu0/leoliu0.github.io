@@ -10,5 +10,5 @@ Leo is a recent doctorate graduate from the University of New South Wales, Schoo
 </div>
 
 <div>
-<img align="right" src="leo.png" width="200">
+<img src="leo.png" width="200" style="float:right">
 </div>	
