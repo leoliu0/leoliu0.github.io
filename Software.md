@@ -4,6 +4,8 @@ title:  "Software"
 date:   2020-09-16 14:03:37 +1000
 ---
 
+I maintain several software that help people to be more productive. My most starred github repo helped thousands of people in both academics and industry professional
+
 <h4>
 <a href="https://github.com/leoliu0/cik-cusip-mapping">CIK to CUSIP Mapping</a>
 <h4/>
