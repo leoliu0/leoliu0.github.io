@@ -36,4 +36,3 @@ Leo is an early career fellow in school of banking and finance. My main research
 <img src="leo.png" width="200" style="float:right">
 </div>
 </div>
-
