@@ -18,6 +18,7 @@ __Conferences__
   - Asian Innovation Economics Conference 2021 (invitation-only)
   - Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only)
   - Macroeconomics Reading Group Workshop 2021 (invitation-only)
+  <hr />
 
 ### Common Ownership and Antitrust Enforcement: Evidence from the Court 
 #### *(with Huaizhou Li, Ronald Masulis and Jason Zein)*
@@ -28,12 +29,14 @@ __Conferences__
 
   - CELS (Conference for Empirical Legal Studies) 2022
   - FMCG (Financial Market and Corporate Governance) 2022
+  <hr />
 
 ### A New CEO General Ability Index
 #### *(with Lixiong Guo)*
 __Conferences__
   - FMA 2017 (Semi-final for best paper award)
   - CAFM 2017
+  <hr />
 
 ### Easy to Parse, Easy to Trade
 #### *(with Van Dang)*
