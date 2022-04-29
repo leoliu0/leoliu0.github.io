@@ -23,7 +23,3 @@ Extremely fast command line utility to replace and delete strings in text files
 <a href="https://github.com/leoliu0/fuzzprocess">Fuzzy Process (fuzzprocess)</a>
 <h4/>
 Deep-learning approach to find nearest K matches for two sets of names
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
