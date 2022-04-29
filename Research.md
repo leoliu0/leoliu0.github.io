@@ -12,10 +12,11 @@ __Conferences__
 
   - ABFER (Asian Bureau of Finance and Economic Research) 2022
   - CEPR (Centre for Economic Policy Reserch) Rising Asia 2022
+  - SEM (The Society for Economic Measurement) 2022
   - FMCG (Financial Market and Corporate Governance) 2022
   - Asian Innovation Economics Conference 2021 (invitation-only)
   - Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only)
-  - Macroecononics Reading Group Workshop 2021 (invitation-only)
+  - Macroeconomics Reading Group Workshop 2021 (invitation-only)
 
 ### Common Ownership and Antitrust Enforcement: Evidence from the Court (with Huaizhou Li, Ronald Masulis and Jason Zein)
 
