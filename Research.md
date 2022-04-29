@@ -33,9 +33,11 @@ __Conferences__
 
 ### A New CEO General Ability Index
 *(with Lixiong Guo)*
+
 __Conferences__
   - FMA 2017 (Semi-final for best paper award)
   - CAFM 2017
+  - AFBC 2017
   <hr />
 
 ### Easy to Parse, Easy to Trade
