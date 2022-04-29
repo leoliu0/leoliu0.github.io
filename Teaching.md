@@ -43,7 +43,6 @@ Student Feedback Highlights:
 - Advanced teaching skills and teachers' rich professional knowledge
 - The classroom is vivid and wonderful and the teacher is conscientious and responsible.
 - Leo is helpful in all assignments! He replies to questions very fast.
-- Leo is a fantastic lecturer – Knows his stuff, gets his point communicated very well
-– Fun guy to learn from as well
+- Leo is a fantastic lecturer – Knows his stuff, gets his point communicated very well. Fun guy to learn from as well
 - Leo is the best!
 - Being introduced to python was quite interesting and I feel this will be a very useful skill in my career.
