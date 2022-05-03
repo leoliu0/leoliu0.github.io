@@ -4,6 +4,8 @@
 
 layout: home
 ---
+{% seo %}
+
 <style type="text/css" media="screen">
 * {
   box-sizing: border-box;
