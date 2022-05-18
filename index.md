@@ -22,10 +22,7 @@ layout: home
 .right {
   flex: 30%;
 }
-div {
-  text-align: justify;
-  text-justify: auto;
-}
+
 </style>
 
 <div class="row">
