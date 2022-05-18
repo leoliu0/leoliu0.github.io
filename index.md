@@ -22,6 +22,11 @@ layout: home
 .right {
   flex: 30%;
 }
+
+div {
+  text-align: justify;
+  text-justify: inter-word;
+}
 </style>
 
 <div class="row">
