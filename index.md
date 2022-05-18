@@ -26,7 +26,7 @@ layout: home
 
 <div class="row">
 <div class="left">
-Leo is an early career fellow in school of banking and finance. My main research interests are laid in the intersection of corporate finance, industry organization and innovation. I am interested in measuring innovation at the individual, firm and economy level and studying how innovation affects firm value, economic growth and productivity. In addition, I am interested in using advanced statistical and machine learning techniques in applied finance, economics and management studies.
+Leo is an early career fellow in the school of banking and finance at UNSW Business. My main research interests are laid in the intersection of corporate finance, industry organization and innovation. I am interested in measuring innovation at the individual, firm and economy level and studying how innovation affects firm value, economic growth and productivity. In addition, I am interested in using advanced statistical and machine learning techniques in applied finance, economics and management studies.
 <br/>
 <a href="LeoLiu_CV.pdf">CV</a>
 
