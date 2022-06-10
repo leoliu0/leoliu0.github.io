@@ -27,7 +27,7 @@ layout: home
 
 <div class="row">
 <div class="left">
-Leo is an early career fellow in the school of banking and finance at UNSW Business School. My main research interests are innovation, entrepreneurship and organization studies. I am interested in measuring innovation and studying how innovation affects firm value, economic growth and productivity. I also study CEO characteristics and firm policy. In addition, I am interested in using advanced statistical and machine learning techniques in applied finance, economics and management studies.
+Leo is an early career fellow at the UNSW Business School. My main research interests are innovation, entrepreneurship and organization studies. I am interested in measuring innovation and studying how innovation affects firm value, economic growth and productivity. I also study CEO characteristics and firm policy. In addition, I am interested in using advanced statistical and machine learning techniques in applied finance, economics and management studies.
 <br/>
 <a href="LeoLiu_CV.pdf">CV</a>
 
