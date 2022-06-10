@@ -45,6 +45,7 @@ __Conferences__
 
 ### Socially Engaged CEO
 *(with Tony Cai, Hao Zhang)* 
+  <hr />
 
 <!-- In the collaborative efforts to combat climate change and environmental threats, CEOs of large corporations play an important role as they command a large fraction of the economy's assets. We document that companies led by CEOs with working experience in the non-profit sectors have better ESG ratings, more ESG engagement actions such as initiating environmental/social programs, emitting less toxic chemicals and developing more innovations for pollution abatement and production of renewable energies. Despite these efforts for public goods, they do not have worse firm performance than their counterparts without non-profit working experiences. These CEOs' efforts are recognized by society by receiving more green-related awards. We also establish causality using the exogenous turnovers of those socially engaged CEOs. -->
 
