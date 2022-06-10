@@ -43,7 +43,7 @@ __Conferences__
   - AFBC 2017
   <hr />
 
-### Socially Engaged CEO
+### Socially-Engaged CEOs
 *(with Tony Cai, Hao Zhang)* 
   <hr />
 
