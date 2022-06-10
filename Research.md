@@ -11,6 +11,7 @@ We propose a new time-varying measure of advanced manufacturing and process inno
 
 __Conferences__
 
+  - AIEA-NBER Conference on Innovation and Entrepreneurship
   - ABFER (Asian Bureau of Finance and Economic Research) 2022
   - CEPR (Centre for Economic Policy Reserch) Rising Asia 2022
   - EARIE (European Association for Research in Industrial Economics) 2022
