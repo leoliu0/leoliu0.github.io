@@ -35,7 +35,7 @@ __Conferences__
 
 
 ### A New CEO General Ability Index
-*(with Lixiong Guo)*
+*(with Lixiong Guo and Shawn Mobbs)*
 
 __Conferences__
   - FMA 2017 (Semi-final for best paper award)
