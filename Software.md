@@ -13,7 +13,7 @@ Provide linking files between CIK and CUSIP using 13G and 13F filings.
 <h4>
 <a href="404.html">USPTO full text database</a>
 <h4/>
-Provide OCR full text data for pre-1975 USPTO patents. They have a great improvement in quality and coverage in those in Google Patents
+Provide OCR full text data for pre-1975 USPTO patents. They have a great improvement in quality and coverage for those in Google Patents
 
 <h4>
 <a href="https://github.com/leoliu0/name_matching">Name Matching</a>
