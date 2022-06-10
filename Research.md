@@ -11,7 +11,7 @@ We propose a new time-varying measure of advanced manufacturing and process inno
 
 __Conferences__
 
-  - AIEA-NBER Conference on Innovation and Entrepreneurship
+  - AIEA-NBER Conference on Innovation and Entrepreneurship 2022
   - ABFER (Asian Bureau of Finance and Economic Research) 2022
   - CEPR (Centre for Economic Policy Reserch) Rising Asia 2022
   - EARIE (European Association for Research in Industrial Economics) 2022
@@ -33,6 +33,7 @@ __Conferences__
   - FMCG (Financial Market and Corporate Governance) 2022
   <hr />
 
+
 ### A New CEO General Ability Index
 *(with Lixiong Guo)*
 
@@ -41,6 +42,11 @@ __Conferences__
   - CAFM 2017
   - AFBC 2017
   <hr />
+
+### Socially Engaged CEO
+*(with Tony Cai, Hao Zhang)* 
+
+<!-- In the collaborative efforts to combat climate change and environmental threats, CEOs of large corporations play an important role as they command a large fraction of the economy's assets. We document that companies led by CEOs with working experience in the non-profit sectors have better ESG ratings, more ESG engagement actions such as initiating environmental/social programs, emitting less toxic chemicals and developing more innovations for pollution abatement and production of renewable energies. Despite these efforts for public goods, they do not have worse firm performance than their counterparts without non-profit working experiences. These CEOs' efforts are recognized by society by receiving more green-related awards. We also establish causality using the exogenous turnovers of those socially engaged CEOs. -->
 
 ### Easy to Parse, Easy to Trade
 *(with Van Dang)*
