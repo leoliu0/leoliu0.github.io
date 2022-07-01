@@ -43,7 +43,7 @@ __Conferences__
   - AFBC 2017
   <hr />
 
-### Socially-Engaged CEOs
+### The Pro-social Management Style
 *(with Tony Cai, Hao Zhang)* 
   <hr />
 
