@@ -50,4 +50,7 @@ Leo is an early career fellow at the UNSW Business School. My main research inte
 
 <p>May 2022:  My advanced manufacturing paper got into CEPR Rising Asia conference. Pitty it's online, wanted to go to Japan again!</p>
 
+<p>April 2022:  I will be presenting my advanced manufacturing paper in society for economic measurement conference in August. Never been to Canada, very excited. Also I will be presenting & discuss in FMCG from Monash University. Good to see my coauthor Will Li will also present our paper on common ownership there!</p>
+
+
 
