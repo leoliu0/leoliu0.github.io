@@ -38,9 +38,9 @@ Leo is an early career fellow at the UNSW Business School. My main research inte
 
 <h3> What's New?</h3>
 
-June 2022: My advanced manufacturing paper got into AIEA-NBER conference. My first NBER conference ^^. It has also been presented in the ABFER, Thanks to Professor Po-Hsuan Hsu for great feedback!
+<p>June 2022: My advanced manufacturing paper got into AIEA-NBER conference. My first NBER conference ^^. It has also been presented in the ABFER, Thanks to Professor Po-Hsuan Hsu for great feedback!</p>
 
-May 2022:  My advanced manufacturing paper got into CEPR Rising Asia conference. Pitty it's online, wanted to go to Japan again!
+<p>May 2022:  My advanced manufacturing paper got into CEPR Rising Asia conference. Pitty it's online, wanted to go to Japan again!</p>
 
 
 </div>
