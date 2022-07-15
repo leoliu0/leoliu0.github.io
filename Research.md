@@ -16,8 +16,8 @@ __Conferences__
   - CEPR (Centre for Economic Policy Reserch) Rising Asia 2022
   - EARIE (European Association for Research in Industrial Economics) 2022
   - SEM (The Society for Economic Measurement) 2022
-    - RMI (Research Management Institute) 2022 
-    - SETA (Symposium on Econometric Theory and Applications) 2022
+  - RMI (Research Management Institute) 2022 
+  - SETA (Symposium on Econometric Theory and Applications) 2022
   - FMCG (Financial Market and Corporate Governance) 2022
   - Asian Innovation Economics Conference 2021 (invitation-only)
   - Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only)
