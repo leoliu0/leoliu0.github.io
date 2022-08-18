@@ -32,6 +32,7 @@ An increasing number of publicly-owned rival firms are jointly held by a small g
 
 __Conferences__
 
+  - FIRN 2022
   - CELS (Conference for Empirical Legal Studies) 2022
   - FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
   <hr />
