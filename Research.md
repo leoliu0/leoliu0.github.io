@@ -48,8 +48,8 @@ __Conferences__
   - AFBC 2017
   <hr />
 
-### The Pro-social Management Style
-*(with Tony Cai, Hao Zhang)* 
+### Is ESG a Management Style?
+*(with Tony Cai, Jason Zein and Hao Zhang)* 
 
 __Conferences__
   - FMA Asia 2022 
