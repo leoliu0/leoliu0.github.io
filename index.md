@@ -46,7 +46,7 @@ Leo is an early career fellow at the UNSW Business School. My main research inte
 
 <h3> What's New?</h3>
 
-<p>Sep 2022: Busy with Conferences: My Common Ownership Paper got into FIRN 2022, see you in Hamilton Island! Three papers got into FMA Asia, good that it is in Melbourne this year!</p>
+<p>Sep 2022: Busy with Conferences: My Common Ownership Paper got into FIRN 2022, see you in Hamilton Island! Three papers got into FMA Asia in Melbourne and AFBC in Sydney, two conferences in a row in December!</p>
 
 <p>July 2022: My advanced manufacturing paper got into AEA (American Economic Association) 2023 conference in New Orleans! </p>
 
