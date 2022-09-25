@@ -27,7 +27,7 @@ layout: home
 
 <div class="row">
 <div class="left">
-Leo is a lecturer of finance at the University of Technology, Sydney. My main research interests are innovation, entrepreneurship and organization studies. I am interested in measuring innovation and studying how innovation affects firm value, economic growth and productivity. I am also interested in how CEO management style, characteristics and skills lead to different firm policies and outcomes. In addition, I apply advanced statistical and machine learning techniques in applied finance, economics and management studies.
+Leo is a lecturer (assistant professor) of finance at the University of Technology, Sydney. My main research interests are innovation, entrepreneurship and organization studies. I am interested in measuring innovation and studying how innovation affects firm value, economic growth and productivity. I am also interested in how CEO management style, characteristics and skills lead to different firm policies and outcomes. In addition, I apply advanced statistical and machine learning techniques in applied finance, economics and management studies.
 <br/>
 <a href="LeoLiu_CV.pdf">CV</a>
 
