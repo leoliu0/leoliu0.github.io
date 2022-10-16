@@ -29,7 +29,7 @@ __Conferences__
 ### Common Ownership and Antitrust Enforcement: Evidence from the Court 
 *(with Huaizhou Li, Ronald Masulis and Jason Zein)*
 
-An increasing number of publicly-owned rival firms are jointly held by a small group of large institutional investors. This has led to serious concerns regarding the economic implications of such common ownership. We analyze U.S. legal cases to uncover links between common ownership and antitrust litigation. This approach allows us to establish a direct connection between common ownership and anti-competitive product market behavior. We empirically show that there is a significant positive relationship between common ownership and the probability that a pair of firms face the same antitrust prosecution. We use mergers between financial institutions as exogenous variations in common ownership to provide causal evidence on this proposed relation. We also show that firm-pairs subject to antitrust litigation are characterized by more socially connected directors, pointing to a possible coordination mechanism.
+An increasing number of publicly-owned rival firms are jointly held by a small group of large investors. This has led to serious concerns regarding the anti-competitive effects of such common ownership. We investigate U.S. antitrust legal cases to see if common ownership leads to serious antitrust concerns. We empirically show that there is a significant positive relationship between common ownership and the probability that a pair of firms face the same antitrust prosecution. We use mergers between financial institutions as exogenous variations in common ownership to provide causal evidence on this proposed relation. In addition, we find that existing level of antitrust enforcement is unlikely to deter the anti-competitive effect of common ownership.
 
 __Conferences__
 
@@ -40,6 +40,14 @@ __Conferences__
   - FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
   <hr />
 
+### Is ESG a Management Style?
+*(with Tony Cai, Jason Zein and Hao Zhang)* 
+<!-- In the collaborative efforts to combat climate change and environmental threats, CEOs of large corporations play an important role as they command a large fraction of the economy's assets. We document that companies led by CEOs with working experience in the non-profit sectors have better ESG ratings, more ESG engagement actions such as initiating environmental/social programs, emitting less toxic chemicals and developing more innovations for pollution abatement and production of renewable energies. Despite these efforts for public goods, they do not have worse firm performance than their counterparts without non-profit working experiences. These CEOs' efforts are recognized by society by receiving more green-related awards. We also establish causality using the exogenous turnovers of those socially engaged CEOs. -->
+
+__Conferences__
+  - FMA Asia 2022 
+  - AFBC 2022
+  <hr />
 
 ### A New CEO General Ability Index
 *(with Lixiong Guo and Shawn Mobbs)*
@@ -50,15 +58,6 @@ __Conferences__
   - AFBC 2017
   <hr />
 
-### Is ESG a Management Style?
-*(with Tony Cai, Jason Zein and Hao Zhang)* 
-
-__Conferences__
-  - FMA Asia 2022 
-  - AFBC 2022
-  <hr />
-
-<!-- In the collaborative efforts to combat climate change and environmental threats, CEOs of large corporations play an important role as they command a large fraction of the economy's assets. We document that companies led by CEOs with working experience in the non-profit sectors have better ESG ratings, more ESG engagement actions such as initiating environmental/social programs, emitting less toxic chemicals and developing more innovations for pollution abatement and production of renewable energies. Despite these efforts for public goods, they do not have worse firm performance than their counterparts without non-profit working experiences. These CEOs' efforts are recognized by society by receiving more green-related awards. We also establish causality using the exogenous turnovers of those socially engaged CEOs. -->
 
 ### Easy to Parse, Easy to Trade
 *(with Van Dang)*
