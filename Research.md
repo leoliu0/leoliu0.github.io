@@ -20,6 +20,7 @@ __Conferences__
   - RMI (Research Management Institute) 2022 
   - SETA (Symposium on Econometric Theory and Applications) 2022
   - AFBC 2022
+  - FRIN Corporate Finance 2022
   - FMCG (Financial Market and Corporate Governance) 2022
   - Asian Innovation Economics Conference 2021 (invitation-only)
   - Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only)
