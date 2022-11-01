@@ -4,7 +4,7 @@ title:  "Research"
 date:   2020-09-16 14:03:37 +1000
 ---
 
-### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth (Job Market Paper) 
+### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth
 *(with Elvira Sojli and Wing Wah Tham)*
 
 We propose new time-varying measures of advanced manufacturing and process innovations based on patent invention claims and titles from 1850 to 2019 across 51 countries. Using this measure, we provide evidence that these innovations are important for firm and aggregate economic growth through technological spillover to product innovations and increased profitability. We find that patents with advanced processes have higher forward citations and economic value than product patents of the same technology class and cohort. Firms with higher quality process innovation are associated with higher profits, sales, capital, employment, and total factor productivity in the short run, while product innovation plays a larger role in the longer run. At the aggregate level, both advanced manufacturing and product innovations are positively related to US economic growth. In cross-country analysis, we find that product innovation is more important than process innovation for emerging countries with low labor costs for growth convergence towards the US economy, but the opposite holds for productivity.
@@ -41,7 +41,7 @@ __Conferences__
   - FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
   <hr />
 
-### Is ESG a Management Style?
+### Is ESG a Management Style? (Under Review)
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
 <!-- In the collaborative efforts to combat climate change and environmental threats, CEOs of large corporations play an important role as they command a large fraction of the economy's assets. We document that companies led by CEOs with working experience in the non-profit sectors have better ESG ratings, more ESG engagement actions such as initiating environmental/social programs, emitting less toxic chemicals and developing more innovations for pollution abatement and production of renewable energies. Despite these efforts for public goods, they do not have worse firm performance than their counterparts without non-profit working experiences. These CEOs' efforts are recognized by society by receiving more green-related awards. We also establish causality using the exogenous turnovers of those socially engaged CEOs. -->
 
