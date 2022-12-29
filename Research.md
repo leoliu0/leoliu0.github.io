@@ -1,7 +1,6 @@
 ---
 layout: page
 title:  "Research"
-date:   2020-09-16 14:03:37 +1000
 ---
 
 ### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth
@@ -41,9 +40,10 @@ __Conferences__
   - FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
   <hr />
 
-### Is ESG a Management Style? (Under Review)
+### Is ESG a Management Style? (Under Review) <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN version</a>
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
-<!-- In the collaborative efforts to combat climate change and environmental threats, CEOs of large corporations play an important role as they command a large fraction of the economy's assets. We document that companies led by CEOs with working experience in the non-profit sectors have better ESG ratings, more ESG engagement actions such as initiating environmental/social programs, emitting less toxic chemicals and developing more innovations for pollution abatement and production of renewable energies. Despite these efforts for public goods, they do not have worse firm performance than their counterparts without non-profit working experiences. These CEOs' efforts are recognized by society by receiving more green-related awards. We also establish causality using the exogenous turnovers of those socially engaged CEOs. -->
+
+Can better firm ESG policies be attributed to a CEO’s style? We find that firms led by CEOs with not-for-profit sector work experience (socially engaged CEOs) possess better ESG ratings and superior real ESG outcomes. They receive higher satisfaction ratings from their employees, develop more green innovations, and have lower harmful emissions. Mirroring the rise of ESG, the proportion of socially engaged CEOs has increased four-fold over the last 20 years. While corporate boards appear to be increasingly selecting these CEOs to enhance their ESG performance, we show that these effects can, to some extent, also be attributed to a causal CEO style. Overall, our results suggest that career experience serving the interests of a broader group of stakeholders in the not-for-profit setting better equips CEOs to achieve corporate ESG objectives
 
 __Conferences__
   - FMA Asia 2022 
