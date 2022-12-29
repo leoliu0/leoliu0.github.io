@@ -40,8 +40,9 @@ __Conferences__
   - FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
   <hr />
 
-### Is ESG a Management Style? (Under Review) 
+### Is ESG a Management Style? (under review)
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
+
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN version</a>
 
