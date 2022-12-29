@@ -40,8 +40,10 @@ __Conferences__
   - FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
   <hr />
 
-### Is ESG a Management Style? (Under Review) <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN version</a>
+### Is ESG a Management Style? (Under Review) 
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
+
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN version</a>
 
 Can better firm ESG policies be attributed to a CEO’s style? We find that firms led by CEOs with not-for-profit sector work experience (socially engaged CEOs) possess better ESG ratings and superior real ESG outcomes. They receive higher satisfaction ratings from their employees, develop more green innovations, and have lower harmful emissions. Mirroring the rise of ESG, the proportion of socially engaged CEOs has increased four-fold over the last 20 years. While corporate boards appear to be increasingly selecting these CEOs to enhance their ESG performance, we show that these effects can, to some extent, also be attributed to a causal CEO style. Overall, our results suggest that career experience serving the interests of a broader group of stakeholders in the not-for-profit setting better equips CEOs to achieve corporate ESG objectives
 
