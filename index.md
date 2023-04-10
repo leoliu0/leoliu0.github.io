@@ -46,7 +46,11 @@ Leo is a lecturer (assistant professor) of finance at the University of Technolo
 
 <h3> What's New?</h3>
 
-<p>Sep 2022: Busy with Conferences: My Common Ownership Paper got into FIRN 2022, see you in Hamilton Island! Three papers got into FMA Asia in Melbourne and AFBC in Sydney, two conferences in a row in December!</p>
+<h4> 2023 </h4>
+<p>April 2022: My paper on Green Innovation got into CICF 2023 in Shanghai! </p>
+
+<h4> 2022 </h4>
+<p>Sep 2022: Busy with Conferences: My Common Ownership Paper got into FIRN 2022, see you in Hamilton Island! Three papers got into FMA Asia in Melbourne and AFBC in Sydney, two conferences in a row in December!
 
 <p>July 2022: My advanced manufacturing paper got into AEA (American Economic Association) 2023 conference in New Orleans! </p>
 
