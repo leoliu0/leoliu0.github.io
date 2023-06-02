@@ -47,6 +47,7 @@ Leo is a lecturer (assistant professor) of finance at the University of Technolo
 <h3> What's New?</h3>
 
 <h4> 2023 </h4>
+<p>June 2022: My paper on Green Innovation got into AIEA-NBER 2023 in Taiwan! </p>
 <p>April 2022: My paper on Green Innovation got into CICF 2023 in Shanghai! </p>
 
 <h4> 2022 </h4>
