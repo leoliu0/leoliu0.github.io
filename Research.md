@@ -13,14 +13,6 @@ __Conferences__
 
   AEA (American Economic Association), 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only)
 
-#### Common Ownership and Antitrust Enforcement: Evidence from the Court 
-*(with Huaizhou Li, Ronald Masulis and Jason Zein)*
-
-An increasing number of publicly-owned rival firms are jointly held by a small group of large investors. This has led to serious concerns regarding the anti-competitive effects of such common ownership. We investigate U.S. antitrust legal cases to see if common ownership leads to serious antitrust concerns. We empirically show that there is a significant positive relationship between common ownership and the probability that a pair of firms face the same antitrust prosecution. We use mergers between financial institutions as exogenous variations in common ownership to provide causal evidence on this proposed relation. In addition, we find that existing level of antitrust enforcement is unlikely to deter the anti-competitive effect of common ownership.
-
-__Conferences__
-FIRN 2022, FMA Asia 2022, CELS (Conference for Empirical Legal Studies) 2022, AFBC 2022, FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
-
 #### Is ESG a Management Style? *(under review)*
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
 
@@ -29,7 +21,16 @@ FIRN 2022, FMA Asia 2022, CELS (Conference for Empirical Legal Studies) 2022, AF
 Can better firm ESG policies be attributed to a CEO’s style? We find that firms led by CEOs with not-for-profit sector work experience (socially engaged CEOs) possess better ESG ratings and superior real ESG outcomes. They receive higher satisfaction ratings from their employees, develop more green innovations, and have lower harmful emissions. Mirroring the rise of ESG, the proportion of socially engaged CEOs has increased four-fold over the last 20 years. While corporate boards appear to be increasingly selecting these CEOs to enhance their ESG performance, we show that these effects can, to some extent, also be attributed to a causal CEO style. Overall, our results suggest that career experience serving the interests of a broader group of stakeholders in the not-for-profit setting better equips CEOs to achieve corporate ESG objectives
 
 __Conferences__
-FMA Asia 2022, AFBC 2022
+AFA 2024 (scheduled), FMA Asia 2022, AFBC 2022
+
+
+#### Common Ownership and Antitrust Enforcement: Evidence from the Court 
+*(with Huaizhou Li, Ronald Masulis and Jason Zein)*
+
+An increasing number of publicly-owned rival firms are jointly held by a small group of large investors. This has led to serious concerns regarding the anti-competitive effects of such common ownership. We investigate U.S. antitrust legal cases to see if common ownership leads to serious antitrust concerns. We empirically show that there is a significant positive relationship between common ownership and the probability that a pair of firms face the same antitrust prosecution. We use mergers between financial institutions as exogenous variations in common ownership to provide causal evidence on this proposed relation. In addition, we find that existing level of antitrust enforcement is unlikely to deter the anti-competitive effect of common ownership.
+
+__Conferences__
+FIRN 2022, FMA Asia 2022, CELS (Conference for Empirical Legal Studies) 2022, AFBC 2022, FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
 
 ### A New CEO General Ability Index
 *(with Lixiong Guo and Shawn Mobbs)*
