@@ -47,6 +47,8 @@ Leo is a lecturer (assistant professor) of finance at the University of Technolo
 <h3> What's New?</h3>
 
 <h4> 2023 </h4>
+
+<p>July 2022: My Github repo on CIK-CUSIP reaches 100 stars!! Glad many people find it useful! </p>
 <p>July 2022: My paper on CEO and ESG got into AFA 2024 in Texas! </p>
 <p>June 2022: My paper on Green Innovation got into AIEA-NBER 2023 in Taiwan! </p>
 <p>April 2022: My paper on Green Innovation got into CICF 2023 in Shanghai! </p>
