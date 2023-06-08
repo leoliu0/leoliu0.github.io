@@ -12,6 +12,7 @@ We propose new time-varying measures of advanced manufacturing and process innov
 __Conferences__
 
   AEA (American Economic Association), 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only)
+<hr>
 
 #### Is ESG a Management Style? *(under review)*
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
@@ -22,7 +23,7 @@ Can better firm ESG policies be attributed to a CEO’s style? We find that firm
 
 __Conferences__
 AFA 2024 (scheduled), FMA Asia 2022, AFBC 2022
-
+<hr>
 
 #### CEO Experience and Value Creation: Evidence from Green Lab Locations
 
@@ -30,6 +31,7 @@ Green technologies are imperative for green growth. We show that CEOs with more 
 
 __Conferences__
 CICF 2023, AIEA-NBER 2023
+<hr>
 
 #### Common Ownership and Antitrust Enforcement: Evidence from the Court 
 *(with Huaizhou Li, Ronald Masulis and Jason Zein)*
@@ -38,6 +40,7 @@ An increasing number of publicly-owned rival firms are jointly held by a small g
 
 __Conferences__
 FIRN 2022, FMA Asia 2022, CELS (Conference for Empirical Legal Studies) 2022, AFBC 2022, FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
+<hr>
 
 ### A New CEO General Ability Index
 *(with Lixiong Guo and Shawn Mobbs)*
