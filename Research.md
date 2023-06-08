@@ -24,6 +24,13 @@ __Conferences__
 AFA 2024 (scheduled), FMA Asia 2022, AFBC 2022
 
 
+#### CEO Experience and Value Creation: Evidence from Green Lab Locations
+
+Green technologies are imperative for green growth. We show that CEOs with more agglomeration experience are critical for opening green R\&D labs that exploit potential productivity and agglomeration benefits. Using exogenous shocks to non-focal green inventor mobility surrounding a focal firm's research labs, we find that the concentration of cutting-edge green inventors improves the focal firm’s green innovation quality. Using CEO$\times$firm fixed effects, we identify a significant impact of CEOs' time-varying experience in agglomeration economies on lab location and innovation success through knowledge spillovers and better inventor-firm matching. Our findings suggest that insiders are key to the firm’s green innovation success.
+
+__Conferences__
+CICF 2023, AIEA-NBER 2023
+
 #### Common Ownership and Antitrust Enforcement: Evidence from the Court 
 *(with Huaizhou Li, Ronald Masulis and Jason Zein)*
 
