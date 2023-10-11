@@ -14,7 +14,7 @@ __Conferences__
   AEA (American Economic Association), 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only)
 <hr>
 
-#### Is ESG a Management Style? *(under review)*
+#### Is ESG a Management Style? 
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN version</a>
@@ -25,7 +25,7 @@ __Conferences__
 AFA 2024 (scheduled), FMA Asia 2022, AFBC 2022
 <hr>
 
-#### CEO Experience and Value Creation: Evidence from Green Lab Locations
+#### CEO Experience and Value Creation: Evidence from Green Lab Locations *(Under Review)*
 
 Green technologies are imperative for green growth. We show that CEOs with more agglomeration experience are critical for opening green R\&D labs that exploit potential productivity and agglomeration benefits. Using exogenous shocks to non-focal green inventor mobility surrounding a focal firm's research labs, we find that the concentration of cutting-edge green inventors improves the focal firm’s green innovation quality. Using CEO$\times$firm fixed effects, we identify a significant impact of CEOs' time-varying experience in agglomeration economies on lab location and innovation success through knowledge spillovers and better inventor-firm matching. Our findings suggest that insiders are key to the firm’s green innovation success.
 
