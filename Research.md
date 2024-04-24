@@ -42,13 +42,6 @@ __Conferences__
 FIRN 2022, FMA Asia 2022, CELS (Conference for Empirical Legal Studies) 2022, AFBC 2022, FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
 <hr>
 
-### A New CEO General Ability Index
-*(with Lixiong Guo and Shawn Mobbs)*
-
-__Conferences__
-  FMA 2017 (Semi-final for best paper award), CAFM 2017, AFBC 2017
-
-
 [jekyll-docs]: https://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll
 [jekyll-talk]: https://talk.jekyllrb.com/
