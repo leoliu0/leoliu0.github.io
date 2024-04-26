@@ -17,11 +17,11 @@ layout: home
 
 .left {
   flex: 70%;
-  margin-right: 20px; 
 }
 
 .right {
   flex: 30%;
+  margin-left: 20px; 
 }
 
 </style>
