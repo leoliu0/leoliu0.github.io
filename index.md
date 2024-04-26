@@ -17,6 +17,7 @@ layout: home
 
 .left {
   flex: 70%;
+  margin-right: 20px; 
 }
 
 .right {
