@@ -22,7 +22,7 @@ __Conferences__
 This paper provides evidence that managerial styles, represented by manager fixed effects and working experience in the non-profit sector, significantly impact corporate Environmental, Social, and Governance (ESG) practices. By applying the fixed-effect approach from Bertrand and Schoar (2003), we find that managerial innate characteristics can explain a substantial portion of variations in corporate ESG policies and outcomes, such as CSR ratings, development of green innovation, and toxic chemical emissions. Additionally, we reveal a strong correlation between CEOs' working experience in non-profit organizations (NFPs) and these fixed effects. CEOs equipped with such experience exhibit enhanced ESG outcomes. It appears that corporate boards are increasingly selecting CEOs with a background in NFP, with the aim of augmenting their ESG performance. However, our evidence indicates that these effects can, to a certain degree, be ascribed to the CEO's causal style. In summary, our findings emphasize the role of managerial styles in influencing corporate ESG policies and demonstrate that prior experience catering to diverse stakeholders in the not-for-profit sector better equips CEOs to achieve corporate ESG goals.
 
 __Conferences__
-AFA 2024 (scheduled), FMA Asia 2022, AFBC 2022
+AFA 2024, FMA Asia 2022, AFBC 2022
 <hr>
 
 #### CEO Experience and Value Creation: Evidence from Green Lab Locations *(Under Review)*
@@ -30,7 +30,7 @@ AFA 2024 (scheduled), FMA Asia 2022, AFBC 2022
 Green technologies are imperative for green growth. We show that CEOs with more agglomeration experience are critical for opening green R\&D labs that exploit potential productivity and agglomeration benefits. Using exogenous shocks to non-focal green inventor mobility surrounding a focal firm's research labs, we find that the concentration of cutting-edge green inventors improves the focal firm’s green innovation quality. Using CEO$\times$firm fixed effects, we identify a significant impact of CEOs' time-varying experience in agglomeration economies on lab location and innovation success through knowledge spillovers and better inventor-firm matching. Our findings suggest that insiders are key to the firm’s green innovation success.
 
 __Conferences__
-CICF 2023, AIEA-NBER 2023
+EFA 2024, CICF 2023, AIEA-NBER 2023
 <hr>
 
 #### Common Ownership and Antitrust Enforcement: Evidence from the Court 
