@@ -13,15 +13,17 @@ layout: home
 
 .row {
   display: flex;
+  margin-left: 20px; /* Adds space on the left side of the entire row */
+  margin-right: 20px; /* Adds space on the right side of the entire row */
 }
 
 .left {
   flex: 70%;
+  padding-right: 20px; /* Adds space between the .left and .right containers */
 }
 
 .right {
   flex: 30%;
-  margin-left: 20px; 
 }
 
 </style>
@@ -41,5 +43,3 @@ I am an Assistant Professor of Finance at the University of Technology, Sydney, 
 <br/>
 
 </div>
-
-
