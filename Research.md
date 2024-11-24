@@ -3,6 +3,10 @@ layout: page
 title:  "Research"
 ---
 
+body {
+    width: 120%;
+}
+
 ### Working Papers:
 #### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth *(Revising for JFE)*
 *(with Elvira Sojli and Wing Wah Tham)*
