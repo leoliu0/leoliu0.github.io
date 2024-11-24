@@ -26,6 +26,7 @@ AFA 2024, FMA Asia 2022, AFBC 2022
 
 #### AI Patents *(Revising for RoF)*
 *(with Tianyu Cai and Raphael Park)*
+<hr>
 
 #### CEO Experience and Value Creation: Evidence from Green Lab Locations *(Under Review)*
 
