@@ -6,6 +6,7 @@ title:  "Research"
 ### Working Papers:
 #### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth *(Revising for JFE)*
 *(with Elvira Sojli and Wing Wah Tham)*
+
 <a href="https://papers.ssrn.com/abstract=4104903">SSRN</a>
 
 __Conferences__
@@ -16,7 +17,7 @@ __Conferences__
 #### Is ESG a Management Style? 
 *(with Tony Cai, Jason Zein and Hao Zhang)* 
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN version</a>
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">SSRN</a>
 
 This paper provides evidence that managerial styles, represented by manager fixed effects and working experience in the non-profit sector, significantly impact corporate Environmental, Social, and Governance (ESG) practices. By applying the fixed-effect approach from Bertrand and Schoar (2003), we find that managerial innate characteristics can explain a substantial portion of variations in corporate ESG policies and outcomes, such as CSR ratings, development of green innovation, and toxic chemical emissions. Additionally, we reveal a strong correlation between CEOs' working experience in non-profit organizations (NFPs) and these fixed effects. CEOs equipped with such experience exhibit enhanced ESG outcomes. It appears that corporate boards are increasingly selecting CEOs with a background in NFP, with the aim of augmenting their ESG performance. However, our evidence indicates that these effects can, to a certain degree, be ascribed to the CEO's causal style. In summary, our findings emphasize the role of managerial styles in influencing corporate ESG policies and demonstrate that prior experience catering to diverse stakeholders in the not-for-profit sector better equips CEOs to achieve corporate ESG goals.
 
