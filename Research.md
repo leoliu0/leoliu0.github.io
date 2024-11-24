@@ -6,12 +6,11 @@ title:  "Research"
 ### Working Papers:
 #### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth *(Revising for JFE)*
 *(with Elvira Sojli and Wing Wah Tham)*
-
-We propose new time-varying measures of advanced manufacturing and process innovations based on patent invention claims and titles from 1850 to 2019 across 51 countries. Using this measure, we provide evidence that these innovations are important for firm and aggregate economic growth through technological spillover to product innovations and increased profitability. We find that patents with advanced processes have higher forward citations and economic value than product patents of the same technology class and cohort. Firms with higher quality process innovation are associated with higher profits, sales, capital, employment, and total factor productivity in the short run, while product innovation plays a larger role in the longer run. At the aggregate level, both advanced manufacturing and product innovations are positively related to US economic growth. In cross-country analysis, we find that product innovation is more important than process innovation for emerging countries with low labor costs for growth convergence towards the US economy, but the opposite holds for productivity.
+<a href="https://papers.ssrn.com/abstract=4104903">SSRN</a>
 
 __Conferences__
 
-  AEA (American Economic Association), 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only)
+  AEA (American Economic Association),2024 & 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only)
 <hr>
 
 #### Is ESG a Management Style? 
@@ -24,6 +23,9 @@ This paper provides evidence that managerial styles, represented by manager fixe
 __Conferences__
 AFA 2024, FMA Asia 2022, AFBC 2022
 <hr>
+
+#### AI Patents *(Revising for RoF)*
+*(with Tianyu Cai and Raphael Park)*
 
 #### CEO Experience and Value Creation: Evidence from Green Lab Locations *(Under Review)*
 
