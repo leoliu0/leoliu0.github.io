@@ -1,11 +1,12 @@
 ---
 layout: page
 title:  "Research"
+<style>
+    body {
+        width: 120%;
+    }
+</style>
 ---
-
-body {
-    width: 120%;
-}
 
 ### Working Papers:
 #### Measuring Manufacturing and Process Innovation, Application to Productivity and Growth *(Revising for JFE)*
