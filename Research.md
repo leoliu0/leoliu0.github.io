@@ -1,11 +1,6 @@
 ---
 layout: page
 title:  "Research"
-<style>
-    body {
-        width: 120%;
-    }
-</style>
 ---
 
 ### Working Papers:
