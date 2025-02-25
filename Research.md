@@ -6,7 +6,7 @@ title:  "Research"
 ### Working Papers:
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227"> Foundational Processes and Growth </a>
 
- *(R&R JFE)*
+ *(R&R Journal of Financial Economics)*
 
 *(with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )*
 
@@ -27,14 +27,14 @@ AFA 2024, FMA Asia 2022, AFBC 2022
 
 #### AI Patents 
 
-*(Revising for RoF)*
+*(Revising for Review of Finance)*
 
 *(with Tianyu Cai and Raphael Park)*
 <hr>
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations  </a> 
 
-*(R&R MS)*
+*(R&R Management Science)*
 
 *(with Elvira Sojli and Wing Wah Tham)*
 
