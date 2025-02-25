@@ -4,16 +4,16 @@ title:  "Research"
 ---
 
 ### Working Papers:
-<a href="https://papers.ssrn.com/abstract=4104903">Measuring Manufacturing and Process Innovation, Application to Productivity and Growth</a>
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227"> Foundational Processes and Growth </a>
 
- *(Revising for JFE)*
+ *(R&R JFE)*
 
-*(with Elvira Sojli and Wing Wah Tham)*
+*(with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )*
 
 
-__Conferences__
+<!-- __Conferences__ -->
 
-  AEA (American Economic Association),2024 & 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only)
+  <!-- AEA (American Economic Association),2024 & 2023 AIEA-NBER Conference on Innovation and Entrepreneurship 2022, ABFER (Asian Bureau of Finance and Economic Research) 2022, CEPR (Centre for Economic Policy Research) Rising Asia 2022, EARIE (European Association for Research in Industrial Economics) 2022, SEM (The Society for Economic Measurement) 2022, RMI (Research Management Institute) 2022, SETA (Symposium on Econometric Theory and Applications) 2022, AFBC 2022, FRIN Corporate Finance 2022, FMCG (Financial Market and Corporate Governance), 2022 Asian Innovation Economics Conference 2021 (invitation-only), Business Financing and Banking Research Group Annual Workshop 2021 (invitation-only), Macroeconomics Reading Group Workshop 2021 (invitation-only) -->
 <hr>
 
 
