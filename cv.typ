@@ -1,4 +1,4 @@
-#show heading: set text(font: "New Computer Modern ")
+// #show heading: set text(font: "New Computer Modern ")
 
 #show link: underline
 #set page(
@@ -26,6 +26,20 @@ School of Banking and Finance \
 	
 *Bond University* #h(1fr) 2009 -- 2012 \
 Bachelor of Commerce
+
+== Working Papers
+#chiline()
+Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )
+
+_R&R Journal of Financial Economics_
+
+CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
+
+_R&R Management Science_
+
+AI Patents (with Tianyu Cai and Raphael Park)
+
+_(Reject & Resubmit Review of Finance)_
 
 == Working Experience
 #chiline()
