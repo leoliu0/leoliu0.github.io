@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global AI Patent Landscape by Era</title>
+    <title>Global AI Patent Landscape - Choropleth</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
@@ -12,21 +12,24 @@
             crossorigin=""></script>
 
     <style>
+        /* CSS Styles remain the same as before */
         body {
             font-family: sans-serif;
             line-height: 1.6;
             margin: 20px;
             padding: 0;
+            background-color: #f4f4f4;
         }
         h1, h2 {
             text-align: center;
             color: #333;
         }
         #map {
-            height: 500px; /* Adjust height as needed */
-            width: 90%;  /* Adjust width as needed */
-            margin: 10px auto; /* Center the map */
+            height: 550px;
+            width: 95%;
+            margin: 10px auto;
             border: 1px solid #ccc;
+            background-color: #fff;
         }
         .map-controls {
             text-align: center;
@@ -38,225 +41,302 @@
             font-size: 1em;
             cursor: pointer;
             border: 1px solid #ccc;
-            background-color: #f0f0f0;
+            background-color: #e9e9e9;
             border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+        .map-controls button:hover {
+             background-color: #d5d5d5;
         }
         .map-controls button.active {
-            background-color: #ddd;
+            background-color: #bbb;
             font-weight: bold;
-            border-color: #aaa;
+            border-color: #999;
         }
         .description {
             max-width: 800px;
             margin: 20px auto;
             padding: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #eee;
+            background-color: #fff;
+            border: 1px solid #ddd;
             border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         p {
             color: #555;
         }
         .legend {
-            padding: 6px 8px;
-            font: 14px Arial, Helvetica, sans-serif;
-            background: white;
-            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            font: 14px/1.5 Arial, Helvetica, sans-serif;
+            background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 5px;
-            line-height: 18px;
-             color: #555;
+            line-height: 20px;
+             color: #444;
+        }
+        .legend h4 {
+            margin: 0 0 5px;
+            color: #222;
+            text-align: center;
         }
         .legend i {
             width: 18px;
             height: 18px;
             float: left;
             margin-right: 8px;
-            opacity: 0.7;
+            opacity: 0.85;
+            border: 1px solid #ccc;
+        }
+        .leaflet-popup-content-wrapper {
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .leaflet-popup-content {
+            font-size: 1.1em;
+            color: #333;
+        }
+         .leaflet-popup-content b {
+            color: #0056b3;
+        }
+        .leaflet-popup-content span {
+            color: #666;
+            font-size: 0.9em;
+        }
+        /* Style for loading/error message */
+        #map-message {
+            text-align: center;
+            padding: 10px;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <h1>Global AI Patent Landscape by Era (Illustrative)</h1>
+    <h1>Global AI Patent Landscape - Choropleth (Illustrative)</h1>
 
-    <div id="map"></div>
+    <div id="map">
+        <div id="map-message">Loading map data...</div>
+    </div>
 
     <div class="map-controls">
         <button id="btn-1990" data-period="1990-2000">1990 - 2000</button>
         <button id="btn-2001" data-period="2001-2010">2001 - 2010</button>
         <button id="btn-2011" data-period="2011-Present" class="active">2011 - Present</button>
-         </div>
+    </div>
 
     <div class="description">
         <h2>About AI Patents and This Map</h2>
         <p>
-            Artificial Intelligence (AI) patents represent inventions utilizing AI techniques. Tracking these patents reveals innovation trends and geographic R&D concentration.
+            This map visualizes the estimated distribution of AI-related patent activity across different countries and time periods using a choropleth representation. Countries are colored based on the estimated volume of patents originating from or filed in that country during the selected era.
         </p>
         <p>
-            <strong>About this map:</strong> This interactive map visualizes the estimated number of AI-related patent filings/grants for different time periods. The size of the circle is proportional to the patent count, and the color indicates the relative volume (Red = High, Orange = Medium, Yellow = Low). Use the buttons above to select a time period. Click on a circle for details.
+            Use the buttons above to switch between time periods (1990-2000, 2001-2010, 2011-Present). Hover over a country to highlight it and see its name; click on a country to see its estimated patent count for the selected period.
         </p>
          <p>
-            <em><strong>Disclaimer:</strong> The data presented here is purely illustrative and randomly generated for demonstration purposes. It does not reflect actual, up-to-date AI patent statistics.</em>
+            <em><strong>Disclaimer:</strong> Patent data is illustrative and randomly generated for demonstration purposes, covering only a subset of countries shown. Real-world analysis requires precise data and methodologies.</em>
         </p>
     </div>
 
     <script>
-        // --- Map Initialization ---
-        var map = L.map('map').setView([20, 10], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // --- Placeholder Data by Time Period ---
-        // Structure: { 'period_key': [ { lat, lon, patents, region }, ... ] }
+        // --- Placeholder Patent Data by Country (ISO A3) and Time Period ---
+        // (Same as before)
         const patentDataByPeriod = {
-            '1990-2000': [
-                { lat: 38.9, lon: -77.0, patents: 5000, region: "USA (East Coast)" },
-                { lat: 37.7, lon: -122.4, patents: 7000, region: "USA (West Coast)" },
-                { lat: 35.6, lon: 139.6, patents: 6000, region: "Japan" },
-                { lat: 39.9, lon: 116.4, patents: 500, region: "China" },
-                { lat: 37.5, lon: 126.9, patents: 800, region: "South Korea" },
-                { lat: 51.5, lon: -0.1, patents: 1500, region: "United Kingdom" },
-                { lat: 48.8, lon: 2.3, patents: 1200, region: "France" },
-                { lat: 52.5, lon: 13.4, patents: 1800, region: "Germany" },
-                { lat: 43.6, lon: -79.3, patents: 900, region: "Canada" },
-                { lat: 47.3, lon: 8.5, patents: 700, region: "Switzerland" }
-            ],
-            '2001-2010': [
-                { lat: 38.9, lon: -77.0, patents: 18000, region: "USA (East Coast)" },
-                { lat: 37.7, lon: -122.4, patents: 22000, region: "USA (West Coast)" },
-                { lat: 35.6, lon: 139.6, patents: 15000, region: "Japan" },
-                { lat: 39.9, lon: 116.4, patents: 12000, region: "China" },
-                { lat: 37.5, lon: 126.9, patents: 10000, region: "South Korea" },
-                { lat: 51.5, lon: -0.1, patents: 7000, region: "United Kingdom" },
-                { lat: 48.8, lon: 2.3, patents: 6000, region: "France" },
-                { lat: 52.5, lon: 13.4, patents: 8000, region: "Germany" },
-                { lat: 43.6, lon: -79.3, patents: 5000, region: "Canada" },
-                { lat: 22.3, lon: 114.1, patents: 4000, region: "Hong Kong / Shenzhen Area" },
-                { lat: 19.0, lon: 72.8, patents: 2000, region: "India" },
-                { lat: -33.8, lon: 151.2, patents: 1500, region: "Australia" },
-                { lat: 47.3, lon: 8.5, patents: 3500, region: "Switzerland" }
-            ],
-            '2011-Present': [
-                { lat: 38.9, lon: -77.0, patents: 55000, region: "USA (East Coast)" },
-                { lat: 37.7, lon: -122.4, patents: 65000, region: "USA (West Coast)" },
-                { lat: 35.6, lon: 139.6, patents: 35000, region: "Japan" },
-                { lat: 39.9, lon: 116.4, patents: 95000, region: "China" }, // Increased China significantly
-                { lat: 37.5, lon: 126.9, patents: 30000, region: "South Korea" },
-                { lat: 51.5, lon: -0.1, patents: 25000, region: "United Kingdom" },
-                { lat: 48.8, lon: 2.3, patents: 22000, region: "France" },
-                { lat: 52.5, lon: 13.4, patents: 28000, region: "Germany" },
-                { lat: 43.6, lon: -79.3, patents: 18000, region: "Canada" },
-                { lat: 22.3, lon: 114.1, patents: 15000, region: "Hong Kong / Shenzhen Area" },
-                { lat: 19.0, lon: 72.8, patents: 10000, region: "India" },
-                { lat: -33.8, lon: 151.2, patents: 8000, region: "Australia" },
-                { lat: 47.3, lon: 8.5, patents: 12000, region: "Switzerland" }
-            ]
+            '1990-2000': { 'USA': 7000, 'CAN': 900, 'CHN': 500, 'JPN': 6000, 'KOR': 800, 'IND': 100, 'DEU': 1800, 'GBR': 1500, 'FRA': 1200, 'CHE': 700, 'AUS': 300 },
+            '2001-2010': { 'USA': 22000, 'CAN': 5000, 'CHN': 12000, 'JPN': 15000, 'KOR': 10000, 'IND': 2000, 'DEU': 8000, 'GBR': 7000, 'FRA': 6000, 'CHE': 3500, 'AUS': 1500 },
+            '2011-Present': { 'USA': 65000, 'CAN': 18000, 'CHN': 95000, 'JPN': 35000, 'KOR': 30000, 'IND': 10000, 'DEU': 28000, 'GBR': 25000, 'FRA': 22000, 'CHE': 12000, 'AUS': 8000 }
+            // Add more country data here as needed, matching ISO_A3 codes from your GeoJSON
         };
 
-        // --- Layer Group for Markers ---
-        // We use a layer group to easily clear and add markers
-        let markerGroup = L.layerGroup().addTo(map);
+        // --- Map Initialization ---
+        var map = L.map('map').setView([25, 15], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, minZoom: 2,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Patent Data: Illustrative'
+        }).addTo(map);
+
+        // --- Global variables ---
+        let geojsonLayer; // Will hold the GeoJSON layer once loaded
+        let currentPeriod = '2011-Present'; // Default period
+        let legend; // To hold the legend control
+        const mapMessageDiv = document.getElementById('map-message');
 
         // --- Color Scaling Function ---
-        // Returns a color based on patent count. Adjust thresholds as needed.
-        // Using simple thresholds: >40k = red, >10k = orange, else yellow
+        // (Same as before)
         function getColor(patentCount) {
-            if (patentCount > 40000) {
-                return '#FF0000'; // Red
-            } else if (patentCount > 10000) {
-                return '#FFA500'; // Orange
-            } else {
-                return '#FFFF00'; // Yellow
-            }
-            // You could implement a more sophisticated continuous scale here later
+            if (patentCount > 50000) return '#d73027'; // Dark Red
+            if (patentCount > 25000) return '#fc8d59'; // Red-Orange
+            if (patentCount > 10000) return '#fee08b'; // Light Orange/Yellow
+            if (patentCount > 1000)  return '#d9ef8b'; // Yellow-Green
+            if (patentCount > 0)     return '#91cf60'; // Light Green
+            return '#f0f0f0'; // Default grey for no/zero data or no geometry
         }
 
-        // --- Function to Display Patents for a Given Period ---
-        function displayPatents(period) {
-            // Clear existing markers from the group
-            markerGroup.clearLayers();
-
-            const data = patentDataByPeriod[period];
-            if (!data) {
-                console.error("No data found for period:", period);
-                return;
+        // --- Style Function for GeoJSON Layer ---
+        function styleFeature(feature) {
+            // If geometry is null or invalid, return an invisible style
+            if (!feature.geometry || !feature.geometry.coordinates || feature.geometry.coordinates.length === 0) {
+                 console.warn(`Feature ${feature.properties.ADMIN} has invalid geometry.`);
+                 return { fillColor: '#e0e0e0', weight: 0, opacity: 0, fillOpacity: 0 }; // Slightly different grey for debugging
             }
 
-            // Find max patents in the current dataset for radius scaling (optional but good)
-            // let maxPatents = Math.max(...data.map(item => item.patents), 0);
+            const countryCode = feature.properties.ISO_A3;
+            const patentCount = patentDataByPeriod[currentPeriod]?.[countryCode] || 0;
 
-            data.forEach(function(item) {
-                // Calculate radius (sqrt scale helps visualize large differences)
-                // Adjust the multiplier (e.g., 150) to get desired circle sizes
-                var radius = Math.sqrt(item.patents) * 150;
+            return {
+                fillColor: getColor(patentCount),
+                weight: 1,
+                opacity: 1,
+                color: '#ccc', // Border color
+                fillOpacity: 0.75
+            };
+        }
 
-                // Determine color based on patent count
-                var fillColor = getColor(item.patents);
-
-                // Create circle marker
-                var circle = L.circle([item.lat, item.lon], {
-                    color: '#555',      // Stroke color (dark grey)
-                    weight: 1,         // Stroke weight
-                    fillColor: fillColor, // Get color from function
-                    fillOpacity: 0.6,  // Fill opacity
-                    radius: radius
+        // --- Interaction Functions ---
+        function highlightFeature(e) {
+            var layer = e.target;
+            if (layer.feature.geometry) { // Only highlight if it has geometry
+                layer.setStyle({
+                    weight: 3,
+                    color: '#555',
+                    dashArray: '',
+                    fillOpacity: 0.9
                 });
+                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                    layer.bringToFront();
+                }
+            }
+        }
 
-                // Add popup
-                circle.bindPopup(`<b>${item.region}</b><br>Period: ${period}<br>Estimated AI Patents: ~${item.patents.toLocaleString()}`);
+        function resetHighlight(e) {
+            if (e.target.feature.geometry) { // Only reset if it has geometry
+                geojsonLayer.resetStyle(e.target);
+            }
+        }
 
-                // Add the circle to the layer group
-                circle.addTo(markerGroup);
-            });
+        function onEachFeature(feature, layer) {
+            // Only add interactions if the feature has geometry
+            if (feature.geometry && feature.geometry.coordinates && feature.geometry.coordinates.length > 0) {
+                layer.on({
+                    mouseover: highlightFeature,
+                    mouseout: resetHighlight,
+                    click: function(e) {
+                         const countryCode = feature.properties.ISO_A3;
+                         const countryName = feature.properties.ADMIN || feature.properties.name || 'Unknown'; // Use ADMIN or name
+                         const patentCount = patentDataByPeriod[currentPeriod]?.[countryCode] || 0;
+                         const countText = patentCount > 0 ? `~${patentCount.toLocaleString()}` : 'No Data';
 
-            // Update active button style
+                         const popupContent = `<b>${countryName}</b><br>
+                                               Est. AI Patents (${currentPeriod}):<br>
+                                               <span>${countText}</span>`;
+                         map.openPopup(popupContent, e.latlng);
+                    }
+                });
+            } else {
+                 // Optionally bind a simpler popup for features without geometry
+                 const countryName = feature.properties.ADMIN || feature.properties.name || 'Unknown';
+                 layer.bindPopup(`<b>${countryName}</b><br><span>(No geometry data available)</span>`);
+            }
+        }
+
+        // --- Function to Update Map Display ---
+        function displayPatents(period) {
+            currentPeriod = period; // Update the global period
+
+            if (!geojsonLayer) {
+                console.error("GeoJSON layer not loaded yet.");
+                mapMessageDiv.textContent = "Error: Map layer not ready.";
+                return; // Don't proceed if the layer isn't ready
+            }
+
+            // Update the style of the existing layer based on the new currentPeriod
+            geojsonLayer.setStyle(styleFeature);
+
+             // Update active button style
             document.querySelectorAll('.map-controls button').forEach(button => {
                 button.classList.remove('active');
                 if (button.dataset.period === period) {
                     button.classList.add('active');
                 }
             });
+
+            // Update legend if it exists
+            if (legend) {
+                legend.update();
+            }
         }
 
-         // --- Legend ---
-        var legend = L.control({position: 'bottomright'});
+        // --- Legend Control ---
+        function createLegend() {
+            legend = L.control({position: 'bottomright'});
 
-        legend.onAdd = function (map) {
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 10001, 40001], // Thresholds used in getColor + lower bound
-                labels = ['Low (<10k)', 'Medium (10k-40k)', 'High (>40k)']; // Corresponding labels
+            legend.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'info legend');
+                this.update(div); // Call update to populate
+                return div;
+            };
 
-            div.innerHTML += '<strong>Patent Volume</strong><br>';
-            // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < grades.length; i++) {
-                // Get color for the start of the range (or slightly above for > checks)
-                const gradeColorValue = grades[i] === 0 ? 1 : grades[i]; // Handle 0 case for getColor logic
-                 div.innerHTML +=
-                    '<i style="background:' + getColor(gradeColorValue) + '"></i> ' +
-                    labels[i] + '<br>';
+            // Method to update the legend content (can be called later)
+            legend.update = function (div) {
+                 div = div || this._container;
+                 const grades = [0, 1001, 10001, 25001, 50001];
+                 const labels = ['0 - 1k', '1k - 10k', '10k - 25k', '25k - 50k', '50k+'];
+
+                 div.innerHTML = `<h4>AI Patents (${currentPeriod})</h4>`;
+                 for (var i = 0; i < grades.length; i++) {
+                     const color = getColor(grades[i] + 1);
+                     div.innerHTML += `<i style="background:${color}"></i> ${labels[i]}<br>`;
+                 }
+                 div.innerHTML += '<i style="background:#f0f0f0"></i> No/Missing Data'; // Combined label
+            };
+
+            legend.addTo(map);
+        }
+
+        // --- Function to Load GeoJSON and Initialize Map ---
+        async function loadMapData() {
+            try {
+                // Fetch the GeoJSON data from the specified file
+                const response = await fetch('global.geojson'); // Assumes file is in the same directory
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const geojsonData = await response.json();
+
+                // Check if GeoJSON data is valid
+                if (!geojsonData || !geojsonData.features) {
+                    throw new Error("Invalid GeoJSON data received.");
+                }
+
+                mapMessageDiv.style.display = 'none'; // Hide loading message
+
+                // Create the GeoJSON layer
+                geojsonLayer = L.geoJSON(geojsonData, {
+                    style: styleFeature,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+
+                // Create the legend
+                createLegend();
+
+                // Display the default period's data
+                displayPatents(currentPeriod);
+
+            } catch (error) {
+                console.error("Error loading or processing GeoJSON:", error);
+                mapMessageDiv.textContent = `Error loading map data: ${error.message}. Please ensure 'global.geojson' is present and valid.`;
+                mapMessageDiv.style.color = 'red';
             }
-            return div;
-        };
-        legend.addTo(map);
-
+        }
 
         // --- Event Listeners for Buttons ---
-        document.getElementById('btn-1990').addEventListener('click', function() {
-            displayPatents('1990-2000');
-        });
-        document.getElementById('btn-2001').addEventListener('click', function() {
-            displayPatents('2001-2010');
-        });
-        document.getElementById('btn-2011').addEventListener('click', function() {
-            displayPatents('2011-Present');
-        });
+        document.getElementById('btn-1990').addEventListener('click', function() { displayPatents('1990-2000'); });
+        document.getElementById('btn-2001').addEventListener('click', function() { displayPatents('2001-2010'); });
+        document.getElementById('btn-2011').addEventListener('click', function() { displayPatents('2011-Present'); });
 
         // --- Initial Map Load ---
-        // Display the latest period by default when the page loads
-        displayPatents('2011-Present');
+        loadMapData(); // Start the data loading process
 
     </script>
 
