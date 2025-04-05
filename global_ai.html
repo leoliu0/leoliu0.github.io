@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global AI Patent Landscape</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        /* Set the size of the map container */
+        #map {
+            height: 500px; /* Adjust height as needed */
+            width: 90%;  /* Adjust width as needed */
+            margin: 20px auto; /* Center the map */
+            border: 1px solid #ccc;
+        }
+        .description {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        p {
+            color: #555;
+        }
+        /* Style for Leaflet popups */
+        .leaflet-popup-content-wrapper {
+            border-radius: 5px;
+        }
+        .leaflet-popup-content {
+            font-size: 1.1em;
+        }
+        .leaflet-popup-content b {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Global AI Patent Landscape (Illustrative)</h1>
+
+    <div id="map"></div>
+
+    <div class="description">
+        <h2>About AI Patents and This Map</h2>
+        <p>
+            Artificial Intelligence (AI) patents represent inventions that utilize AI techniques, algorithms, or applications to solve specific problems. These can range from core machine learning models and neural network architectures to AI-driven systems in fields like healthcare, autonomous vehicles, natural language processing, and robotics.
+        </p>
+        <p>
+            Tracking AI patents provides insights into the pace of innovation, key technological trends, and the geographic distribution of research and development activity. Countries and companies leading in AI patent filings often indicate strong investment and focus in this transformative technology area.
+        </p>
+        <p>
+            <strong>About this map:</strong> This interactive map visualizes the estimated number of AI-related patent filings or grants associated with major innovation hubs around the world. The size of the circle is proportional to the number of patents (using a square root scale to moderate size differences). Click on a circle to see the estimated count for that region.
+        </p>
+        <p>
+            <em><strong>Disclaimer:</strong> The data presented here is purely illustrative and randomly generated for demonstration purposes. It does not reflect actual, up-to-date AI patent statistics. Real-world patent data is complex and requires rigorous analysis from specialized databases.</em>
+        </p>
+    </div>
+
+    <script>
+        // --- Map Initialization ---
+        // Initialize the map and set its view to a global perspective
+        // Coordinates [latitude, longitude], zoom level
+        var map = L.map('map').setView([20, 10], 2); // Center roughly globally, low zoom
+
+        // Add a tile layer to the map (using OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // --- Placeholder Data ---
+        // Makeup data: [latitude, longitude, estimated_patent_count, region_name]
+        // Note: Patent counts are purely fictional for this example.
+        var aiPatentData = [
+            { lat: 38.9, lon: -77.0, patents: 55000, region: "USA (East Coast)" },
+            { lat: 37.7, lon: -122.4, patents: 65000, region: "USA (West Coast)" },
+            { lat: 35.6, lon: 139.6, patents: 35000, region: "Japan" },
+            { lat: 39.9, lon: 116.4, patents: 75000, region: "China" },
+            { lat: 37.5, lon: 126.9, patents: 30000, region: "South Korea" },
+            { lat: 51.5, lon: -0.1, patents: 25000, region: "United Kingdom" },
+            { lat: 48.8, lon: 2.3, patents: 22000, region: "France" },
+            { lat: 52.5, lon: 13.4, patents: 28000, region: "Germany" },
+            { lat: 43.6, lon: -79.3, patents: 18000, region: "Canada" },
+            { lat: 22.3, lon: 114.1, patents: 15000, region: "Hong Kong / Shenzhen Area" },
+            { lat: 19.0, lon: 72.8, patents: 10000, region: "India" },
+            { lat: -33.8, lon: 151.2, patents: 8000, region: "Australia" },
+             { lat: 47.3, lon: 8.5, patents: 12000, region: "Switzerland" }
+        ];
+
+        // --- Add Data to Map ---
+        aiPatentData.forEach(function(data) {
+            // Calculate radius based on patent count (use sqrt for better visual scaling)
+            var radius = Math.sqrt(data.patents) * 150; // Adjust multiplier for desired circle size
+
+            // Create a circle marker
+            var circle = L.circle([data.lat, data.lon], {
+                color: 'red',        // Stroke color
+                fillColor: '#f03',   // Fill color
+                fillOpacity: 0.5,  // Fill opacity
+                radius: radius       // Radius in meters
+            }).addTo(map);
+
+            // Add a popup to the circle
+            circle.bindPopup(`<b>${data.region}</b><br>Estimated AI Patents: ~${data.patents.toLocaleString()}`);
+        });
+
+    </script>
+
+</body>
+</html>
