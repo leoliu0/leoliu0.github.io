@@ -28,7 +28,6 @@ title:  "Research"
 *(Revising for Review of Finance)*
 
 *(with Tianyu Cai and Raphael Park)*
-<hr>
 
 __Conferences__
 EFA 2024, CICF 2023, AIEA-NBER 2023
