@@ -179,7 +179,7 @@
                  return { fillColor: '#e0e0e0', weight: 0, opacity: 0, fillOpacity: 0 }; // Slightly different grey for debugging
             }
 
-            const countryCode = feature.properties.ISO_A3;
+            const countryCode = feature.properties.adm0_a3;
             const patentCount = patentDataByPeriod[currentPeriod]?.[countryCode] || 0;
 
             return {
@@ -220,7 +220,7 @@
                     mouseover: highlightFeature,
                     mouseout: resetHighlight,
                     click: function(e) {
-                         const countryCode = feature.properties.ISO_A3;
+                         const countryCode = feature.properties.adm0_a3;
                          const countryName = feature.properties.ADMIN || feature.properties.name || 'Unknown'; // Use ADMIN or name
                          const patentCount = patentDataByPeriod[currentPeriod]?.[countryCode] || 0;
                          const countText = patentCount > 0 ? `~${patentCount.toLocaleString()}` : 'No Data';
