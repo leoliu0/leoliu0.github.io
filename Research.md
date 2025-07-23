@@ -11,6 +11,8 @@ title:  "Research"
 *(with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )*
 
 
+<hr>
+<hr>
 ### Working Papers:
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations  </a> 
