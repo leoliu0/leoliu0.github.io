@@ -31,7 +31,7 @@ Bachelor of Commerce
 #chiline()
 Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )
 
-_R&R Journal of Financial Economics_
+_Conditionally Accepted at Journal of Financial Economics_
 
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
@@ -44,10 +44,10 @@ _(Reject & Resubmit Review of Finance)_
 == Working Experience
 #chiline()
 *University of Technology Sydney* #h(1fr) 2022 -- current \
-Lectuer (Assistant Professor) of Finance\
+Lecture (Assistant Professor) of Finance\
 
 *University of New South Wales* #h(1fr) 2021 -- 2022 \
-Associate Lectuer of Finance
+Associate Lecture of Finance
 
 *Rozetta (formerly CMCRC)* #h(1fr) 2017 -- 2019 \
 Research Fellow / Business Analyst
