@@ -6,7 +6,7 @@ title:  "Research"
 ### Publications and Accepted Papers
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227"> Foundational Processes and Growth </a>
 
- *(Conditionally Accepted at Journal of Financial Economics)*
+ *(Accepted at Journal of Financial Economics)*
 
 *(with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )*
 

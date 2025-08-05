@@ -1,5 +1,5 @@
 // #show heading: set text(font: "New Computer Modern ")
-#set text(font: ("IBM Plex Serif", "Noto Sans CJK SC"), lang: "zh", region: "cn")
+#set text(font: ("Libertinus Serif", "Noto Serif CJK SC"), fallback: false)
 
 #show link: underline
 #set page(
@@ -12,6 +12,29 @@
 = Leo Liu
 
 leo.liu\@uts.edu.au | #link("https://leoliu0.github.io")
+
+== 研究方向
+#chiline()
+创新、创业、公司金融
+
+== 发表论文
+#chiline()
+投资者搜寻与资产定价，《金融季刊》(ADBC A级)
+
+== 工作论文
+#chiline()
+
+基础流程与增长 (合作者：Elvira Sojli, Wing Wah Tham, Salomé Baslandze )
+
+《金融经济学期刊》有条件接受 (UTD24, FT50, ADBC A\*, Econ Top)
+
+CEO经验与价值创造 (合作者：Elvira Sojli and Wing Wah Tham)
+
+《管理科学》修订并重投 (UTD24, FT50, ADBC A\*, Econ Top)
+
+人工智能专利 (合作者：Tianyu Cai and Raphael Park)
+
+《金融评论》拒稿并重投 (FT50, ADBC A\*)
 
 == 教育背景
 #chiline()
