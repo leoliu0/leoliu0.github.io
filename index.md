@@ -40,27 +40,30 @@ img {
   </div>
 </div>
 
+<br>
+<br>
+
 ---
 
 ## Publications and Accepted Papers
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227">Foundational Processes and Growth</a>
- *(Accepted at Journal of Financial Economics)*
- *(with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)*
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227">Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)</a>
+
+*Accepted at Journal of Financial Economics*
+ 
 
 ---
 
 ## Working Papers
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations</a> 
-*(R&R Management Science)*
-*(with Elvira Sojli and Wing Wah Tham)*
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations (with Elvira Sojli and Wing Wah Tham) </a> 
+
+*R&R Management Science*
 
 ---
 
-#### AI Patents 
-*(Revising for Review of Finance)*
-*(with Tianyu Cai and Raphael Park)*
+#### AI Patents (with Tianyu Cai and Raphael Park)
+*Revising for Review of Finance*
 
 ---
 
