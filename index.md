@@ -5,7 +5,7 @@ layout: home
 
 <style type="text/css" media="screen">
   .wrapper {
-    max-width: 1200px; /* Adjust this value as needed */
+    max-width: 2000px; /* Adjust this value as needed */
   }
   * {
     box-sizing: border-box;
@@ -52,7 +52,7 @@ layout: home
 
 ## Publications and Accepted Papers
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227">Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)</a>
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227">Foundational Processes and Growth</a> (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
 
 *Accepted at Journal of Financial Economics*
 
@@ -60,7 +60,7 @@ layout: home
 
 ## Working Papers
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations (with Elvira Sojli and Wing Wah Tham) </a>
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations</a> (with Elvira Sojli and Wing Wah Tham) 
 
 *R&R Management Science*
 
