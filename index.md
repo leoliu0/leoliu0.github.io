@@ -1,4 +1,4 @@
- --- ---
+---
 layout: home
 {% seo %}
 ---
@@ -8,7 +8,6 @@ layout: home
 * {
   box-sizing: border-box;
 }
-
 
 .row {
   display: flex;
@@ -31,8 +30,6 @@ img {
   height: auto; /* Maintains the aspect ratio of the image */
 }
 </style>
-
-
 
 <div class="row">
   <div class="right">
