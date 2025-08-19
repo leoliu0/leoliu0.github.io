@@ -19,14 +19,15 @@ leo.liu\@uts.edu.au | #link("https://leoliu0.github.io")
 
 == 发表论文
 #chiline()
-投资者搜寻与资产定价，《金融季刊》(ADBC A级)
-
-== 工作论文
-#chiline()
 
 基础流程与增长 (合作者：Elvira Sojli, Wing Wah Tham, Salomé Baslandze )
 
 《金融经济学期刊》有条件接受 (UTD24, FT50, ADBC A\*, Econ Top)
+
+投资者搜寻与资产定价，《金融季刊》(ADBC A级)
+
+== 工作论文
+#chiline()
 
 CEO经验与价值创造 (合作者：Elvira Sojli and Wing Wah Tham)
 

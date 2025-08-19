@@ -17,24 +17,23 @@ leo.liu\@uts.edu.au |
 #chiline()
 Innovation, Entreprenership, Corporate Finance
 
-== Publications
+== Publications and Accepted Papers
 #chiline()
-Investor Search and Asset Prices, Quarterly Journal of Finance (ADBC A)
+Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
 
+_Accepted at Journal of Financial Economics (UTD24, FT50, ADBC A\*, Econ Top)_
+
+Investor Search and Asset Prices, Quarterly Journal of Finance (ADBC A)
 == Working Papers
 #chiline()
 
-Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze )
-
-_Conditionally Accepted at Journal of Financial Economics (UTD24, FT50, ADBC A*, Econ Top)_
-
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
-_R&R Management Science (UTD24, FT50, ADBC A*, Econ Top)_
+_R&R Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
 
 AI Patents (with Tianyu Cai and Raphael Park)
 
-_Reject & Resubmit Review of Finance (FT50, ADBC A*)__
+_Reject & Resubmit Review of Finance (FT50, ADBC A\*)_
 
 == Education
 #chiline()
