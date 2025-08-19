@@ -1,25 +1,28 @@
----
+ --- ---
 layout: home
 {% seo %}
 ---
 
 <style type="text/css" media="screen">
+
 * {
   box-sizing: border-box;
 }
 
+
 .row {
   display: flex;
-  align-items: flex-start; /* Aligns items at their top edges */
-  gap: 20px; /* Adds space between the columns */
+  align-items: flex-start; /* Ensures that the items align at their top edges */
 }
 
 .left {
   flex: 70%;
+  padding-left: 20px; /* Adds space on the left side of the text */
 }
 
 .right {
   flex: 30%;
+  padding-right: 20px; /* Adds space on the right side of the image */
 }
 
 img {
@@ -28,6 +31,8 @@ img {
   height: auto; /* Maintains the aspect ratio of the image */
 }
 </style>
+
+
 
 <div class="row">
   <div class="right">
