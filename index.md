@@ -4,6 +4,9 @@ layout: home
 ---
 
 <style type="text/css" media="screen">
+  .wrapper {
+    max-width: 1200px; /* Adjust this value as needed */
+  }
   * {
     box-sizing: border-box;
   }
