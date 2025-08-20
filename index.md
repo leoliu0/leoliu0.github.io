@@ -4,6 +4,9 @@ layout: home
 ---
 
 <style type="text/css" media="screen">
+  body {
+    font-size: 18px; /* Adjust base font size for the whole page */
+  }
   .wrapper {
     max-width: 1200px; /* Adjust this value as needed */
   }
