@@ -69,7 +69,9 @@ layout: home
 
 ---
 
-#### AI Patents (with Tianyu Cai and Raphael Park)
+####  
+
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868">AI Patents</a>(with Sheng Xu, Tianyu Cai, Raphael Park)
 *Revising for Review of Finance*
 
 ---
