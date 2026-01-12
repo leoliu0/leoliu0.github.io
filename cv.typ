@@ -31,7 +31,7 @@ CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
 _R&R Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
 
-AI Patents (with Tianyu Cai and Raphael Park)
+AI Patents (with Sheng Xu, Tianyu Cai and Raphael Park)
 
 _Reject & Resubmit Review of Finance (FT50, ADBC A\*)_
 
