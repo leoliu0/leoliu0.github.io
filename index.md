@@ -59,6 +59,60 @@ layout: home
 
 *Accepted at Journal of Financial Economics*
 
+<button id="show-download-form-btn" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Download Dataset</button>
+
+<div id="download-form-container" style="display: none; margin-top: 15px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; max-width: 400px; background-color: #f9f9f9;">
+  <form id="download-form" action="https://formspree.io/f/mgolgzql" method="POST">
+    <div style="margin-bottom: 10px;">
+      <label for="user-name" style="display: block; margin-bottom: 5px; font-weight: bold;">Name:</label>
+      <input type="text" id="user-name" name="name" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="user-role" style="display: block; margin-bottom: 5px; font-weight: bold;">Role:</label>
+      <input type="text" id="user-role" name="role" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="user-institution" style="display: block; margin-bottom: 5px; font-weight: bold;">Institution:</label>
+      <input type="text" id="user-institution" name="institution" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+    </div>
+    <button type="submit" style="padding: 5px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Submit & Download</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('show-download-form-btn').addEventListener('click', function() {
+    var formContainer = document.getElementById('download-form-container');
+    formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
+  });
+
+  document.getElementById('download-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = document.getElementById('download-form');
+    var data = new FormData(form);
+    
+    fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      // Trigger the download
+      var link = document.createElement('a');
+      link.href = 'found_patent.csv';
+      link.download = 'found_patent.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Update UI with success message
+      document.getElementById('download-form-container').innerHTML = '<p style="color: #28a745; font-weight: bold;">Thank you! Your download should start shortly.</p>';
+    }).catch(error => {
+      alert("Oops! There was a problem submitting your form.");
+    });
+  });
+</script>
+
 ---
 
 ## Working Papers
@@ -69,7 +123,8 @@ layout: home
 
 ---
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868">AI Patents</a>(with Sheng Xu, Tianyu Cai, Raphael Park)
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868">AI Patents</a> (with Sheng Xu, Tianyu Cai, Raphael Park)
+
 *Revising for Review of Finance*
 
 ---

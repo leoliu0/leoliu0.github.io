@@ -21,19 +21,40 @@ Innovation, Entreprenership, Corporate Finance
 #chiline()
 Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
 
-_Accepted at Journal of Financial Economics (UTD24, FT50, ADBC A\*, Econ Top)_
+_Forthcoming at Journal of Financial Economics (UTD24, FT50, ADBC A\*, Econ Top)_
 
-Investor Search and Asset Prices, Quarterly Journal of Finance (ADBC A)
+#line(length: 100%, stroke: gray + 0.5pt)
+
+Investor Search and Asset Prices, 
+
+_Quarterly Journal of Finance (ADBC A)_
+
 == Working Papers
 #chiline()
 
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
-_R&R Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
+_Revise and Resubmit at Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
+#line(length: 100%, stroke: gray + 0.5pt)
 
 AI Patents (with Sheng Xu, Tianyu Cai and Raphael Park)
 
 _Reject & Resubmit Review of Finance (FT50, ADBC A\*)_
+#line(length: 100%, stroke: gray + 0.5pt)
+
+Innovation Policies and Productivities (with Sheng Xu, Fariborz Moshirian and Vikram Nanda)
+
+_Reject & Resubmit Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
+#line(length: 100%, stroke: gray + 0.5pt)
+
+Common Ownership and Antitrust
+
+_Revise and Resubmit at Journal of Corporate Finance (ADBC A\*)_
+#line(length: 100%, stroke: gray + 0.5pt)
+
+Product Scope and Institutional Ownership
+
+_Revise and Resubmit at Journal of Banking and Finance (ADBC A\*)_
 
 == Education
 #chiline()
