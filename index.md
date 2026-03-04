@@ -63,16 +63,18 @@ layout: home
 
 <div id="download-form-container" style="display: none; margin-top: 15px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; max-width: 400px; background-color: #f9f9f9;">
   <p style="font-size: 14px; color: #555; margin-bottom: 15px; line-height: 1.4;">
-    <em>We would like to understand who uses our data, so we kindly ask you to enter a few details. Thank you for your interest!</em>
+    <em>We would like to understand the usage of the data, so we kindly ask you to enter a few details. Thank you for your interest!</em>
   </p>
   <form id="download-form" action="https://formspree.io/f/mgolgzql" method="POST">
-    <div style="margin-bottom: 10px;">
-      <label for="user-firstname" style="display: block; margin-bottom: 5px; font-weight: bold;">First Name:</label>
-      <input type="text" id="user-firstname" name="firstname" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
-    </div>
-    <div style="margin-bottom: 10px;">
-      <label for="user-lastname" style="display: block; margin-bottom: 5px; font-weight: bold;">Last Name:</label>
-      <input type="text" id="user-lastname" name="lastname" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+      <div style="flex: 1;">
+        <label for="user-firstname" style="display: block; margin-bottom: 5px; font-weight: bold;">First Name:</label>
+        <input type="text" id="user-firstname" name="firstname" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+      </div>
+      <div style="flex: 1;">
+        <label for="user-lastname" style="display: block; margin-bottom: 5px; font-weight: bold;">Last Name:</label>
+        <input type="text" id="user-lastname" name="lastname" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+      </div>
     </div>
     <div style="margin-bottom: 10px;">
       <label for="user-role" style="display: block; margin-bottom: 5px; font-weight: bold;">Role:</label>
