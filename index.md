@@ -62,10 +62,17 @@ layout: home
 <button id="show-download-form-btn" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Download Dataset</button>
 
 <div id="download-form-container" style="display: none; margin-top: 15px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; max-width: 400px; background-color: #f9f9f9;">
+  <p style="font-size: 14px; color: #555; margin-bottom: 15px; line-height: 1.4;">
+    <em>We would like to understand who uses our data, so we kindly ask you to enter a few details. Thank you for your interest!</em>
+  </p>
   <form id="download-form" action="https://formspree.io/f/mgolgzql" method="POST">
     <div style="margin-bottom: 10px;">
-      <label for="user-name" style="display: block; margin-bottom: 5px; font-weight: bold;">Name:</label>
-      <input type="text" id="user-name" name="name" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+      <label for="user-firstname" style="display: block; margin-bottom: 5px; font-weight: bold;">First Name:</label>
+      <input type="text" id="user-firstname" name="firstname" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="user-lastname" style="display: block; margin-bottom: 5px; font-weight: bold;">Last Name:</label>
+      <input type="text" id="user-lastname" name="lastname" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
     </div>
     <div style="margin-bottom: 10px;">
       <label for="user-role" style="display: block; margin-bottom: 5px; font-weight: bold;">Role:</label>
@@ -75,7 +82,7 @@ layout: home
       <label for="user-institution" style="display: block; margin-bottom: 5px; font-weight: bold;">Institution:</label>
       <input type="text" id="user-institution" name="institution" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;" />
     </div>
-    <button type="submit" style="padding: 5px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Submit & Download</button>
+    <button type="submit" style="padding: 5px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Submit Download Request</button>
   </form>
 </div>
 
