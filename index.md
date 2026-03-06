@@ -38,7 +38,7 @@ layout: home
 
 <div class="row">
   <div class="image-column">
-    <img src="leo.png" alt="Leo">
+    <img src="leo.jpg" alt="Leo">
   </div>
   
   <div class="text-column">
