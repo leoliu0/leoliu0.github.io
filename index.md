@@ -108,8 +108,8 @@ layout: home
     }).then(response => {
       // Trigger the download
       var link = document.createElement('a');
-      link.href = 'found_patent.csv';
-      link.download = 'found_patent.csv';
+      link.href = 'found_process.zip';
+      link.download = 'found_process.zip';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
