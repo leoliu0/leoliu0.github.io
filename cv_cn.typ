@@ -35,7 +35,7 @@ CEO经验与价值创造 (合作者：Elvira Sojli and Wing Wah Tham)
 
 人工智能专利 (合作者：Tianyu Cai and Raphael Park)
 
-《金融评论》拒稿并重投 (FT50, ADBC A\*)
+《金融评论》修订并重投 (FT50, ADBC A\*)
 
 == 教育背景
 #chiline()

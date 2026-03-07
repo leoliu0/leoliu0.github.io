@@ -57,7 +57,7 @@ layout: home
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227">Foundational Processes and Growth</a> (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
 
-*Accepted at Journal of Financial Economics*
+*Forthcoming, Journal of Financial Economics*
 
 <button id="show-download-form-btn" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Download Dataset</button>
 
@@ -128,13 +128,13 @@ layout: home
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809">CEO Experience and Value Creation: Evidence from Green Lab Locations</a> (with Elvira Sojli and Wing Wah Tham) 
 
-*R&R Management Science*
+*R&R, Management Science*
 
 ---
 
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868">AI Patents</a> (with Sheng Xu, Tianyu Cai, Raphael Park)
 
-*Revising for Review of Finance*
+*R&R, Review of Finance*
 
 ---
 

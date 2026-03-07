@@ -34,12 +34,12 @@ _Quarterly Journal of Finance (ADBC A)_
 
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
-_Revise and Resubmit at Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
+_Revise and Resubmit, Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
 #line(length: 100%, stroke: gray + 0.5pt)
 
 AI Patents (with Sheng Xu, Tianyu Cai and Raphael Park)
 
-_Reject & Resubmit Review of Finance (FT50, ADBC A\*)_
+_Revise & Resubmit, Review of Finance (FT50, ADBC A\*)_
 #line(length: 100%, stroke: gray + 0.5pt)
 
 Innovation Policies and Productivities (with Sheng Xu, Fariborz Moshirian and Vikram Nanda)
