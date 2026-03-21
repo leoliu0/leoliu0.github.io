@@ -141,14 +141,23 @@ layout: home
 
 ---
 
+<!-- #### Innovation Policy and AI (with Sheng Xu,) -->
+<!---->
+<!-- *R&R, Journal of Corporate Finance* -->
+<!---->
+<!-- --- -->
+
+#### Does Common Ownership Raise Antitrust Concerns? (with Huaizhou Li, Ronald Masulis and Jason Zein)
+
+*R&R, Journal of Corporate Finance*
+
+---
+
 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516">Can ESG Performance be attributed to Management Styles?</a>
 *(with Tony Cai, Jason Zein and Hao Zhang)*
 __Conferences__: AFA 2024, FMA Asia 2022, AFBC 2022
 
 ---
 
-#### Common Ownership and Antitrust Enforcement: Evidence from the Court
-*(with Huaizhou Li, Ronald Masulis and Jason Zein)*
-__Conferences__: FIRN 2022, FMA Asia 2022, CELS (Conference for Empirical Legal Studies) 2022, AFBC 2022, FMCG (Financial Market and Corporate Governance) 2022 (Runner-up for Best paper in Corporate Finance)
 
 ---
