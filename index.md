@@ -53,7 +53,7 @@ layout: home
 
 ---
 
-## Publications and Accepted Papers
+## Publications
 
 <p>
   <a href="1-s2.0-S0304405X26000474-main.pdf" target="_blank">Foundational Processes and Growth</a> 
