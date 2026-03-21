@@ -55,10 +55,13 @@ layout: home
 
 ## Publications and Accepted Papers
 
-<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227">Foundational Processes and Growth</a> (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
-<a href="1-s2.0-S0304405X26000474-main.pdf">[PDF]</a>
+<p>
+  <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5098227" target="_blank"><strong>Foundational Processes and Growth</strong></a> 
+  (with Elvira Sojli, Wing Wah Tham, and Salomé Baslandze)<br>
+  <em>Journal of Financial Economics</em>, Volume 180, June 2026, 104276. 
+  <a href="1-s2.0-S0304405X26000474-main.pdf" target="_blank">[PDF]</a>
+</p>
 
-*Journal of Financial Economics 180, 104276.*
 
 <button id="show-download-form-btn" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Download Dataset</button>
 
