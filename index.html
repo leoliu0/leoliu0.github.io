@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo Liu - Assistant Professor of Finance</title>
+  <meta name="description" content="Leo Liu is an Assistant Professor of Finance at University of Technology, Sydney. Research on innovation, entrepreneurship, and AI.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-brand">Leo Liu</a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="software.html">Software</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-photo">
+            <img src="leo.jpg" alt="Leo Liu">
+          </div>
+          <div class="hero-text">
+            <h1>Leo Liu</h1>
+            <p>I am an Assistant Professor of Finance at the University of Technology, Sydney. My research on innovation and entrepreneurship involves measuring innovation to study firm, industry, and economic outcomes. My recent work also examines corporate disclosure and the impact and determinants of AI innovation.</p>
+            <div class="hero-links">
+              <a href="cv.pdf">Download CV</a>
+              <a href="mailto:leo.liu@uts.edu.au">Email</a>
+              <a href="https://github.com/leoliu0">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Publications</h2>
+        
+        <div class="paper">
+          <div class="paper-title">
+            <a href="1-s2.0-S0304405X26000474-main.pdf" target="_blank">Foundational Processes and Growth</a>
+            <span class="status-badge">JFE</span>
+          </div>
+          <div class="paper-authors">with Elvira Sojli, Wing Wah Tham, and Salomé Baslandze</div>
+          <div class="paper-meta">
+            <span class="journal">Journal of Financial Economics</span>, Volume 180, June 2026, 104276
+          </div>
+        </div>
+
+        <div id="download-section">
+          <strong>Download Dataset</strong>
+          <p style="font-size: 0.9rem; color: var(--text-light); margin: 8px 0 16px;">We would like to understand the usage of the data, so we kindly ask you to enter a few details.</p>
+          <button id="show-form-btn" class="btn btn-secondary">Request Download</button>
+          
+          <div id="download-form-ui">
+            <form id="download-form">
+              <div class="form-row">
+                <div>
+                  <label for="firstname">First Name</label>
+                  <input type="text" id="firstname" name="firstname" required>
+                </div>
+                <div>
+                  <label for="lastname">Last Name</label>
+                  <input type="text" id="lastname" name="lastname" required>
+                </div>
+              </div>
+              <div>
+                <label for="role">Role</label>
+                <input type="text" id="role" name="role" required>
+              </div>
+              <div>
+                <label for="institution">Institution</label>
+                <input type="text" id="institution" name="institution" required>
+              </div>
+              <button type="submit" class="btn">Submit & Download</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Working Papers</h2>
+
+        <div class="paper">
+          <div class="paper-title">
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809" target="_blank">CEO Experience and Value Creation: Evidence from Green Lab Locations</a>
+            <span class="status-badge">R&R Management Science</span>
+          </div>
+          <div class="paper-authors">with Elvira Sojli and Wing Wah Tham</div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-title">
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868" target="_blank">AI Patents</a>
+            <span class="status-badge">R&R Review of Finance</span>
+          </div>
+          <div class="paper-authors">with Sheng Xu, Tianyu Cai, Raphael Park</div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-title">Does Common Ownership Raise Antitrust Concerns?</div>
+          <div class="paper-authors">with Huaizhou Li, Ronald Masulis and Jason Zein</div>
+          <div class="paper-meta"><span class="status-badge">R&R Journal of Corporate Finance</span></div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-title">
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516" target="_blank">Can ESG Performance be attributed to Management Styles?</a>
+          </div>
+          <div class="paper-authors">with Tony Cai, Jason Zein and Hao Zhang</div>
+          <div class="conferences">Conferences: AFA 2024, FMA Asia 2022, AFBC 2022</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p><strong>Leo Liu</strong></p>
+          <p>Assistant Professor of Finance</p>
+          <p>University of Technology, Sydney</p>
+          <p style="margin-top: 8px;"><a href="mailto:leo.liu@uts.edu.au">leo.liu@uts.edu.au</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/leoliu0">GitHub</a>
+          <a href="https://scholar.google.com">Google Scholar</a>
+          <a href="cv.pdf">CV</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('show-form-btn').addEventListener('click', function() {
+      var formUI = document.getElementById('download-form-ui');
+      formUI.style.display = formUI.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.getElementById('download-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var data = new FormData(form);
+      
+      fetch('https://formspree.io/f/mgolgzql', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function() {
+        var link = document.createElement('a');
+        link.href = 'found_process.zip';
+        link.download = 'found_process.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        form.outerHTML = '<div class="success-msg">Thank you! Your download should start shortly.</div>';
+      }).catch(function() {
+        alert('Oops! There was a problem submitting your form.');
+      });
+    });
+  </script>
+</body>
+</html>
