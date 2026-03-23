@@ -97,8 +97,8 @@ nav {
 }
 
 .hero-photo img {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -106,13 +106,6 @@ nav {
 
 .hero-text {
   flex: 1;
-}
-
-.hero-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
 }
 
 .hero-links {
