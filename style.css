@@ -220,10 +220,7 @@ section:last-child {
 }
 
 #download-section {
-  background: var(--bg-light);
-  margin: 0;
-  padding: 40px;
-  border-radius: 8px;
+  padding: 16px 0;
   margin-bottom: 28px;
 }
 
