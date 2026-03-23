@@ -25,16 +25,18 @@
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <div class="hero-photo">
-            <img src="leo.jpg" alt="Leo Liu">
-          </div>
           <div class="hero-text">
             <h1>Leo Liu</h1>
             <p>I am an Assistant Professor of Finance at the University of Technology, Sydney. My research on innovation and entrepreneurship involves measuring innovation to study firm, industry, and economic outcomes. My recent work also examines corporate disclosure and the impact and determinants of AI innovation.</p>
-            <div class="hero-links">
-              <a href="cv.pdf">Download CV</a>
-              <a href="mailto:leo.liu@uts.edu.au">Email</a>
-              <a href="https://github.com/leoliu0">GitHub</a>
+            <div class="hero-bottom">
+              <div class="hero-links">
+                <a href="cv.pdf">Download CV</a>
+                <a href="mailto:leo.liu@uts.edu.au">Email</a>
+                <a href="https://github.com/leoliu0">GitHub</a>
+              </div>
+              <div class="hero-photo">
+                <img src="leo.jpg" alt="Leo Liu">
+              </div>
             </div>
           </div>
         </div>
@@ -53,36 +55,32 @@
           <div class="paper-authors">with Elvira Sojli, Wing Wah Tham, and Salomé Baslandze</div>
           <div class="paper-meta">
             <span class="journal">Journal of Financial Economics</span>, Volume 180, June 2026, 104276
+            <button id="show-form-btn" class="btn btn-secondary" style="font-size: 0.75rem; padding: 3px 8px; margin-left: 8px; vertical-align: middle;">Dataset</button>
           </div>
         </div>
 
-        <div id="download-section">
-          <button id="show-form-btn" class="btn btn-secondary" style="font-size: 0.85rem; padding: 6px 12px;">Download Dataset</button>
-          <p style="font-size: 0.85rem; color: var(--text-light); margin: 8px 0 0;">for "Foundational Processes and Growth"</p>
-          
-          <div id="download-form-ui" style="display: none; margin-top: 16px; max-width: 400px;">
-            <form id="download-form">
-              <div class="form-row">
-                <div>
-                  <label for="firstname">First Name</label>
-                  <input type="text" id="firstname" name="firstname" required>
-                </div>
-                <div>
-                  <label for="lastname">Last Name</label>
-                  <input type="text" id="lastname" name="lastname" required>
-                </div>
+        <div id="download-form-ui" style="display: none; margin-top: 16px; max-width: 400px; background: var(--bg-light); padding: 20px; border-radius: 6px;">
+          <form id="download-form">
+            <div class="form-row">
+              <div>
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" required>
               </div>
               <div>
-                <label for="role">Role</label>
-                <input type="text" id="role" name="role" required>
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" required>
               </div>
-              <div>
-                <label for="institution">Institution</label>
-                <input type="text" id="institution" name="institution" required>
-              </div>
-              <button type="submit" class="btn">Submit & Download</button>
-            </form>
-          </div>
+            </div>
+            <div>
+              <label for="role">Role</label>
+              <input type="text" id="role" name="role" required>
+            </div>
+            <div>
+              <label for="institution">Institution</label>
+              <input type="text" id="institution" name="institution" required>
+            </div>
+            <button type="submit" class="btn">Submit & Download</button>
+          </form>
         </div>
       </div>
     </section>
