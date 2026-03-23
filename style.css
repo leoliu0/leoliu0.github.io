@@ -98,7 +98,7 @@ nav {
 
 .hero-photo img {
   width: 250px !important;
-  height: 250px !important;
+  height: 270px !important;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
