@@ -23,9 +23,11 @@ Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Bas
 
 _Forthcoming at Journal of Financial Economics (UTD24, FT50, ADBC A\*, Econ Top)_
 
+_Chapter 2 of my thesis_
+
 #line(length: 100%, stroke: gray + 0.5pt)
 
-Investor Search and Asset Prices, 
+Investor Search and Asset Prices,
 
 _Quarterly Journal of Finance (ADBC A)_
 
@@ -35,6 +37,8 @@ _Quarterly Journal of Finance (ADBC A)_
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
 _Revise and Resubmit, Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
+
+_Chapter 3 of my thesis_
 #line(length: 100%, stroke: gray + 0.5pt)
 
 AI Patents (with Sheng Xu, Tianyu Cai and Raphael Park)
