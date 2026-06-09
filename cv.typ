@@ -13,15 +13,15 @@
 leo.liu\@uts.edu.au |
 #link("https://leoliu0.github.io")
 
-== Research Interests
+== Bio
 #chiline()
-Innovation, Entreprenership, Corporate Finance
+I am an Assistant Professor of Finance at the University of Technology, Sydney. My research interests are innovation, entrepreneurship, and corporate finance. My work on innovation and entrepreneurship involves measuring innovation to study firm, industry, and economic outcomes. My recent work also examines corporate disclosure and the impact and determinants of AI innovation. My work has been published in the Journal of Financial Economics, with several papers under review at top journals, and has been presented at leading conferences including AEA, AFA, NBER, SFS Cavalcade North America, EFA, and CICIF.
 
 == Publications and Accepted Papers
 #chiline()
 Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
 
-_Forthcoming at Journal of Financial Economics (UTD24, FT50, ADBC A\*, Econ Top)_
+_Forthcoming at Journal of Financial Economics (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
 
 _Chapter 2 of my thesis_
 
@@ -29,60 +29,61 @@ _Chapter 2 of my thesis_
 
 Investor Search and Asset Prices,
 
-_Quarterly Journal of Finance (ADBC A)_
+_Quarterly Journal of Finance (ABDC A, ABS 1, ESCI)_
+
+#line(length: 100%, stroke: gray + 0.5pt)
+
+Common Ownership and Antitrust
+
+_Forthcoming at Journal of Corporate Finance (ABDC A\*, ABS 4, SSCI)_
 
 == Working Papers
 #chiline()
 
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
-_Revise and Resubmit, Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
+_Revise and Resubmit, Management Science (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
 
 _Chapter 3 of my thesis_
 #line(length: 100%, stroke: gray + 0.5pt)
 
 AI Patents (with Sheng Xu, Tianyu Cai and Raphael Park)
 
-_Revise & Resubmit, Review of Finance (FT50, ADBC A\*)_
+_Revise & Resubmit, Review of Finance (FT50, ABDC A\*, ABS 4, SSCI)_
 #line(length: 100%, stroke: gray + 0.5pt)
 
 Innovation Policies and Productivities (with Sheng Xu, Fariborz Moshirian and Vikram Nanda)
 
-_Reject & Resubmit Management Science (UTD24, FT50, ADBC A\*, Econ Top)_
-#line(length: 100%, stroke: gray + 0.5pt)
-
-Common Ownership and Antitrust
-
-_Revise and Resubmit at Journal of Corporate Finance (ADBC A\*)_
+_Resubmitted and Under Review, Management Science (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
 #line(length: 100%, stroke: gray + 0.5pt)
 
 Product Scope and Institutional Ownership
 
-_Revise and Resubmit at Journal of Banking and Finance (ADBC A\*)_
+_Revise and Resubmit at Journal of Banking and Finance (ABDC A\*, ABS 3, SSCI)_
 
 == Education
 #chiline()
 
-*University of New South Wales* #h(1fr) 2017 -- 2022 \
+*University of New South Wales, Sydney, Australia* #h(1fr) 2017 -- 2022 \
 PhD in Finance \
 School of Banking and Finance \
 
-*University of New South Wales* #h(1fr) 2015 -- 2017 \
+*University of New South Wales, Sydney, Australia* #h(1fr) 2015 -- 2017 \
 Master of Philosophy, Finance \
 School of Banking and Finance \
 	
-*Bond University* #h(1fr) 2009 -- 2012 \
+*Bond University, Brisbane, Australia* #h(1fr) 2009 -- 2012 \
 Bachelor of Commerce
 
 == Working Experience
 #chiline()
-*University of Technology Sydney* #h(1fr) 2022 -- current \
+*University of Technology Sydney, Sydney* #h(1fr) 2022 -- current \
 Lecturer (Assistant Professor) of Finance\
 
-*University of New South Wales* #h(1fr) 2021 -- 2022 \
+*University of New South Wales, Sydney* #h(1fr) 2021 -- 2022 \
 Associate Lecturer of Finance
 
-*Rozetta (formerly CMCRC)* #h(1fr) 2017 -- 2019 \
+*Rozetta (formerly CMCRC), Sydney* #h(1fr) 2017 -- 2019 \
 Research Fellow / Business Analyst
 
 == Technical Skills
