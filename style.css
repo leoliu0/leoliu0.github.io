@@ -246,6 +246,13 @@ section {
   color: var(--text-medium);
 }
 
+.dataset-request-btn {
+  margin-left: 8px;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  vertical-align: middle;
+}
+
 .status-badge {
   display: inline-block;
   padding: 3px 10px;
@@ -272,12 +279,13 @@ section {
 
 #download-form-ui {
   display: none;
-  margin-top: 20px;
-  padding: 28px;
-  background: var(--bg-white);
-  border-radius: var(--radius-lg);
+  max-width: 420px;
+  margin-top: 16px;
+  padding: 20px;
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 #download-form-ui p {

@@ -53,7 +53,31 @@
           <div class="paper-authors">with Elvira Sojli, Wing Wah Tham, and Salomé Baslandze</div>
           <div class="paper-meta">
             <span class="journal">Journal of Financial Economics</span>, Volume 180, June 2026, 104276
-            <button id="show-form-btn" class="btn btn-secondary" style="font-size: 0.75rem; padding: 3px 8px; margin-left: 8px; vertical-align: middle;">Dataset</button>
+            <button id="show-form-btn" class="btn btn-secondary dataset-request-btn" aria-controls="download-form-ui" aria-expanded="false">Request Dataset</button>
+          </div>
+          <div id="download-form-ui">
+            <p>We would like to understand the usage of the data, so we kindly ask you to enter a few details. Thank you for your interest!</p>
+            <form id="download-form">
+              <div class="form-row">
+                <div>
+                  <label for="firstname">First Name</label>
+                  <input type="text" id="firstname" name="firstname" required>
+                </div>
+                <div>
+                  <label for="lastname">Last Name</label>
+                  <input type="text" id="lastname" name="lastname" required>
+                </div>
+              </div>
+              <div>
+                <label for="role">Role</label>
+                <input type="text" id="role" name="role" required>
+              </div>
+              <div>
+                <label for="institution">Institution</label>
+                <input type="text" id="institution" name="institution" required>
+              </div>
+              <button type="submit" class="btn">Submit & Download</button>
+            </form>
           </div>
         </div>
 
@@ -66,31 +90,6 @@
           <div class="paper-meta">
             <span class="journal">Journal of Corporate Finance</span>, forthcoming
           </div>
-        </div>
-
-        <div id="download-form-ui" style="display: none; margin-top: 16px; max-width: 400px; background: var(--bg-light); padding: 20px; border-radius: 6px;">
-          <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px;">We would like to understand the usage of the data, so we kindly ask you to enter a few details. Thank you for your interest!</p>
-          <form id="download-form">
-            <div class="form-row">
-              <div>
-                <label for="firstname">First Name</label>
-                <input type="text" id="firstname" name="firstname" required>
-              </div>
-              <div>
-                <label for="lastname">Last Name</label>
-                <input type="text" id="lastname" name="lastname" required>
-              </div>
-            </div>
-            <div>
-              <label for="role">Role</label>
-              <input type="text" id="role" name="role" required>
-            </div>
-            <div>
-              <label for="institution">Institution</label>
-              <input type="text" id="institution" name="institution" required>
-            </div>
-            <button type="submit" class="btn">Submit & Download</button>
-          </form>
         </div>
       </div>
     </section>
@@ -163,7 +162,9 @@
   <script>
     document.getElementById('show-form-btn').addEventListener('click', function() {
       var formUI = document.getElementById('download-form-ui');
-      formUI.style.display = formUI.style.display === 'none' ? 'block' : 'none';
+      var isOpen = formUI.style.display === 'block';
+      formUI.style.display = isOpen ? 'none' : 'block';
+      this.setAttribute('aria-expanded', String(!isOpen));
     });
 
     document.getElementById('download-form').addEventListener('submit', function(e) {
