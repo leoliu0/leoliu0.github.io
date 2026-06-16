@@ -1,0 +1,2 @@
+found_patent.csv filter=lfs diff=lfs merge=lfs -text
+found_process.zip filter=lfs diff=lfs merge=lfs -text
