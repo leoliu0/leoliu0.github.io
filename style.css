@@ -1,26 +1,26 @@
 /* ==========================================================================
    Leo Liu — "The Offprint"
-   An editorial, journal-inspired identity: warm paper, ink, a claret accent.
+   An editorial, journal-inspired identity: cool paper, ink, a navy accent.
    Display: Fraunces (variable serif) · Text: Instrument Sans
    Fonts are loaded from Google Fonts in each page <head>.
    ========================================================================== */
 
 :root {
   /* Paper & ink */
-  --paper:        #f6f2e9;   /* warm ivory page */
-  --paper-raised: #fbf8f1;   /* lifted surfaces (cards, insets) */
-  --paper-sunken: #eee7d7;   /* recessed insets */
-  --ink:          #201c17;   /* headings, near-black warm */
-  --ink-soft:     #4c463c;   /* body copy */
-  --ink-faint:    #8a8071;   /* meta, captions, numerals */
+  --paper:        #f2f3f5;   /* cool off-white page */
+  --paper-raised: #f8f9fb;   /* lifted surfaces (cards, insets) */
+  --paper-sunken: #e7e9ee;   /* recessed insets */
+  --ink:          #1a1f2b;   /* headings, ink navy-black */
+  --ink-soft:     #454b57;   /* body copy */
+  --ink-faint:    #7c8290;   /* meta, captions, numerals */
 
   /* Rules & accents */
-  --rule:         #ddd3bf;   /* hairline rules */
-  --rule-strong:  #c7bca3;   /* heavier rules */
-  --claret:       #7c2233;   /* primary accent */
-  --claret-deep:  #5c1626;   /* hover / pressed */
-  --claret-tint:  #f0e2df;   /* faint accent wash */
-  --gold:         #a9863f;   /* rare metallic detail */
+  --rule:         #d5d9e0;   /* hairline rules */
+  --rule-strong:  #bcc2cd;   /* heavier rules */
+  --claret:       #1f3a6e;   /* primary accent (deep navy) */
+  --claret-deep:  #142a52;   /* hover / pressed */
+  --claret-tint:  #e5e9f2;   /* faint accent wash */
+  --gold:         #b08a3e;   /* rare metallic (brass) detail */
 
   --radius:       3px;
   --maxw:         920px;
@@ -49,8 +49,8 @@ body {
   color: var(--ink-soft);
   background-color: var(--paper);
   background-image:
-    radial-gradient(1200px 600px at 78% -8%, rgba(124, 34, 51, 0.05), transparent 60%),
-    radial-gradient(900px 500px at 0% 100%, rgba(169, 134, 63, 0.05), transparent 55%);
+    radial-gradient(1200px 600px at 78% -8%, rgba(31, 58, 110, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 0% 100%, rgba(176, 138, 62, 0.05), transparent 55%);
   background-attachment: fixed;
   position: relative;
   min-height: 100vh;
@@ -104,7 +104,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(246, 242, 233, 0.82);
+  background: rgba(242, 243, 245, 0.82);
   backdrop-filter: saturate(1.4) blur(10px);
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom: 1px solid var(--rule);
@@ -275,7 +275,7 @@ nav {
   padding: 9px;
   background: var(--paper-raised);
   border: 1px solid var(--rule-strong);
-  box-shadow: 0 1px 0 var(--paper), 0 18px 40px -22px rgba(32, 28, 23, 0.5);
+  box-shadow: 0 1px 0 var(--paper), 0 18px 40px -22px rgba(26, 31, 43, 0.5);
 }
 
 .portrait-frame img {
@@ -747,7 +747,7 @@ footer {
   flex-shrink: 0;
   margin-top: 40px;
   background: var(--ink);
-  color: rgba(246, 242, 233, 0.72);
+  color: rgba(242, 243, 245, 0.72);
   padding: 52px 0;
 }
 
@@ -772,7 +772,7 @@ footer {
 }
 
 .footer-info a {
-  color: rgba(246, 242, 233, 0.72);
+  color: rgba(242, 243, 245, 0.72);
   border-bottom: 1px solid transparent;
 }
 
@@ -793,7 +793,7 @@ footer {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(246, 242, 233, 0.72);
+  color: rgba(242, 243, 245, 0.72);
 }
 
 .footer-links a:hover {

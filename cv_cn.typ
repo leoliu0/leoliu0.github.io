@@ -21,7 +21,7 @@ leo.liu\@uts.edu.au | #link("https://leoliu0.github.io")
 #chiline()
 基础过程与增长（合作者：Elvira Sojli、Wing Wah Tham、Salomé Baslandze）
 
-_即将发表于《金融经济学期刊》（Journal of Financial Economics，UTD24、FT50、ABDC A\*、ABS 4\*、Econ Top、SSCI）_
+_《金融经济学期刊》（Journal of Financial Economics），第 180 卷，2026 年 6 月，104276（UTD24、FT50、ABDC A\*、ABS 4\*、Econ Top、SSCI）_
 
 _博士论文第二章_
 
@@ -33,9 +33,9 @@ _《金融季刊》（Quarterly Journal of Finance，ABDC A、ABS 1、ESCI）_
 
 #line(length: 100%, stroke: gray + 0.5pt)
 
-共同所有权与反垄断
+共同所有权是否引发反垄断担忧？（Does Common Ownership Raise Antitrust Concerns?）
 
-_即将发表于《公司金融期刊》（Journal of Corporate Finance，ABDC A\*、ABS 4、SSCI）_
+_《公司金融期刊》（Journal of Corporate Finance），第 100 卷，2026 年，103037（ABDC A\*、ABS 4、SSCI）_
 
 == 工作论文
 #chiline()

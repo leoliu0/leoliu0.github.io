@@ -21,7 +21,7 @@ I am an Assistant Professor of Finance at the University of Technology, Sydney. 
 #chiline()
 Foundational Processes and Growth (with Elvira Sojli, Wing Wah Tham, Salomé Baslandze)
 
-_Forthcoming at Journal of Financial Economics (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
+_Journal of Financial Economics, Volume 180, June 2026, 104276 (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
 
 _Chapter 2 of my thesis_
 
@@ -33,9 +33,9 @@ _Quarterly Journal of Finance (ABDC A, ABS 1, ESCI)_
 
 #line(length: 100%, stroke: gray + 0.5pt)
 
-Common Ownership and Antitrust
+Does Common Ownership Raise Antitrust Concerns?
 
-_Forthcoming at Journal of Corporate Finance (ABDC A\*, ABS 4, SSCI)_
+_Journal of Corporate Finance, Volume 100, 2026, 103037 (ABDC A\*, ABS 4, SSCI)_
 
 == Working Papers
 #chiline()
