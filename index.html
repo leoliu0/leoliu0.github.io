@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leo Liu - Assistant Professor of Finance</title>
+  <title>Leo Liu — Assistant Professor of Finance</title>
   <meta name="description" content="Leo Liu is an Assistant Professor of Finance at the University of Technology, Sydney. His research studies innovation, entrepreneurship, corporate disclosure, and AI innovation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,70 +28,22 @@
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <div class="hero-photo">
-            <img src="leo.jpg" alt="Leo Liu">
-          </div>
           <div class="hero-text">
-            <h1>Leo Liu</h1>
-            <p>I am an Assistant Professor of Finance at the University of Technology, Sydney. My research on innovation and entrepreneurship involves measuring innovation to study firm, industry, and economic outcomes. My recent work also examines corporate disclosure and the impact and determinants of AI innovation. My work has been published in the Journal of Financial Economics, with several papers under review at top journals, and has been presented at leading conferences including AEA, AFA, NBER, SFS Cavalcade North America, EFA, and CICIF.</p>
-            <div class="hero-links">
-              <a href="cv.pdf">Download CV</a>
+            <p class="hero-kicker reveal">Assistant Professor of Finance · UTS</p>
+            <h1 class="reveal">Leo Liu</h1>
+            <p class="drop reveal">I am an Assistant Professor of Finance at the University of Technology, Sydney. My research on innovation and entrepreneurship involves measuring innovation to study firm, industry, and economic outcomes. My recent work also examines corporate disclosure and the impact and determinants of AI innovation. My work has been published in the <em>Journal of Financial Economics</em>, with several papers under review at top journals, and has been presented at leading conferences including AEA, AFA, NBER, SFS Cavalcade North America, EFA, and CICIF.</p>
+            <div class="hero-links reveal">
+              <a href="cv.pdf" class="primary">Download CV</a>
               <a href="mailto:leo.liu@uts.edu.au">Email</a>
               <a href="https://github.com/leoliu0">GitHub</a>
+              <a href="https://scholar.google.com">Scholar</a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h2 class="section-title">Publications</h2>
-        
-        <div class="paper">
-          <div class="paper-title">
-            <a href="1-s2.0-S0304405X26000474-main.pdf" target="_blank">Foundational Processes and Growth</a>
-            <span class="status-badge">JFE</span>
-          </div>
-          <div class="paper-authors">with Elvira Sojli, Wing Wah Tham, and Salomé Baslandze</div>
-          <div class="paper-meta">
-            <span class="journal">Journal of Financial Economics</span>, Volume 180, June 2026, 104276,
-            <button id="show-form-btn" class="dataset-request-btn" aria-controls="download-form-ui" aria-expanded="false">Dataset</button>
-          </div>
-          <div id="download-form-ui">
-            <p>We would like to understand the usage of the data, so we kindly ask you to enter a few details. Thank you for your interest!</p>
-            <form id="download-form">
-              <div class="form-row">
-                <div>
-                  <label for="firstname">First Name</label>
-                  <input type="text" id="firstname" name="firstname" required>
-                </div>
-                <div>
-                  <label for="lastname">Last Name</label>
-                  <input type="text" id="lastname" name="lastname" required>
-                </div>
-              </div>
-              <div>
-                <label for="role">Role</label>
-                <input type="text" id="role" name="role" required>
-              </div>
-              <div>
-                <label for="institution">Institution</label>
-                <input type="text" id="institution" name="institution" required>
-              </div>
-              <button type="submit" class="btn">Submit & Download</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="paper">
-          <div class="paper-title">
-            <a href="1-s2.0-S0929119926000957-main.pdf" target="_blank">Does Common Ownership Raise Antitrust Concerns?</a>
-            <span class="status-badge">JCF</span>
-          </div>
-          <div class="paper-authors">with Huaizhou Li, Ronald Masulis and Jason Zein</div>
-          <div class="paper-meta">
-            <span class="journal">Journal of Corporate Finance</span>, Volume 100, 2026, 103037
+          <div class="hero-portrait">
+            <div class="portrait-frame">
+              <img src="leo.jpg" alt="Portrait of Leo Liu">
+            </div>
+            <p class="portrait-cap">Leo Liu</p>
           </div>
         </div>
       </div>
@@ -96,54 +51,117 @@
 
     <section>
       <div class="container">
-        <h2 class="section-title">Working Papers</h2>
-
-        <div class="paper">
-          <div class="paper-title">
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809" target="_blank">CEO Experience and Value Creation: Evidence from Green Lab Locations</a>
-            <span class="status-badge">R&R Management Science</span>
-          </div>
-          <div class="paper-authors">with Elvira Sojli and Wing Wah Tham</div>
+        <div class="section-head">
+          <h2 class="section-title">Publications</h2>
+          <span class="section-count">Peer-reviewed</span>
         </div>
 
-        <div class="paper">
-          <div class="paper-title">
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868" target="_blank">AI Patents</a>
-            <span class="status-badge">R&R Review of Finance</span>
-          </div>
-          <div class="paper-authors">with Sheng Xu, Tianyu Cai, Raphael Park</div>
+        <div class="papers">
+          <article class="paper">
+            <div class="paper-title">
+              <a href="1-s2.0-S0304405X26000474-main.pdf" target="_blank">Foundational Processes and Growth</a>
+              <span class="status-badge badge-pub">JFE</span>
+            </div>
+            <div class="paper-authors">with Elvira Sojli, Wing Wah Tham, and Salomé Baslandze</div>
+            <div class="paper-meta">
+              <span class="journal">Journal of Financial Economics</span>, Volume 180, June 2026, 104276.
+              <button id="show-form-btn" class="dataset-request-btn" aria-controls="download-form-ui" aria-expanded="false">Request dataset</button>
+            </div>
+            <div id="download-form-ui">
+              <p>We would like to understand the usage of the data, so we kindly ask you to enter a few details. Thank you for your interest!</p>
+              <form id="download-form">
+                <div class="form-row">
+                  <div>
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                  </div>
+                  <div>
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                  </div>
+                </div>
+                <div>
+                  <label for="role">Role</label>
+                  <input type="text" id="role" name="role" required>
+                </div>
+                <div>
+                  <label for="institution">Institution</label>
+                  <input type="text" id="institution" name="institution" required>
+                </div>
+                <button type="submit" class="btn">Submit &amp; Download</button>
+              </form>
+            </div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-title">
+              <a href="1-s2.0-S0929119926000957-main.pdf" target="_blank">Does Common Ownership Raise Antitrust Concerns?</a>
+              <span class="status-badge badge-pub">JCF</span>
+            </div>
+            <div class="paper-authors">with Huaizhou Li, Ronald Masulis and Jason Zein</div>
+            <div class="paper-meta">
+              <span class="journal">Journal of Corporate Finance</span>, Volume 100, 2026, 103037.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Working Papers</h2>
+          <span class="section-count">In progress &amp; under review</span>
         </div>
 
-        <div class="paper">
-          <div class="paper-title">
-            Product Scope and Ownership Structure
-            <span class="status-badge">R&R Journal of Banking and Finance</span>
-          </div>
-          <div class="paper-authors">with Tony Cai, Jinzhao Du and Fariborz Moshirian</div>
-        </div>
+        <div class="papers">
+          <article class="paper">
+            <div class="paper-title">
+              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4568809" target="_blank">CEO Experience and Value Creation: Evidence from Green Lab Locations</a>
+              <span class="status-badge">R&amp;R · Management Science</span>
+            </div>
+            <div class="paper-authors">with Elvira Sojli and Wing Wah Tham</div>
+          </article>
 
-        <div class="paper">
-          <div class="paper-title">
-            Trust and Corporate Ownership
-            <span class="status-badge">R&R Journal of Corporate Finance</span>
-          </div>
-          <div class="paper-authors">with Fariborz Moshirian, Bohui Zhang and Sherry Zhang</div>
-        </div>
+          <article class="paper">
+            <div class="paper-title">
+              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6063868" target="_blank">AI Patents</a>
+              <span class="status-badge">R&amp;R · Review of Finance</span>
+            </div>
+            <div class="paper-authors">with Sheng Xu, Tianyu Cai, Raphael Park</div>
+          </article>
 
-        <div class="paper">
-          <div class="paper-title">
-            AI Innovation Policy and Productivity
-            <span class="status-badge">Reject & Resubmit Management Science</span>
-          </div>
-          <div class="paper-authors">with Fariborz Moshirian, Vikram Nanda and Sheng Xu</div>
-        </div>
+          <article class="paper">
+            <div class="paper-title">
+              Product Scope and Ownership Structure
+              <span class="status-badge">R&amp;R · Journal of Banking and Finance</span>
+            </div>
+            <div class="paper-authors">with Tony Cai, Jinzhao Du and Fariborz Moshirian</div>
+          </article>
 
-        <div class="paper">
-          <div class="paper-title">
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516" target="_blank">Can ESG Performance be attributed to Management Styles?</a>
-          </div>
-          <div class="paper-authors">with Tony Cai, Jason Zein and Hao Zhang</div>
-          <div class="conferences">Conferences: AFA 2024, FMA Asia 2022, AFBC 2022</div>
+          <article class="paper">
+            <div class="paper-title">
+              Trust and Corporate Ownership
+              <span class="status-badge">R&amp;R · Journal of Corporate Finance</span>
+            </div>
+            <div class="paper-authors">with Fariborz Moshirian, Bohui Zhang and Sherry Zhang</div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-title">
+              AI Innovation Policy and Productivity
+              <span class="status-badge">Reject &amp; Resubmit · Management Science</span>
+            </div>
+            <div class="paper-authors">with Fariborz Moshirian, Vikram Nanda and Sheng Xu</div>
+          </article>
+
+          <article class="paper">
+            <div class="paper-title">
+              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4266516" target="_blank">Can ESG Performance be attributed to Management Styles?</a>
+            </div>
+            <div class="paper-authors">with Tony Cai, Jason Zein and Hao Zhang</div>
+            <div class="conferences">Conferences: AFA 2024, FMA Asia 2022, AFBC 2022</div>
+          </article>
         </div>
       </div>
     </section>
@@ -156,7 +174,7 @@
           <p><strong>Leo Liu</strong></p>
           <p>Assistant Professor of Finance</p>
           <p>University of Technology, Sydney</p>
-          <p style="margin-top: 8px;"><a href="mailto:leo.liu@uts.edu.au">leo.liu@uts.edu.au</a></p>
+          <p style="margin-top: 10px;"><a href="mailto:leo.liu@uts.edu.au">leo.liu@uts.edu.au</a></p>
         </div>
         <div class="footer-links">
           <a href="https://github.com/leoliu0">GitHub</a>
@@ -179,7 +197,7 @@
       e.preventDefault();
       var form = this;
       var data = new FormData(form);
-      
+
       fetch('https://formspree.io/f/mgolgzql', {
         method: 'POST',
         body: data,
@@ -191,7 +209,7 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
+
         form.outerHTML = '<div class="success-msg">Thank you! Your download should start shortly.</div>';
       }).catch(function() {
         alert('Oops! There was a problem submitting your form.');
