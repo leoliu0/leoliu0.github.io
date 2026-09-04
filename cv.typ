@@ -40,6 +40,11 @@ _Journal of Corporate Finance, Volume 100, 2026, 103037 (ABDC A\*, ABS 4, SSCI)_
 == Working Papers
 #chiline()
 
+Commercialization Margins and Uncertainties (with Elvira Sojli and Wing Wah Tham)
+
+_Revise and Resubmit, Review of Financial Studies (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
+#line(length: 100%, stroke: gray + 0.5pt)
+
 CEO Experience and Value Creation (with Elvira Sojli and Wing Wah Tham)
 
 _Revise and Resubmit, Management Science (UTD24, FT50, ABDC A\*, ABS 4\*, Econ Top, SSCI)_
