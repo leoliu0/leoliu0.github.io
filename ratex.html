@@ -268,8 +268,11 @@
         <a href="index.html" class="nav-brand">Leo Liu</a>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="software.html">Software</a></li>
-          <li><a href="ratex.html" class="active">ratex</a></li>
+          <li>
+            <a href="software.html" style="color: var(--ink-soft);">Software</a>
+            <span style="color: var(--ink-faint); margin: 0 4px;">/</span>
+            <span style="color: var(--green); font-weight: 600; font-family: var(--mono); font-size: 0.95rem;">ratex</span>
+          </li>
           <li><a href="teaching.html">Teaching</a></li>
         </ul>
       </nav>
@@ -278,7 +281,7 @@
 
   <main>
     <!-- Hero Section -->
-    <section class="hero" style="padding-bottom: 24px;">
+    <section style="padding: 32px 0 20px;">
       <div class="container">
         <div class="page-header" style="margin-bottom: 16px;">
           <p class="hero-kicker">typesetting / pure-rust</p>
@@ -423,6 +426,49 @@
           </div>
 
           <!-- Linux x86_64 Tarball -->
+          <!-- Debian / Ubuntu .deb -->
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>Ubuntu / Debian</span>
+                  <span>🐧</span>
+                </div>
+                <div class="download-card-meta">.deb package • amd64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Native Debian package for Ubuntu, Debian, Linux Mint, and Pop!_OS.
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex_0.1.0_amd64.deb" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">
+                Download .deb
+              </a>
+            </div>
+          </div>
+
+          <!-- Fedora / RHEL / openSUSE .rpm -->
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>Fedora / RHEL</span>
+                  <span>🎩</span>
+                </div>
+                <div class="download-card-meta">.rpm package • x86_64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Native RPM package for Fedora, RHEL, CentOS, Rocky Linux, and openSUSE.
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex-0.1.0-1.x86_64.rpm" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">
+                Download .rpm
+              </a>
+            </div>
+          </div>
+
+          <!-- Universal Linux Tarball -->
           <div class="download-card">
             <div>
               <div class="download-card-header">
@@ -430,18 +476,15 @@
                   <span>Universal Linux</span>
                   <span>🐧</span>
                 </div>
-                <div class="download-card-meta">.tar.gz &amp; .deb • x86_64</div>
+                <div class="download-card-meta">.tar.gz • x86_64</div>
               </div>
               <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
-                Standalone tarball installer for Fedora, RHEL, openSUSE, or native <code>.deb</code> for Ubuntu / Debian.
+                Complete standalone distribution archive with one-click installer for any Linux system.
               </p>
             </div>
             <div class="download-card-action">
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex_0.1.0_amd64.deb" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">
-                Download .deb
-              </a>
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-linux-x86_64.tar.gz" class="sublink">
-                or download .tar.gz
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-linux-x86_64.tar.gz" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">
+                Download .tar.gz
               </a>
             </div>
           </div>
@@ -490,8 +533,7 @@
 
           <div class="feature-card">
             <h3>📦 100% Self-Contained</h3>
-            <p>Embeds over 15,000 common LaTeX packages, document classes, and precompiled formats inside a 29 MiB compressed in-memory archive. Zero network calls or external TeX installations required.</p>
-          </div>
+            <p>Embeds all essential formats, packages, math symbols, and CJK fonts, plus bundles a complete 67,000+ file TeX Live tree in <code>share/tex-suite/</code>. Zero external dependencies required.</p>
 
           <div class="feature-card">
             <h3>🛡️ Pure Rust Safety</h3>
