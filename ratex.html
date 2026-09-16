@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ratex — Ultra-Fast Pure-Rust TeX Engine</title>
-  <meta name="description" content="ratex is an ultra-fast, self-contained, pure-Rust TeX engine and typesetting toolchain designed as a modern replacement for pdflatex and latexmk.">
+  <meta name="description" content="ratex is an ultra-fast, self-contained, pure-Rust TeX engine and typesetting toolchain. Drop-in replacement for pdflatex, xelatex, lualatex, and texmk.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin: 20px 0 28px;
+      margin: 20px 0 24px;
     }
     .badge {
       font-family: var(--mono);
@@ -41,7 +41,57 @@
       background: var(--green-tint);
       color: var(--green-deep);
       border-color: var(--line-strong);
-      font-weight: 500;
+      font-weight: 600;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+      margin-bottom: 32px;
+    }
+    .btn-os {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius);
+      font-size: 0.96rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s var(--ease);
+    }
+    .btn-os.primary {
+      background: var(--green);
+      color: #ffffff;
+    }
+    .btn-os.primary:hover {
+      background: var(--green-deep);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+    .btn-os.secondary {
+      background: var(--bg-raised);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-os.secondary:hover {
+      border-color: var(--green);
+      color: var(--green-deep);
+      transform: translateY(-2px);
+    }
+
+    .callout-box {
+      background: var(--bg-raised);
+      border: 1px solid var(--line-strong);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin: 24px 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.6;
     }
 
     .install-box {
@@ -49,7 +99,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 24px;
-      margin: 28px 0 44px;
+      margin: 20px 0 40px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
     .install-box-header {
@@ -60,7 +110,7 @@
     }
     .install-box-title {
       font-family: var(--mono);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--ink);
     }
@@ -70,7 +120,7 @@
       border-radius: 4px;
       padding: 14px 16px;
       font-family: var(--mono);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--ink);
       overflow-x: auto;
       line-height: 1.5;
@@ -81,51 +131,76 @@
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
       margin: 24px 0 44px;
     }
     .download-card {
       background: var(--bg-raised);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
     }
+    .download-card.featured {
+      border-color: var(--line-strong);
+      box-shadow: 0 4px 14px var(--green-tint);
+    }
     .download-card:hover {
       border-color: var(--green);
-      box-shadow: 0 4px 12px var(--green-tint);
+      box-shadow: 0 6px 16px var(--green-tint);
     }
     .download-card-header {
       margin-bottom: 12px;
     }
     .download-card-title {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--ink);
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     .download-card-meta {
       font-family: var(--mono);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--ink-faint);
     }
     .download-card-action {
-      margin-top: 14px;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .download-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--green);
+    .action-btn {
+      display: block;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--green);
+      color: #fff;
+      transition: background 0.2s;
     }
-    .download-link:hover {
+    .action-btn:hover {
+      background: var(--green-deep);
+      color: #fff;
+    }
+    .sublink {
+      font-size: 0.84rem;
+      color: var(--ink-faint);
+      text-align: center;
+      text-decoration: none;
+    }
+    .sublink:hover {
       color: var(--green-deep);
+      text-decoration: underline;
     }
 
     .feature-grid {
@@ -202,50 +277,204 @@
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section class="hero" style="padding-bottom: 24px;">
       <div class="container">
         <div class="page-header" style="margin-bottom: 16px;">
           <p class="hero-kicker">typesetting / pure-rust</p>
           <h1 style="font-size: 2.5rem; margin-bottom: 10px;">ratex</h1>
           <p style="font-size: 1.15rem; max-width: 65ch; line-height: 1.6; color: var(--ink-soft);">
-            An ultra-fast, self-contained, pure-Rust TeX engine and build toolchain designed as a modern, high-performance replacement for <code>pdflatex</code> and <code>latexmk</code>.
+            An ultra-fast, self-contained, pure-Rust TeX engine and typesetting toolchain. Built from scratch to serve as a high-performance drop-in replacement for <code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code>, and <code>texmk</code>.
           </p>
         </div>
 
         <div class="badge-row">
-          <span class="badge accent">v0.1.0 Latest</span>
+          <span class="badge accent">v0.1.0 Active</span>
+          <span class="badge">macOS Native (.pkg)</span>
+          <span class="badge">Windows Native (.exe)</span>
+          <span class="badge">Arch AUR: ratex-bin</span>
           <span class="badge">Pure Rust (Zero C deps)</span>
           <span class="badge">Dual License: MIT / Apache-2.0</span>
-          <span class="badge">Arch AUR: ratex-bin</span>
         </div>
 
-        <div class="hero-links" style="margin-top: 10px;">
-          <a href="#downloads" class="primary">Download Release</a>
-          <a href="https://github.com/leoliu0/ratex" target="_blank" rel="noopener">GitHub Repository &rarr;</a>
-          <a href="https://aur.archlinux.org/packages/ratex-bin" target="_blank" rel="noopener">AUR Package &rarr;</a>
+        <div class="callout-box">
+          <strong>Full Engine Replacement Everywhere:</strong> ratex replaces <code>pdflatex</code>, <code>xelatex</code>, and <code>lualatex</code> out of the box with zero configuration. On macOS and Windows, the installer includes an option (enabled by default) to also replace <code>latexmk</code> with <code>texmk</code> for seamless integration with TeXstudio and VS Code LaTeX Workshop.
+        </div>
+
+        <!-- Primary OS Download Buttons -->
+        <div class="cta-row">
+          <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex-v0.1.0-macos-arm64.pkg" class="btn-os primary">
+            🍎 Download for macOS (Apple Silicon .pkg)
+          </a>
+          <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex-setup-v0.1.0-windows-x64.exe" class="btn-os primary">
+            🪟 Download for Windows (Setup .exe)
+          </a>
+          <a href="#downloads" class="btn-os secondary">
+            All Platforms &amp; Linux &darr;
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Quick Install -->
-    <section>
+    <!-- Downloads Section (Mac & Windows First) -->
+    <section id="downloads">
       <div class="container">
-        <div class="install-box">
-          <div class="install-box-header">
-            <span class="install-box-title">Quick Install</span>
-            <span style="font-size: 0.8rem; font-family: var(--mono); color: var(--ink-faint);">Arch Linux (AUR)</span>
+        <div class="section-head">
+          <h2 class="section-title">Installers &amp; Packages</h2>
+          <span class="section-count">v0.1.0 Downloads</span>
+        </div>
+
+        <div class="card-grid">
+          <!-- macOS Apple Silicon -->
+          <div class="download-card featured">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>macOS (Apple Silicon)</span>
+                  <span>🍎</span>
+                </div>
+                <div class="download-card-meta">M1 / M2 / M3 / M4 • Native .pkg</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Native macOS installer package. Double-click to install into <code>/usr/local/bin</code> with automatic PATH setup.
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex-v0.1.0-macos-arm64.pkg" class="action-btn">
+                Download .pkg (Apple Silicon)
+              </a>
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-macos-aarch64.tar.gz" class="sublink">
+                or portable .tar.gz
+              </a>
+            </div>
           </div>
-          <div class="code-block">
-            <span class="code-comment"># Precompiled binary via AUR</span><br>
-            yay -S ratex-bin<br><br>
-            <span class="code-comment"># Or build from source via AUR</span><br>
-            yay -S ratex
+
+          <!-- Windows x64 -->
+          <div class="download-card featured">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>Windows (64-bit)</span>
+                  <span>🪟</span>
+                </div>
+                <div class="download-card-meta">Windows 10 / 11 • Setup .exe</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Native Windows setup wizard. Installs executables, adds ratex to PATH, and configures TeXstudio / VS Code compatibility.
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex-setup-v0.1.0-windows-x64.exe" class="action-btn">
+                Download Setup .exe
+              </a>
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-windows-x86_64.zip" class="sublink">
+                or portable .zip
+              </a>
+            </div>
+          </div>
+
+          <!-- macOS Intel -->
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>macOS (Intel x86_64)</span>
+                  <span>🍎</span>
+                </div>
+                <div class="download-card-meta">Intel Mac • Native .pkg</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Native package installer for Intel-based Macs.
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex-v0.1.0-macos-x86_64.pkg" class="action-btn">
+                Download .pkg (Intel)
+              </a>
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-macos-x86_64.tar.gz" class="sublink">
+                or portable .tar.gz
+              </a>
+            </div>
+          </div>
+
+          <!-- Arch Linux AUR -->
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>Arch Linux / Manjaro</span>
+                  <span>🐧</span>
+                </div>
+                <div class="download-card-meta">AUR Package • x86_64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Available directly on the Arch User Repository (AUR):
+                <code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px;">yay -S ratex-bin</code>
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://aur.archlinux.org/packages/ratex-bin" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);" target="_blank" rel="noopener">
+                View on AUR &rarr;
+              </a>
+              <a href="https://aur.archlinux.org/packages/ratex" class="sublink" target="_blank" rel="noopener">
+                or ratex (build from source)
+              </a>
+            </div>
+          </div>
+
+          <!-- Linux x86_64 Tarball -->
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>Universal Linux</span>
+                  <span>🐧</span>
+                </div>
+                <div class="download-card-meta">.tar.gz &amp; .deb • x86_64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Standalone tarball installer for Fedora, RHEL, openSUSE, or native <code>.deb</code> for Ubuntu / Debian.
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex_0.1.0_amd64.deb" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">
+                Download .deb
+              </a>
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-linux-x86_64.tar.gz" class="sublink">
+                or download .tar.gz
+              </a>
+            </div>
+          </div>
+
+          <!-- GitHub Source -->
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title">
+                  <span>Cargo / Source</span>
+                  <span>🦀</span>
+                </div>
+                <div class="download-card-meta">Rust 1.80+ • Workspace</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">
+                Compile from source with Cargo:
+                <code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px;">cargo build --release</code>
+              </p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);" target="_blank" rel="noopener">
+                View Source on GitHub &rarr;
+              </a>
+              <a href="https://github.com/leoliu0/ratex/releases" class="sublink" target="_blank" rel="noopener">
+                all release assets
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- What is ratex? -->
+    <!-- Key Architecture -->
     <section>
       <div class="container">
         <div class="section-head">
@@ -265,13 +494,13 @@
           </div>
 
           <div class="feature-card">
-            <h3>🛡️ Memory Safe & Robust</h3>
-            <p>Written entirely in pure Rust with strict bounds checking. Completely eliminates buffer overflows, memory leaks, and runaway pointers common in legacy C TeX engines.</p>
+            <h3>🛡️ Pure Rust Safety</h3>
+            <p>Written entirely in pure Rust with strict bounds checking. Eliminates the buffer overflows, memory corruption bugs, and runaway pointers of legacy C TeX engines.</p>
           </div>
 
           <div class="feature-card">
-            <h3>🔄 Seamless Workflow</h3>
-            <p>Ships as a standalone <code>texmk</code> driver. Drop it into your existing workspace: <code>texmk paper.tex</code> handles compilation passes automatically without clashing with existing TeX Live setups.</p>
+            <h3>🔄 Drop-in CLI Compatibility</h3>
+            <p>Directly provides <code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code>, and <code>texmk</code>. On macOS &amp; Windows, seamlessly substitutes <code>latexmk</code> so TeXstudio and VS Code work instantly.</p>
           </div>
         </div>
       </div>
@@ -326,132 +555,24 @@
       </div>
     </section>
 
-    <!-- Download Matrix -->
-    <section id="downloads">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Download &amp; Installation</h2>
-          <span class="section-count">v0.1.0 Precompiled Packages</span>
-        </div>
-
-        <div class="card-grid">
-          <!-- Arch Linux -->
-          <div class="download-card">
-            <div class="download-card-header">
-              <div class="download-card-title">Arch Linux / Manjaro</div>
-              <div class="download-card-meta">AUR • x86_64</div>
-            </div>
-            <p style="font-size: 0.9rem; color: var(--ink-soft);">Install precompiled or compile from source directly through your AUR helper.</p>
-            <div class="download-card-action">
-              <a href="https://aur.archlinux.org/packages/ratex-bin" class="download-link" target="_blank" rel="noopener">
-                AUR package page &rarr;
-              </a>
-            </div>
-          </div>
-
-          <!-- Linux x86_64 -->
-          <div class="download-card">
-            <div class="download-card-header">
-              <div class="download-card-title">Universal Linux</div>
-              <div class="download-card-meta">.tar.gz • x86_64</div>
-            </div>
-            <p style="font-size: 0.9rem; color: var(--ink-soft);">Self-contained archive with one-click installer script for any Linux distribution.</p>
-            <div class="download-card-action">
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-linux-x86_64.tar.gz" class="download-link">
-                Download .tar.gz &darr;
-              </a>
-            </div>
-          </div>
-
-          <!-- Debian / Ubuntu -->
-          <div class="download-card">
-            <div class="download-card-header">
-              <div class="download-card-title">Debian / Ubuntu</div>
-              <div class="download-card-meta">.deb package • amd64</div>
-            </div>
-            <p style="font-size: 0.9rem; color: var(--ink-soft);">Native Debian package for Ubuntu, Debian, Linux Mint, and Pop!_OS.</p>
-            <div class="download-card-action">
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex_0.1.0_amd64.deb" class="download-link">
-                Download .deb &darr;
-              </a>
-            </div>
-          </div>
-
-          <!-- macOS Apple Silicon -->
-          <div class="download-card">
-            <div class="download-card-header">
-              <div class="download-card-title">macOS (Apple Silicon)</div>
-              <div class="download-card-meta">.tar.gz • M1 / M2 / M3 / M4</div>
-            </div>
-            <p style="font-size: 0.9rem; color: var(--ink-soft);">Optimized native binary archive for Apple Silicon Macs with automated installer.</p>
-            <div class="download-card-action">
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-macos-aarch64.tar.gz" class="download-link">
-                Download .tar.gz &darr;
-              </a>
-            </div>
-          </div>
-
-          <!-- macOS Intel -->
-          <div class="download-card">
-            <div class="download-card-header">
-              <div class="download-card-title">macOS (Intel)</div>
-              <div class="download-card-meta">.tar.gz • x86_64</div>
-            </div>
-            <p style="font-size: 0.9rem; color: var(--ink-soft);">Native binary archive for Intel-based Macs with automated installer.</p>
-            <div class="download-card-action">
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-macos-x86_64.tar.gz" class="download-link">
-                Download .tar.gz &darr;
-              </a>
-            </div>
-          </div>
-
-          <!-- Windows x64 -->
-          <div class="download-card">
-            <div class="download-card-header">
-              <div class="download-card-title">Windows</div>
-              <div class="download-card-meta">.zip • x86_64</div>
-            </div>
-            <p style="font-size: 0.9rem; color: var(--ink-soft);">Standalone Windows archive with PowerShell and batch installers.</p>
-            <div class="download-card-action">
-              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-windows-x86_64.zip" class="download-link">
-                Download .zip &darr;
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Build from Source -->
-        <div class="install-box" style="margin-top: 10px;">
-          <div class="install-box-header">
-            <span class="install-box-title">Build from Source (Rust 1.80+)</span>
-            <span style="font-size: 0.8rem; font-family: var(--mono); color: var(--ink-faint);">cargo</span>
-          </div>
-          <div class="code-block">
-            git clone https://github.com/leoliu0/ratex.git<br>
-            cd ratex<br>
-            cargo build --release --bin texmk<br><br>
-            <span class="code-comment"># Binary located at target/release/texmk</span><br>
-            ./target/release/texmk document.tex
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Usage -->
     <section style="padding-bottom: 60px;">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Quick Usage</h2>
-          <span class="section-count">Compiling Documents</span>
+          <h2 class="section-title">How to Use</h2>
+          <span class="section-count">Drop-in Commands</span>
         </div>
 
         <div class="code-block" style="background: var(--bg-raised); border-color: var(--line);">
-          <span class="code-comment"># Compile document and automatically converge bibliography and citations</span><br>
-          texmk document.tex<br><br>
-          <span class="code-comment"># Specify output directory</span><br>
-          texmk -output-directory=build document.tex<br><br>
-          <span class="code-comment"># Allow using external TeX Live packages if not already embedded</span><br>
-          texmk --allow-system-texmf document.tex
+          <span class="code-comment"># 1. Multi-pass auto-converging build (replaces latexmk)</span><br>
+          texmk paper.tex<br><br>
+          <span class="code-comment"># 2. Direct single-pass compile (drop-in pdflatex replacement)</span><br>
+          pdflatex paper.tex<br><br>
+          <span class="code-comment"># 3. XeLaTeX or LuaLaTeX document</span><br>
+          xelatex paper.tex<br>
+          lualatex paper.tex<br><br>
+          <span class="code-comment"># 4. In TeXstudio / VS Code (LaTeX Workshop):</span><br>
+          <span class="code-comment"># Builds work out of the box using standard pdflatex or latexmk recipes!</span>
         </div>
       </div>
     </section>
