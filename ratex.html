@@ -559,20 +559,48 @@
     <section style="padding-bottom: 60px;">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">How to Use</h2>
-          <span class="section-count">Drop-in Commands</span>
+          <h2 class="section-title">How to Use &amp; Editor Setup</h2>
+          <span class="section-count">CLI &amp; IDEs</span>
         </div>
 
-        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line);">
-          <span class="code-comment"># 1. Multi-pass auto-converging build (replaces latexmk)</span><br>
+        <!-- CLI Usage -->
+        <h3 style="margin: 20px 0 10px; font-size: 1.15rem; color: var(--ink);">1. Terminal / CLI</h3>
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line); margin-bottom: 24px;">
+          <span class="code-comment"># Multi-pass auto-converging build (replaces latexmk; converges bibtex and citations automatically)</span><br>
           texmk paper.tex<br><br>
-          <span class="code-comment"># 2. Direct single-pass compile (drop-in pdflatex replacement)</span><br>
+          <span class="code-comment"># Output PDF into a custom folder (e.g. build/)</span><br>
+          texmk -output-directory=build paper.tex<br><br>
+          <span class="code-comment"># Direct single-pass compile (drop-in pdflatex replacement)</span><br>
           pdflatex paper.tex<br><br>
-          <span class="code-comment"># 3. XeLaTeX or LuaLaTeX document</span><br>
-          xelatex paper.tex<br>
-          lualatex paper.tex<br><br>
-          <span class="code-comment"># 4. In TeXstudio / VS Code (LaTeX Workshop):</span><br>
-          <span class="code-comment"># Builds work out of the box using standard pdflatex or latexmk recipes!</span>
+          <span class="code-comment"># Clean intermediate auxiliary files</span><br>
+          texmk -c
+        </div>
+
+        <!-- TeXstudio Setup -->
+        <h3 style="margin: 24px 0 10px; font-size: 1.15rem; color: var(--ink);">2. TeXstudio Setup</h3>
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line); margin-bottom: 24px;">
+          <span class="code-comment"># If you replaced latexmk (Mac/Windows installer option):</span><br>
+          No configuration required! Default "Compile" (F5) works immediately.<br><br>
+          <span class="code-comment"># Manual configuration:</span><br>
+          1. Go to: <strong>Options &rarr; Configure TeXstudio &rarr; Build</strong><br>
+          2. Set <strong>Default Compiler</strong> to: <code>texmk -pdf -interaction=nonstopmode %.tex</code><br>
+          3. Press <strong>F5</strong> to build your document in milliseconds!
+        </div>
+
+        <!-- VS Code LaTeX Workshop -->
+        <h3 style="margin: 24px 0 10px; font-size: 1.15rem; color: var(--ink);">3. VS Code (LaTeX Workshop) Setup</h3>
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line);">
+          <span class="code-comment">// Add this recipe to your VS Code settings.json (Ctrl+, or Cmd+,):</span><br>
+          "latex-workshop.latex.tools": [<br>
+          &nbsp;&nbsp;{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"name": "ratex",<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"command": "texmk",<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"args": ["-pdf", "-interaction=nonstopmode", "%DOC%"]<br>
+          &nbsp;&nbsp;}<br>
+          ],<br>
+          "latex-workshop.latex.recipes": [<br>
+          &nbsp;&nbsp;{ "name": "ratex", "tools": ["ratex"] }<br>
+          ]
         </div>
       </div>
     </section>
