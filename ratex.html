@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ratex — Ultra-Fast Pure-Rust TeX Engine</title>
+  <meta name="description" content="ratex is an ultra-fast, self-contained, pure-Rust TeX engine and typesetting toolchain designed as a modern replacement for pdflatex and latexmk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      try {
+        fetch("https://wispy-dawn-595c.auleo-liu.workers.dev", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ page: window.location.pathname, referrer: document.referrer || "direct" }),
+          keepalive: true
+        }).catch(function(){});
+      } catch(e){}
+    })();
+  </script>
+  <style>
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 28px;
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      background: var(--bg-sunken);
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
+    }
+    .badge.accent {
+      background: var(--green-tint);
+      color: var(--green-deep);
+      border-color: var(--line-strong);
+      font-weight: 500;
+    }
+
+    .install-box {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 28px 0 44px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .install-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .install-box-title {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .code-block {
+      background: var(--bg-sunken);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--ink);
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    .code-comment {
+      color: var(--ink-faint);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 24px 0 44px;
+    }
+    .download-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .download-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 4px 12px var(--green-tint);
+    }
+    .download-card-header {
+      margin-bottom: 12px;
+    }
+    .download-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .download-card-meta {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+    }
+    .download-card-action {
+      margin-top: 14px;
+    }
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--green);
+    }
+    .download-link:hover {
+      color: var(--green-deep);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0 44px;
+    }
+    .feature-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .feature-card h3 {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 24px 0 44px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-raised);
+    }
+    table.bench-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      text-align: left;
+    }
+    table.bench-table th, table.bench-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    table.bench-table th {
+      background: var(--bg-sunken);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    table.bench-table tr:last-child td {
+      border-bottom: none;
+    }
+    table.bench-table td strong {
+      color: var(--green-deep);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-brand">Leo Liu</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="software.html">Software</a></li>
+          <li><a href="ratex.html" class="active">ratex</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="padding-bottom: 24px;">
+      <div class="container">
+        <div class="page-header" style="margin-bottom: 16px;">
+          <p class="hero-kicker">typesetting / pure-rust</p>
+          <h1 style="font-size: 2.5rem; margin-bottom: 10px;">ratex</h1>
+          <p style="font-size: 1.15rem; max-width: 65ch; line-height: 1.6; color: var(--ink-soft);">
+            An ultra-fast, self-contained, pure-Rust TeX engine and build toolchain designed as a modern, high-performance replacement for <code>pdflatex</code> and <code>latexmk</code>.
+          </p>
+        </div>
+
+        <div class="badge-row">
+          <span class="badge accent">v0.1.0 Latest</span>
+          <span class="badge">Pure Rust (Zero C deps)</span>
+          <span class="badge">Dual License: MIT / Apache-2.0</span>
+          <span class="badge">Arch AUR: ratex-bin</span>
+        </div>
+
+        <div class="hero-links" style="margin-top: 10px;">
+          <a href="#downloads" class="primary">Download Release</a>
+          <a href="https://github.com/leoliu0/ratex" target="_blank" rel="noopener">GitHub Repository &rarr;</a>
+          <a href="https://aur.archlinux.org/packages/ratex-bin" target="_blank" rel="noopener">AUR Package &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Install -->
+    <section>
+      <div class="container">
+        <div class="install-box">
+          <div class="install-box-header">
+            <span class="install-box-title">Quick Install</span>
+            <span style="font-size: 0.8rem; font-family: var(--mono); color: var(--ink-faint);">Arch Linux (AUR)</span>
+          </div>
+          <div class="code-block">
+            <span class="code-comment"># Precompiled binary via AUR</span><br>
+            yay -S ratex-bin<br><br>
+            <span class="code-comment"># Or build from source via AUR</span><br>
+            yay -S ratex
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is ratex? -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Key Architecture</h2>
+          <span class="section-count">Design Highlights</span>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>⚡ Sub-10ms Incremental Builds</h3>
+            <p>Built-in cryptographic auxiliary state tracking and dependency graph converge cross-references and bibliography passes in <strong>0.8–8.2 ms</strong>, compared to 40–60 ms in TeX Live.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>📦 100% Self-Contained</h3>
+            <p>Embeds over 15,000 common LaTeX packages, document classes, and precompiled formats inside a 29 MiB compressed in-memory archive. Zero network calls or external TeX installations required.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>🛡️ Memory Safe & Robust</h3>
+            <p>Written entirely in pure Rust with strict bounds checking. Completely eliminates buffer overflows, memory leaks, and runaway pointers common in legacy C TeX engines.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔄 Seamless Workflow</h3>
+            <p>Ships as a standalone <code>texmk</code> driver. Drop it into your existing workspace: <code>texmk paper.tex</code> handles compilation passes automatically without clashing with existing TeX Live setups.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Benchmarks -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Performance Highlights</h2>
+          <span class="section-count">Tested on 3,000 real-world arXiv papers</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="bench-table">
+            <thead>
+              <tr>
+                <th>Workload</th>
+                <th>ratex (Rust)</th>
+                <th>TeX Live (pdflatex / latexmk)</th>
+                <th>Advantage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Incremental Rebuild (Warm)</strong></td>
+                <td>0.8 – 8.2 ms</td>
+                <td>40 – 60 ms</td>
+                <td><strong>10× – 70× faster ⚡</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Short Papers (1–3 pages) Cold</strong></td>
+                <td>11 – 13 ms</td>
+                <td>39 – 41 ms</td>
+                <td><strong>3.1× – 3.6× faster ⚡</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Full 3,000-Paper Corpus Throughput</strong></td>
+                <td>89 papers / min</td>
+                <td>53 papers / min</td>
+                <td><strong>1.7× faster ⚡</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Visual Document Parity</strong></td>
+                <td>96.39% mean fidelity</td>
+                <td>Baseline (100%)</td>
+                <td>Publication-grade match</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Matrix -->
+    <section id="downloads">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Download &amp; Installation</h2>
+          <span class="section-count">v0.1.0 Precompiled Packages</span>
+        </div>
+
+        <div class="card-grid">
+          <!-- Arch Linux -->
+          <div class="download-card">
+            <div class="download-card-header">
+              <div class="download-card-title">Arch Linux / Manjaro</div>
+              <div class="download-card-meta">AUR • x86_64</div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--ink-soft);">Install precompiled or compile from source directly through your AUR helper.</p>
+            <div class="download-card-action">
+              <a href="https://aur.archlinux.org/packages/ratex-bin" class="download-link" target="_blank" rel="noopener">
+                AUR package page &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Linux x86_64 -->
+          <div class="download-card">
+            <div class="download-card-header">
+              <div class="download-card-title">Universal Linux</div>
+              <div class="download-card-meta">.tar.gz • x86_64</div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--ink-soft);">Self-contained archive with one-click installer script for any Linux distribution.</p>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-linux-x86_64.tar.gz" class="download-link">
+                Download .tar.gz &darr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Debian / Ubuntu -->
+          <div class="download-card">
+            <div class="download-card-header">
+              <div class="download-card-title">Debian / Ubuntu</div>
+              <div class="download-card-meta">.deb package • amd64</div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--ink-soft);">Native Debian package for Ubuntu, Debian, Linux Mint, and Pop!_OS.</p>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/ratex_0.1.0_amd64.deb" class="download-link">
+                Download .deb &darr;
+              </a>
+            </div>
+          </div>
+
+          <!-- macOS Apple Silicon -->
+          <div class="download-card">
+            <div class="download-card-header">
+              <div class="download-card-title">macOS (Apple Silicon)</div>
+              <div class="download-card-meta">.tar.gz • M1 / M2 / M3 / M4</div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--ink-soft);">Optimized native binary archive for Apple Silicon Macs with automated installer.</p>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-macos-aarch64.tar.gz" class="download-link">
+                Download .tar.gz &darr;
+              </a>
+            </div>
+          </div>
+
+          <!-- macOS Intel -->
+          <div class="download-card">
+            <div class="download-card-header">
+              <div class="download-card-title">macOS (Intel)</div>
+              <div class="download-card-meta">.tar.gz • x86_64</div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--ink-soft);">Native binary archive for Intel-based Macs with automated installer.</p>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-macos-x86_64.tar.gz" class="download-link">
+                Download .tar.gz &darr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Windows x64 -->
+          <div class="download-card">
+            <div class="download-card-header">
+              <div class="download-card-title">Windows</div>
+              <div class="download-card-meta">.zip • x86_64</div>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--ink-soft);">Standalone Windows archive with PowerShell and batch installers.</p>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/ratex/releases/download/v0.1.0/tex-suite-v0.1.0-windows-x86_64.zip" class="download-link">
+                Download .zip &darr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Build from Source -->
+        <div class="install-box" style="margin-top: 10px;">
+          <div class="install-box-header">
+            <span class="install-box-title">Build from Source (Rust 1.80+)</span>
+            <span style="font-size: 0.8rem; font-family: var(--mono); color: var(--ink-faint);">cargo</span>
+          </div>
+          <div class="code-block">
+            git clone https://github.com/leoliu0/ratex.git<br>
+            cd ratex<br>
+            cargo build --release --bin texmk<br><br>
+            <span class="code-comment"># Binary located at target/release/texmk</span><br>
+            ./target/release/texmk document.tex
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage -->
+    <section style="padding-bottom: 60px;">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Quick Usage</h2>
+          <span class="section-count">Compiling Documents</span>
+        </div>
+
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line);">
+          <span class="code-comment"># Compile document and automatically converge bibliography and citations</span><br>
+          texmk document.tex<br><br>
+          <span class="code-comment"># Specify output directory</span><br>
+          texmk -output-directory=build document.tex<br><br>
+          <span class="code-comment"># Allow using external TeX Live packages if not already embedded</span><br>
+          texmk --allow-system-texmf document.tex
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p><strong>Leo Liu</strong></p>
+          <p>Assistant Professor of Finance</p>
+          <p>University of Technology, Sydney</p>
+          <p style="margin-top: 8px;"><a href="mailto:leo.liu@uts.edu.au">leo.liu@uts.edu.au</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="software.html">Software</a>
+          <a href="ratex.html">ratex</a>
+          <a href="https://github.com/leoliu0/ratex">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
