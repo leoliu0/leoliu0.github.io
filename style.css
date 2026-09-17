@@ -166,6 +166,60 @@ nav {
   opacity: 1;
 }
 
+
+.nav-links a.nav-pill {
+  background: var(--green-tint);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 3px 12px;
+  color: var(--green-deep);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-links a.nav-pill:hover,
+.nav-links a.nav-pill.active {
+  background: var(--green);
+  color: #ffffff;
+  border-color: var(--green);
+}
+.nav-links a.nav-pill::before,
+.nav-links a.nav-pill::after {
+  display: none !important;
+}
+
+.latest-post-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 4px 14px 4px 6px;
+  text-decoration: none;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.latest-post-banner:hover {
+  border-color: var(--green);
+  transform: translateY(-1px);
+  color: var(--ink);
+}
+.latest-post-tag {
+  background: var(--green);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
 /* ==========================================================================
    Hero / bio
    ========================================================================== */
