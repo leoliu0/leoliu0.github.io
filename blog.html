@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Leo Liu</title>
+  <meta name="description" content="Technical articles, research notes, and engineering insights on finance, innovation, and high-performance software systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      try {
+        fetch("https://wispy-dawn-595c.auleo-liu.workers.dev", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ page: window.location.pathname, referrer: document.referrer || "direct" }),
+          keepalive: true
+        }).catch(function(){});
+      } catch(e){}
+    })();
+  </script>
+  <style>
+    .blog-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 32px;
+      padding: 0;
+    }
+    .blog-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-raised);
+      padding: 24px 28px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .blog-card:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+    .blog-card-meta {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .blog-card-tag {
+      background: var(--green-tint);
+      color: var(--green-deep);
+      border: 1px solid var(--line-strong);
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .blog-card h2 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .blog-card p {
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .read-more {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--green);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-brand">Leo Liu</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="software.html">Software</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="page-header">
+          <p class="hero-kicker">cat blog/</p>
+          <h1>Articles &amp; Notes</h1>
+          <p>Thoughts on high-performance compilers, innovation economics, research methodologies, and systems engineering.</p>
+        </div>
+
+        <ul class="blog-list">
+          <li>
+            <a href="blog-ratex.html" class="blog-card">
+              <div class="blog-card-meta">
+                <span>September 2026</span>
+                <span>&bull;</span>
+                <span class="blog-card-tag">Rust</span>
+                <span class="blog-card-tag">Systems</span>
+                <span class="blog-card-tag">TeX</span>
+              </div>
+              <h2>Why TeX is Slow and How We Rebuilt It in Pure Rust</h2>
+              <p>Why do legacy LaTeX engines take seconds to compile simple documents? A deep dive into the 40-year filesystem and subprocess bottleneck, and how ratex achieves sub-10ms builds across 3,000 arXiv papers.</p>
+              <span class="read-more">Read article &rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer style="margin-top: 60px; padding: 40px 0; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--ink-faint);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <p>&copy; 2026 Leo Liu. All rights reserved.</p>
+      <div style="display: flex; gap: 16px;">
+        <a href="index.html" style="color: inherit; text-decoration: none;">Home</a>
+        <a href="software.html" style="color: inherit; text-decoration: none;">Software</a>
+        <a href="blog.html" style="color: inherit; text-decoration: none;">Blog</a>
+        <a href="https://github.com/leoliu0" style="color: inherit; text-decoration: none;">GitHub</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
