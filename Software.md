@@ -6,6 +6,11 @@ date:   2020-09-16 14:03:37 +1000
 I maintain a few datasets to help other researchers and save their efforts and they are mostly used in my papers. I also maintain several software that help people to be more productive. My most starred Github repo helped thousands of people in both academia and industry 
 
 <h4>
+<a href="ratex.html">ratex</a>
+<h4/>
+Ultra-fast, self-contained pure-Rust TeX engine, WebAssembly module (<code>tex.wasm</code>), and C library (<code>libtex</code>). Features native SVG embedding, SyncTeX by default, and built-in latexdiff.
+
+<h4>
 <a href="https://github.com/leoliu0/cik-cusip-mapping">CIK to CUSIP Mapping</a>
 <h4/>
 Provide linking files between CIK and CUSIP using 13G and 13F filings. 

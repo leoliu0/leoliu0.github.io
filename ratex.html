@@ -521,17 +521,28 @@
           </div>
 
           <div class="feature-card">
+            <h3>🌐 WebAssembly &amp; C API (libtex)</h3>
+            <p>Compile LaTeX documents in-memory from browser runtimes, Node.js, or C/C++ applications via <code>tex.wasm</code> and <code>libtex</code> without touching disk or spawning external processes.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>🎨 Native SVG &amp; Vector Graphics</h3>
+            <p>Directly embed <code>\includegraphics{figure.svg}</code> with pure-Rust in-memory rasterization into PDF XObjects—no Inkscape, Ghostscript, or shell escape needed.</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>🔍 SyncTeX &amp; Built-in latexdiff</h3>
+            <p>Automatic <code>.synctex.gz</code> generation enabled by default for instant editor jump-to-source, plus token-level visual revision diffing with <code>ratex latexdiff</code>.</p>
+          </div>
+
+          <div class="feature-card">
             <h3>📦 100% Self-Contained</h3>
             <p>Embeds all essential formats, packages, math symbols, and CJK fonts, plus bundles a complete 67,000+ file TeX Live tree in <code>share/tex-suite/</code>. Zero external dependencies required.</p>
+          </div>
 
           <div class="feature-card">
             <h3>🛡️ Pure Rust Safety</h3>
             <p>Written entirely in pure Rust with strict bounds checking. Eliminates the buffer overflows, memory corruption bugs, and runaway pointers of legacy C TeX engines.</p>
-          </div>
-
-          <div class="feature-card">
-            <h3>🔄 Drop-in CLI Compatibility</h3>
-            <p>Directly provides <code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code>, and <code>texmk</code>. On macOS &amp; Windows, seamlessly substitutes <code>latexmk</code> so TeXstudio and VS Code work instantly.</p>
           </div>
         </div>
       </div>
