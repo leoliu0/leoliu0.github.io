@@ -8,7 +8,7 @@ I maintain a few datasets to help other researchers and save their efforts and t
 <h4>
 <a href="ratex.html">ratex</a>
 <h4/>
-Ultra-fast, self-contained pure-Rust TeX engine, WebAssembly module (<code>tex.wasm</code>), and C library (<code>libtex</code>). Features native SVG embedding, SyncTeX by default, and built-in latexdiff.
+Ultra-fast, self-contained pure-Rust TeX engine and toolchain. Compiles documents in milliseconds with an embedded LaTeX format and 24,000+ packages.
 
 <h4>
 <a href="https://github.com/leoliu0/cik-cusip-mapping">CIK to CUSIP Mapping</a>
