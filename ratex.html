@@ -9,18 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script>
-    (function(){
-      try {
-        fetch("https://wispy-dawn-595c.auleo-liu.workers.dev", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ page: window.location.pathname, referrer: document.referrer || "direct" }),
-          keepalive: true
-        }).catch(function(){});
-      } catch(e){}
-    })();
-  </script>
   <style>
     .badge-row {
       display: flex;
