@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why TeX is Slow and How We Rebuilt It in Pure Rust — Leo Liu</title>
-  <meta name="description" content="A deep dive into why legacy TeX engines take seconds to compile simple papers, and how ratex achieves sub-10ms builds using pure Rust and in-memory architecture.">
+  <title>Why I Built ratex: Modernizing TeX While Waiting for Typst — Leo Liu</title>
+  <meta name="description" content="Typst is the future of typesetting, but academic journals and arXiv still mandate legacy LaTeX. Why we built ratex in pure Rust to eliminate auxiliary file clutter, cryptic errors, and tool fragmentation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -160,7 +160,7 @@
           <a href="blog.html" class="back-link">&larr; Back to articles</a>
           
           <header class="post-header">
-            <h1 style="font-size: 2.2rem; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em;">Why TeX is Slow and How We Rebuilt It in Pure Rust</h1>
+            <h1 style="font-size: 2.2rem; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em;">Why I Built ratex: Modernizing TeX While Waiting for Typst</h1>
             <div class="post-meta">
               <span>September 2026</span>
               <span>&bull;</span>
@@ -172,13 +172,27 @@
             </div>
           </header>
 
-          <p>If you write papers in academia or technical industry, you know the feeling: you edit one sentence in your LaTeX document, press save, and wait 3 to 15 seconds for <code>latexmk</code> or <code>pdflatex</code> to recompile. In an era where modern compilers build hundreds of thousands of lines of code in sub-second times, why is compiling a 10-page PDF so painfully slow?</p>
+          <p>I love <a href="https://typst.app/">Typst</a>. Its syntax is clean, its compiler is written in modern Rust, and its incremental rendering is a breath of fresh air. Typst is unequivocally the future of scientific and technical document preparation.</p>
 
-          <p>For the past year, I built <a href="https://github.com/leoliu0/ratex"><strong>ratex</strong></a>—an ultra-fast, self-contained, pure-Rust TeX engine and build toolchain designed as a ground-up drop-in replacement for <code>pdflatex</code> and <code>latexmk</code>. On incremental edits, <strong>ratex rebuilds complex documents in 0.8 to 8.2 milliseconds</strong>—over 50&times; faster than standard TeX Live.</p>
+          <p><strong>And yet, I cannot submit Typst to the journals I publish in.</strong></p>
 
-          <p>Here is what makes legacy TeX slow, and how we re-architected it in Rust.</p>
+          <p>Major economics and finance journals (the <em>Journal of Finance</em>, <em>Journal of Financial Economics</em>, <em>Review of Financial Studies</em>), top computer science conferences (ACM, IEEE), and arXiv do not accept Typst source files. They mandate LaTeX. They provide 40-page <code>.cls</code> and <code>.sty</code> files written thirty years ago that depend on obscure macro expansions and fragile packages. Until academic publishing overhauls its entire submission and typesetting infrastructure—which could take a decade or more—dealing with TeX remains completely inevitable for researchers.</p>
 
-          <h2>1. The 40-Year Bottleneck: Why Legacy TeX is Slow</h2>
+          <p>So the pragmatic question became: <em>How do we alleviate the daily agony of TeX right now, without waiting for the world to catch up?</em></p>
+
+          <p>That frustration led me to build <a href="https://github.com/leoliu0/ratex"><strong>ratex</strong></a>. Not as a new language, but as a modern, pure-Rust reconstruction of the entire TeX engine and toolchain that compiles unchanged, legacy LaTeX manuscripts at 2020s software speeds.</p>
+
+          <h2>1. The Four Daily Agonies of TeX</h2>
+
+          <p>Anyone who writes research in LaTeX knows the friction points by heart:</p>
+
+          <ul>
+            <li><strong>Too many fragmented tools to choose from:</strong> Are you using <code>pdflatex</code>? <code>xelatex</code>? <code>lualatex</code>? Do you run <code>bibtex</code> or <code>biber</code>? Why do you need an external Perl script (<code>latexmk</code>) just to figure out how many times to recompile your file? Why can't there be <em>one</em> clean binary that just builds the document?</li>
+            <li><strong>Pollution of near-useless auxiliary files:</strong> A simple 5-page draft litters your folder with <code>.aux</code>, <code>.log</code>, <code>.out</code>, <code>.toc</code>, <code>.bbl</code>, <code>.blg</code>, <code>.fls</code>, <code>.fdb_latexmk</code>, and <code>.synctex.gz</code>. If a single byte goes corrupt in an auxiliary file, the entire compiler crashes until you manually wipe the directory.</li>
+            <li><strong>Counter-intuitive, cryptic error messages:</strong> When something breaks, TeX halts at a terrifying interactive <code>?</code> prompt or dumps 800 lines of inscrutable macro tracebacks deep inside package code you didn't write, without telling you the actual typo in your source text.</li>
+            <li><strong>Painfully slow compilation:</strong> A standard build spawns 3 to 4 sequential subprocesses, searches across 100,000 files using <code>kpathsea</code>, and re-reads everything from disk. An incremental sentence edit takes 5 to 15 seconds.</li>
+          </ul>
+          <h2>2. The 40-Year Bottleneck: Why Legacy TeX is Slow</h2>
 
           <p>Standard TeX implementations (such as Web2C / pdfTeX / XeTeX) date back decades. While Donald Knuth's typesetting algorithms are legendary for mathematical beauty, the surrounding runtime model suffers from four major architectural bottlenecks:</p>
 
@@ -189,10 +203,9 @@
             <li><strong>Memory Unsoundness and Segfaults:</strong> Classic TeX engines use fixed static arrays in C with manual memory pointers. When memory limits are exceeded or tricky macro packages clash, you get confusing error dumps or hard crashes.</li>
           </ol>
 
-          <h2>2. How ratex Rebuilt TeX from Scratch in Rust</h2>
+          <h2>3. How ratex Rebuilt TeX from Scratch in Rust</h2>
 
           <p>To eliminate these bottlenecks without sacrificing Knuth's exact mathematical typesetting rules, <strong>ratex</strong> was engineered around three principles:</p>
-
           <h3>A. 100% In-Memory Package Resolution</h3>
           <p>Instead of requiring a multi-gigabyte TeX Live installation and traversing disk hierarchies, <code>ratex</code> embeds pre-compressed format assets and over 24,000 standard TeX packages directly into the binary. When a document loads a package, it resolves from an in-memory index in less than 50 microseconds. Zero disk lookups, zero missing package dialogs.</p>
 
@@ -202,7 +215,7 @@
           <h3>C. Cryptographic Artifact Caching</h3>
           <p>ratex maintains a lightweight dependency graph with BLAKE3/xxHash state hashing. If only a single paragraph changes, font metrics, macro definitions, and unchanged auxiliary streams are reused immediately, reducing warm incremental rebuilds to under 10 milliseconds.</p>
 
-          <h2>3. Real-World Performance: 3,000 arXiv Papers</h2>
+          <h2>4. Real-World Performance: 3,000 arXiv Papers</h2>
 
           <p>We verified <code>ratex</code> against <strong>3,000 real-world arXiv research papers</strong> spanning mathematics, physics, and computer science. The benchmarks speak for themselves:</p>
 
@@ -247,7 +260,7 @@
             "Clean compiles across arXiv: ratex cleanly compiled 2,620 papers vs 2,613 for TeX Live, with a 96.39% mean visual pixel parity score."
           </blockquote>
 
-          <h2>4. Compiler-Grade Diagnostics (No More Cryptic `?` Prompts)</h2>
+          <h2>5. Compiler-Grade Diagnostics (No More Cryptic `?` Prompts)</h2>
 
           <p>Every LaTeX user has experienced the dread of Knuth's infamous <code>?</code> prompt halting a build with a cryptic message buried 800 lines deep in a <code>.log</code> file:</p>
 
@@ -274,7 +287,7 @@ l.14 \textbld
             <li><strong>Unclosed Environment Tracking:</strong> When you forget an <code>\end{equation}</code>, it points to the exact opening tag rather than failing at the end of the file.</li>
             <li><strong>Zero Interactive Hangs:</strong> Never pauses with a modal <code>?</code> prompt in non-interactive terminals or CI pipelines.</li>
           </ul>
-          <h2>5. Installing and Getting Started</h2>
+          <h2>6. Installing and Getting Started</h2>
 
           <p>ratex is fully open source under the MIT and Apache 2.0 licenses. Standalone native packages are available for Linux, macOS, and Windows:</p>
 
