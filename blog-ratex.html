@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Why I Built ratex: Modernizing TeX While Waiting for Typst — Leo Liu</title>
-  <meta name="description" content="Typst is the future of typesetting, but academic journals and arXiv still mandate legacy LaTeX. Why we built ratex in pure Rust to eliminate auxiliary file clutter, cryptic errors, and tool fragmentation.">
+  <meta name="description" content="Typst is the future of typesetting, but academic journals and arXiv still mandate legacy LaTeX. Why I built ratex in pure Rust to eliminate auxiliary file clutter, cryptic errors, and tool fragmentation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -177,7 +177,7 @@
           <p><strong>And yet, you cannot submit Typst to most journals or repositories today.</strong></p>
 
           <p>Virtually all major academic journals across mathematics, physics, economics, and computer science, as well as preprint servers like arXiv, do not accept Typst source files. They mandate LaTeX. They provide 40-page <code>.cls</code> and <code>.sty</code> templates written twenty or thirty years ago that depend on obscure macro expansions and legacy packages. Until scientific publishing overhauls its entire submission and typesetting infrastructure—which could take a decade or more—dealing with TeX remains completely inevitable for researchers and engineers.</p>
-          <p>So the pragmatic question became: <em>How do we alleviate the daily agony of TeX right now, without waiting for the world to catch up?</em></p>
+          <p>So the pragmatic question became: <em>How to alleviate the daily agony of TeX right now, without waiting for the world to catch up?</em></p>
 
           <p>That frustration led me to build <a href="https://github.com/leoliu0/ratex"><strong>ratex</strong></a>. Not as a new language, but as a modern, pure-Rust reconstruction of the entire TeX engine and toolchain that compiles unchanged, legacy LaTeX manuscripts at 2020s software speeds.</p>
 
@@ -202,7 +202,7 @@
             <li><strong>Memory Unsoundness and Segfaults:</strong> Classic TeX engines use fixed static arrays in C with manual memory pointers. When memory limits are exceeded or tricky macro packages clash, you get confusing error dumps or hard crashes.</li>
           </ol>
 
-          <h2>3. How ratex Rebuilt TeX from Scratch in Rust</h2>
+          <h2>3. How I Rebuilt TeX from Scratch in Rust</h2>
 
           <p>To eliminate these bottlenecks without sacrificing Knuth's exact mathematical typesetting rules, <strong>ratex</strong> was engineered around three principles:</p>
           <h3>A. 100% In-Memory Package Resolution</h3>
@@ -216,7 +216,7 @@
 
           <h2>4. Real-World Performance: 3,000 arXiv Papers</h2>
 
-          <p>We verified <code>ratex</code> against <strong>3,000 real-world arXiv research papers</strong> spanning mathematics, physics, and computer science. The benchmarks speak for themselves:</p>
+          <p>I verified <code>ratex</code> against <strong>3,000 real-world arXiv research papers</strong> spanning mathematics, physics, and computer science. The benchmarks speak for themselves:</p>
 
           <table class="benchmark-table">
             <thead>
@@ -308,9 +308,9 @@ sudo apt install ./ratex_0.2.0_amd64.deb</code></pre>
           <p>You can drop it directly into VS Code (LaTeX Workshop) by setting <code>"latex-workshop.latex.tools": [{"name": "ratex", "command": "ratex", "args": ["-pdf", "%DOC%"]}]</code>.</p>
 
           <div style="background: var(--bg-sunken); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 18px 22px; margin: 32px 0;">
-            <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; color: var(--ink);">Help Us Test Your Papers &amp; File Issues</h3>
+            <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; color: var(--ink);">Help Test Your Papers &amp; File Issues</h3>
             <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--ink-soft);">
-              Have a tricky paper, custom style file, or obscure macro package that doesn't compile? Please open an issue on GitHub! We actively welcome minimal reproduction snippets and bug reports at <a href="https://github.com/leoliu0/ratex/issues" style="color: var(--green); font-weight: 600;">github.com/leoliu0/ratex/issues</a>.
+              Have a tricky paper, custom style file, or obscure macro package that doesn't compile? Please open an issue on GitHub! Minimal reproduction snippets and bug reports are warmly welcome at <a href="https://github.com/leoliu0/ratex/issues" style="color: var(--green); font-weight: 600;">github.com/leoliu0/ratex/issues</a>.
             </p>
           </div>
           <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);">
