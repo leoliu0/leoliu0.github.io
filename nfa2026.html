@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discussion: Information and Innovation (Shuting Li 2026)</title>
+<style>
+  :root {
+    --slide-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #334155;
+    --text-sub: #64748b;
+    --navy-primary: #1e3a8a;
+    --navy-accent: #2563eb;
+    --border-line: #e2e8f0;
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--slide-bg);
+    color: var(--text-main);
+    font-family: var(--font-stack);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Fullscreen Slide Canvas */
+  #deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: var(--slide-bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Minimal Top Header Bar */
+  .slide-header {
+    height: 56px;
+    padding: 0 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid var(--border-line);
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .slide-header-left {
+    font-size: 1.38rem;
+    font-weight: 700;
+    color: var(--navy-primary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .slide-header-right {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-sub);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Main Slide Canvas */
+  .slide-container {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 38px 68px 32px 68px;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    background: #ffffff;
+    transition: opacity 0.1s ease-in-out;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .slide-page::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide-page.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* Typography - Large & Clean */
+  .slide-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.22;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    border-bottom: 2px solid var(--border-line);
+    padding-bottom: 10px;
+  }
+
+  .single-column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.8vh, 20px);
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Lists with Punchy Spacing */
+  ul.main-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul.main-list > li {
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 18px;
+    font-size: 1.7rem;
+    line-height: 1.5;
+    color: var(--text-main);
+  }
+
+  ul.main-list > li::before {
+    content: "—";
+    position: absolute;
+    left: 4px;
+    color: var(--navy-accent);
+    font-weight: 900;
+  }
+
+  ul.main-list > li strong {
+    color: #000000;
+    font-weight: 800;
+  }
+
+  ul.sub-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 6px;
+  }
+
+  ul.sub-list > li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 8px;
+    font-size: 1.55rem;
+    line-height: 1.48;
+    color: var(--text-muted);
+  }
+
+  ul.sub-list > li::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: var(--navy-primary);
+    font-size: 1.2rem;
+  }
+
+  ul.sub-list > li strong {
+    color: var(--text-main);
+    font-weight: 700;
+  }
+
+  /* Minimal Highlight Box */
+  .clean-box {
+    margin-top: 14px;
+    padding: 14px 24px;
+    background: #f8fafc;
+    border: 1.5px solid var(--border-line);
+    border-left: 6px solid var(--navy-primary);
+    border-radius: 4px;
+    font-size: 1.75rem;
+    line-height: 1.5;
+    color: #0f172a;
+  }
+
+  .clean-box-alert {
+    background: #fef2f2;
+    border-color: #fecaca;
+    border-left-color: #dc2626;
+    color: #991b1b;
+  }
+
+  /* Title Slide */
+  .title-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding: 0 40px;
+  }
+
+  .title-kicker {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy-accent);
+    margin-bottom: 20px;
+  }
+
+  .title-heading {
+    font-size: clamp(3.2rem, 5.8vh, 4.0rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #0f172a;
+    margin-bottom: 24px;
+    max-width: 1200px;
+    letter-spacing: -0.025em;
+  }
+
+  .title-author {
+    font-size: clamp(1.7rem, 3.2vh, 2.15rem);
+    color: var(--text-muted);
+    margin-bottom: 44px;
+  }
+
+  .title-details {
+    display: flex;
+    gap: 80px;
+    padding-top: 28px;
+    border-top: 2px solid var(--border-line);
+    width: 100%;
+    max-width: 950px;
+  }
+
+  .detail-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-sub);
+  }
+
+  .detail-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 4px;
+  }
+
+  /* Minimal Discrete Page Number in Bottom Right */
+  .slide-counter {
+    position: absolute;
+    bottom: 20px;
+    right: 36px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-sub);
+    letter-spacing: 0.05em;
+    user-select: none;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  #progress-bar {
+    height: 3px;
+    width: 0%;
+    background: var(--navy-primary);
+    transition: width 0.2s;
+  }
+
+  .math {
+    font-family: "Cambria Math", "Times New Roman", Times, serif;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div id="deck">
+  <!-- Top Bar -->
+  <div class="slide-header">
+    <div class="slide-header-left" id="header-left">Discussion</div>
+    <div class="slide-header-right" id="header-right">Discussion</div>
+  </div>
+
+  <div id="progress-bar"></div>
+
+  <!-- Slide Canvas -->
+  <div class="slide-container">
+
+    <!-- SLIDE 1: Title -->
+    <div class="slide-page active" data-category="Discussion" data-tag="Discussion">
+      <div class="title-content">
+        <div class="title-kicker">Discussion Slides</div>
+        <h1 class="title-heading">Information and Innovation:<br>Evidence From Railroad Expansion in the 19th Century</h1>
+        <div class="title-author">Author: <strong>Shuting Li</strong> (CSU San Marcos / Georgia State University)</div>
+        
+        <div class="title-details">
+          <div class="detail-group">
+            <span class="detail-label">Discussant</span>
+            <span class="detail-value">Leo Liu</span>
+          </div>
+          <div class="detail-group">
+            <span class="detail-label">Affiliation</span>
+            <span class="detail-value">University of Technology Sydney</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: What the Paper Does -->
+    <div class="slide-page" data-category="Overview" data-tag="Summary of Findings">
+      <h2 class="slide-title">What the Paper Does & Core Findings</h2>
+      <div class="single-column">
+        <ul class="main-list">
+          <li>
+            <strong>Research Question:</strong> Does infrastructure spur innovation via physical trade/travel or codified technological information (postal mail)?
+          </li>
+          <li>
+            <strong>Empirical Setup:</strong> Staggered U.S. railroad rollout (1840–1900) carrying Post Office mail routes.
+            <ul class="sub-list">
+              <li>Stacked Difference-in-Differences across 24 cohorts (&plusmn;5-year balanced window).</li>
+              <li>Propensity score matching (1:1 without replacement) on county population, urban share, and white share.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Main Findings:</strong>
+            <ul class="sub-list">
+              <li><strong>Patent volume booms:</strong> Railroad arrival increases county patent counts by <strong>+11% (OLS)</strong> to <strong>+23% (Poisson)</strong>.</li>
+              <li><strong>Quality does not rise:</strong> Average novelty and breakthrough importance (Kelly et al. 2021) are flat or negative.</li>
+              <li><strong>"Peripheral convergence":</strong> Mail links increase patent similarity specifically toward <em>ordinary peers</em>, not elite hubs.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="clean-box">
+          <strong>Central Thesis:</strong> Lower communication costs democratized the volume of ordinary invention without improving average quality.
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Comment 1 (Contribution & Positioning) -->
+    <div class="slide-page" data-category="Major Comment 1" data-tag="Contribution & Positioning">
+      <h2 class="slide-title">Comment 1: Situating the Contribution in the Literature</h2>
+      <div class="single-column">
+        <ul class="main-list">
+          <li>
+            <strong>Building on Established Foundations:</strong>
+            <ul class="sub-list">
+              <li><strong>Acemoglu et al. (2016, AER):</strong> Documented that 19th-century post offices expanded innovation via codified knowledge.</li>
+              <li><strong>Hanlon et al. (2022, NBER):</strong> Showed postal rate cuts reduced spatial decay in knowledge diffusion.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Reconciling with Prior Railroad Evidence:</strong>
+            <ul class="sub-list">
+              <li><strong>Perlman (2015, 2016):</strong> Found that physical rail access fostered innovation primarily through local agglomeration rather than distant idea diffusion.</li>
+              <li><strong>The Paper's Advance:</strong> Moves beyond static rail presence by tracing <em>route-level postal intensity</em> (<span class="math">Trips</span>) and using dense embeddings to capture subtle semantic diffusion that earlier keyword counts missed.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Elevating the Paper's Distinctive Conceptual Insights:</strong>
+            <ul class="sub-list">
+              <li><strong>Peer-to-Peer vs. Hub-and-Spoke:</strong> Challenges the classic "superstar city" model by showing communication networks fostered peer diffusion among ordinary, peripheral inventors.</li>
+              <li><strong>Volume vs. Frontier Quality:</strong> Reveals that lowering communication costs democratized the volume of incremental invention without necessarily shifting average breakthrough quality.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Major Comment 2 (Treatment Identification) -->
+    <div class="slide-page" data-category="Major Comment 2" data-tag="Identification">
+      <h2 class="slide-title">Comment 2: Physical Track Arrival Is Not a Mail-Information Shock</h2>
+      <div class="single-column">
+        <ul class="main-list">
+          <li>
+            <strong>Disentangling Bundled Transportation Shocks:</strong> Baseline treatment is physical rail track arrival (Atack 2015). Tracks carry heavy freight, passenger travel, machinists, and buyers all at once.
+          </li>
+          <li>
+            <strong>Endogenous Mail Intensity:</strong> Weekly trips (<span class="math">Trips<sub>c,t</sub></span>) and routes in Table 4 are contemporaneous post-treatment measures responding to local economic demand.
+            <ul class="sub-list">
+              <li>Centrality is frozen at connection year to prevent reverse causality, but mail service intensity is left free to respond to patenting.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Potential Solutions:</strong>
+            <ul class="sub-list">
+              <li><strong>Exploit timing gaps:</strong> Compare counties where track opened years before mail contracts were signed to isolate mail from freight.</li>
+              <li><strong>Control for Market Access:</strong> Directly include Donaldson & Hornbeck (2016) freight market access in the regression.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Major Comment 3 (Mechanism: Finding & Channels) -->
+    <div class="slide-page" data-category="Major Comment 3" data-tag="Mechanism">
+      <h2 class="slide-title">Comment 3: What Was in the Mail? Explaining Peripheral Convergence</h2>
+      <div class="single-column">
+        <ul class="main-list" style="margin-bottom: 6px;">
+          <li style="margin-bottom: 8px;">
+            <strong>The Paper's Finding (Table 7):</strong>
+            <ul class="sub-list">
+              <li style="margin-bottom: 3px;">Similarity rises <strong>+1.26 percentile points</strong> between non-hub pairs; zero effect toward urban hubs.</li>
+              <li style="margin-bottom: 3px;"><em>Author's takeaway:</em> Horizontal knowledge diffusion among peripheral inventors via rail mail.</li>
+            </ul>
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>Plausible Alternative Explanations (What Was in the Mail?):</strong>
+            <ul class="sub-list">
+              <li style="margin-bottom: 3px;"><strong>Direct Letters Unlikely:</strong> Inventors rarely mailed unpatented, proprietary ideas to distant strangers.</li>
+              <li style="margin-bottom: 3px;"><strong>Broadcast Print:</strong> Subsidized periodicals (<em>Scientific American</em>, USPTO reports) spread common technical vocabulary.</li>
+              <li style="margin-bottom: 3px;"><strong>Common Problem-Solving:</strong> Connected farm counties faced identical bottlenecks (reaper parts, grain elevators), inducing parallel invention.</li>
+              <li style="margin-bottom: 3px;"><strong>Passenger Mobility:</strong> Mail cars ran on passenger trains; higher frequency enabled face-to-face travel and tacit exchange.</li>
+              <li style="margin-bottom: 3px;"><strong>Potential Extension:</strong> Test <strong>cross-county co-inventorship (joint patents)</strong> to verify collaborative networks.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Major Comment 4 (NLP Methodology) -->
+    <div class="slide-page" data-category="Major Comment 4" data-tag="NLP Methodology">
+      <h2 class="slide-title">Comment 4: NLP Methodology: 512-Token Truncation & Contradiction</h2>
+      <div class="single-column">
+        <ul class="main-list">
+          <li>
+            <strong>The Stella 512-Token Context Window Limit:</strong>
+            <ul class="sub-list">
+              <li>Stella (<code>stella_en_1.5B_v5</code>) is trained on <strong>512 tokens</strong> (&asymp; 350 words). 19th-c. patents run 2,000–5,000+ words.</li>
+              <li>Silent truncation discards all technical claims and mechanisms, embedding only introductory boilerplate:
+                <div style="font-size: 1.7rem; margin: 10px 0; background: #f8fafc; padding: 12px 18px; border-radius: 4px; border: 1.5px solid #cbd5e1; color: #0f172a;">
+                  <em>"Be it known that I, [Name], of [City, County, State]..."</em> + drawing captions (<em>"Fig. 1 is a side view..."</em>).
+                </div>
+              </li>
+              <li>Risk: May measure geographic boilerplate overlap rather than technical innovation!</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Text vs. Appendix Contradiction:</strong>
+            <ul class="sub-list">
+              <li>Main text claims 1,024-dim Stella embeddings; Appendix A.1 prints formula for TF-IDF / TFBIDF (Eq. 10–12).</li>
+              <li><strong>Potential Solution:</strong> Reconcile text and Appendix A.1, document truncation thresholds, and strip legal preambles before embedding.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Figure 3 Pre-Trends -->
+    <div class="slide-page" data-category="Empirical Observations" data-tag="Figure 3 Pre-Trends">
+      <h2 class="slide-title">Examining Pre-Treatment Trends in Figure 3</h2>
+      <div class="single-column">
+        <ul class="main-list" style="margin-bottom: 16px;">
+          <li>
+            <strong>The Stated Claim in the Paper:</strong> <em>"The lead coefficients are small and statistically insignificant prior to treatment, providing support for the parallel-trends assumption."</em> (Section 5.1, p. 30)
+          </li>
+        </ul>
+
+        <!-- Embedded Exact Graph from Paper (Page 74) - Large & Clear -->
+        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 6px; padding: 18px 24px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+          <div style="font-size: 1.55rem; font-weight: 700; color: #1e3a8a; margin-bottom: 12px;">Figure 3 from the Paper: Dynamic Treatment Effect on Innovation Quantity</div>
+          <img src="data:image/png;base64,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" alt="Figure 3 from the Paper" style="max-width: 100%; height: auto; max-height: clamp(300px, 48vh, 460px); display: block; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 4px;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Other Comments & Additional Observations -->
+    <div class="slide-page" data-category="Other Comments" data-tag="Natural Experiments & Diagnostics">
+      <h2 class="slide-title">Other Comments: Natural Experiments & Diagnostics</h2>
+      <div class="single-column">
+        <ul class="main-list">
+          <li>
+            <strong>Natural Experiment Specifications:</strong>
+            <ul class="sub-list">
+              <li><strong>Postal Reforms (1845–1863):</strong> Clarifying 11-year cohort window alignment across regimes, and reconciling OLS (+20%) with Poisson (&minus;23.5%) in the 1863 reform.</li>
+              <li><strong>Civil War Mail Suspension:</strong> Interpreting Southern post office cuts alongside concurrent wartime disruptions (infrastructure damage, USPTO filing access).</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Data Reporting & Measurement Diagnostics:</strong>
+            <ul class="sub-list">
+              <li><strong>Urban Share Summary Stats (Table 1):</strong> Reported SD (0.208) exceeds theoretical bound (&asymp; 0.147) for mean 0.022; check weighting or scaling.</li>
+              <li><strong>Zero Counts & Elasticity:</strong> With 61% zeros, log(1 + Patents) underestimates the true extensive-margin response; rely on Poisson estimates.</li>
+              <li><strong>Water Heterogeneity:</strong> Ensure control counties are classified by their own water access rather than inheriting the treated county's dummy.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+<!-- SLIDE 9: Conclusion -->
+    <div class="slide-page" data-category="Conclusion" data-tag="Summary & Discussion">
+      <h2 class="slide-title">Summary & Concluding Thoughts</h2>
+      <div class="single-column">
+        <ul class="main-list" style="margin-bottom: 4px;">
+          <li style="margin-bottom: 5px;">
+            <strong>Core Strengths of the Paper:</strong>
+            <ul class="sub-list">
+              <li style="margin-bottom: 2px;"><strong>New Empirical Foundation:</strong> Digitizing 38 years of PMG mail contracts linked to rail GIS.</li>
+              <li style="margin-bottom: 2px;"><strong>Provocative Narrative:</strong> Documents peripheral peer-to-peer diffusion using patent text embeddings.</li>
+            </ul>
+          </li>
+          <li style="margin-bottom: 5px;">
+            <strong>Suggestions for Consideration:</strong>
+            <ul class="sub-list">
+              <li style="margin-bottom: 2px;"><strong>Avoid Crowding with Information Literature:</strong> Many papers sit uncomfortably close in the "information & innovation" space (Acemoglu et al., Hanlon et al., Perlman). This rich PMG-rail setting provides a standout contribution to the infrastructure literature.</li>
+              <li style="margin-bottom: 2px;"><strong>Pitch Toward "Infrastructure & Innovation":</strong> Access to infrastructure is vital for innovation. Pitching toward broad infrastructure access is consistent with all empirical results and avoids the fragile burden of defending a "pure information" channel.</li>
+              <li style="margin-bottom: 2px;"><strong>Empirical Refinements:</strong> Reconcile with Perlman (2015), test timing lags between tracks and contracts, and validate text embeddings on technical claims.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Minimal Discrete Page Number at Bottom Right (No Footer Bar) -->
+  <div class="slide-counter" id="slide-indicator">1 / 9</div>
+</div>
+
+<script>
+  let activeIndex = 0;
+  const pages = document.querySelectorAll('.slide-page');
+  const bar = document.getElementById('progress-bar');
+  const indicator = document.getElementById('slide-indicator');
+  const headLeft = document.getElementById('header-left');
+  const headRight = document.getElementById('header-right');
+
+  function renderSlide(idx) {
+    pages.forEach((page, i) => {
+      page.classList.toggle('active', i === idx);
+    });
+
+    const active = pages[idx];
+    headLeft.textContent = active.getAttribute('data-category') || "Discussion";
+    headRight.textContent = active.getAttribute('data-tag') || "Discussion";
+
+    const percent = ((idx + 1) / pages.length) * 100;
+    bar.style.width = `${percent}%`;
+    indicator.textContent = `${idx + 1} / ${pages.length}`;
+  }
+
+  function nextSlide() {
+    if (activeIndex < pages.length - 1) {
+      activeIndex++;
+      renderSlide(activeIndex);
+    }
+  }
+
+  function prevSlide() {
+    if (activeIndex > 0) {
+      activeIndex--;
+      renderSlide(activeIndex);
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prevSlide();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      activeIndex = 0;
+      renderSlide(activeIndex);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      activeIndex = pages.length - 1;
+      renderSlide(activeIndex);
+    }
+  });
+
+  // Touch navigation
+  let tStart = 0;
+  document.getElementById('deck').addEventListener('touchstart', (e) => {
+    tStart = e.changedTouches[0].screenX;
+  }, false);
+
+  document.getElementById('deck').addEventListener('touchend', (e) => {
+    let tEnd = e.changedTouches[0].screenX;
+    if (tEnd < tStart - 40) nextSlide();
+    if (tEnd > tStart + 40) prevSlide();
+  }, false);
+
+  renderSlide(activeIndex);
+</script>
+
+</body>
+</html>
