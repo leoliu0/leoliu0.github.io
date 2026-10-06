@@ -11,9 +11,9 @@ I maintain a few datasets to help other researchers and save their efforts and t
 Comprehensive, high-precision U.S. patent-to-scholarly paper linkage and dual-disclosure dataset (61.7M links, 1.29M patents, 3.74M OpenAlex papers). Extends Marx &amp; Fuegi beyond 2021 through 2026 with 97.7% twin precision.
 
 <h4>
-<a href="ratex.html">ratex</a>
+<a href="texres.html">TeXres</a>
 <h4/>
-Ultra-fast, self-contained pure-Rust TeX engine and toolchain. Compiles documents in milliseconds with an embedded LaTeX format and 24,000+ packages.
+A TeX distribution in a single executable, written in Rust. Compiles LaTeX with pdfLaTeX, XeLaTeX or LuaLaTeX, with the formats, packages, fonts, BibTeX and Biber built in. Formerly ratex.
 
 <h4>
 <a href="https://github.com/leoliu0/cik-cusip-mapping">CIK to CUSIP Mapping</a>

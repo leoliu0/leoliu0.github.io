@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeXres: a TeX distribution in a single executable</title>
+  <meta name="description" content="TeXres is a TeX distribution in a single executable, written in Rust. It compiles LaTeX with pdfLaTeX, XeLaTeX or LuaLaTeX and includes the formats, packages, fonts, BibTeX and Biber.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 24px;
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      background: var(--bg-sunken);
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
+    }
+    .badge.accent {
+      background: var(--green-tint);
+      color: var(--green-deep);
+      border-color: var(--line-strong);
+      font-weight: 600;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+      margin-bottom: 32px;
+    }
+    .btn-os {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius);
+      font-size: 0.96rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s var(--ease);
+    }
+    .btn-os.primary {
+      background: var(--green);
+      color: #ffffff;
+    }
+    .btn-os.primary:hover {
+      background: var(--green-deep);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+    .btn-os.secondary {
+      background: var(--bg-raised);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-os.secondary:hover {
+      border-color: var(--green);
+      color: var(--green-deep);
+      transform: translateY(-2px);
+    }
+
+    .callout-box {
+      background: var(--bg-raised);
+      border: 1px solid var(--line-strong);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin: 24px 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .install-box {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 20px 0 40px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .install-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .install-box-title {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .code-block {
+      background: var(--bg-sunken);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: var(--ink);
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    .code-comment {
+      color: var(--ink-faint);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+      margin: 24px 0 44px;
+    }
+    .download-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .download-card.featured {
+      border-color: var(--line-strong);
+      box-shadow: 0 4px 14px var(--green-tint);
+    }
+    .download-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 6px 16px var(--green-tint);
+    }
+    .download-card-header {
+      margin-bottom: 12px;
+    }
+    .download-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .download-card-meta {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+    }
+    .download-card-action {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .action-btn {
+      display: block;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--green);
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .action-btn:hover {
+      background: var(--green-deep);
+      color: #fff;
+    }
+    .sublink {
+      font-size: 0.84rem;
+      color: var(--ink-faint);
+      text-align: center;
+      text-decoration: none;
+    }
+    .sublink:hover {
+      color: var(--green-deep);
+      text-decoration: underline;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0 44px;
+    }
+    .feature-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .feature-card h3 {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-brand">Leo Liu</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="software.html" style="color: var(--ink-soft);">Software</a>
+            <span style="color: var(--ink-faint); margin: 0 4px;">/</span>
+            <span style="color: var(--green); font-weight: 600; font-family: var(--mono); font-size: 0.95rem;">TeXres</span>
+          </li>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="blog.html" class="nav-pill">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section style="padding: 32px 0 20px;">
+      <div class="container">
+        <div class="page-header" style="margin-bottom: 16px;">
+          <p class="hero-kicker">typesetting / rust</p>
+          <h1 style="font-size: 2.5rem; margin-bottom: 10px;">TeXres</h1>
+          <p style="font-size: 1.15rem; max-width: 65ch; line-height: 1.6; color: var(--ink-soft);">
+            A TeX distribution in a single executable, written in Rust. It compiles LaTeX documents with pdfLaTeX, XeLaTeX or LuaLaTeX, and includes the LaTeX formats, a package archive, fonts, BibTeX and Biber. You don't need TeX Live, and nothing is downloaded during a build.
+          </p>
+        </div>
+        <div class="badge-row">
+          <span class="badge accent">command: texres</span>
+          <span class="badge">macOS, Windows, Linux x86_64 and ARM64</span>
+          <span class="badge">Homebrew tap</span>
+          <span class="badge">AUR: texres-bin</span>
+          <span class="badge">MIT / Apache-2.0</span>
+        </div>
+        <div class="callout-box">
+          <code>texres paper.tex</code> runs LaTeX, BibTeX or Biber as many times as needed and writes <code>paper.pdf</code>. The project was previously called <em>ratex</em>; the old GitHub URLs redirect to <a href="https://github.com/leoliu0/texres">github.com/leoliu0/texres</a>.
+        </div>
+        <div class="cta-row">
+          <a href="https://github.com/leoliu0/texres/releases/latest" class="btn-os primary">Download the latest release</a>
+          <a href="#downloads" class="btn-os secondary">Install instructions &darr;</a>
+          <a href="https://github.com/leoliu0/texres" class="btn-os secondary">Source on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Install</h2>
+          <span class="section-count">files on the latest release page</span>
+        </div>
+        <p style="color: var(--ink-soft); max-width: 70ch;">All packages are on the <a href="https://github.com/leoliu0/texres/releases/latest">latest release</a> page; file names carry the version number. Linux ARM64 builds need glibc 2.36 or newer (Debian 12 or later), which includes Linux Docker containers on Apple Silicon. Alpine and other musl systems are not supported.</p>
+        <div class="card-grid">
+          <div class="download-card featured">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>macOS</span></div>
+                <div class="download-card-meta">Homebrew or .pkg &bull; Apple Silicon and Intel</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">Install with Homebrew:<code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px; white-space:pre; overflow-x:auto;">brew tap leoliu0/texres https://github.com/leoliu0/texres.git
+brew install leoliu0/texres/texres</code>Or download <code>texres-v…-macos-aarch64.pkg</code> (Apple Silicon) or <code>…-macos-x86_64.pkg</code> (Intel).</p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/texres/releases/latest" class="action-btn">Download .pkg (latest release)</a>
+            </div>
+          </div>
+          <div class="download-card featured">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>Windows</span></div>
+                <div class="download-card-meta">Windows 10 / 11 &bull; x64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">Download and run <code>texres-setup-v…-windows-x64.exe</code>. A portable <code>tex-suite-v…-windows-x86_64.zip</code> is also available.</p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/texres/releases/latest" class="action-btn">Download setup .exe (latest release)</a>
+            </div>
+          </div>
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>Debian / Ubuntu</span></div>
+                <div class="download-card-meta">.deb &bull; amd64 and arm64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">Download <code>texres_…_amd64.deb</code> or <code>texres_…_arm64.deb</code>, then:<code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px; white-space:pre; overflow-x:auto;">sudo apt install ./texres_*_amd64.deb</code></p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/texres/releases/latest" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">Latest release</a>
+            </div>
+          </div>
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>Fedora / RHEL / openSUSE</span></div>
+                <div class="download-card-meta">.rpm &bull; x86_64 and aarch64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">Download <code>texres-…-1.x86_64.rpm</code> or <code>…-1.aarch64.rpm</code>, then:<code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px; white-space:pre; overflow-x:auto;">sudo dnf install ./texres-*.x86_64.rpm</code></p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/texres/releases/latest" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">Latest release</a>
+            </div>
+          </div>
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>Arch Linux</span></div>
+                <div class="download-card-meta">AUR &bull; x86_64 and aarch64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">Prebuilt binary:<code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px; white-space:pre; overflow-x:auto;">yay -S texres-bin</code>Or build from source with <code>yay -S texres</code>.</p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://aur.archlinux.org/packages/texres-bin" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">texres-bin on AUR</a>
+              <a href="https://aur.archlinux.org/packages/texres" class="sublink">texres (build from source)</a>
+            </div>
+          </div>
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>Other Linux</span></div>
+                <div class="download-card-meta">.tar.gz &bull; x86_64 and aarch64</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;">For any glibc distribution. Installs to <code>~/.local</code>:<code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px; white-space:pre; overflow-x:auto;">tar -xzf tex-suite-v…-linux-x86_64.tar.gz
+./tex-suite-linux-x86_64/install.sh</code></p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/texres/releases/latest" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">Latest release</a>
+            </div>
+          </div>
+          <div class="download-card">
+            <div>
+              <div class="download-card-header">
+                <div class="download-card-title"><span>From source</span></div>
+                <div class="download-card-meta">Stable Rust 1.88+</div>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5;"><code style="display:block; margin-top:6px; font-size:0.84rem; background:var(--bg-sunken); padding:4px 6px; border-radius:3px; white-space:pre; overflow-x:auto;">git clone https://github.com/leoliu0/texres.git
+cd texres
+cargo build --release --locked --bin texres
+./install.sh --from-source</code>Installs into <code>~/.local</code>; add <code>--system</code> for <code>/usr/local</code>.</p>
+            </div>
+            <div class="download-card-action">
+              <a href="https://github.com/leoliu0/texres" class="action-btn" style="background:var(--bg-sunken); color:var(--ink); border:1px solid var(--line);">Source on GitHub</a>
+              <a href="https://github.com/leoliu0/texres/releases" class="sublink">all releases</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Features</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>Three engines</h3>
+            <p>pdfLaTeX, XeLaTeX and LuaLaTeX. Documents loading <code>fontspec</code>, <code>xeCJK</code>, <code>ctex</code>, <code>unicode-math</code> or <code>polyglossia</code> run as XeLaTeX automatically; everything else runs as pdfLaTeX. Override with <code>-pdf</code>, <code>-xelatex</code> or <code>-lualatex</code>.</p>
+          </div>
+          <div class="feature-card">
+            <h3>BibTeX and Biber built in</h3>
+            <p><code>\bibliography</code> runs BibTeX. <code>biblatex</code> with the default <code>backend=biber</code> runs the built-in Biber, which writes the same <code>.bbl</code> as Biber 2.22. Works offline.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Self-contained</h3>
+            <p>LaTeX formats, a package archive and fonts are bundled. No TeX Live needed, and nothing is downloaded during a build. Output is compared against TeX Live 2026 in CI.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Fonts</h3>
+            <p>Bundled fonts include Latin Modern, TeX Gyre, STIX Two, Libertinus, IPAex, Harano Aji and Fandol. System fonts are not used; to use another font, put the file next to your document and load it with <code>Path=./</code>.</p>
+          </div>
+          <div class="feature-card">
+            <h3>One command</h3>
+            <p><code>texres paper.tex</code> runs LaTeX, BibTeX or Biber as many times as needed. A symlink named <code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code>, <code>bibtex</code> or <code>biber</code> runs one pass of that tool; named <code>latexmk</code> it behaves like <code>texres</code>. An existing TeX Live is left alone.</p>
+          </div>
+          <div class="feature-card">
+            <h3>SyncTeX, latexdiff, libraries</h3>
+            <p>Writes <code>.synctex.gz</code> for editor jump-to-source. Includes <code>texres latexdiff</code>. A C library and a WebAssembly module compile documents in memory (<a href="https://github.com/leoliu0/texres/blob/main/docs/libraries.md">docs</a>).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-bottom: 60px;">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Usage and editor setup</h2>
+        </div>
+        <h3 style="margin: 20px 0 10px; font-size: 1.15rem; color: var(--ink);">Command line</h3>
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line); margin-bottom: 24px;">
+          <span class="code-comment"># engine picked from the preamble</span><br>
+          texres paper.tex<br>
+          <span class="code-comment"># or -pdf, -lualatex</span><br>
+          texres -xelatex paper.tex<br>
+          <span class="code-comment"># write output to build/</span><br>
+          texres -output-directory=build paper.tex<br>
+          <span class="code-comment"># remove cached build files</span><br>
+          texres -c paper.tex<br>
+          <span class="code-comment"># compare two versions</span><br>
+          texres latexdiff old.tex new.tex diff.tex &amp;&amp; texres diff.tex
+        </div>
+        <p style="color: var(--ink-soft);"><code>texres --help</code> lists all options. Exit status: 0 converged, 1 build failed, 2 usage error.</p>
+        <p style="color: var(--ink-soft);">Editors need the full path to <code>texres</code>. Find it with <code>command -v texres</code> (Homebrew: <code>"$(brew --prefix)/bin/texres"</code>).</p>
+        <h3 style="margin: 24px 0 10px; font-size: 1.15rem; color: var(--ink);">TeXstudio</h3>
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line); margin-bottom: 24px;">
+          1. <strong>Options &rarr; Configure TeXstudio &rarr; Commands</strong>: set <strong>Latexmk</strong> to (using your path)<br>
+          &nbsp;&nbsp;&nbsp;<code>"/opt/homebrew/bin/texres" -pdf -interaction=nonstopmode "%.tex"</code><br>
+          2. Under <strong>Build</strong>, choose <strong>Latexmk</strong> as the default compiler.<br>
+          <span class="code-comment"># Use the full path: macOS apps started from the Dock don't see your shell PATH.</span>
+        </div>
+        <h3 style="margin: 24px 0 10px; font-size: 1.15rem; color: var(--ink);">VS Code (LaTeX Workshop)</h3>
+        <div class="code-block" style="background: var(--bg-raised); border-color: var(--line); margin-bottom: 24px;">
+          <span class="code-comment">// add to settings.json</span><br>
+          "latex-workshop.latex.tools": [<br>
+          &nbsp;&nbsp;{{ "name": "texres", "command": "texres", "args": ["-pdf", "-interaction=nonstopmode", "%DOC%"] }}<br>
+          ],<br>
+          "latex-workshop.latex.recipes": [{{ "name": "texres", "tools": ["texres"] }}]
+        </div>
+        <p style="color: var(--ink-soft);">The <code>.synctex.gz</code> file next to the PDF lets the editor jump between source and PDF. More: <a href="https://github.com/leoliu0/texres#readme">README</a>, <a href="https://github.com/leoliu0/texres/blob/main/DIAGNOSTICS.md">error messages</a>, <a href="https://github.com/leoliu0/texres/blob/main/PERFORMANCE.md">performance</a>. Bug reports and papers that don't compile are welcome at <a href="https://github.com/leoliu0/texres/issues">github.com/leoliu0/texres/issues</a>.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p><strong>Leo Liu</strong></p>
+          <p>Assistant Professor of Finance</p>
+          <p>University of Technology, Sydney</p>
+          <p style="margin-top: 8px;"><a href="mailto:leo.liu@uts.edu.au">leo.liu@uts.edu.au</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="software.html">Software</a>
+          <a href="texres.html">TeXres</a>
+          <a href="https://github.com/leoliu0/texres">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

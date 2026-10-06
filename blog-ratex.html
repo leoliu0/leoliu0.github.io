@@ -172,6 +172,10 @@
             </div>
           </header>
 
+          <div class="callout-box" style="background: var(--bg-sunken); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 14px 20px; margin: 0 0 28px; font-size: 0.95rem;">
+            <strong>Update:</strong> ratex has since been renamed <strong>TeXres</strong> and the command is now <code>texres</code>. Current install instructions are on the <a href="texres.html">TeXres page</a>. The post below is kept as written in September 2026; its version numbers and benchmarks refer to that release.
+          </div>
+
           <p>I love <a href="https://typst.app/">Typst</a>. Its syntax is clean, its compiler is written in modern Rust, and its incremental rendering is a breath of fresh air. Typst is unequivocally the future of scientific and technical document preparation.</p>
 
           <p><strong>And yet, you cannot submit Typst to most journals or repositories today.</strong></p>
@@ -179,7 +183,7 @@
           <p>Virtually all major academic journals across mathematics, physics, economics, and computer science, as well as preprint servers like arXiv, do not accept Typst source files. They mandate LaTeX. They provide 40-page <code>.cls</code> and <code>.sty</code> templates written twenty or thirty years ago that depend on obscure macro expansions and legacy packages. Until scientific publishing overhauls its entire submission and typesetting infrastructure—which could take a decade or more—dealing with TeX remains completely inevitable for researchers and engineers.</p>
           <p>So the pragmatic question became: <em>How to alleviate the daily agony of TeX right now, without waiting for the world to catch up?</em></p>
 
-          <p>That frustration led me to build <a href="https://github.com/leoliu0/ratex"><strong>ratex</strong></a>. Not as a new language, but as a modern, pure-Rust reconstruction of the entire TeX engine and toolchain that compiles unchanged, legacy LaTeX manuscripts at 2020s software speeds.</p>
+          <p>That frustration led me to build <a href="https://github.com/leoliu0/texres"><strong>ratex</strong></a>. Not as a new language, but as a modern, pure-Rust reconstruction of the entire TeX engine and toolchain that compiles unchanged, legacy LaTeX manuscripts at 2020s software speeds.</p>
 
           <h2>1. The Four Daily Agonies of TeX</h2>
 
@@ -288,7 +292,7 @@ l.14 \textbld
           </ul>
           <h2>6. Installing and Getting Started</h2>
 
-          <p>ratex is fully open source under the MIT and Apache 2.0 licenses. Standalone native packages are available for Linux, macOS, and Windows:</p>
+          <p>ratex is fully open source under the MIT and Apache 2.0 licenses. Standalone native packages are available for Linux, macOS, and Windows. <em>(These commands are from the original release; see the <a href="texres.html">TeXres page</a> for current ones.)</em></p>
 
           <pre><code># Arch Linux (AUR)
 yay -S ratex-bin
@@ -310,12 +314,12 @@ sudo apt install ./ratex_0.2.0_amd64.deb</code></pre>
           <div style="background: var(--bg-sunken); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 18px 22px; margin: 32px 0;">
             <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; color: var(--ink);">Help Test Your Papers &amp; File Issues</h3>
             <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--ink-soft);">
-              Have a tricky paper, custom style file, or obscure macro package that doesn't compile? Please open an issue on GitHub! Minimal reproduction snippets and bug reports are warmly welcome at <a href="https://github.com/leoliu0/ratex/issues" style="color: var(--green); font-weight: 600;">github.com/leoliu0/ratex/issues</a>.
+              Have a tricky paper, custom style file, or obscure macro package that doesn't compile? Please open an issue on GitHub! Minimal reproduction snippets and bug reports are warmly welcome at <a href="https://github.com/leoliu0/texres/issues" style="color: var(--green); font-weight: 600;">github.com/leoliu0/texres/issues</a>.
             </p>
           </div>
           <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);">
 
-          <p>Check out the project on GitHub: <a href="https://github.com/leoliu0/ratex" style="color: var(--green); font-weight: 600;">github.com/leoliu0/ratex</a>. If you find it useful for your own writing, starring the repo helps others discover it!</p>
+          <p>Check out the project on GitHub: <a href="https://github.com/leoliu0/texres" style="color: var(--green); font-weight: 600;">github.com/leoliu0/texres</a>. If you find it useful for your own writing, starring the repo helps others discover it!</p>
         </article>
       </div>
     </section>
