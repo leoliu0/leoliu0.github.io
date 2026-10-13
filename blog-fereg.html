@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why I Built fereg: reghdfe and fixest Results in a Fraction of the Time — Leo Liu</title>
+  <meta name="description" content="reghdfe is the standard for fixed-effects regressions in Stata, but it is slow on large panels, and fixest and pyfixest give slightly different numbers. Why I built fereg: one Rust engine with Stata, R and Python front ends that reproduce reghdfe, fixest and pyfixest and run 3 to 100 times faster.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .post-header {
+      position: static;
+      margin-bottom: 40px;
+    }
+    .post-meta {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: var(--ink-faint);
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .post-tag {
+      background: var(--green-tint);
+      color: var(--green-deep);
+      border: 1px solid var(--line-strong);
+      padding: 2px 8px;
+      border-radius: var(--radius);
+      font-weight: 500;
+    }
+    .post-body {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .post-body h2 {
+      margin-top: 48px;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .post-body h3 {
+      margin-top: 32px;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      color: var(--ink);
+    }
+    .post-body p {
+      margin-bottom: 20px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+    }
+    .post-body ul, .post-body ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .post-body li {
+      margin-bottom: 8px;
+      color: var(--ink-soft);
+    }
+    .post-body blockquote {
+      border-left: 3px solid var(--green);
+      background: var(--bg-sunken);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 28px 0;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .post-body pre {
+      background: #181b18;
+      color: #e6e8e6;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .post-body code {
+      font-family: var(--mono);
+      font-size: 0.88em;
+      background: var(--bg-sunken);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .post-body pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+    }
+    .post-body pre .comment {
+      color: #8b949e;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 28px 0;
+    }
+    .benchmark-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .benchmark-table.compact {
+      font-size: 0.86rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+    .benchmark-table.compact th, .benchmark-table.compact td {
+      padding: 8px 8px;
+    }
+    .benchmark-table.compact td:first-child {
+      min-width: 150px;
+    }
+    .benchmark-table td.num, .benchmark-table th.num {
+      text-align: right;
+      font-family: var(--mono);
+      white-space: nowrap;
+    }
+    .benchmark-table th {
+      background: var(--bg-sunken);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+    .benchmark-table tr:hover {
+      background: rgba(26, 127, 55, 0.02);
+    }
+    .highlight-cell {
+      color: var(--green-deep);
+      font-weight: 600;
+      font-family: var(--mono);
+    }
+    .table-note {
+      font-size: 0.88rem;
+      color: var(--ink-faint);
+      margin-top: -12px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: var(--ink-faint);
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+    .back-link:hover {
+      color: var(--green);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-brand">Leo Liu</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="software.html">Software</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <article class="post-body">
+          <a href="blog.html" class="back-link">&larr; Back to articles</a>
+
+          <header class="post-header">
+            <h1 style="font-size: 2.2rem; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.02em;">Why I Built fereg: reghdfe and fixest Results in a Fraction of the Time</h1>
+            <div class="post-meta">
+              <span>October 2026</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+              <span>&bull;</span>
+              <span class="post-tag">fereg</span>
+              <span class="post-tag">Econometrics</span>
+              <span class="post-tag">Rust</span>
+            </div>
+          </header>
+
+          <p>I run <code>reghdfe</code> almost every day. It is the standard tool for regressions with high-dimensional fixed effects in Stata, and together with <code>ivreghdfe</code> and <code>ppmlhdfe</code> it has shaped how a generation of empirical papers in economics and finance is written.</p>
+
+          <p><strong>But my datasets kept growing, and reghdfe did not keep up.</strong></p>
+
+          <p>On 10 million observations with individual, firm and year effects, one regression takes half a minute. A Poisson model with <code>ppmlhdfe</code> takes four. On some panels, <code>reghdfe</code> does not finish within fifteen minutes. When a paper needs dozens of specifications, robustness checks and subsamples, that adds up to days of waiting.</p>
+
+          <p><a href="https://lrberge.github.io/fixest/">fixest</a> in R and <a href="https://github.com/py-econometrics/pyfixest">pyfixest</a> in Python are much faster. But moving to them means switching languages, and the numbers do not quite match. Each package has its own rules for dropping singleton observations, counting the degrees of freedom absorbed by the fixed effects, and correcting the standard errors. The same model can give different samples and standard errors in Stata, R and Python, and a project that uses all three has to reconcile them.</p>
+
+          <p>So I built <a href="https://github.com/leoliu0/fereg"><strong>fereg</strong></a>: one estimation engine written in Rust, with Stata, R and Python front ends. Each front end reproduces the package its users already know, and in my benchmarks each one is faster than the package it replaces.</p>
+
+          <h2>1. One Engine, Three Front Ends</h2>
+
+          <p>Each front end follows the syntax, defaults, small-sample corrections and output of the package it mirrors:</p>
+
+          <div class="table-wrap">
+            <table class="benchmark-table">
+              <thead>
+                <tr>
+                  <th>Front end</th>
+                  <th>Commands</th>
+                  <th>Reproduces</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Stata 16+</strong></td>
+                  <td><code>fereg</code>, <code>feppml</code>, <code>felogit</code></td>
+                  <td>reghdfe 6.13.1, ivreghdfe 1.1.4, ppmlhdfe 2.3.3, <code>logit</code> with fixed-effect dummies</td>
+                </tr>
+                <tr>
+                  <td><strong>R 4.2+</strong></td>
+                  <td><code>fereg::feols</code>, <code>fepois</code>, <code>feglm</code></td>
+                  <td>fixest 0.14.2</td>
+                </tr>
+                <tr>
+                  <td><strong>Python 3.10+</strong></td>
+                  <td><code>fereg.feols</code>, <code>fepois</code>, <code>feglm</code></td>
+                  <td>pyfixest 0.60.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Existing code needs at most a different command name:</p>
+
+          <pre><code><span class="comment">* Stata</span>
+reghdfe y x1 x2, absorb(firm year) cluster(firm)
+fereg   y x1 x2, absorb(firm year) cluster(firm)
+
+<span class="comment"># R</span>
+fixest::feols(y ~ x1 + x2 | firm + year, df, cluster = ~firm)
+fereg::feols(y ~ x1 + x2 | firm + year, df, cluster = ~firm)
+
+<span class="comment"># Python</span>
+pyfixest.feols("y ~ x1 + x2 | firm + year", data=df, vcov={"CRV1": "firm"})
+fereg.feols("y ~ x1 + x2 | firm + year", data=df, vcov={"CRV1": "firm"})</code></pre>
+
+          <p>All three cover OLS, IV/2SLS, Poisson and logit with any number of fixed effects, interactions of fixed effects, varying slopes (such as firm-specific trends), weights, and iid, robust or multi-way clustered standard errors, plus residuals, predictions and the estimated fixed effects. The estimation sample, the degrees of freedom, the variance estimator and the stored results follow the reference package. The test suites check each front end against reghdfe, ivreghdfe, ppmlhdfe, Stata&rsquo;s <code>logit</code>, fixest and pyfixest.</p>
+
+          <h2>2. Why Fixed-Effects Regressions Are Slow</h2>
+
+          <p>With millions of fixed-effect levels, the dummy variables cannot be formed. Instead, the outcome and each regressor are residualized on the fixed effects (the Frisch&ndash;Waugh&ndash;Lovell theorem), and the coefficients are estimated from the residuals. Each residualization is a linear system with one unknown per fixed-effect level: millions of unknowns, one system per variable. Poisson and logit models solve these systems again at every iteration.</p>
+
+          <p>reghdfe, fixest and pyfixest solve them by alternating projections: demean by individual, then by firm, then by year, and repeat until nothing changes. This converges in a few sweeps when the fixed effects are well connected, for example when many workers move between firms. It slows to a crawl when they are not, as in matched employer&ndash;employee data with little mobility. Every sweep is a full pass over the data.</p>
+
+          <h2>3. How fereg Solves It</h2>
+
+          <p>fereg starts from the linear algebra of the problem instead of from the algorithm. Four ideas do most of the work.</p>
+
+          <h3>A. Work on cells, not observations</h3>
+          <p>The system depends on the data only through the <em>cells</em>: the distinct combinations of fixed-effect levels that occur, their weights, and the sums of each variable within them. fereg sorts the observations by cell once. After that, every solver iteration is one pass over the cells, with all variables processed together. The observations are read again only at the end, to subtract the fitted fixed effects. With state and year effects on individual-level data, there are far fewer cells than observations.</p>
+
+          <h3>B. Eliminate the largest fixed effect exactly</h3>
+          <p>The part of the system that belongs to one set of fixed effects is diagonal, so it can be solved in closed form. fereg eliminates the fixed effect with the most levels, usually individuals or workers, and iterates only on the rest. With two fixed effects, what remains is a graph Laplacian, a matrix whose structure is well understood.</p>
+
+          <h3>C. A solver that watches itself</h3>
+          <p>The remaining system is solved by preconditioned conjugate gradient, for all variables at once. After 6 and 12 iterations, fereg measures how fast each variable converges and projects the remaining work. When iterating would be slow, a cost model decides whether to factor the system exactly (sparse Cholesky) or approximately, with the approximate Cholesky methods developed for graph Laplacians (Kyng and Sachdeva). The solve then needs only a few more steps. Run time therefore depends little on how well connected the data are, which is exactly where alternating projections struggle most.</p>
+
+          <h3>D. Parallel, and deterministic</h3>
+          <p>Every pass is parallel over observations or cells, not over variables, so a regression with one regressor still uses every core. Sums are taken over fixed chunks and combined in a fixed order, so the estimates are bit-for-bit identical whatever the number of threads: your results do not change when you move from a laptop to a server.</p>
+
+          <p>For Poisson and logit, only the weights change between iterations. The cell structure and orderings are built once, each iteration starts from the previous fixed effects, and a factorization is kept until refactoring it is cheaper than iterating.</p>
+
+          <h2>4. Benchmarks</h2>
+
+          <p>Seconds per regression at 10 million observations on 16 threads (AMD Ryzen 9 9950X), data in memory: the median of three timed runs after a warm-up (a single run when the warm-up takes over a minute). The data are the benchmark panels of fixest and pyfixest: individuals over 10 years, with firms assigned at random (&ldquo;simple&rdquo;) or cyclically (&ldquo;difficult&rdquo;, a fixed-effect structure that is hard for iterative solvers).</p>
+
+          <div class="table-wrap">
+            <table class="benchmark-table compact">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th class="num">fereg<br>Stata</th>
+                  <th class="num">reghdfe<br>family</th>
+                  <th class="num">xhdfe</th>
+                  <th class="num">fereg<br>Python</th>
+                  <th class="num">py&shy;fixest</th>
+                  <th class="num">fereg<br>R</th>
+                  <th class="num">fixest</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>OLS, 2 FEs</td>
+                  <td class="num highlight-cell">0.15</td><td class="num">11.7</td><td class="num">0.87</td>
+                  <td class="num highlight-cell">0.14</td><td class="num">1.82</td>
+                  <td class="num highlight-cell">0.15</td><td class="num">0.51</td>
+                </tr>
+                <tr>
+                  <td>OLS, 3 FEs</td>
+                  <td class="num highlight-cell">0.29</td><td class="num">31.4</td><td class="num">1.93</td>
+                  <td class="num highlight-cell">0.24</td><td class="num">2.61</td>
+                  <td class="num highlight-cell">0.25</td><td class="num">1.27</td>
+                </tr>
+                <tr>
+                  <td>OLS, 10 regressors, 3 FEs</td>
+                  <td class="num highlight-cell">0.90</td><td class="num">60.5</td><td class="num">6.68</td>
+                  <td class="num highlight-cell">0.85</td><td class="num">6.52</td>
+                  <td class="num highlight-cell">0.86</td><td class="num">5.45</td>
+                </tr>
+                <tr>
+                  <td>OLS, 3 FEs, difficult</td>
+                  <td class="num highlight-cell">0.38</td><td class="num">&gt;900</td><td class="num">73.5</td>
+                  <td class="num highlight-cell">0.32</td><td class="num">5.93</td>
+                  <td class="num highlight-cell">0.34</td><td class="num">35.8</td>
+                </tr>
+                <tr>
+                  <td>IV/2SLS, 3 FEs, robust</td>
+                  <td class="num highlight-cell">0.48</td><td class="num">41.5</td><td class="num">4.10</td>
+                  <td class="num highlight-cell">0.42</td><td class="num">7.00</td>
+                  <td class="num highlight-cell">0.42</td><td class="num">2.67</td>
+                </tr>
+                <tr>
+                  <td>Poisson, 3 FEs, robust</td>
+                  <td class="num highlight-cell">3.15</td><td class="num">235.6</td><td class="num">&mdash;</td>
+                  <td class="num highlight-cell">2.68</td><td class="num">202.8</td>
+                  <td class="num highlight-cell">2.60</td><td class="num">43.1</td>
+                </tr>
+                <tr>
+                  <td>Logit, 3 FEs</td>
+                  <td class="num highlight-cell">2.27</td><td class="num">&mdash;</td><td class="num">&mdash;</td>
+                  <td class="num highlight-cell">2.25</td><td class="num">26.7</td>
+                  <td class="num highlight-cell">2.04</td><td class="num">8.84</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">&ldquo;reghdfe family&rdquo;: reghdfe for OLS, ivreghdfe for IV, ppmlhdfe for Poisson. pyfixest: the faster of its two solvers (MAP and LSMR). &gt;900: did not finish within 15 minutes. &mdash;: no such estimator.</p>
+
+          <p>That is about 70 to 110 times faster than reghdfe, ivreghdfe and ppmlhdfe, 8 to 76 times faster than pyfixest, and 3 to 17 times faster than fixest on the simple panel. The gap is widest where it hurts most:</p>
+
+          <blockquote>
+            On the difficult panel with three fixed effects, reghdfe did not finish in 15 minutes and fixest took 36 seconds. fereg takes about a third of a second.
+          </blockquote>
+
+          <p>The table is a slice of a larger grid of 273 configurations: OLS with iid and clustered errors, IV, Poisson, logit, varying slopes, and worker&ndash;firm (AKM) designs with high and low mobility, from 10,000 to 10 million observations, on 16 threads and, up to 1 million observations, on a single thread. In every configuration, the fereg Stata commands are faster than every competitor that finished (reghdfe, ivreghdfe, ppmlhdfe, xhdfe, fixest and pyfixest), and the R and Python packages are faster than fixest and pyfixest. The Stata times include the transfer of the data from Stata to the plugin, which Stata does one value at a time. Full tables and the benchmark code are in the <a href="https://github.com/leoliu0/fereg/tree/main/bench">repository</a>.</p>
+
+          <h2>5. Installing fereg</h2>
+
+          <p>fereg is open source under the MIT license. The Stata package includes binaries for Linux, macOS (Apple Silicon and Intel) and Windows:</p>
+
+          <pre><code>net install fereg, from("https://raw.githubusercontent.com/leoliu0/fereg/gh-pages/stata") replace
+
+fereg y x1 (x2 = z), absorb(firm year) vce(robust)
+feppml trade dist, absorb(exporter#year importer#year) cluster(pair)
+felogit default x1, absorb(firm year)</code></pre>
+
+          <p>Python wheels cover CPython 3.10&ndash;3.14 on Linux, macOS and Windows; data can be pandas or polars:</p>
+
+          <pre><code>pip install fereg --find-links https://github.com/leoliu0/fereg/releases/expanded_assets/v0.3.0</code></pre>
+
+          <p>In R, the source package builds with Rust installed (<code>cargo</code> and <code>rustc</code>); binaries for macOS and Windows are on the <a href="https://github.com/leoliu0/fereg/releases/tag/v0.3.0">release page</a>:</p>
+
+          <pre><code>install.packages("https://github.com/leoliu0/fereg/releases/download/v0.3.0/fereg_0.3.0.tar.gz",
+                 repos = NULL, type = "source")</code></pre>
+
+          <h2>6. What Is Not There Yet</h2>
+
+          <p>fereg covers the models that most applied work runs every day, not everything the reference packages offer. Not implemented yet: probit; HC2/HC3, Newey&ndash;West and Driscoll&ndash;Kraay standard errors; pyfixest&rsquo;s wild bootstrap, randomization inference and difference-in-differences helpers; and fixest&rsquo;s panel lag operators. The full list is in the <a href="https://github.com/leoliu0/fereg#readme">README</a>.</p>
+
+          <p>The solver also stops on its own criterion: when the estimated relative error of each residualized variable falls below 10<sup>&minus;8</sup>. Results therefore agree with reghdfe, fixest and pyfixest to numerical precision, not bit for bit.</p>
+
+          <p>fereg would not exist without the packages it reproduces. reghdfe and ppmlhdfe (Sergio Correia and coauthors), fixest (Laurent Berg&eacute;) and pyfixest (the pyfixest team) define what the right answer is; fereg only tries to reach it faster.</p>
+
+          <div style="background: var(--bg-sunken); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 18px 22px; margin: 32px 0;">
+            <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; color: var(--ink);">Try It on Your Data and File Issues</h3>
+            <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--ink-soft);">
+              If a model gives a different sample, standard error or stored result than reghdfe, fixest or pyfixest, that is a bug. Please open an issue with a small example at <a href="https://github.com/leoliu0/fereg/issues" style="color: var(--green); font-weight: 600;">github.com/leoliu0/fereg/issues</a>.
+            </p>
+          </div>
+          <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);">
+
+          <p>The project is on GitHub: <a href="https://github.com/leoliu0/fereg" style="color: var(--green); font-weight: 600;">github.com/leoliu0/fereg</a>. If it saves you time, starring the repo helps others find it.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer style="margin-top: 60px; padding: 40px 0; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--ink-faint);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <p>&copy; 2026 Leo Liu. All rights reserved.</p>
+      <div style="display: flex; gap: 16px;">
+        <a href="index.html" style="color: inherit; text-decoration: none;">Home</a>
+        <a href="software.html" style="color: inherit; text-decoration: none;">Software</a>
+        <a href="blog.html" style="color: inherit; text-decoration: none;">Blog</a>
+        <a href="https://github.com/leoliu0" style="color: inherit; text-decoration: none;">GitHub</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
