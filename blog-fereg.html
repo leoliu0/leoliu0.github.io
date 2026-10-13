@@ -145,6 +145,13 @@
       font-weight: 600;
       font-family: var(--mono);
     }
+    .mult {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.95em;
+      font-weight: 700;
+      color: var(--green);
+    }
     .table-note {
       font-size: 0.88rem;
       color: var(--ink-faint);
@@ -303,50 +310,50 @@ fereg.feols("y ~ x1 + x2 | firm + year", data=df, vcov={"CRV1": "firm"})</code><
               <tbody>
                 <tr>
                   <td>OLS, 2 FEs</td>
-                  <td class="num highlight-cell">0.15</td><td class="num">11.7</td><td class="num">0.87</td>
-                  <td class="num highlight-cell">0.14</td><td class="num">1.82</td>
-                  <td class="num highlight-cell">0.15</td><td class="num">0.51</td>
+                  <td class="num highlight-cell">0.15</td><td class="num">11.7<span class="mult">78&times;</span></td><td class="num">0.87<span class="mult">5.8&times;</span></td>
+                  <td class="num highlight-cell">0.14</td><td class="num">1.82<span class="mult">13&times;</span></td>
+                  <td class="num highlight-cell">0.15</td><td class="num">0.51<span class="mult">3.4&times;</span></td>
                 </tr>
                 <tr>
                   <td>OLS, 3 FEs</td>
-                  <td class="num highlight-cell">0.29</td><td class="num">31.4</td><td class="num">1.93</td>
-                  <td class="num highlight-cell">0.24</td><td class="num">2.61</td>
-                  <td class="num highlight-cell">0.25</td><td class="num">1.27</td>
+                  <td class="num highlight-cell">0.29</td><td class="num">31.4<span class="mult">108&times;</span></td><td class="num">1.93<span class="mult">6.7&times;</span></td>
+                  <td class="num highlight-cell">0.24</td><td class="num">2.61<span class="mult">11&times;</span></td>
+                  <td class="num highlight-cell">0.25</td><td class="num">1.27<span class="mult">5.1&times;</span></td>
                 </tr>
                 <tr>
                   <td>OLS, 10 regressors, 3 FEs</td>
-                  <td class="num highlight-cell">0.90</td><td class="num">60.5</td><td class="num">6.68</td>
-                  <td class="num highlight-cell">0.85</td><td class="num">6.52</td>
-                  <td class="num highlight-cell">0.86</td><td class="num">5.45</td>
+                  <td class="num highlight-cell">0.90</td><td class="num">60.5<span class="mult">67&times;</span></td><td class="num">6.68<span class="mult">7.4&times;</span></td>
+                  <td class="num highlight-cell">0.85</td><td class="num">6.52<span class="mult">7.7&times;</span></td>
+                  <td class="num highlight-cell">0.86</td><td class="num">5.45<span class="mult">6.3&times;</span></td>
                 </tr>
                 <tr>
                   <td>OLS, 3 FEs, difficult</td>
-                  <td class="num highlight-cell">0.38</td><td class="num">&gt;900</td><td class="num">73.5</td>
-                  <td class="num highlight-cell">0.32</td><td class="num">5.93</td>
-                  <td class="num highlight-cell">0.34</td><td class="num">35.8</td>
+                  <td class="num highlight-cell">0.38</td><td class="num">&gt;900<span class="mult">&gt;2,300&times;</span></td><td class="num">73.5<span class="mult">193&times;</span></td>
+                  <td class="num highlight-cell">0.32</td><td class="num">5.93<span class="mult">19&times;</span></td>
+                  <td class="num highlight-cell">0.34</td><td class="num">35.8<span class="mult">105&times;</span></td>
                 </tr>
                 <tr>
                   <td>IV/2SLS, 3 FEs, robust</td>
-                  <td class="num highlight-cell">0.48</td><td class="num">41.5</td><td class="num">4.10</td>
-                  <td class="num highlight-cell">0.42</td><td class="num">7.00</td>
-                  <td class="num highlight-cell">0.42</td><td class="num">2.67</td>
+                  <td class="num highlight-cell">0.48</td><td class="num">41.5<span class="mult">86&times;</span></td><td class="num">4.10<span class="mult">8.5&times;</span></td>
+                  <td class="num highlight-cell">0.42</td><td class="num">7.00<span class="mult">17&times;</span></td>
+                  <td class="num highlight-cell">0.42</td><td class="num">2.67<span class="mult">6.4&times;</span></td>
                 </tr>
                 <tr>
                   <td>Poisson, 3 FEs, robust</td>
-                  <td class="num highlight-cell">3.15</td><td class="num">235.6</td><td class="num">&mdash;</td>
-                  <td class="num highlight-cell">2.68</td><td class="num">202.8</td>
-                  <td class="num highlight-cell">2.60</td><td class="num">43.1</td>
+                  <td class="num highlight-cell">3.15</td><td class="num">235.6<span class="mult">75&times;</span></td><td class="num">&mdash;</td>
+                  <td class="num highlight-cell">2.68</td><td class="num">202.8<span class="mult">76&times;</span></td>
+                  <td class="num highlight-cell">2.60</td><td class="num">43.1<span class="mult">17&times;</span></td>
                 </tr>
                 <tr>
                   <td>Logit, 3 FEs</td>
                   <td class="num highlight-cell">2.27</td><td class="num">&mdash;</td><td class="num">&mdash;</td>
-                  <td class="num highlight-cell">2.25</td><td class="num">26.7</td>
-                  <td class="num highlight-cell">2.04</td><td class="num">8.84</td>
+                  <td class="num highlight-cell">2.25</td><td class="num">26.7<span class="mult">12&times;</span></td>
+                  <td class="num highlight-cell">2.04</td><td class="num">8.84<span class="mult">4.3&times;</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p class="table-note">&ldquo;reghdfe family&rdquo;: reghdfe for OLS, ivreghdfe for IV, ppmlhdfe for Poisson. pyfixest: the faster of its two solvers (MAP and LSMR). &gt;900: did not finish within 15 minutes. &mdash;: no such estimator.</p>
+          <p class="table-note">Green multiples: how many times faster fereg is, against the fereg version for the same language (reghdfe family and xhdfe vs fereg Stata, pyfixest vs fereg Python, fixest vs fereg R). &ldquo;reghdfe family&rdquo;: reghdfe for OLS, ivreghdfe for IV, ppmlhdfe for Poisson. pyfixest: the faster of its two solvers (MAP and LSMR). &gt;900: did not finish within 15 minutes. &mdash;: no such estimator.</p>
 
           <p>That is about 70 to 110 times faster than reghdfe, ivreghdfe and ppmlhdfe, 8 to 76 times faster than pyfixest, and 3 to 17 times faster than fixest on the simple panel. The gap is widest where it hurts most:</p>
 
