@@ -215,8 +215,11 @@ body.lang-both .read-toc summary .read-en {
   height: auto;
 }
 
-/* Wide content scrolls sideways instead of widening the page. Tables sit in a
-   .read-scroll wrapper (added by the build, with a min-width for 4+ columns). */
+/* Wide content scrolls sideways inside its own box instead of widening the page:
+   tables (in a .read-scroll wrapper added by the build), display formulas, flow rows
+   (.read-flow, also added by the build) and inline formulas too wide for their line
+   (.read-wide, set by the page script). .more-right fades the right edge while there
+   is more to scroll to. */
 .read-body .read-scroll {
   max-width: 100%;
   overflow-x: auto;
@@ -228,9 +231,17 @@ body.lang-both .read-toc summary .read-en {
   overflow-wrap: normal;
 }
 
-/* columns already get a min-width; let headers wrap instead of running into the next one */
+/* let headers wrap instead of running into the next column, but not letter by letter */
 .read-body .read-scroll :is(td, th) {
   white-space: normal !important;
+  min-width: 4.5em;
+}
+
+/* --fade (set by the page script) is the hidden width + 8px, at most 36px, so a box
+   missing only a few pixels does not dim visible content */
+.read-body .more-right {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--fade, 36px)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--fade, 36px)), transparent);
 }
 
 .read-body mjx-container[display="true"] {
@@ -239,13 +250,25 @@ body.lang-both .read-toc summary .read-en {
   overflow-y: hidden;
 }
 
-/* Inline formulas wider than the column shrink to fit (display formulas scroll) */
-.read-body mjx-container:not([display="true"]) {
-  max-width: calc(100% - 1.5em);
+/* Formulas shrink to fit the column, but not below 70% of their size: the build sets
+   each SVG's min-width, which wins over max-width; past that they scroll. */
+.read-body mjx-container > svg {
+  max-width: 100%;
+  height: auto;
 }
 
-.read-body span[style*="nowrap"] > mjx-container {
-  max-width: calc(100% - 2.5em);
+.read-body mjx-container.read-wide {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+
+/* formula + punctuation kept on one line: leave room for the punctuation */
+.read-body span[style*="nowrap"] > mjx-container > svg,
+.read-body span[style*="nowrap"] > mjx-container.read-wide {
+  max-width: calc(100% - 1.2em);
 }
 
 /* MathJax's hidden screen-reader copy is clipped but would still widen the page */
@@ -253,19 +276,19 @@ body.lang-both .read-toc summary .read-en {
   width: 100% !important;
 }
 
-.read-body mjx-container:not([display="true"]) > svg {
-  max-width: 100%;
-  height: auto;
-}
-
 /* Inside (scrolling) tables formulas keep their natural size */
-.read-body :is(td, th) mjx-container,
-.read-body :is(td, th) mjx-container > svg {
+.read-body :is(td, th) mjx-container > svg,
+.read-body :is(td, th) span[style*="nowrap"] > mjx-container > svg {
   max-width: none;
 }
 
 .read-body :is(p, li, div):not(:is(td, th) *) {
   overflow-wrap: anywhere;
+}
+
+/* captions set to 0.6em of the slide font are too small at reading size */
+.read-body [style*="font-size: 0.6em"] {
+  font-size: 12px !important;
 }
 
 .read-body :where(ul, ol) {
@@ -314,12 +337,26 @@ body.lang-both .read-toc summary .read-en {
   .read-body [style*="display: flex"] > *,
   .read-body [style*="display:flex"] > * {
     min-width: 0;
-    max-width: 100%;
+    max-width: 100% !important;
   }
 
   /* flex rows with a gap are side-by-side cards or columns: one per line */
   .read-body [style*="display: flex"][style*="gap"] > *,
   .read-body [style*="display:flex"][style*="gap"] > * {
     flex: 1 1 100% !important;
+  }
+
+  /* "party - arrows - party" flow rows keep their order on one line and scroll */
+  .read-body .read-flow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .read-body .read-flow > * {
+    min-width: min-content;
+  }
+
+  .read-body .read-flow * {
+    overflow-wrap: normal;
   }
 }

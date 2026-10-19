@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const link = document.querySelector(".deck-read-link");
       if (!link) return;
       const i = Reveal.getIndices();
-      link.href = link.dataset.base + (i.v ? "?lang=en" : "") + "#p" + (i.h + 1);
+      link.href = link.dataset.base + "?lang=" + (i.v ? "en" : "zh") + "#p" + (i.h + 1);
     }
     Reveal.on("ready", syncReadLink);
     Reveal.on("slidechanged", syncReadLink);
