@@ -157,6 +157,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("resize", autoFitAllSlides);
 
+    // Pinch-zoom enlarges the page around a visible window (the visual viewport); keep the
+    // page number in that window's bottom-right corner at its normal on-screen size.
+    function pinSlideNumber() {
+      const el = document.querySelector(".reveal .slide-number");
+      const vv = window.visualViewport;
+      if (!el || !vv) return;
+      if (vv.scale <= 1.001 && vv.offsetLeft === 0 && vv.offsetTop === 0) {
+        el.style.transform = "";
+        return;
+      }
+      const box = el.offsetParent.getBoundingClientRect();
+      const right = box.left + el.offsetLeft + el.offsetWidth;
+      const bottom = box.top + el.offsetTop + el.offsetHeight;
+      const gapRight = document.documentElement.clientWidth - right;
+      const gapBottom = document.documentElement.clientHeight - bottom;
+      const dx = vv.offsetLeft + vv.width - gapRight / vv.scale - right;
+      const dy = vv.offsetTop + vv.height - gapBottom / vv.scale - bottom;
+      el.style.transformOrigin = "100% 100%";
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(${1 / vv.scale})`;
+    }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", pinSlideNumber);
+      window.visualViewport.addEventListener("scroll", pinSlideNumber);
+    }
+
     // The bundled Kai web font changes text size when it arrives; refit then.
     if (document.fonts) {
       document.fonts.addEventListener("loadingdone", function () {
