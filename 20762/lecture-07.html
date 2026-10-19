@@ -1,201 +1,310 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20762 第7讲：二叉树期权定价模型导论</title>
-  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
-  <link rel="stylesheet" href="assets/slides.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第7讲：二叉树期权定价模型导论</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
 </head>
 <body>
-  <a href="index.html" class="deck-index-link">&larr; 返回课程目录</a>
-  <div class="reveal">
-    <div class="slides">
-
-    <!-- Slide 1 -->
-    <section id="l07-s01" data-kind="original" data-source-slide="1" data-pdf-page="1" data-pdf-half="top">
-      <div class="slide-container">
-        <div class="title-slide-container" style="width: 100%;">
-          <div class="title-slide-h1">第 7 讲</div>
-          <div class="title-slide-h1" style="margin-bottom: 20px">二叉树期权定价模型导论</div>
-          <div class="title-slide-h2">John C. Hull 第12章</div>
-          
-          <div class="tip-of-the-week-box">
-            <div class="tip-title">每周提示</div>
-            <div class="tip-text">
+<a class="deck-index-link" href="index.html">← 返回课程目录</a>
+<div class="reveal">
+<div class="slides">
+<!-- Slide 1 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l07-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 7 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">二叉树期权定价模型导论</div>
+<div class="title-slide-h2">John C. Hull 第12章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">每周提示</div>
+<div class="tip-text">
               股票上涨的“风险中性”概率意味着其预期收益率等于无风险利率。这与真实世界中股票实际的上涨概率截然不同。
             </div>
+</div>
+<div class="uts-logo-text">
+<span style="color: #000; font-weight: 900;">✦</span> UTS商学院
           </div>
-          
-          <div class="uts-logo-text">
-            <span style="color: #000; font-weight: 900;">&#10022;</span> UTS商学院
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 2 -->
-    <section id="l07-s02" data-kind="original" data-source-slide="2" data-pdf-page="1" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 2</div>
-          <ul class="sidebar-nav">
-            <li class="active">学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">学习目标</h2>
-          <div class="slide-content">
-            <ul>
-              <li>利用单期二叉树模型对无红利股票的欧式看涨与看跌期权进行定价</li>
-              <li>无套利分析原理：
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l07-s01-en" lang="en">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">Lecture 7</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">Introduction to Binomial Trees</div>
+<div class="title-slide-h2">Hull, Chapter 12</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">Tip of the week</div>
+<div class="tip-text">
+              The risk-neutral probability that the stock will go up, implies an expected return equal to the risk-free rate. It is different to the probability of an up movement in the real world.
+            </div>
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS Business School</div>
+</div>
+</div>
+<div class="slide-footer" style="left: 48px;">
+<span>20762 Derivatives and Risk Management • UTS Business School</span>
+<span class="slide-source-badge">Original Slide 1 of 19 (p.1 top)</span>
+</div>
+</section></section>
+<!-- Slide 2 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l07-s02">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li>利用单期二叉树模型对无红利股票的欧式看涨与看跌期权进行定价</li>
+<li>无套利分析原理：
                 <ul>
-                  <li>定义并计算期权的 Delta (\(\Delta\))</li>
-                </ul>
-              </li>
-              <li>风险中性定价：
+<li>定义并计算期权的 Delta (\(\Delta\))</li>
+</ul>
+</li>
+<li>风险中性定价：
                 <ul>
-                  <li>定义并计算风险中性概率</li>
-                  <li>比较真实世界（实际）概率与风险中性概率</li>
-                </ul>
-              </li>
-              <li>从观测到的市场数据中计算二叉树模型参数</li>
-              <li>模型拓展应用：
+<li>定义并计算风险中性概率</li>
+<li>比较真实世界（实际）概率与风险中性概率</li>
+</ul>
+</li>
+<li>从观测到的市场数据中计算二叉树模型参数</li>
+<li>模型拓展应用：
                 <ul>
-                  <li>多期二叉树模型</li>
-                  <li>美式期权定价</li>
-                  <li>调整二叉树模型以处理连续红利收益率</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 3 -->
-    <section id="l07-s03" data-kind="original" data-source-slide="3" data-pdf-page="2" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 3</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li class="active">单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title" style="margin-bottom: 10px;">案例分析 – 单期二叉树模型</h2>
-          <div class="slide-content">
-            <!-- Top Section: Core Parameters and Payoffs -->
-            <div style="margin-bottom: 14px;">
-              <ul style="margin-bottom: 8px;">
-                <li><strong>基础资产：</strong> 股票当前价格 \( S_0 = \mathbf{\$20} \)。3个月后（\( T = 0.25 \)）股票价格离散变动为两态：
+<li>多期二叉树模型</li>
+<li>美式期权定价</li>
+<li>调整二叉树模型以处理连续红利收益率</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l07-s02-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Learning Objectives</h2>
+<div class="slide-content">
+<ul>
+<li>Use the one-period binomial model to price European call and put options on a non-dividend paying stock</li>
+<li>No-arbitrage arguments:
+                <ul>
+<li>Define and compute delta of an option</li>
+</ul>
+</li>
+<li>Risk-neutral valuation:
+                <ul>
+<li>Define and compute risk-neutral probabilities</li>
+<li>Compare real-world (actual) and risk-neutral probabilities</li>
+</ul>
+</li>
+<li>Compute the parameters of a binomial model from observed market data</li>
+<li>Extensions:
+                <ul>
+<li>Multi-period binomial trees</li>
+<li>Pricing of American options</li>
+<li>Adjust the binomial model to cater for dividend yield</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 3 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l07-s03">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title" style="margin-bottom: 10px;">案例分析 – 单期二叉树模型</h2>
+<div class="slide-content">
+<!-- Top Section: Core Parameters and Payoffs -->
+<div style="margin-bottom: 14px;">
+<ul style="margin-bottom: 8px;">
+<li><strong>基础资产：</strong> 股票当前价格 \( S_0 = \mathbf{\$20} \)。3个月后（\( T = 0.25 \)）股票价格离散变动为两态：
                   <span style="color: #047857; font-weight: bold;">上涨至 \( S_u = \$22 \)</span> 或 
                   <span style="color: #b91c1c; font-weight: bold;">下跌至 \( S_d = \$18 \)</span>。
                 </li>
-                <li><strong>待定价期权：</strong> 3个月期看涨期权，执行价 \( K = \mathbf{\$21} \)，无风险利率 \( r = 12\% \)（连续复利）。
+<li><strong>待定价期权：</strong> 3个月期看涨期权，执行价 \( K = \mathbf{\$21} \)，无风险利率 \( r = 12\% \)（连续复利）。
                   <ul>
-                    <li>状态 \( u \)（上涨）：到期回报 \( f_u = \max[S_u - K, 0] = \max[22 - 21, 0] = \mathbf{\$1} \)</li>
-                    <li>状态 \( d \)（下跌）：到期回报 \( f_d = \max[S_d - K, 0] = \max[18 - 21, 0] = \mathbf{\$0} \)</li>
-                  </ul>
+<li>状态 \( u \)（上涨）：到期回报 \( f_u = \max[S_u - K, 0] = \max[22 - 21, 0] = \mathbf{\$1} \)</li>
+<li>状态 \( d \)（下跌）：到期回报 \( f_d = \max[S_d - K, 0] = \max[18 - 21, 0] = \mathbf{\$0} \)</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- Bottom Section: Wide Prominent Binomial Tree Diagram -->
+<div class="example-card" style="margin: 0; padding: 14px 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; text-align: center;">
+<div style="font-weight: 700; color: #1e3a8a; font-size: 16.5px; margin-bottom: 8px;">单期股票价格与期权回报二叉树</div>
+<svg height="175" style="margin: 0 auto; display: block;" viewbox="0 0 560 175" width="560">
+<!-- Connecting Branches -->
+<line stroke="#2563eb" stroke-width="2.5" x1="140" x2="380" y1="88" y2="40"></line>
+<line stroke="#2563eb" stroke-width="2.5" x1="140" x2="380" y1="88" y2="136"></line>
+<!-- Branch Labels -->
+<text fill="#047857" font-size="13.5" font-weight="700" x="230" y="46">上涨 (u = 1.10)</text>
+<text fill="#b91c1c" font-size="13.5" font-weight="700" x="230" y="142">下跌 (d = 0.90)</text>
+<!-- Root Node t=0 -->
+<rect fill="#eff6ff" height="52" rx="6" stroke="#3b82f6" stroke-width="2" width="110" x="40" y="62"></rect>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="95" y="83">S₀ = $20</text>
+<text fill="#2563eb" font-size="13.5" font-weight="600" text-anchor="middle" x="95" y="103">f₀ = ?</text>
+<!-- Up Node t=T -->
+<rect fill="#ecfdf5" height="52" rx="6" stroke="#10b981" stroke-width="2" width="135" x="375" y="14"></rect>
+<text fill="#065f46" font-size="14" font-weight="bold" text-anchor="middle" x="442" y="35">Sᵤ = $22</text>
+<text fill="#047857" font-size="13.5" font-weight="700" text-anchor="middle" x="442" y="55">fᵤ = $1</text>
+<!-- Down Node t=T -->
+<rect fill="#fef2f2" height="52" rx="6" stroke="#ef4444" stroke-width="2" width="135" x="375" y="110"></rect>
+<text fill="#991b1b" font-size="14" font-weight="bold" text-anchor="middle" x="442" y="131">S_d = $18</text>
+<text fill="#b91c1c" font-size="13.5" font-weight="700" text-anchor="middle" x="442" y="151">f_d = $0</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l07-s03-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title" style="margin-bottom: 10px;">Case Study – 1-Step Binomial Model</h2>
+<div class="slide-content">
+<!-- Top Section: Core Parameters and Payoffs -->
+<div style="margin-bottom: 14px;">
+<ul style="margin-bottom: 8px;">
+<li><strong>Underlying Asset:</strong> Current stock price \( S_0 = \mathbf{\$20} \)。In 3 months (\( T = 0.25 \)), stock price discretely moves to 2 states:
+                  <span style="color: #047857; font-weight: bold;">Up to \( S_u = \$22 \)</span> 或 
+                  <span style="color: #b91c1c; font-weight: bold;">Down to \( S_d = \$18 \)</span>。
                 </li>
-              </ul>
-            </div>
-
-            <!-- Bottom Section: Wide Prominent Binomial Tree Diagram -->
-            <div class="example-card" style="margin: 0; padding: 14px 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; text-align: center;">
-              <div style="font-weight: 700; color: #1e3a8a; font-size: 16.5px; margin-bottom: 8px;">单期股票价格与期权回报二叉树</div>
-              <svg width="560" height="175" viewBox="0 0 560 175" style="margin: 0 auto; display: block;">
-                <!-- Connecting Branches -->
-                <line x1="140" y1="88" x2="380" y2="40" stroke="#2563eb" stroke-width="2.5" />
-                <line x1="140" y1="88" x2="380" y2="136" stroke="#2563eb" stroke-width="2.5" />
-                
-                <!-- Branch Labels -->
-                <text x="230" y="46" font-size="13.5" font-weight="700" fill="#047857">上涨 (u = 1.10)</text>
-                <text x="230" y="142" font-size="13.5" font-weight="700" fill="#b91c1c">下跌 (d = 0.90)</text>
-
-                <!-- Root Node t=0 -->
-                <rect x="40" y="62" width="110" height="52" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
-                <text x="95" y="83" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">S₀ = $20</text>
-                <text x="95" y="103" font-size="13.5" font-weight="600" fill="#2563eb" text-anchor="middle">f₀ = ?</text>
-
-                <!-- Up Node t=T -->
-                <rect x="375" y="14" width="135" height="52" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
-                <text x="442" y="35" font-size="14" font-weight="bold" fill="#065f46" text-anchor="middle">Sᵤ = $22</text>
-                <text x="442" y="55" font-size="13.5" font-weight="700" fill="#047857" text-anchor="middle">fᵤ = $1</text>
-
-                <!-- Down Node t=T -->
-                <rect x="375" y="110" width="135" height="52" rx="6" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
-                <text x="442" y="131" font-size="14" font-weight="bold" fill="#991b1b" text-anchor="middle">S_d = $18</text>
-                <text x="442" y="151" font-size="13.5" font-weight="700" fill="#b91c1c" text-anchor="middle">f_d = $0</text>
-              </svg>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 4 -->
-    <section id="l07-s04" data-kind="original" data-source-slide="4" data-pdf-page="2" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 4</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li class="active">无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 无套利分析原理</h2>
-          <div class="slide-content">
-            <ul>
-              <li>考虑由以下资产构成的投资组合：
+<li><strong>Derivative:</strong> 3-month call option with strike \( K = \mathbf{\$21} \)，risk-free rate \( r = 12\% \)(continuous compounding)。
+                  <ul>
+<li>State \( u \) (Up): Payoff \( f_u = \max[S_u - K, 0] = \max[22 - 21, 0] = \mathbf{\$1} \)</li>
+<li>State \( d \) (Down): Payoff \( f_d = \max[S_d - K, 0] = \max[18 - 21, 0] = \mathbf{\$0} \)</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- Bottom Section: Wide Prominent Binomial Tree Diagram -->
+<div class="example-card" style="margin: 0; padding: 14px 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; text-align: center;">
+<div style="font-weight: 700; color: #1e3a8a; font-size: 16.5px; margin-bottom: 8px;">1-Step Stock Price and Option Payoff Binomial Tree</div>
+<svg height="175" style="margin: 0 auto; display: block;" viewbox="0 0 560 175" width="560">
+<!-- Connecting Branches -->
+<line stroke="#2563eb" stroke-width="2.5" x1="140" x2="380" y1="88" y2="40"></line>
+<line stroke="#2563eb" stroke-width="2.5" x1="140" x2="380" y1="88" y2="136"></line>
+<!-- Branch Labels -->
+<text fill="#047857" font-size="13.5" font-weight="700" x="230" y="46">Up (u = 1.10)</text>
+<text fill="#b91c1c" font-size="13.5" font-weight="700" x="230" y="142">Down (d = 0.90)</text>
+<!-- Root Node t=0 -->
+<rect fill="#eff6ff" height="52" rx="6" stroke="#3b82f6" stroke-width="2" width="110" x="40" y="62"></rect>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="95" y="83">S₀ = $20</text>
+<text fill="#2563eb" font-size="13.5" font-weight="600" text-anchor="middle" x="95" y="103">f₀ = ?</text>
+<!-- Up Node t=T -->
+<rect fill="#ecfdf5" height="52" rx="6" stroke="#10b981" stroke-width="2" width="135" x="375" y="14"></rect>
+<text fill="#065f46" font-size="14" font-weight="bold" text-anchor="middle" x="442" y="35">Sᵤ = $22</text>
+<text fill="#047857" font-size="13.5" font-weight="700" text-anchor="middle" x="442" y="55">fᵤ = $1</text>
+<!-- Down Node t=T -->
+<rect fill="#fef2f2" height="52" rx="6" stroke="#ef4444" stroke-width="2" width="135" x="375" y="110"></rect>
+<text fill="#991b1b" font-size="14" font-weight="bold" text-anchor="middle" x="442" y="131">S_d = $18</text>
+<text fill="#b91c1c" font-size="13.5" font-weight="700" text-anchor="middle" x="442" y="151">f_d = $0</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 4 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l07-s04">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li class="active">无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 无套利分析原理</h2>
+<div class="slide-content">
+<ul>
+<li>考虑由以下资产构成的投资组合：
                 <ul>
-                  <li>持有 \( \Delta \) 份标的资产多头，以及</li>
-                  <li>卖出 1 份看涨期权空头</li>
-                </ul>
-              </li>
-              <li>到期时投资组合的价值为 \( (\Delta \t\times  S_T) - f_T \)：
+<li>持有 \( \Delta \) 份标的资产多头，以及</li>
+<li>卖出 1 份看涨期权空头</li>
+</ul>
+</li>
+<li>到期时投资组合的价值为 \( (\Delta \t\times  S_T) - f_T \)：
                 <ul>
-                  <li>若股票上涨，组合价值为 \( (\Delta \t\times  \$22) - \$1 \)</li>
-                  <li>若股票下跌，组合价值为 \( (\Delta \t\times  \$18) - \$0 \)</li>
-                </ul>
-              </li>
-              <li>当两种状态下的到期支付完全相等时，该投资组合即为<strong>无风险组合</strong>：
+<li>若股票上涨，组合价值为 \( (\Delta \t\times  \$22) - \$1 \)</li>
+<li>若股票下跌，组合价值为 \( (\Delta \t\times  \$18) - \$0 \)</li>
+</ul>
+</li>
+<li>当两种状态下的到期支付完全相等时，该投资组合即为<strong>无风险组合</strong>：
                 <div class="equation-box">
                   \[ (\Delta \t\times  \$22) - \$1 = (\Delta \t\times  \$18) - \$0 \]
                 </div>
@@ -203,50 +312,94 @@
                 <div class="equation-box">
                   \[ \Delta = \frac{\$1 - \$0}{\$22 - \$18} = \mathbf{0.25} \]
                 </div>
-              </li>
-              <li>\( \Delta \) 代表期权价格变动与股票价格变动的比率（对冲比率）。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 5 -->
-    <section id="l07-s05" data-kind="original" data-source-slide="5" data-pdf-page="3" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 5</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li class="active">无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 无套利分析原理</h2>
-          <div class="slide-content">
-            <ul>
-              <li>现在代入 \( \Delta = 0.25 \) 计算投资组合的到期价值：
+</li>
+<li>\( \Delta \) 代表期权价格变动与股票价格变动的比率（对冲比率）。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l07-s04-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 4</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li class="active">No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – No-Arbitrage Arguments</h2>
+<div class="slide-content">
+<ul>
+<li>Consider the portfolio consisting of:
                 <ul>
-                  <li>若股票上涨，价值为 \( (0.25 \t\times  \$22) - \$1 = \mathbf{\$4.50} \)</li>
-                  <li>若股票下跌，价值为 \( (0.25 \t\times  \$18) - \$0 = \mathbf{\$4.50} \)</li>
-                </ul>
-              </li>
-              <li>因此该投资组合是完全无风险的，其现值必须以无风险利率折现：
+<li>a long position in \( \Delta \) units of the asset, AND</li>
+<li>a short position in one call option</li>
+</ul>
+</li>
+<li>The value of portfolio at maturity is \( (\Delta \t\times  S_T) - f_T \):
+                <ul>
+<li>If the stock moves up this is \( (\Delta \t\times  \$22) - \$1 \)</li>
+<li>If the stock moves down it is \( (\Delta \t\times  \$18) - \$0 \)</li>
+</ul>
+</li>
+<li>The portfolio is <strong>riskless</strong> when the payouts in both states are equal:
+                <div class="equation-box">
+                  \[ (\Delta \t\times  \$22) - \$1 = (\Delta \t\times  \$18) - \$0 \]
+                </div>
+                which implies that:
+                <div class="equation-box">
+                  \[ \Delta = \frac{\$1 - \$0}{\$22 - \$18} = \mathbf{0.25} \]
+                </div>
+</li>
+<li>\( \Delta \) represents the change in the price of the option divided by the change in the stock price.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 5 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l07-s05">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li class="active">无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 无套利分析原理</h2>
+<div class="slide-content">
+<ul>
+<li>现在代入 \( \Delta = 0.25 \) 计算投资组合的到期价值：
+                <ul>
+<li>若股票上涨，价值为 \( (0.25 \t\times  \$22) - \$1 = \mathbf{\$4.50} \)</li>
+<li>若股票下跌，价值为 \( (0.25 \t\times  \$18) - \$0 = \mathbf{\$4.50} \)</li>
+</ul>
+</li>
+<li>因此该投资组合是完全无风险的，其现值必须以无风险利率折现：
                 <div class="equation-box">
                   \[ \$4.50 \, e^{-0.12 \t\times  0.25} = \mathbf{\$4.3670} \]
                 </div>
-              </li>
-              <li>投资组合的期初价值为：
+</li>
+<li>投资组合的期初价值为：
                 <div class="equation-box">
                   \[ (\Delta \t\times  S_0) - f_0 = \$4.3670 \]
                 </div>
@@ -254,51 +407,93 @@
                 <div class="equation-box">
                   \[ f_0 = (0.25 \t\times  \$20) - \$4.3670 = \$5.00 - \$4.3670 = \mathbf{\$0.6330} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 6 -->
-    <section id="l07-s06" data-kind="original" data-source-slide="6" data-pdf-page="3" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 6</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li class="active">无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">一般情况下的无套利分析</h2>
-          <div class="slide-content">
-            <ul>
-              <li>股票初始价格为 \( S_0 \)，到期价格要么为 \( S_T = S_u = uS_0 \)，要么为 \( S_T = S_d = dS_0 \)：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l07-s05-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 5</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li class="active">No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – No-Arbitrage Arguments</h2>
+<div class="slide-content">
+<ul>
+<li>We now calculate the terminal portfolio value with \( \Delta = 0.25 \):
                 <ul>
-                  <li>若 \( S_T = uS_0 \)，则衍生品到期回报 \( f_u \) 确定已知。</li>
-                  <li>若 \( S_T = dS_0 \)，则衍生品到期回报 \( f_d \) 确定已知。</li>
-                </ul>
-              </li>
-              <li>构建如下投资组合：
+<li>If the stock moves up it is \( (0.25 \t\times  \$22) - \$1 = \mathbf{\$4.50} \)</li>
+<li>If the stock moves down it is \( (0.25 \t\times  \$18) - \$0 = \mathbf{\$4.50} \)</li>
+</ul>
+</li>
+<li>The portfolio is thus risk-free and so its present value must be discounted at the risk-free rate:
+                <div class="equation-box">
+                  \[ \$4.50 \, e^{-0.12 \t\times  0.25} = \mathbf{\$4.3670} \]
+                </div>
+</li>
+<li>The initial portfolio value is thus:
+                <div class="equation-box">
+                  \[ (\Delta \t\times  S_0) - f_0 = \$4.3670 \]
+                </div>
+                from which it follows that:
+                <div class="equation-box">
+                  \[ f_0 = (0.25 \t\times  \$20) - \$4.3670 = \$5.00 - \$4.3670 = \mathbf{\$0.6330} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 6 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l07-s06">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li class="active">无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">一般情况下的无套利分析</h2>
+<div class="slide-content">
+<ul>
+<li>股票初始价格为 \( S_0 \)，到期价格要么为 \( S_T = S_u = uS_0 \)，要么为 \( S_T = S_d = dS_0 \)：
                 <ul>
-                  <li>持有 \( \Delta \) 份标的资产多头，以及</li>
-                  <li>卖出 1 份衍生期权空头</li>
-                </ul>
-              </li>
-              <li>到期时投资组合的价值为 \( uS_0\Delta - f_u \) 或 \( dS_0\Delta - f_d \)。</li>
-              <li>当投资组合满足以下条件时实现完全无风险：
+<li>若 \( S_T = uS_0 \)，则衍生品到期回报 \( f_u \) 确定已知。</li>
+<li>若 \( S_T = dS_0 \)，则衍生品到期回报 \( f_d \) 确定已知。</li>
+</ul>
+</li>
+<li>构建如下投资组合：
+                <ul>
+<li>持有 \( \Delta \) 份标的资产多头，以及</li>
+<li>卖出 1 份衍生期权空头</li>
+</ul>
+</li>
+<li>到期时投资组合的价值为 \( uS_0\Delta - f_u \) 或 \( dS_0\Delta - f_d \)。</li>
+<li>当投资组合满足以下条件时实现完全无风险：
                 <div class="equation-box">
                   \[ uS_0\Delta - f_u = dS_0\Delta - f_d \]
                 </div>
@@ -306,867 +501,1594 @@
                 <div class="equation-box">
                   \[ \Delta = \frac{f_u - f_d}{uS_0 - dS_0} = \frac{f_u - f_d}{S_u - S_d} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 7 -->
-    <section id="l07-s07" data-kind="original" data-source-slide="7" data-pdf-page="4" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 7</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li class="active">无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">一般情况下的无套利分析</h2>
-          <div class="slide-content">
-            <ul>
-              <li>投资组合的到期终值为 \( uS_0\Delta - f_u = dS_0\Delta - f_d \)。</li>
-              <li>投资组合的初始价值：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l07-s06-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 6</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li class="active">No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">No-Arbitrage Arguments in General</h2>
+<div class="slide-content">
+<ul>
+<li>Initial stock price is \( S_0 \), and \( S_T = S_u = uS_0 \) or \( S_T = S_d = dS_0 \):
                 <ul>
-                  <li>由于最终组合价值与市场涨跌方向完全无关，该组合是无风险的，因此：
+<li>If \( S_T = uS_0 \), then the derivative payoff \( f_u \) is known.</li>
+<li>If \( S_T = dS_0 \), then the derivative payoff \( f_d \) is known.</li>
+</ul>
+</li>
+<li>Consider the portfolio consisting of:
+                <ul>
+<li>a long position in \( \Delta \) units of the asset, AND</li>
+<li>a short position in one option</li>
+</ul>
+</li>
+<li>The value of the portfolio at maturity is \( uS_0\Delta - f_u \) or \( dS_0\Delta - f_d \).</li>
+<li>The portfolio is riskless when:
+                <div class="equation-box">
+                  \[ uS_0\Delta - f_u = dS_0\Delta - f_d \]
+                </div>
+                from which it follows that:
+                <div class="equation-box">
+                  \[ \Delta = \frac{f_u - f_d}{uS_0 - dS_0} = \frac{f_u - f_d}{S_u - S_d} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 7 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l07-s07">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li class="active">无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">一般情况下的无套利分析</h2>
+<div class="slide-content">
+<ul>
+<li>投资组合的到期终值为 \( uS_0\Delta - f_u = dS_0\Delta - f_d \)。</li>
+<li>投资组合的初始价值：
+                <ul>
+<li>由于最终组合价值与市场涨跌方向完全无关，该组合是无风险的，因此：
                     \[ (uS_0\Delta - f_u)e^{-rT} = (dS_0\Delta - f_d)e^{-rT} \]
                   </li>
-                  <li>今日构建该投资组合的成本为：\( \Delta S_0 - f_0 \)</li>
-                </ul>
-              </li>
-              <li>将上述两种表达式联立等置：
+<li>今日构建该投资组合的成本为：\( \Delta S_0 - f_0 \)</li>
+</ul>
+</li>
+<li>将上述两种表达式联立等置：
                 <div class="equation-box">
                   \[ f_0 = \Delta S_0 - (uS_0\Delta - f_u)e^{-rT} \]
                 </div>
-              </li>
-              <li>代入 \( \Delta \) 的表达式并进行代数化简可得：
+</li>
+<li>代入 \( \Delta \) 的表达式并进行代数化简可得：
                 <div class="equation-box">
                   \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \quad \text{其中} \quad p = \frac{e^{rT} - d}{u - d} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 8 -->
-    <section id="l07-s08" data-kind="original" data-source-slide="8" data-pdf-page="4" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 8</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li class="active">风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">“风险中性”概率</h2>
-          <div class="slide-content">
-            <ul>
-              <li>风险中性投资者认为所有资产价格均以无风险利率 \( r \) 增长，因此在对未来所有现金流估值时均以 \( r \) 进行折现。</li>
-              <li>在<strong>“风险中性”</strong>世界中：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l07-s07-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 7</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li class="active">No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">No-Arbitrage Arguments in General</h2>
+<div class="slide-content">
+<ul>
+<li>The terminal value of the portfolio is \( uS_0\Delta - f_u = dS_0\Delta - f_d \).</li>
+<li>The initial value of the portfolio:
                 <ul>
-                  <li>所有资产的预期收益率都等于无风险利率 \( r \)</li>
-                  <li>资产的期初现值等于其到期预期回报以无风险利率贴现后的数值</li>
-                </ul>
-              </li>
-              <li>股票上涨的“风险中性”概率 \( p \) 满足：
+<li>Since the final portfolio value is independent of the market direction, the portfolio is risk-free, thus:
+                    \[ (uS_0\Delta - f_u)e^{-rT} = (dS_0\Delta - f_d)e^{-rT} \]
+                  </li>
+<li>The cost to set up the portfolio today is: \( \Delta S_0 - f_0 \)</li>
+</ul>
+</li>
+<li>Thus by equating these two representations:
+                <div class="equation-box">
+                  \[ f_0 = \Delta S_0 - (uS_0\Delta - f_u)e^{-rT} \]
+                </div>
+</li>
+<li>By substituting \( \Delta \) and simplifying algebraically:
+                <div class="equation-box">
+                  \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \quad \text{with} \quad p = \frac{e^{rT} - d}{u - d} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 8 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l07-s08">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li class="active">风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">“风险中性”概率</h2>
+<div class="slide-content">
+<ul>
+<li>风险中性投资者认为所有资产价格均以无风险利率 \( r \) 增长，因此在对未来所有现金流估值时均以 \( r \) 进行折现。</li>
+<li>在<strong>“风险中性”</strong>世界中：
+                <ul>
+<li>所有资产的预期收益率都等于无风险利率 \( r \)</li>
+<li>资产的期初现值等于其到期预期回报以无风险利率贴现后的数值</li>
+</ul>
+</li>
+<li>股票上涨的“风险中性”概率 \( p \) 满足：
                 <div class="equation-box">
                   \[ E[S_T] = S_0 e^{rT} \implies S_0 = e^{-rT} E[S_T] = e^{-rT} [p S_u + (1 - p) S_d] \]
                 </div>
-              </li>
-              <li>真实世界（实际）中股票上涨的概率 \( p_a \) 与风险中性概率 \( p \) 存在本质差异。
+</li>
+<li>真实世界（实际）中股票上涨的概率 \( p_a \) 与风险中性概率 \( p \) 存在本质差异。
                 <ul>
-                  <li>若资产的实际预期收益率为 \( \mu \)，则：
+<li>若资产的实际预期收益率为 \( \mu \)，则：
                     \[ S_0 = e^{-\mu T} E_a[S_T] = e^{-\mu T} [p_a S_u + (1 - p_a) S_d] \]
                   </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 9 -->
-    <section id="l07-s09" data-kind="original" data-source-slide="9" data-pdf-page="5" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 9</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li class="active">风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 风险中性定价</h2>
-          <div class="slide-content">
-            <ul>
-              <li>设 \( p \) 为股票上涨的“风险中性”概率，则有：
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l07-s08-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 8</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li class="active">Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">The “Risk-Neutral” Probability</h2>
+<div class="slide-content">
+<ul>
+<li>Risk-neutral investors believe that asset prices grow at the risk-free rate \( r \) and thus value all future cash-flows by discounting at \( r \).</li>
+<li>In a <strong>“risk-neutral”</strong> world:
+                <ul>
+<li>the expected return of every asset is the risk-free rate \( r \)</li>
+<li>the initial value of an asset is equal to its expected payoff at maturity, discounted at the risk-free rate</li>
+</ul>
+</li>
+<li>The “risk-neutral” probability \( p \) of an up movement satisfies:
+                <div class="equation-box">
+                  \[ E[S_T] = S_0 e^{rT} \implies S_0 = e^{-rT} E[S_T] = e^{-rT} [p S_u + (1 - p) S_d] \]
+                </div>
+</li>
+<li>The real-world (actual) probability \( p_a \) of stock going up is different to the risk-neutral probability \( p \).
+                <ul>
+<li>When \( \mu \) is the expected return on the asset, then:
+                    \[ S_0 = e^{-\mu T} E_a[S_T] = e^{-\mu T} [p_a S_u + (1 - p_a) S_d] \]
+                  </li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 9 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l07-s09">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li class="active">风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 风险中性定价</h2>
+<div class="slide-content">
+<ul>
+<li>设 \( p \) 为股票上涨的“风险中性”概率，则有：
                 <div class="equation-box" style="padding: 8px 14px; margin: 6px 0;">
                   \[ E[S_T] = S_0 e^{rT} \implies p S_u + (1 - p) S_d = S_0 e^{rT} \quad (1) \]
                   \[ E[f_T] = f_0 e^{rT} \implies p f_u + (1 - p) f_d = f_0 e^{rT} \quad (2) \]
                 </div>
-              </li>
-              <li>由方程 (1) 代入已知数据 \( S_0 = 20, S_u = 22, S_d = 18, r = 12\%, T = 0.25 \)：
+</li>
+<li>由方程 (1) 代入已知数据 \( S_0 = 20, S_u = 22, S_d = 18, r = 12\%, T = 0.25 \)：
                 <div class="equation-box" style="padding: 8px 14px; margin: 6px 0;">
                   \[ \$22 p + \$18(1 - p) = \$20 e^{0.12 \t\times  0.25} \]
                   \[ p = \frac{\$20 e^{0.12 \t\times  0.25} - \$18}{\$22 - \$18} = \frac{20.609 - 18}{4} = \mathbf{0.6523} \]
                 </div>
-              </li>
-              <li>由方程 (2) 可得期权价值：
+</li>
+<li>由方程 (2) 可得期权价值：
                 <div class="equation-box" style="padding: 8px 14px; margin: 6px 0;">
                   \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \]
                   \[ = e^{-0.12 \t\times  0.25} [(0.6523 \t\times  \$1) + (0.3477 \t\times  \$0)] = \mathbf{\$0.6330} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 10 -->
-    <section id="l07-s10" data-kind="original" data-source-slide="10" data-pdf-page="5" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 10</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li class="active">风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">一般情况下的风险中性定价</h2>
-          <div class="slide-content">
-            <ul>
-              <li>设 \( p \) 为股票上涨的“风险中性”概率：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l07-s09-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 9</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li class="active">Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Risk-Neutral Valuation</h2>
+<div class="slide-content">
+<ul>
+<li>Let \( p \) be the “risk-neutral” probability of an up movement, then:
+                <div class="equation-box" style="padding: 8px 14px; margin: 6px 0;">
+                  \[ E[S_T] = S_0 e^{rT} \implies p S_u + (1 - p) S_d = S_0 e^{rT} \quad (1) \]
+                  \[ E[f_T] = f_0 e^{rT} \implies p f_u + (1 - p) f_d = f_0 e^{rT} \quad (2) \]
+                </div>
+</li>
+<li>From (1) with \( S_0 = 20, S_u = 22, S_d = 18, r = 12\%, T = 0.25 \):
+                <div class="equation-box" style="padding: 8px 14px; margin: 6px 0;">
+                  \[ \$22 p + \$18(1 - p) = \$20 e^{0.12 \t\times  0.25} \]
+                  \[ p = \frac{\$20 e^{0.12 \t\times  0.25} - \$18}{\$22 - \$18} = \frac{20.609 - 18}{4} = \mathbf{0.6523} \]
+                </div>
+</li>
+<li>From (2) we have:
+                <div class="equation-box" style="padding: 8px 14px; margin: 6px 0;">
+                  \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \]
+                  \[ = e^{-0.12 \t\times  0.25} [(0.6523 \t\times  \$1) + (0.3477 \t\times  \$0)] = \mathbf{\$0.6330} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 10 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l07-s10">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li class="active">风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">一般情况下的风险中性定价</h2>
+<div class="slide-content">
+<ul>
+<li>设 \( p \) 为股票上涨的“风险中性”概率：
                 \[ S_u = u S_0 \, (p), \qquad S_d = d S_0 \, (1 - p) \]
               </li>
-              <li>在“风险中性”世界中，资产的初始价值等于其到期预期回报按无风险利率 \( r \) 折现的现值：
+<li>在“风险中性”世界中，资产的初始价值等于其到期预期回报按无风险利率 \( r \) 折现的现值：
                 <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
                   \[ E[S_T] = S_0 e^{rT} \implies p S_u + (1 - p) S_d = S_0 e^{rT} \quad (3) \]
                   \[ E[f_T] = f_0 e^{rT} \implies p f_u + (1 - p) f_d = f_0 e^{rT} \quad (4) \]
                 </div>
-              </li>
-              <li>从方程 (3) 中解出 \( p \)：
+</li>
+<li>从方程 (3) 中解出 \( p \)：
                 <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
                   \[ p u S_0 + (1 - p) d S_0 = S_0 e^{rT} \implies p = \frac{e^{rT} - d}{u - d} \]
                 </div>
-              </li>
-              <li>从方程 (4) 导出通用期权定价公式：
+</li>
+<li>从方程 (4) 导出通用期权定价公式：
                 <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
                   \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \]
                 </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l07-s10-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 10</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li class="active">Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Risk-Neutral Valuation in General</h2>
+<div class="slide-content">
+<ul>
+<li>Let \( p \) be the “risk-neutral” probability of an up movement:
+                \[ S_u = u S_0 \, (p), \qquad S_d = d S_0 \, (1 - p) \]
               </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 10-v1 (Enrichment 7.A) -->
-    <section id="l07-s10-v1" data-kind="enrichment" data-after-source-slide="10">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 7 讲 - 拓展 1</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>单期二叉树模型</li>
-              <li>无套利复制组合</li>
-              <li class="active">风险中性定价</li>
-              <li>确定u与d参数</li>
-              <li>两期二叉树模型</li>
-              <li>美式期权定价</li>
-              <li>二叉树实务应用</li>
-              <li>连续红利收益率</li>
-            </ul>
-        </aside>
-        <div class="slide-body">
-          <h3 class="slide-title" style="margin-bottom: 6px">单步欧式看跌期权：无套利复制 vs 风险中性期望</h3>
-          <div class="slide-content">
-            <p style="margin-bottom: 8px; font-size: 19px;"><strong>设定：</strong> \( S_0 = \$30 \)，3个月（\( T = 0.25 \)）后 \( S_u = \$33 \)，\( S_d = \$27 \)。利率 \( r = 8\% \) 年化连续复利。求 \( K = \$30 \) 看跌期权价值。</p>
-            <div style="display: flex; gap: 14px; width: 100%;">
-              <!-- Method 1 -->
-              <div class="example-card" style="flex: 1 1 50%; padding: 10px 14px; margin: 0; box-sizing: border-box;">
-                <h4 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 18px;">方法一：复制组合 / Delta对冲</h4>
-                <p style="margin: 0 0 4px 0; font-size: 16.5px;">回报：\( f_u = 0 \)，\( f_d = \$3 \)。</p>
-                <div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+<li>In a “risk-neutral” world, the initial value of an asset is equal to its discounted expected payoff at maturity, discounted at \( r \):
+                <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+                  \[ E[S_T] = S_0 e^{rT} \implies p S_u + (1 - p) S_d = S_0 e^{rT} \quad (3) \]
+                  \[ E[f_T] = f_0 e^{rT} \implies p f_u + (1 - p) f_d = f_0 e^{rT} \quad (4) \]
+                </div>
+</li>
+<li>From (3) we solve for \( p \):
+                <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+                  \[ p u S_0 + (1 - p) d S_0 = S_0 e^{rT} \implies p = \frac{e^{rT} - d}{u - d} \]
+                </div>
+</li>
+<li>From (4) the general pricing formula is:
+                <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+                  \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 10-v1 (Enrichment 7.A) -->
+<section data-start-indexv="0"><section data-after-source-slide="10" data-kind="enrichment" id="l07-s10-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 拓展 1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li class="active">风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">单步欧式看跌期权：无套利复制 vs 风险中性期望</h3>
+<div class="slide-content">
+<p style="margin-bottom: 8px; font-size: 19px;"><strong>设定：</strong> \( S_0 = \$30 \)，3个月（\( T = 0.25 \)）后 \( S_u = \$33 \)，\( S_d = \$27 \)。利率 \( r = 8\% \) 年化连续复利。求 \( K = \$30 \) 看跌期权价值。</p>
+<div style="display: flex; gap: 14px; width: 100%;">
+<!-- Method 1 -->
+<div class="example-card" style="flex: 1 1 50%; padding: 10px 14px; margin: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 18px;">方法一：复制组合 / Delta对冲</h4>
+<p style="margin: 0 0 4px 0; font-size: 16.5px;">回报：\( f_u = 0 \)，\( f_d = \$3 \)。</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
                   \[ \Delta = \frac{f_u - f_d}{S_u - S_d} = \frac{0 - 3}{33 - 27} = \mathbf{-0.5} \]
                 </div>
-                <p style="margin: 4px 0; font-size: 16px;">卖出1份看跌期权 + 卖空0.5股股票：</p>
-                <ul style="margin: 0 0 4px 0; padding-left: 18px; font-size: 15.5px;">
-                  <li>上涨：\( -0.5(33) - 0 = -\$16.50 \)</li>
-                  <li>下跌：\( -0.5(27) - 3 = -\$16.50 \)</li>
-                </ul>
-                <div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+<p style="margin: 4px 0; font-size: 16px;">卖出1份看跌期权 + 卖空0.5股股票：</p>
+<ul style="margin: 0 0 4px 0; padding-left: 18px; font-size: 15.5px;">
+<li>上涨：\( -0.5(33) - 0 = -\$16.50 \)</li>
+<li>下跌：\( -0.5(27) - 3 = -\$16.50 \)</li>
+</ul>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
                   \[ PV(\Pi) = -16.50 e^{-0.08  \times  0.25} = -\$16.1733 \]
                   \[ -0.5(30) - p_0 = -16.1733 \implies \mathbf{p_0 = \$1.17} \]
                 </div>
-              </div>
-              <!-- Method 2 -->
-              <div class="example-card" style="flex: 1 1 50%; padding: 10px 14px; margin: 0; box-sizing: border-box;">
-                <h4 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 18px;">方法二：风险中性定价</h4>
-                <p style="margin: 0 0 4px 0; font-size: 16.5px;">\( u = 1.10 \)，\( d = 0.90 \)，\( e^{rT} = e^{0.02} = 1.0202 \)。</p>
-                <div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+</div>
+<!-- Method 2 -->
+<div class="example-card" style="flex: 1 1 50%; padding: 10px 14px; margin: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 18px;">方法二：风险中性定价</h4>
+<p style="margin: 0 0 4px 0; font-size: 16.5px;">\( u = 1.10 \)，\( d = 0.90 \)，\( e^{rT} = e^{0.02} = 1.0202 \)。</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
                   \[ p = \frac{e^{rT} - d}{u - d} = \frac{1.0202 - 0.90}{1.10 - 0.90} = \mathbf{0.6010} \]
                   \[ 1 - p = 0.3990 \]
                 </div>
-                <p style="margin: 4px 0; font-size: 16px;">折现风险中性预期回报：</p>
-                <div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+<p style="margin: 4px 0; font-size: 16px;">折现风险中性预期回报：</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
                   \[ p_0 = e^{-0.02} [0.6010(0) + 0.3990(\$3)] \]
                   \[ = e^{-0.02} [1.1970] = \mathbf{\$1.17} \]
                 </div>
-                <p style="color: #047857; margin: 6px 0 0 0; font-weight: bold; font-size: 15.5px;">✓ 两种方法完全等价：\( p_0 = \$1.17 \)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 11 -->
-    <section id="l07-s11" data-kind="original" data-source-slide="11" data-pdf-page="6" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 11</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li class="active">确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">确定参数 \( u \) 与 \( d \)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>在实务中，通常采用 <strong>Cox, Ross and Rubinstein (1979)</strong> 的方法，根据资产价格波动率 \( \sigma \) 来校准确定 \( u \) 与 \( d \)。对于极小时间步长 \( \Delta t \)：
+<p style="color: #047857; margin: 6px 0 0 0; font-weight: bold; font-size: 15.5px;">✓ 两种方法完全等价：\( p_0 = \$1.17 \)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="10" data-kind="enrichment" id="l07-s10-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - v1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li class="active">风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">1-Step European Put: No-Arbitrage Replication vs Risk-Neutral Expectation</h3>
+<div class="slide-content">
+<p style="margin-bottom: 8px; font-size: 19px;"><strong>Setup:</strong> \( S_0 = \$30 \)，3-month（\( T = 0.25 \)）后 \( S_u = \$33 \)，\( S_d = \$27 \)。Rate \( r = 8\% \) p.a. continuous。Value \( K = \$30 \) put option。</p>
+<div style="display: flex; gap: 14px; width: 100%;">
+<!-- Method 1 -->
+<div class="example-card" style="flex: 1 1 50%; padding: 10px 14px; margin: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 18px;">Method 1: Replication / Delta Hedge</h4>
+<p style="margin: 0 0 4px 0; font-size: 16.5px;">Payoffs:\( f_u = 0 \)，\( f_d = \$3 \)。</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+                  \[ \Delta = \frac{f_u - f_d}{S_u - S_d} = \frac{0 - 3}{33 - 27} = \mathbf{-0.5} \]
+                </div>
+<p style="margin: 4px 0; font-size: 16px;">Short 1 put + short 0.5 shares:</p>
+<ul style="margin: 0 0 4px 0; padding-left: 18px; font-size: 15.5px;">
+<li>Up:\( -0.5(33) - 0 = -\$16.50 \)</li>
+<li>Down:\( -0.5(27) - 3 = -\$16.50 \)</li>
+</ul>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+                  \[ PV(\Pi) = -16.50 e^{-0.08  \times  0.25} = -\$16.1733 \]
+                  \[ -0.5(30) - p_0 = -16.1733 \implies \mathbf{p_0 = \$1.17} \]
+                </div>
+</div>
+<!-- Method 2 -->
+<div class="example-card" style="flex: 1 1 50%; padding: 10px 14px; margin: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin: 0 0 6px 0; font-size: 18px;">Method 2: Risk-Neutral Pricing</h4>
+<p style="margin: 0 0 4px 0; font-size: 16.5px;">\( u = 1.10 \)，\( d = 0.90 \)，\( e^{rT} = e^{0.02} = 1.0202 \)。</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+                  \[ p = \frac{e^{rT} - d}{u - d} = \frac{1.0202 - 0.90}{1.10 - 0.90} = \mathbf{0.6010} \]
+                  \[ 1 - p = 0.3990 \]
+                </div>
+<p style="margin: 4px 0; font-size: 16px;">折现风险中性预期Payoffs:</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0; font-size: 16.5px;">
+                  \[ p_0 = e^{-0.02} [0.6010(0) + 0.3990(\$3)] \]
+                  \[ = e^{-0.02} [1.1970] = \mathbf{\$1.17} \]
+                </div>
+<p style="color: #047857; margin: 6px 0 0 0; font-weight: bold; font-size: 15.5px;">✓ Identical results from both methods: \( p_0 = \$1.17 \)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 11 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l07-s11">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li class="active">确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">确定参数 \( u \) 与 \( d \)</h2>
+<div class="slide-content">
+<ul>
+<li>在实务中，通常采用 <strong>Cox, Ross and Rubinstein (1979)</strong> 的方法，根据资产价格波动率 \( \sigma \) 来校准确定 \( u \) 与 \( d \)。对于极小时间步长 \( \Delta t \)：
                 <div class="equation-box">
                   \[ u = e^{\sigma \sqrt{\Delta t}} \]
                   \[ d = \frac{1}{u} = e^{-\sigma \sqrt{\Delta t}} \]
                 </div>
-              </li>
-              <li><strong>示例：</strong>假定 \( \Delta t = 0.25 \) 且 \( \sigma = 22.90\% \)。则：
+</li>
+<li><strong>示例：</strong>假定 \( \Delta t = 0.25 \) 且 \( \sigma = 22.90\% \)。则：
                 <div class="equation-box">
                   \[ u = e^{0.2290 \sqrt{0.25}} = e^{0.1145} = \mathbf{1.1213} \]
                   \[ d = \frac{1}{u} = e^{-0.2290 \sqrt{0.25}} = \mathbf{0.8918} = \frac{1}{1.1213} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 12 -->
-    <section id="l07-s12" data-kind="original" data-source-slide="12" data-pdf-page="6" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 12</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li class="active">两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title" style="margin-bottom: 8px;">案例分析 – 两期二叉树模型 (基础参数)</h2>
-          <div class="slide-content">
-            <!-- Top Section: Model Parameters & Risk-Neutral Probability -->
-            <div style="display: flex; gap: 14px; margin-bottom: 12px;">
-              <div style="flex: 1; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px;">
-                <div style="font-weight: 700; color: #1e3a8a; margin-bottom: 4px; font-size: 16px;">市场参数与步长划分</div>
-                <p style="margin: 0; font-size: 16px; line-height: 1.45;">
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l07-s11-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 11</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li class="active">Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Determining \( u \) and \( d \)</h2>
+<div class="slide-content">
+<ul>
+<li>In practice, \( u \) and \( d \) are determined from the asset price volatility \( \sigma \), by using the <strong>Cox, Ross and Rubinstein (1979)</strong> approach. For small time step \( \Delta t \):
+                <div class="equation-box">
+                  \[ u = e^{\sigma \sqrt{\Delta t}} \]
+                  \[ d = \frac{1}{u} = e^{-\sigma \sqrt{\Delta t}} \]
+                </div>
+</li>
+<li><strong>Example:</strong> Assume that \( \Delta t = 0.25 \) and \( \sigma = 22.90\% \). Then:
+                <div class="equation-box">
+                  \[ u = e^{0.2290 \sqrt{0.25}} = e^{0.1145} = \mathbf{1.1213} \]
+                  \[ d = \frac{1}{u} = e^{-0.2290 \sqrt{0.25}} = \mathbf{0.8918} = \frac{1}{1.1213} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 12 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l07-s12">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li class="active">两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title" style="margin-bottom: 8px;">案例分析 – 两期二叉树模型 (基础参数)</h2>
+<div class="slide-content">
+<!-- Top Section: Model Parameters & Risk-Neutral Probability -->
+<div style="display: flex; gap: 14px; margin-bottom: 12px;">
+<div style="flex: 1; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px;">
+<div style="font-weight: 700; color: #1e3a8a; margin-bottom: 4px; font-size: 16px;">市场参数与步长划分</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.45;">
                   \( S_0 = \$20, \quad \sigma = 22.90\%, \quad r = 12\% \)<br/>
                   总到期时间 \( T = 6/12 = 0.5 \)，每期步长 \( \Delta t = 3/12 = 0.25 \)
                 </p>
-              </div>
-              <div style="flex: 1.2; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px;">
-                <div style="font-weight: 700; color: #1e3a8a; margin-bottom: 4px; font-size: 16px;">CRR 参数与风险中性概率</div>
-                <p style="margin: 0; font-size: 16px; line-height: 1.45;">
+</div>
+<div style="flex: 1.2; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px;">
+<div style="font-weight: 700; color: #1e3a8a; margin-bottom: 4px; font-size: 16px;">CRR 参数与风险中性概率</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.45;">
                   \( u = e^{0.2290 \sqrt{0.25}} = \mathbf{1.1213}, \quad d = \frac{1}{u} = \mathbf{0.8918} \)<br/>
                   \( p = \frac{e^{0.12 \t\times  0.25} - 0.8918}{1.1213 - 0.8918} = \mathbf{0.604}, \quad 1 - p = \mathbf{0.396} \)
                 </p>
-              </div>
-            </div>
-
-            <!-- Bottom Section: Wide Prominent 2-Step Stock Price Tree Diagram -->
-            <div class="example-card" style="margin: 0; padding: 12px 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; text-align: center;">
-              <div style="font-weight: 700; color: #1e3a8a; font-size: 16.5px; margin-bottom: 6px;">股票价格两期演变二叉树 (\( \Delta t = 3 \) 个月)</div>
-              <svg width="600" height="245" viewBox="0 0 600 245" style="margin: 0 auto; display: block;">
-                <!-- Branches t=0 to t=1 -->
-                <line x1="90" y1="110" x2="270" y2="60" stroke="#3b82f6" stroke-width="2.5" />
-                <line x1="90" y1="110" x2="270" y2="160" stroke="#3b82f6" stroke-width="2.5" />
-                
-                <!-- Branches t=1 to t=2 -->
-                <line x1="270" y1="60" x2="470" y2="25" stroke="#3b82f6" stroke-width="2.5" />
-                <line x1="270" y1="60" x2="470" y2="110" stroke="#3b82f6" stroke-width="2.5" />
-                <line x1="270" y1="160" x2="470" y2="110" stroke="#3b82f6" stroke-width="2.5" />
-                <line x1="270" y1="160" x2="470" y2="195" stroke="#3b82f6" stroke-width="2.5" />
-
-                <!-- Node t=0 -->
-                <circle cx="90" cy="110" r="25" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" />
-                <text x="90" y="115" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">$20.00</text>
-                <text x="90" y="150" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">t = 0</text>
-
-                <!-- Nodes t=1 (3 Months) -->
-                <circle cx="270" cy="60" r="25" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" />
-                <text x="270" y="65" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">$22.43</text>
-                
-                <circle cx="270" cy="160" r="25" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" />
-                <text x="270" y="165" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">$17.84</text>
-                <text x="270" y="200" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">t = 3 个月</text>
-
-                <!-- Nodes t=2 (6 Months) -->
-                <circle cx="470" cy="25" r="24" fill="#ecfdf5" stroke="#059669" stroke-width="2" />
-                <text x="470" y="30" font-size="13.5" font-weight="bold" fill="#065f46" text-anchor="middle">$25.15</text>
-                
-                <circle cx="470" cy="110" r="24" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" />
-                <text x="470" y="115" font-size="13.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">$20.00</text>
-                
-                <circle cx="470" cy="195" r="24" fill="#fef2f2" stroke="#dc2626" stroke-width="2" />
-                <text x="470" y="200" font-size="13.5" font-weight="bold" fill="#991b1b" text-anchor="middle">$15.91</text>
-                <text x="470" y="235" font-size="12" font-weight="600" fill="#64748b" text-anchor="middle">t = 6 个月</text>
-              </svg>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 13 -->
-    <section id="l07-s13" data-kind="original" data-source-slide="13" data-pdf-page="7" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 13</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li class="active">两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 两期二叉树模型 (看涨期权)</h2>
-          <div class="slide-content">
-            <p>对执行价格 \( K = \$21 \)、到期时间 \( T = 6/12 \) 的看涨期权进行定价：</p>
-            <div style="display: flex; gap: 12px; max-width: 100%;">
-              <div>
-                <p><strong>到期看涨期权回报：</strong></p>
-                <div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+</div>
+</div>
+<!-- Bottom Section: Wide Prominent 2-Step Stock Price Tree Diagram -->
+<div class="example-card" style="margin: 0; padding: 12px 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; text-align: center;">
+<div style="font-weight: 700; color: #1e3a8a; font-size: 16.5px; margin-bottom: 6px;">股票价格两期演变二叉树 (\( \Delta t = 3 \) 个月)</div>
+<svg height="245" style="margin: 0 auto; display: block;" viewbox="0 0 600 245" width="600">
+<!-- Branches t=0 to t=1 -->
+<line stroke="#3b82f6" stroke-width="2.5" x1="90" x2="270" y1="110" y2="60"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="90" x2="270" y1="110" y2="160"></line>
+<!-- Branches t=1 to t=2 -->
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="60" y2="25"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="60" y2="110"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="160" y2="110"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="160" y2="195"></line>
+<!-- Node t=0 -->
+<circle cx="90" cy="110" fill="#eff6ff" r="25" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="90" y="115">$20.00</text>
+<text fill="#64748b" font-size="12" font-weight="600" text-anchor="middle" x="90" y="150">t = 0</text>
+<!-- Nodes t=1 (3 Months) -->
+<circle cx="270" cy="60" fill="#eff6ff" r="25" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="270" y="65">$22.43</text>
+<circle cx="270" cy="160" fill="#eff6ff" r="25" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="270" y="165">$17.84</text>
+<text fill="#64748b" font-size="12" font-weight="600" text-anchor="middle" x="270" y="200">t = 3 个月</text>
+<!-- Nodes t=2 (6 Months) -->
+<circle cx="470" cy="25" fill="#ecfdf5" r="24" stroke="#059669" stroke-width="2"></circle>
+<text fill="#065f46" font-size="13.5" font-weight="bold" text-anchor="middle" x="470" y="30">$25.15</text>
+<circle cx="470" cy="110" fill="#eff6ff" r="24" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="13.5" font-weight="bold" text-anchor="middle" x="470" y="115">$20.00</text>
+<circle cx="470" cy="195" fill="#fef2f2" r="24" stroke="#dc2626" stroke-width="2"></circle>
+<text fill="#991b1b" font-size="13.5" font-weight="bold" text-anchor="middle" x="470" y="200">$15.91</text>
+<text fill="#64748b" font-size="12" font-weight="600" text-anchor="middle" x="470" y="235">t = 6 个月</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l07-s12-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li class="active">两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title" style="margin-bottom: 8px;">Case Study – 2-Step Binomial Model (Parameters)</h2>
+<div class="slide-content">
+<!-- Top Section: Model Parameters & Risk-Neutral Probability -->
+<div style="display: flex; gap: 14px; margin-bottom: 12px;">
+<div style="flex: 1; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px;">
+<div style="font-weight: 700; color: #1e3a8a; margin-bottom: 4px; font-size: 16px;">Market Parameters &amp; Step Size</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.45;">
+                  \( S_0 = \$20, \quad \sigma = 22.90\%, \quad r = 12\% \)<br/>
+                  Total maturity \( T = 6/12 = 0.5 \)，per step \( \Delta t = 3/12 = 0.25 \)
+                </p>
+</div>
+<div style="flex: 1.2; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px;">
+<div style="font-weight: 700; color: #1e3a8a; margin-bottom: 4px; font-size: 16px;">CRR Parameters &amp; Risk-Neutral Probabilities</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.45;">
+                  \( u = e^{0.2290 \sqrt{0.25}} = \mathbf{1.1213}, \quad d = \frac{1}{u} = \mathbf{0.8918} \)<br/>
+                  \( p = \frac{e^{0.12 \t\times  0.25} - 0.8918}{1.1213 - 0.8918} = \mathbf{0.604}, \quad 1 - p = \mathbf{0.396} \)
+                </p>
+</div>
+</div>
+<!-- Bottom Section: Wide Prominent 2-Step Stock Price Tree Diagram -->
+<div class="example-card" style="margin: 0; padding: 12px 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; text-align: center;">
+<div style="font-weight: 700; color: #1e3a8a; font-size: 16.5px; margin-bottom: 6px;">2-Step Stock Price Evolution Tree (\( \Delta t = 3 \) Months)</div>
+<svg height="245" style="margin: 0 auto; display: block;" viewbox="0 0 600 245" width="600">
+<!-- Branches t=0 to t=1 -->
+<line stroke="#3b82f6" stroke-width="2.5" x1="90" x2="270" y1="110" y2="60"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="90" x2="270" y1="110" y2="160"></line>
+<!-- Branches t=1 to t=2 -->
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="60" y2="25"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="60" y2="110"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="160" y2="110"></line>
+<line stroke="#3b82f6" stroke-width="2.5" x1="270" x2="470" y1="160" y2="195"></line>
+<!-- Node t=0 -->
+<circle cx="90" cy="110" fill="#eff6ff" r="25" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="90" y="115">$20.00</text>
+<text fill="#64748b" font-size="12" font-weight="600" text-anchor="middle" x="90" y="150">t = 0</text>
+<!-- Nodes t=1 (3 Months) -->
+<circle cx="270" cy="60" fill="#eff6ff" r="25" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="270" y="65">$22.43</text>
+<circle cx="270" cy="160" fill="#eff6ff" r="25" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="14" font-weight="bold" text-anchor="middle" x="270" y="165">$17.84</text>
+<text fill="#64748b" font-size="12" font-weight="600" text-anchor="middle" x="270" y="200">t = 3 Months</text>
+<!-- Nodes t=2 (6 Months) -->
+<circle cx="470" cy="25" fill="#ecfdf5" r="24" stroke="#059669" stroke-width="2"></circle>
+<text fill="#065f46" font-size="13.5" font-weight="bold" text-anchor="middle" x="470" y="30">$25.15</text>
+<circle cx="470" cy="110" fill="#eff6ff" r="24" stroke="#1d4ed8" stroke-width="2"></circle>
+<text fill="#1e3a8a" font-size="13.5" font-weight="bold" text-anchor="middle" x="470" y="115">$20.00</text>
+<circle cx="470" cy="195" fill="#fef2f2" r="24" stroke="#dc2626" stroke-width="2"></circle>
+<text fill="#991b1b" font-size="13.5" font-weight="bold" text-anchor="middle" x="470" y="200">$15.91</text>
+<text fill="#64748b" font-size="12" font-weight="600" text-anchor="middle" x="470" y="235">t = 6 Months</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 13 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l07-s13">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li class="active">两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 两期二叉树模型 (看涨期权)</h2>
+<div class="slide-content">
+<p>对执行价格 \( K = \$21 \)、到期时间 \( T = 6/12 \) 的看涨期权进行定价：</p>
+<div style="display: flex; gap: 12px; max-width: 100%;">
+<div>
+<p><strong>到期看涨期权回报：</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
                   \[ f_{uu} = \max[25.15 - 21, 0] = \mathbf{4.15} \]
                   \[ f_{ud} = \max[20.00 - 21, 0] = \mathbf{0} \]
                   \[ f_{dd} = \max[15.91 - 21, 0] = \mathbf{0} \]
                 </div>
-              </div>
-              <div>
-                <p><strong>倒推逆向折现 (\( p = 0.604 \))：</strong></p>
-                <div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+</div>
+<div>
+<p><strong>倒推逆向折现 (\( p = 0.604 \))：</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
                   \[ f_u = e^{-0.12 \t\times  0.25}(0.604 \t\times  4.15 + 0.396 \t\times  0) = \mathbf{2.43} \]
                   \[ f_d = e^{-0.12 \t\times  0.25}(0.604 \t\times  0 + 0.396 \t\times  0) = \mathbf{0} \]
                   \[ f_0 = e^{-0.12 \t\times  0.25}(0.604 \t\times  2.43 + 0.396 \t\times  0) = \mathbf{1.42} \]
                 </div>
-              </div>
-            </div>
-            <p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">
+</div>
+</div>
+<p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">
               6个月期欧式看涨期权的价格为 $1.42。
             </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 14 -->
-    <section id="l07-s14" data-kind="original" data-source-slide="14" data-pdf-page="7" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 14</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li class="active">两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 两期二叉树模型 (看跌期权)</h2>
-          <div class="slide-content">
-            <p>对执行价格 \( K = \$22 \)、到期时间 \( T = 6/12 \) 的看跌期权进行定价：</p>
-            <div style="display: flex; gap: 12px; max-width: 100%;">
-              <div>
-                <p><strong>到期看跌期权回报：</strong></p>
-                <div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l07-s13-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 13</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li class="active">Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Two-Step Binomial Tree (Call)</h2>
+<div class="slide-content">
+<p>Price a call option with \( K = \$21 \) and \( T = 6/12 \):</p>
+<div style="display: flex; gap: 12px; max-width: 100%;">
+<div>
+<p><strong>Terminal Call Payoffs:</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+                  \[ f_{uu} = \max[25.15 - 21, 0] = \mathbf{4.15} \]
+                  \[ f_{ud} = \max[20.00 - 21, 0] = \mathbf{0} \]
+                  \[ f_{dd} = \max[15.91 - 21, 0] = \mathbf{0} \]
+                </div>
+</div>
+<div>
+<p><strong>Backward Induction (\( p = 0.604 \)):</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+                  \[ f_u = e^{-0.12 \t\times  0.25}(0.604 \t\times  4.15 + 0.396 \t\times  0) = \mathbf{2.43} \]
+                  \[ f_d = e^{-0.12 \t\times  0.25}(0.604 \t\times  0 + 0.396 \t\times  0) = \mathbf{0} \]
+                  \[ f_0 = e^{-0.12 \t\times  0.25}(0.604 \t\times  2.43 + 0.396 \t\times  0) = \mathbf{1.42} \]
+                </div>
+</div>
+</div>
+<p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">The price of the 6-month European call is $1.42.</p>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 14 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l07-s14">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li class="active">两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 两期二叉树模型 (看跌期权)</h2>
+<div class="slide-content">
+<p>对执行价格 \( K = \$22 \)、到期时间 \( T = 6/12 \) 的看跌期权进行定价：</p>
+<div style="display: flex; gap: 12px; max-width: 100%;">
+<div>
+<p><strong>到期看跌期权回报：</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
                   \[ f_{uu} = \max[22 - 25.15, 0] = \mathbf{0} \]
                   \[ f_{ud} = \max[22 - 20.00, 0] = \mathbf{2.00} \]
                   \[ f_{dd} = \max[22 - 15.91, 0] = \mathbf{6.09} \]
                 </div>
-              </div>
-              <div>
-                <p><strong>倒推逆向折现 (\( p = 0.604 \))：</strong></p>
-                <div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+</div>
+<div>
+<p><strong>倒推逆向折现 (\( p = 0.604 \))：</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
                   \[ f_u = e^{-0.12 \t\times  0.25}(0.604 \t\times  0 + 0.396 \t\times  2) = \mathbf{0.77} \]
                   \[ f_d = e^{-0.12 \t\times  0.25}(0.604 \t\times  2 + 0.396 \t\times  6.09) = \mathbf{3.51} \]
                   \[ f_0 = e^{-0.12 \t\times  0.25}(0.604 \t\times  0.77 + 0.396 \t\times  3.51) = \mathbf{1.80} \]
                 </div>
-              </div>
-            </div>
-            <p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">
+</div>
+</div>
+<p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">
               6个月期欧式看跌期权的价格为 $1.80。
             </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 15 -->
-    <section id="l07-s15" data-kind="original" data-source-slide="15" data-pdf-page="8" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 15</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li class="active">美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 两期二叉树模型 (美式看跌期权)</h2>
-          <div class="slide-content">
-            <p>对执行价格 \( K = \$22 \)、到期时间 \( T = 6/12 \) 的美式看跌期权进行定价：</p>
-            <ul>
-              <li>在每个节点检验提前行权是否为最优决策，即将对应的欧式期权价值（继续持有价值）与内在价值 \( \max[K - S_t, 0] \) 进行比较：</li>
-            </ul>
-            <div class="equation-box" style="padding: 8px 14px; margin: 6px 0">
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l07-s14-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 14</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li class="active">Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Two-Step Binomial Tree (Put)</h2>
+<div class="slide-content">
+<p>Price a put option with \( K = \$22 \) and \( T = 6/12 \):</p>
+<div style="display: flex; gap: 12px; max-width: 100%;">
+<div>
+<p><strong>Terminal Put Payoffs:</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+                  \[ f_{uu} = \max[22 - 25.15, 0] = \mathbf{0} \]
+                  \[ f_{ud} = \max[22 - 20.00, 0] = \mathbf{2.00} \]
+                  \[ f_{dd} = \max[22 - 15.91, 0] = \mathbf{6.09} \]
+                </div>
+</div>
+<div>
+<p><strong>Backward Induction (\( p = 0.604 \)):</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 6px 0">
+                  \[ f_u = e^{-0.12 \t\times  0.25}(0.604 \t\times  0 + 0.396 \t\times  2) = \mathbf{0.77} \]
+                  \[ f_d = e^{-0.12 \t\times  0.25}(0.604 \t\times  2 + 0.396 \t\times  6.09) = \mathbf{3.51} \]
+                  \[ f_0 = e^{-0.12 \t\times  0.25}(0.604 \t\times  0.77 + 0.396 \t\times  3.51) = \mathbf{1.80} \]
+                </div>
+</div>
+</div>
+<p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">The price of the 6-month European put is $1.80.</p>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 15 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l07-s15">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li class="active">美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 两期二叉树模型 (美式看跌期权)</h2>
+<div class="slide-content">
+<p>对执行价格 \( K = \$22 \)、到期时间 \( T = 6/12 \) 的美式看跌期权进行定价：</p>
+<ul>
+<li>在每个节点检验提前行权是否为最优决策，即将对应的欧式期权价值（继续持有价值）与内在价值 \( \max[K - S_t, 0] \) 进行比较：</li>
+</ul>
+<div class="equation-box" style="padding: 8px 14px; margin: 6px 0">
               \[ f_d = \max\left[ e^{-0.12 \t\times  0.25}(0.604 \t\times  2 + 0.396 \t\times  6.09), \, \max[22 - 17.84, 0] \right] = \max[3.51, \mathbf{4.16}] = \mathbf{4.16} \]
               \[ f_u = \max\left[ e^{-0.12 \t\times  0.25}(0.604 \t\times  0 + 0.396 \t\times  2), \, \max[22 - 22.43, 0] \right] = \max[0.77, 0] = \mathbf{0.77} \]
               \[ f_0 = \max\left[ e^{-0.12 \t\times  0.25}(0.604 \t\times  0.77 + 0.396 \t\times  4.16), \, \max[22 - 20, 0] \right] = \max[2.05, 2.00] = \mathbf{2.05} \]
             </div>
-            <p style="margin-top: 8px; color: #b91c1c; font-weight: bold">
-              &bull; 在节点 \( d \)（\( S = 17.84 \)）处，提前行权为最优决策！内在价值 \( \$4.16 &gt; \$3.51 \)。<br>
-              &bull; 美式看跌期权价格为 $2.05，高于对应的欧式看跌期权价格 $1.80。
+<p style="margin-top: 8px; color: #b91c1c; font-weight: bold">
+              • 在节点 \( d \)（\( S = 17.84 \)）处，提前行权为最优决策！内在价值 \( \$4.16 &gt; \$3.51 \)。<br/>
+              • 美式看跌期权价格为 $2.05，高于对应的欧式看跌期权价格 $1.80。
             </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 15-v1 (Enrichment 7.B) -->
-    <section id="l07-s15-v1" data-kind="enrichment" data-after-source-slide="15">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 7 讲 - 拓展 2</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>单期二叉树模型</li>
-              <li>无套利复制组合</li>
-              <li>风险中性定价</li>
-              <li>确定u与d参数</li>
-              <li>两期二叉树模型</li>
-              <li class="active">美式期权定价</li>
-              <li>二叉树实务应用</li>
-              <li>连续红利收益率</li>
-            </ul>
-        </aside>
-        <div class="slide-body">
-          <h3 class="slide-title" style="margin-bottom: 6px">两期 CRR 二叉树：节点 d 处的提前行权决策</h3>
-          <div class="slide-content">
-            <p style="margin-bottom: 4px;"><strong>设定：</strong>\( S_0 = \$40, \sigma = 19.5\%, r = 12\%, T = 0.5 \)（2期步长：\( \Delta t = 0.25 \)），看跌期权行权价 \( K = \$42 \)。<br>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l07-s15-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 15</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li class="active">American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Two-Step Binomial Tree (American Put)</h2>
+<div class="slide-content">
+<p>Price an American put option with \( K = \$22 \) and \( T = 6/12 \):</p>
+<ul>
+<li>Test at each node to see whether early exercise is optimal, by comparing the corresponding European put price (continuation value) with the intrinsic value \( \max[K - S_t, 0] \):</li>
+</ul>
+<div class="equation-box" style="padding: 8px 14px; margin: 6px 0">
+              \[ f_d = \max\left[ e^{-0.12 \t\times  0.25}(0.604 \t\times  2 + 0.396 \t\times  6.09), \, \max[22 - 17.84, 0] \right] = \max[3.51, \mathbf{4.16}] = \mathbf{4.16} \]
+              \[ f_u = \max\left[ e^{-0.12 \t\times  0.25}(0.604 \t\times  0 + 0.396 \t\times  2), \, \max[22 - 22.43, 0] \right] = \max[0.77, 0] = \mathbf{0.77} \]
+              \[ f_0 = \max\left[ e^{-0.12 \t\times  0.25}(0.604 \t\times  0.77 + 0.396 \t\times  4.16), \, \max[22 - 20, 0] \right] = \max[2.05, 2.00] = \mathbf{2.05} \]
+            </div>
+<p style="margin-top: 8px;  color: #b91c1c; font-weight: bold">
+              • At node \( d \) (\( S = 17.84 \)), early exercise is optimal! Intrinsic value \( \$4.16 &gt; \$3.51 \).<br/>
+              • The American put price is $2.05, which is higher than the European put price of $1.80.
+            </p>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 15-v1 (Enrichment 7.B) -->
+<section data-start-indexv="0"><section data-after-source-slide="15" data-kind="enrichment" id="l07-s15-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 拓展 2</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li class="active">美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">两期 CRR 二叉树：节点 d 处的提前行权决策</h3>
+<div class="slide-content">
+<p style="margin-bottom: 4px;"><strong>设定：</strong>\( S_0 = \$40, \sigma = 19.5\%, r = 12\%, T = 0.5 \)（2期步长：\( \Delta t = 0.25 \)），看跌期权行权价 \( K = \$42 \)。<br/>
             \( u = e^{0.195 \t\times  0.5} = 1.1024 \)，\( d = 0.9071 \)，\( p = \frac{e^{0.03} - 0.9071}{1.1024 - 0.9071} = 0.6316 \)，\( 1 - p = 0.3684 \)，贴现因子 \( e^{-0.03} = 0.9704 \)。</p>
-            <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 14px;">
-              <div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
-                <h4 style="color: #1e3a8a; margin-bottom: 4px">第 (a) 部分：欧式看跌期权 (\( p_0 = \$2.04 \))</h4>
-                <p style="margin-bottom: 2px">到期回报：\( p_{uu} = 0 \)，\( p_{ud} = 42 - 40 = 2.00 \)，\( p_{dd} = 42 - 32.91 = 9.09 \)。</p>
-                <div class="equation-box" style="padding: 4px 6px; margin: 2px 0">
+<div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 14px;">
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">第 (a) 部分：欧式看跌期权 (\( p_0 = \$2.04 \))</h4>
+<p style="margin-bottom: 2px">到期回报：\( p_{uu} = 0 \)，\( p_{ud} = 42 - 40 = 2.00 \)，\( p_{dd} = 42 - 32.91 = 9.09 \)。</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 2px 0">
                   \[ p_u = 0.9704[0.6316(0) + 0.3684(2)] = \mathbf{0.72} \]
                   \[ p_d = 0.9704[0.6316(2) + 0.3684(9.09)] = \mathbf{4.47} \]
                   \[ p_0 = 0.9704[0.6316(0.72) + 0.3684(4.47)] = \mathbf{\$2.04} \]
                 </div>
-              </div>
-              <div class="example-card" style="padding: 8px 12px; margin-bottom: 0; border-left: 4px solid #dc2626;">
-                <h4 style="color: #b91c1c; margin-bottom: 4px">第 (b) 部分：美式看跌期权 (\( P_0 = \$2.48 \))</h4>
-                <p style="margin-bottom: 2px">逐节点提前行权检验：</p>
-                <ul style="margin: 0; padding-left: 14px">
-                  <li><strong>节点 u：</strong>内在价值 \( \max[42 - 44.10, 0] = 0 \le 0.72 \implies \) 继续持有！价值 = <strong>$0.72</strong></li>
-                  <li><strong>节点 d：</strong>内在价值 \( 42 - 36.28 = \mathbf{5.72} &gt; 4.47 \implies \) <strong>提前行权！</strong>价值 = <strong>$5.72</strong></li>
-                  <li><strong>节点 0：</strong>继续持有价值 \( 0.9704[0.6316(0.72) + 0.3684(5.72)] = \mathbf{2.48} \)。内在价值 \( 42 - 40 = 2.00 \le 2.48 \implies \) 继续持有！价值 = <strong>$2.48</strong></li>
-                </ul>
-              </div>
-            </div>
-            <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px 12px; margin-top: 6px; color: #1e3a8a">
+</div>
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0; border-left: 4px solid #dc2626;">
+<h4 style="color: #b91c1c; margin-bottom: 4px">第 (b) 部分：美式看跌期权 (\( P_0 = \$2.48 \))</h4>
+<p style="margin-bottom: 2px">逐节点提前行权检验：</p>
+<ul style="margin: 0; padding-left: 14px">
+<li><strong>节点 u：</strong>内在价值 \( \max[42 - 44.10, 0] = 0 \le 0.72 \implies \) 继续持有！价值 = <strong>$0.72</strong></li>
+<li><strong>节点 d：</strong>内在价值 \( 42 - 36.28 = \mathbf{5.72} &gt; 4.47 \implies \) <strong>提前行权！</strong>价值 = <strong>$5.72</strong></li>
+<li><strong>节点 0：</strong>继续持有价值 \( 0.9704[0.6316(0.72) + 0.3684(5.72)] = \mathbf{2.48} \)。内在价值 \( 42 - 40 = 2.00 \le 2.48 \implies \) 继续持有！价值 = <strong>$2.48</strong></li>
+</ul>
+</div>
+</div>
+<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px 12px; margin-top: 6px; color: #1e3a8a">
               提前行权溢价为 \( \$2.48 - \$2.04 = \mathbf{\$0.44} \)。对于处于深度实值的看跌期权（节点 d），立即行权获得现金不仅避免了资金的时间价值折现损失，还能防范未来股价向上反弹回升的风险。
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide: Excel Implementation & Interactive App -->
-    <section id="l07-s15-v2" data-kind="enrichment" data-after-source-slide="15">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - Excel建模</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li class="active">美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title" style="margin-bottom: 8px;">二叉树模型的 Excel 函数建模与交互应用</h2>
-          <div class="slide-content">
-            
-            <!-- Excel Formula Mapping Table -->
-            <table class="slide-table" style="margin: 0 0 12px 0; font-size: 16px; width: 100%;">
-              <thead>
-                <tr>
-                  <th style="width: 22%; background: #047857; color: white;">模型变量 / 节点</th>
-                  <th style="width: 48%; background: #065f46; color: white;">Excel 核心公式语法</th>
-                  <th style="width: 30%; background: #047857; color: white;">计算示例值 (本讲案例)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>时间步长 \(\Delta t\)</strong></td>
-                  <td><code>=T / Steps</code> (单元格 <code>=B5/B6</code>)</td>
-                  <td><code>=0.5 / 2 = 0.25</code></td>
-                </tr>
-                <tr>
-                  <td><strong>上升因子 \(u\) 与 \(d\)</strong></td>
-                  <td><code>=EXP(sigma * SQRT(dt))</code> / <code>=1 / u</code></td>
-                  <td>\( u = \mathbf{1.1213}, \; d = \mathbf{0.8918} \)</td>
-                </tr>
-                <tr>
-                  <td><strong>风险中性概率 \(p\)</strong></td>
-                  <td><code>=(EXP((r - q)*dt) - d) / (u - d)</code></td>
-                  <td><code>=(EXP(0.03) - 0.8918)/(1.1213-0.8918) = 0.604</code></td>
-                </tr>
-                <tr>
-                  <td><strong>欧式期权反向折现</strong></td>
-                  <td><code>=EXP(-r*dt) * (p * V_up + (1 - p) * V_down)</code></td>
-                  <td>\( f_0 = e^{-0.03}(0.604 	\times  2.43 + 0.396 	\times  0) = \mathbf{\$1.42} \)</td>
-                </tr>
-                <tr>
-                  <td><strong>美式期权行权判断</strong></td>
-                  <td><code>=MAX(Payoff_Now, Continuation_Value)</code></td>
-                  <td><code>=MAX(K - S_node, EXP(-r*dt)*(p*V_u + (1-p)*V_d))</code></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Interactive App Callout Banner -->
-            <div class="concept-card" style="margin: 0; padding: 14px 20px; background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                  <h4 style="color: #1e3a8a; margin: 0 0 4px 0; font-size: 18px;">💻 课程配套交互工具：二叉树期权计算器 (binomial.html)</h4>
-                  <p style="margin: 0; font-size: 15.5px; color: #334155; line-height: 1.45;">
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="15" data-kind="enrichment" id="l07-s15-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li class="active">American Options</li>
+<li>Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Two-Step CRR Tree: Early-Exercise Decision at Node d</h3>
+<div class="slide-content">
+<p style="margin-bottom: 4px;"><strong>Setup:</strong> \( S_0 = \$40, \sigma = 19.5\%, r = 12\%, T = 0.5 \) (2 steps: \( \Delta t = 0.25 \)), Put strike \( K = \$42 \).<br/>
+            \( u = e^{0.195 \t\times  0.5} = 1.1024 \), \( d = 0.9071 \), \( p = \frac{e^{0.03} - 0.9071}{1.1024 - 0.9071} = 0.6316 \), \( 1 - p = 0.3684 \), discount \( e^{-0.03} = 0.9704 \).</p>
+<div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 14px;">
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">Part (a): European Put (\( p_0 = \$2.04 \))</h4>
+<p style="margin-bottom: 2px">Terminal payoffs: \( p_{uu} = 0 \), \( p_{ud} = 42 - 40 = 2.00 \), \( p_{dd} = 42 - 32.91 = 9.09 \).</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 2px 0">
+                  \[ p_u = 0.9704[0.6316(0) + 0.3684(2)] = \mathbf{0.72} \]
+                  \[ p_d = 0.9704[0.6316(2) + 0.3684(9.09)] = \mathbf{4.47} \]
+                  \[ p_0 = 0.9704[0.6316(0.72) + 0.3684(4.47)] = \mathbf{\$2.04} \]
+                </div>
+</div>
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0; border-left: 4px solid #dc2626;">
+<h4 style="color: #b91c1c; margin-bottom: 4px">Part (b): American Put (\( P_0 = \$2.48 \))</h4>
+<p style="margin-bottom: 2px">Node-by-node early-exercise test:</p>
+<ul style="margin: 0; padding-left: 14px">
+<li><strong>Node u:</strong> Intrinsic \( \max[42 - 44.10, 0] = 0 \le 0.72 \implies \) Hold! Value = <strong>$0.72</strong></li>
+<li><strong>Node d:</strong> Intrinsic \( 42 - 36.28 = \mathbf{5.72} &gt; 4.47 \implies \) <strong>EXERCISE EARLY!</strong> Value = <strong>$5.72</strong></li>
+<li><strong>Node 0:</strong> Continuation \( 0.9704[0.6316(0.72) + 0.3684(5.72)] = \mathbf{2.48} \). Intrinsic \( 42 - 40 = 2.00 \le 2.48 \implies \) Hold! Value = <strong>$2.48</strong></li>
+</ul>
+</div>
+</div>
+<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px 12px; margin-top: 6px;  color: #1e3a8a">
+<strong>Core Principle:</strong> The early exercise premium is \( \$2.48 - \$2.04 = \mathbf{\$0.44} \). For an American put deep in the money (node d), immediate cash receipt avoids the delay of discounting and protects against future upward stock price rebound.
+            </div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide: Excel Implementation & Interactive App -->
+<section data-start-indexv="0"><section data-after-source-slide="15" data-kind="enrichment" id="l07-s15-v2">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - Excel建模</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li class="active">美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title" style="margin-bottom: 8px;">二叉树模型的 Excel 函数建模与交互应用</h2>
+<div class="slide-content">
+<!-- Excel Formula Mapping Table -->
+<table class="slide-table" style="margin: 0 0 12px 0; font-size: 16px; width: 100%;">
+<thead>
+<tr>
+<th style="width: 22%; background: #047857; color: white;">模型变量 / 节点</th>
+<th style="width: 48%; background: #065f46; color: white;">Excel 核心公式语法</th>
+<th style="width: 30%; background: #047857; color: white;">计算示例值 (本讲案例)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>时间步长 \(\Delta t\)</strong></td>
+<td><code>=T / Steps</code> (单元格 <code>=B5/B6</code>)</td>
+<td><code>=0.5 / 2 = 0.25</code></td>
+</tr>
+<tr>
+<td><strong>上升因子 \(u\) 与 \(d\)</strong></td>
+<td><code>=EXP(sigma * SQRT(dt))</code> / <code>=1 / u</code></td>
+<td>\( u = \mathbf{1.1213}, \; d = \mathbf{0.8918} \)</td>
+</tr>
+<tr>
+<td><strong>风险中性概率 \(p\)</strong></td>
+<td><code>=(EXP((r - q)*dt) - d) / (u - d)</code></td>
+<td><code>=(EXP(0.03) - 0.8918)/(1.1213-0.8918) = 0.604</code></td>
+</tr>
+<tr>
+<td><strong>欧式期权反向折现</strong></td>
+<td><code>=EXP(-r*dt) * (p * V_up + (1 - p) * V_down)</code></td>
+<td>\( f_0 = e^{-0.03}(0.604 	\times  2.43 + 0.396 	\times  0) = \mathbf{\$1.42} \)</td>
+</tr>
+<tr>
+<td><strong>美式期权行权判断</strong></td>
+<td><code>=MAX(Payoff_Now, Continuation_Value)</code></td>
+<td><code>=MAX(K - S_node, EXP(-r*dt)*(p*V_u + (1-p)*V_d))</code></td>
+</tr>
+</tbody>
+</table>
+<!-- Interactive App Callout Banner -->
+<div class="concept-card" style="margin: 0; padding: 14px 20px; background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<h4 style="color: #1e3a8a; margin: 0 0 4px 0; font-size: 18px;">💻 课程配套交互工具：二叉树期权计算器 (binomial.html)</h4>
+<p style="margin: 0; font-size: 15.5px; color: #334155; line-height: 1.45;">
                     本课程目录已内置轻量级交互网页应用，支持动态调整步数（1至50步）、波动率及行权方式，实时对比欧式/美式期权反向推导与 Black-Scholes 极限收敛。
                   </p>
-                </div>
-                <a href="binomial.html" target="_blank" style="flex-shrink: 0; margin-left: 16px; background: #2563eb; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 15px; box-shadow: 0 2px 4px rgba(37,99,235,0.25); display: inline-flex; align-items: center; gap: 6px;">
+</div>
+<a href="binomial.html" style="flex-shrink: 0; margin-left: 16px; background: #2563eb; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 15px; box-shadow: 0 2px 4px rgba(37,99,235,0.25); display: inline-flex; align-items: center; gap: 6px;" target="_blank">
                   打开计算器 ↗
                 </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide: Full-Stage Embedded Interactive Binomial Tree App -->
-    <section id="l07-s15-v3" data-kind="enrichment" data-after-source-slide="15">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 交互实验</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li class="active">美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body" style="padding: 24px 32px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <div>
-              <h2 class="slide-title" style="margin: 0 0 2px 0; font-size: 26px;">二叉树期权定价交互模拟器 (Live Interactive Tool)</h2>
-              <p style="margin: 0; font-size: 15px; color: #64748b;">支持动态调整步数（1–50步）、行权方式与市场参数，实时观察各节点演化与提前行权边界</p>
-            </div>
-            <a href="binomial.html" target="_blank" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; text-decoration: none; padding: 5px 12px; border-radius: 6px; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 4px;">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="15" data-kind="enrichment" id="l07-s15-v2-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - Excel Modeling</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>1-Step Binomial Model</li>
+<li>No-Arbitrage Replication</li>
+<li>Risk-Neutral Pricing</li>
+<li>Determining u and d</li>
+<li>2-Step Binomial Model</li>
+<li class="active">American Options</li>
+<li>Practical Applications</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title" style="margin-bottom: 8px;">Binomial Tree Excel Modeling &amp; Interactive Tools</h2>
+<div class="slide-content">
+<!-- Excel Formula Mapping Table -->
+<table class="slide-table" style="margin: 0 0 12px 0; font-size: 16px; width: 100%;">
+<thead>
+<tr>
+<th style="width: 22%; background: #047857; color: white;">Model Variable / Node</th>
+<th style="width: 48%; background: #065f46; color: white;">Excel Formula Syntax</th>
+<th style="width: 30%; background: #047857; color: white;">Case Study Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Time Step \(\Delta t\)</strong></td>
+<td><code>=T / Steps</code> (e.g. cell <code>=B5/B6</code>)</td>
+<td><code>=0.5 / 2 = 0.25</code></td>
+</tr>
+<tr>
+<td><strong>Multipliers \(u\) &amp; \(d\)</strong></td>
+<td><code>=EXP(sigma * SQRT(dt))</code> / <code>=1 / u</code></td>
+<td>\( u = \mathbf{1.1213}, \; d = \mathbf{0.8918} \)</td>
+</tr>
+<tr>
+<td><strong>Risk-Neutral Probability \(p\)</strong></td>
+<td><code>=(EXP((r - q)*dt) - d) / (u - d)</code></td>
+<td><code>=(EXP(0.03) - 0.8918)/(1.1213-0.8918) = 0.604</code></td>
+</tr>
+<tr>
+<td><strong>European Backward Roll</strong></td>
+<td><code>=EXP(-r*dt) * (p * V_up + (1 - p) * V_down)</code></td>
+<td>\( f_0 = e^{-0.03}(0.604 	\times  2.43 + 0.396 	\times  0) = \mathbf{\$1.42} \)</td>
+</tr>
+<tr>
+<td><strong>American Early Exercise</strong></td>
+<td><code>=MAX(Payoff_Now, Continuation_Value)</code></td>
+<td><code>=MAX(K - S_node, EXP(-r*dt)*(p*V_u + (1-p)*V_d))</code></td>
+</tr>
+</tbody>
+</table>
+<!-- Interactive App Callout Banner -->
+<div class="concept-card" style="margin: 0; padding: 14px 20px; background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<h4 style="color: #1e3a8a; margin: 0 0 4px 0; font-size: 18px;">💻 Interactive Tool: Option Binomial Tree Calculator (binomial.html)</h4>
+<p style="margin: 0; font-size: 15.5px; color: #334155; line-height: 1.45;">
+                    A responsive web app is available in this repository to compute customized n-step binomial trees (1–50 steps), dynamic Greeks, early exercise boundaries, and Black-Scholes convergence in real time.
+                  </p>
+</div>
+<a href="binomial.html" style="flex-shrink: 0; margin-left: 16px; background: #2563eb; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 15px; box-shadow: 0 2px 4px rgba(37,99,235,0.25); display: inline-flex; align-items: center; gap: 6px;" target="_blank">
+                  Open Tool ↗
+                </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide: Full-Stage Embedded Interactive Binomial Tree App -->
+<section data-start-indexv="0"><section data-after-source-slide="15" data-kind="enrichment" id="l07-s15-v3">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 交互实验</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li class="active">美式期权定价</li>
+<li>二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body" style="padding: 24px 32px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+<div>
+<h2 class="slide-title" style="margin: 0 0 2px 0; font-size: 26px;">二叉树期权定价交互模拟器 (Live Interactive Tool)</h2>
+<p style="margin: 0; font-size: 15px; color: #64748b;">支持动态调整步数（1–50步）、行权方式与市场参数，实时观察各节点演化与提前行权边界</p>
+</div>
+<a href="binomial.html" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; text-decoration: none; padding: 5px 12px; border-radius: 6px; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 4px;" target="_blank">
               新窗口全屏打开 ↗
             </a>
-          </div>
-          
-          <div class="slide-content" style="flex-grow: 1; height: 100%;">
-            <iframe src="binomial.html" style="width: 100%; height: 605px; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06); background: #ffffff;" allow="fullscreen"></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 16 -->
-    <section id="l07-s16" data-kind="original" data-source-slide="16" data-pdf-page="8" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 16</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li class="active">二叉树实务应用</li>
-            <li>连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">二叉树模型的实务应用</h2>
-          <div class="slide-content">
-            <div style="display: flex; gap: 24px; align-items: center;">
-              <div style="flex: 1.1;">
-                <img src="assets/lecture-07/slide-16-chart.png" alt="Binomial tree option price convergence versus number of steps" style="width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;">
-              </div>
-              <div style="flex: 0.9;">
-                <ul>
-                  <li>在实务中应用二叉树模型时，通常将期权的存续期划分为<strong>30步或更多时间步长</strong>。</li>
-                  <li>随着步数不断增加，离散二叉树计算出的期权价格将收敛于连续时间下的 Black-Scholes-Merton 理论解析解。</li>
-                  <li>二叉树模型能够非常便捷地扩展并处理离散分红付息。</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 17 -->
-    <section id="l07-s17" data-kind="original" data-source-slide="17" data-pdf-page="9" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 17</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li class="active">连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">风险中性定价 – 连续红利收益率</h2>
-          <div class="slide-content">
-            <ul>
-              <li>在“风险中性”世界中，支付连续复利红利收益率 \( q \) 的股票预期收益率为 \( r - q \)。因此：
+</div>
+<div class="slide-content" style="flex-grow: 1; height: 100%;">
+<iframe allow="fullscreen" src="binomial.html" style="width: 100%; height: 605px; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06); background: #ffffff;"></iframe>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="15" data-kind="enrichment" id="l07-s15-v3-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - Interactive</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>1-Step Binomial Model</li>
+<li>No-Arbitrage Replication</li>
+<li>Risk-Neutral Pricing</li>
+<li>Determining u and d</li>
+<li>2-Step Binomial Model</li>
+<li class="active">American Options</li>
+<li>Practical Applications</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body" style="padding: 24px 32px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+<div>
+<h2 class="slide-title" style="margin: 0 0 2px 0; font-size: 26px;">Option Binomial Tree Interactive Simulator</h2>
+<p style="margin: 0; font-size: 15px; color: #64748b;">Dynamically adjust steps (1–50), early exercise, volatility, and compare backward induction directly</p>
+</div>
+<a href="binomial.html" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; text-decoration: none; padding: 5px 12px; border-radius: 6px; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 4px;" target="_blank">
+              Open in New Window ↗
+            </a>
+</div>
+<div class="slide-content" style="flex-grow: 1; height: 100%;">
+<iframe allow="fullscreen" src="binomial.html" style="width: 100%; height: 605px; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06); background: #ffffff;"></iframe>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 16 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l07-s16">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li class="active">二叉树实务应用</li>
+<li>连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">二叉树模型的实务应用</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 24px; align-items: center;">
+<div style="flex: 1.1;">
+<img alt="Binomial tree option price convergence versus number of steps" src="assets/lecture-07/slide-16-chart.png" style="width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;"/>
+</div>
+<div style="flex: 0.9;">
+<ul>
+<li>在实务中应用二叉树模型时，通常将期权的存续期划分为<strong>30步或更多时间步长</strong>。</li>
+<li>随着步数不断增加，离散二叉树计算出的期权价格将收敛于连续时间下的 Black-Scholes-Merton 理论解析解。</li>
+<li>二叉树模型能够非常便捷地扩展并处理离散分红付息。</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l07-s16-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 16</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li class="active">Trees in Practice</li>
+<li>Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Binomial Trees in Practice</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 24px; align-items: center;">
+<div style="flex: 1.1;">
+<img alt="Binomial tree option price convergence versus number of steps" src="assets/lecture-07/slide-16-chart.png" style="width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;"/>
+</div>
+<div style="flex: 0.9;">
+<ul>
+<li>When the binomial model is used in practice the life of the option is typically divided into <strong>30 or more time steps</strong>.</li>
+<li>As the number of steps increases, the discrete tree price converges to the continuous Black-Scholes-Merton price.</li>
+<li>Binomial trees are easily adapted to handle discrete dividend payments.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 17 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l07-s17">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li class="active">连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">风险中性定价 – 连续红利收益率</h2>
+<div class="slide-content">
+<ul>
+<li>在“风险中性”世界中，支付连续复利红利收益率 \( q \) 的股票预期收益率为 \( r - q \)。因此：
                 <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
                   \[ E[S_T] = S_0 e^{(r - q)T} \implies p S_u + (1 - p) S_d = S_0 e^{(r - q)T} \quad (5) \]
                   \[ E[f_T] = f_0 e^{rT} \implies p f_u + (1 - p) f_d = f_0 e^{rT} \quad (6) \]
                 </div>
-              </li>
-              <li>由方程 (5) 可推导出：
+</li>
+<li>由方程 (5) 可推导出：
                 <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
                   \[ p u S_0 + (1 - p) d S_0 = S_0 e^{(r - q)T} \implies p = \frac{e^{(r - q)T} - d}{u - d} \]
                 </div>
-              </li>
-              <li>由方程 (6) 将预期到期回报按无风险利率 \( r \) 折现：
+</li>
+<li>由方程 (6) 将预期到期回报按无风险利率 \( r \) 折现：
                 <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
                   \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 18 -->
-    <section id="l07-s18" data-kind="original" data-source-slide="18" data-pdf-page="9" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 18</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li class="active">连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 无套利分析原理<br><span style="color: #4338ca">(支付红利股票的看跌期权)</span></h2>
-          <div class="slide-content">
-            <ul>
-              <li>某股票当前价格为<strong>$20</strong>，3个月后其价格要么为<strong>$22</strong>，要么为<strong>$18</strong>。</li>
-              <li>对3个月期看跌期权定价，已知 \( K = \$21, \, q = 3\%, \, r = 12\% \)：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l07-s17-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 17</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li class="active">Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Risk-Neutral Valuation – Dividend Yield</h2>
+<div class="slide-content">
+<ul>
+<li>In a “risk-neutral” world, the expected return on a stock paying a continuously compounded dividend yield \( q \) is \( r - q \). Thus:
+                <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+                  \[ E[S_T] = S_0 e^{(r - q)T} \implies p S_u + (1 - p) S_d = S_0 e^{(r - q)T} \quad (5) \]
+                  \[ E[f_T] = f_0 e^{rT} \implies p f_u + (1 - p) f_d = f_0 e^{rT} \quad (6) \]
+                </div>
+</li>
+<li>From (5) we have that:
+                <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+                  \[ p u S_0 + (1 - p) d S_0 = S_0 e^{(r - q)T} \implies p = \frac{e^{(r - q)T} - d}{u - d} \]
+                </div>
+</li>
+<li>From (6) we discount the expected payoff at \( r \):
+                <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+                  \[ f_0 = e^{-rT} [p f_u + (1 - p) f_d] \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 18 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l07-s18">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li class="active">连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 无套利分析原理<br/><span style="color: #4338ca">(支付红利股票的看跌期权)</span></h2>
+<div class="slide-content">
+<ul>
+<li>某股票当前价格为<strong>$20</strong>，3个月后其价格要么为<strong>$22</strong>，要么为<strong>$18</strong>。</li>
+<li>对3个月期看跌期权定价，已知 \( K = \$21, \, q = 3\%, \, r = 12\% \)：
                 <ul>
-                  <li>若 \( S_T = S_u = \$22 \)，则 \( f_u = \max[21 - 22, 0] = \mathbf{\$0} \)</li>
-                  <li>若 \( S_T = S_d = \$18 \)，则 \( f_d = \max[21 - 18, 0] = \mathbf{\$3} \)</li>
-                </ul>
-              </li>
-              <li>构建由以下头寸组成的投资组合：
+<li>若 \( S_T = S_u = \$22 \)，则 \( f_u = \max[21 - 22, 0] = \mathbf{\$0} \)</li>
+<li>若 \( S_T = S_d = \$18 \)，则 \( f_d = \max[21 - 18, 0] = \mathbf{\$3} \)</li>
+</ul>
+</li>
+<li>构建由以下头寸组成的投资组合：
                 <ul>
-                  <li>持有 \( \Delta \) 份标的资产多头，以及</li>
-                  <li>卖出 1 份看跌期权空头</li>
-                </ul>
-              </li>
-              <li>到期时投资组合的价值为 \( (\Delta \t\times  S_T e^{qT}) - f_T \)：
+<li>持有 \( \Delta \) 份标的资产多头，以及</li>
+<li>卖出 1 份看跌期权空头</li>
+</ul>
+</li>
+<li>到期时投资组合的价值为 \( (\Delta \t\times  S_T e^{qT}) - f_T \)：
                 <ul>
-                  <li>若股票上涨：\( (\Delta \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 \)</li>
-                  <li>若股票下跌：\( (\Delta \t\times  \$18 e^{0.03 \t\times  0.25}) - \$3 \)</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 19 -->
-    <section id="l07-s19" data-kind="original" data-source-slide="19" data-pdf-page="10" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-          <div class="sidebar-course-code">20762 DRM</div>
-          <div class="sidebar-slide-id">第 7 讲 - 19</div>
-          <ul class="sidebar-nav">
-            <li>学习目标</li>
-            <li>单期二叉树模型</li>
-            <li>无套利复制组合</li>
-            <li>风险中性定价</li>
-            <li>确定u与d参数</li>
-            <li>两期二叉树模型</li>
-            <li>美式期权定价</li>
-            <li>二叉树实务应用</li>
-            <li class="active">连续红利收益率</li>
-          </ul>
-        </aside>
-      
-        <div class="slide-body">
-          <h2 class="slide-title">案例分析 – 无套利分析原理 (续)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>当投资组合满足以下条件时实现完全无风险：
+<li>若股票上涨：\( (\Delta \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 \)</li>
+<li>若股票下跌：\( (\Delta \t\times  \$18 e^{0.03 \t\times  0.25}) - \$3 \)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l07-s18-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 18</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li class="active">Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – No-Arbitrage Arguments<br/><span style="color: #4338ca">(Put on a Dividend Paying Stock)</span></h2>
+<div class="slide-content">
+<ul>
+<li>A stock price is currently <strong>$20</strong>, and in three months it will be either <strong>$22</strong> or <strong>$18</strong>.</li>
+<li>Price a 3-month put option with \( K = \$21, \, q = 3\%, \, r = 12\% \):
+                <ul>
+<li>If \( S_T = S_u = \$22 \), then \( f_u = \max[21 - 22, 0] = \mathbf{\$0} \)</li>
+<li>If \( S_T = S_d = \$18 \), then \( f_d = \max[21 - 18, 0] = \mathbf{\$3} \)</li>
+</ul>
+</li>
+<li>Consider the portfolio consisting of:
+                <ul>
+<li>a long position in \( \Delta \) units of the asset, AND</li>
+<li>a short position in one put option</li>
+</ul>
+</li>
+<li>The value of portfolio at maturity is \( (\Delta \t\times  S_T e^{qT}) - f_T \):
+                <ul>
+<li>If stock moves up: \( (\Delta \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 \)</li>
+<li>If stock moves down: \( (\Delta \t\times  \$18 e^{0.03 \t\times  0.25}) - \$3 \)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 19 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l07-s19">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li class="active">连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 无套利分析原理 (续)</h2>
+<div class="slide-content">
+<ul>
+<li>当投资组合满足以下条件时实现完全无风险：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ (\Delta \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 = (\Delta \t\times  \$18 e^{0.03 \t\times  0.25}) - \$3 \]
                 </div>
@@ -1174,83 +2096,175 @@
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ \Delta = \frac{\$0 - \$3}{\$22 e^{0.03 \t\times  0.25} - \$18 e^{0.03 \t\times  0.25}} = \frac{-\$3}{\$4 e^{0.0075}} = \mathbf{-0.744} \]
                 </div>
-                <em>注意此时 \( \Delta \) 为负数（持有空头股票以对冲空头看跌期权）。</em>
-              </li>
-              <li>到期组合价值：\( (-0.744 \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 = \mathbf{-\$16.49} \)</li>
-              <li>无风险组合的现值：\( -\$16.49 e^{-0.12 \t\times  0.25} = \mathbf{-\$16.00} \)</li>
-              <li>初始组合价值：
+<em>注意此时 \( \Delta \) 为负数（持有空头股票以对冲空头看跌期权）。</em>
+</li>
+<li>到期组合价值：\( (-0.744 \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 = \mathbf{-\$16.49} \)</li>
+<li>无风险组合的现值：\( -\$16.49 e^{-0.12 \t\times  0.25} = \mathbf{-\$16.00} \)</li>
+<li>初始组合价值：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ (\Delta \t\times  S_0) - f_0 = -\$16.00 \implies f_0 = (-0.744 \t\times  \$20) + \$16.00 = \mathbf{\$1.12} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 19-v1 (Enrichment 7.C) -->
-    <section id="l07-s19-v1" data-kind="enrichment" data-after-source-slide="19">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 7 讲 - 拓展 3</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>单期二叉树模型</li>
-              <li>无套利复制组合</li>
-              <li>风险中性定价</li>
-              <li>确定u与d参数</li>
-              <li>两期二叉树模型</li>
-              <li>美式期权定价</li>
-              <li>二叉树实务应用</li>
-              <li class="active">连续红利收益率</li>
-            </ul>
-        </aside>
-        <div class="slide-body">
-          <h3 class="slide-title" style="margin-bottom: 8px">连续红利收益率 \( q \) 下的股指看涨期权定价</h3>
-          <div class="slide-content">
-            <p style="margin-bottom: 6px;"><strong>问题：</strong>某股票指数当前点位为<strong>300点</strong>。在未来3个月内（\( T = 0.25 \)），指数预期上涨或下跌10%（\( u = 1.10, \, d = 0.90 \)）。年化无风险利率 \( r = 8\% \)，连续红利收益率 \( q = 3\% \)。对执行价格 \( K = 300 \) 的3个月期欧式看涨期权进行估值。</p>
-            <div style="display: flex; gap: 12px; max-width: 100%;">
-              <div class="example-card" style="flex: 1 1 50%; max-width: 49%; padding: 8px 10px; margin-bottom: 0; box-sizing: border-box;">
-                <h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 1：考虑持有成本调整后的概率 \( p \)</h4>
-                <p style="margin-bottom: 4px">在风险中性世界中，标的指数以 \( r - q = 8\% - 3\% = 5\% \) 的净增长率增长：</p>
-                <div class="equation-box" style="padding: 6px 8px; margin: 4px 0">
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l07-s19-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - 19</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li class="active">Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – No-Arbitrage Arguments (cont.)</h2>
+<div class="slide-content">
+<ul>
+<li>The portfolio is riskless when:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ (\Delta \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 = (\Delta \t\times  \$18 e^{0.03 \t\times  0.25}) - \$3 \]
+                </div>
+                which implies that:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ \Delta = \frac{\$0 - \$3}{\$22 e^{0.03 \t\times  0.25} - \$18 e^{0.03 \t\times  0.25}} = \frac{-\$3}{\$4 e^{0.0075}} = \mathbf{-0.744} \]
+                </div>
+<em>Note that \( \Delta \) is negative (short stock to hedge a short put).</em>
+</li>
+<li>Terminal portfolio value: \( (-0.744 \t\times  \$22 e^{0.03 \t\times  0.25}) - \$0 = \mathbf{-\$16.49} \)</li>
+<li>Present value of riskless portfolio: \( -\$16.49 e^{-0.12 \t\times  0.25} = \mathbf{-\$16.00} \)</li>
+<li>Initial portfolio value:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ (\Delta \t\times  S_0) - f_0 = -\$16.00 \implies f_0 = (-0.744 \t\times  \$20) + \$16.00 = \mathbf{\$1.12} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 19-v1 (Enrichment 7.C) -->
+<section data-start-indexv="0"><section data-after-source-slide="19" data-kind="enrichment" id="l07-s19-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 7 讲 - 拓展 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>单期二叉树模型</li>
+<li>无套利复制组合</li>
+<li>风险中性定价</li>
+<li>确定u与d参数</li>
+<li>两期二叉树模型</li>
+<li>美式期权定价</li>
+<li>二叉树实务应用</li>
+<li class="active">连续红利收益率</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">连续红利收益率 \( q \) 下的股指看涨期权定价</h3>
+<div class="slide-content">
+<p style="margin-bottom: 6px;"><strong>问题：</strong>某股票指数当前点位为<strong>300点</strong>。在未来3个月内（\( T = 0.25 \)），指数预期上涨或下跌10%（\( u = 1.10, \, d = 0.90 \)）。年化无风险利率 \( r = 8\% \)，连续红利收益率 \( q = 3\% \)。对执行价格 \( K = 300 \) 的3个月期欧式看涨期权进行估值。</p>
+<div style="display: flex; gap: 12px; max-width: 100%;">
+<div class="example-card" style="flex: 1 1 50%; max-width: 49%; padding: 8px 10px; margin-bottom: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 1：考虑持有成本调整后的概率 \( p \)</h4>
+<p style="margin-bottom: 4px">在风险中性世界中，标的指数以 \( r - q = 8\% - 3\% = 5\% \) 的净增长率增长：</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0">
                   \[ p = \frac{e^{(0.08 - 0.03) \t\times  0.25} - 0.90}{1.10 - 0.90} \]
                   \[ = \frac{1.01258 - 0.90}{0.20} = \mathbf{0.5629} \]
                   \[ 1 - p = 0.4371 \]
                 </div>
-                <p style="color: #475569; margin: 0">注意此时 \( p = 56.29\% \) 低于不分红资产的上涨概率（\( 60.10\% \)），因为股息派发稀释了资本利得增长。</p>
-              </div>
-              <div class="example-card" style="flex: 1 1 50%; max-width: 49%; padding: 8px 10px; margin-bottom: 0; box-sizing: border-box;">
-                <h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 2：期权到期回报与估值计算</h4>
-                <p style="margin-bottom: 4px">到期指数点位及看涨期权回报：</p>
-                <ul style="margin: 0 0 6px 0; padding-left: 14px">
-                  <li>上涨：\( S_u = 330 \implies c_u = \mathbf{30} \)</li>
-                  <li>下跌：\( S_d = 270 \implies c_d = \mathbf{0} \)</li>
-                </ul>
-                <p style="margin-bottom: 4px">以无风险利率 \( r \) 折现：</p>
-                <div class="equation-box" style="padding: 6px 8px; margin: 4px 0">
+<p style="color: #475569; margin: 0">注意此时 \( p = 56.29\% \) 低于不分红资产的上涨概率（\( 60.10\% \)），因为股息派发稀释了资本利得增长。</p>
+</div>
+<div class="example-card" style="flex: 1 1 50%; max-width: 49%; padding: 8px 10px; margin-bottom: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 2：期权到期回报与估值计算</h4>
+<p style="margin-bottom: 4px">到期指数点位及看涨期权回报：</p>
+<ul style="margin: 0 0 6px 0; padding-left: 14px">
+<li>上涨：\( S_u = 330 \implies c_u = \mathbf{30} \)</li>
+<li>下跌：\( S_d = 270 \implies c_d = \mathbf{0} \)</li>
+</ul>
+<p style="margin-bottom: 4px">以无风险利率 \( r \) 折现：</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0">
                   \[ c_0 = e^{-rT} [p c_u + (1 - p) c_d] \]
                   \[ = e^{-0.08 \t\times  0.25} [0.5629 \t\times  30 + 0.4371 \t\times  0] \]
                   \[ = e^{-0.02} \t\times  16.8868 = \mathbf{16.55 \text{ 指数点}} \]
                 </div>
-              </div>
-            </div>
-            <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 6px; padding: 6px 12px; margin-top: 8px; color: #854d0e">
+</div>
+</div>
+<div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 6px; padding: 6px 12px; margin-top: 8px; color: #854d0e">
               贴现时使用 \( e^{-rT} \) 而<strong>非</strong> \( e^{-(r-q)T} \)，因为期权持有者仅享有到期时指数点位的结算收益，而在期权存续期内并<strong>不</strong>享有现金股利分红！
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    </div>
-  </div>
-
-  <script src="vendor/reveal/dist/reveal.js"></script>
-  <script src="vendor/reveal/plugin/math/math.js"></script>
-  <script src="vendor/mathjax/tex-svg.js" id="MathJax-script" async></script>
-  <script src="assets/deck.js"></script>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="19" data-kind="enrichment" id="l07-s19-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 7 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>One-Period Model</li>
+<li>No-Arbitrage Arguments</li>
+<li>Risk-Neutral Valuation</li>
+<li>Determining u and d</li>
+<li>Two-Step Trees</li>
+<li>American Options</li>
+<li>Trees in Practice</li>
+<li class="active">Continuous Dividend Yield</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Index Call Option Valuation with Continuous Dividend Yield \( q \)</h3>
+<div class="slide-content">
+<p style="margin-bottom: 6px;"><strong>Question:</strong> A share index currently trades at <strong>300 points</strong>. Over the next 3 months (\( T = 0.25 \)), it is expected to increase or decrease by 10% (\( u = 1.10, \, d = 0.90 \)). Risk-free rate \( r = 8\% \) p.a., dividend yield \( q = 3\% \) p.a. (continuous). Value a 3-month European call with strike \( K = 300 \).</p>
+<div style="display: flex; gap: 12px; max-width: 100%;">
+<div class="example-card" style="flex: 1 1 50%; max-width: 49%; padding: 8px 10px; margin-bottom: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">Step 1: Carry-Adjusted Probability \( p \)</h4>
+<p style="margin-bottom: 4px">In a risk-neutral world, the underlying grows at rate \( r - q = 8\% - 3\% = 5\% \):</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0">
+                  \[ p = \frac{e^{(0.08 - 0.03) \t\times  0.25} - 0.90}{1.10 - 0.90} \]
+                  \[ = \frac{1.01258 - 0.90}{0.20} = \mathbf{0.5629} \]
+                  \[ 1 - p = 0.4371 \]
+                </div>
+<p style="color: #475569; margin: 0">Notice \( p = 56.29\% \) is lower than for a non-dividend asset (\( 60.10\% \)) because dividends drain capital growth.</p>
+</div>
+<div class="example-card" style="flex: 1 1 50%; max-width: 49%; padding: 8px 10px; margin-bottom: 0; box-sizing: border-box;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">Step 2: Payoffs &amp; Valuation</h4>
+<p style="margin-bottom: 4px">Terminal index levels and call payoffs:</p>
+<ul style="margin: 0 0 6px 0; padding-left: 14px">
+<li>Up: \( S_u = 330 \implies c_u = \mathbf{30} \)</li>
+<li>Down: \( S_d = 270 \implies c_d = \mathbf{0} \)</li>
+</ul>
+<p style="margin-bottom: 4px">Discount back at risk-free rate \( r \):</p>
+<div class="equation-box" style="padding: 6px 8px; margin: 4px 0">
+                  \[ c_0 = e^{-rT} [p c_u + (1 - p) c_d] \]
+                  \[ = e^{-0.08 \t\times  0.25} [0.5629 \t\times  30 + 0.4371 \t\times  0] \]
+                  \[ = e^{-0.02} \t\times  16.8868 = \mathbf{16.55 \text{ index points}} \]
+                </div>
+</div>
+</div>
+<div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 6px; padding: 6px 12px; margin-top: 8px;  color: #854d0e">
+<strong>Critical Insight from Video:</strong> We discount at \( e^{-rT} \), NOT \( e^{-(r-q)T} \), because the option holder receives the final index payoff but does NOT receive the cash dividend yield during the life of the option!
+            </div>
+</div>
+</div>
+</div>
+</section></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
 </body>
 </html>

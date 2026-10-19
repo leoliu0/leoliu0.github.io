@@ -71,22 +71,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function autoFitAllSlides() {
-    document.querySelectorAll(".reveal .slides > section").forEach(autoFitSlide);
+    document.querySelectorAll(".reveal .slides section").forEach(function (s) {
+      if (!s.querySelector("section")) autoFitSlide(s);
+    });
   }
 
   // 3. Make Sidebar TOC Navigation Interactive & Clickable
   function makeSidebarClickable() {
     const topicSlideMap = new Map();
-    const slides = Array.from(document.querySelectorAll(".reveal .slides > section"));
+    const stacks = Array.from(document.querySelectorAll(".reveal .slides > section"));
 
-    slides.forEach((sec, idx) => {
-      const activeLi = sec.querySelector(".sidebar-nav li.active");
-      if (activeLi) {
-        const topicText = activeLi.textContent.trim();
-        if (!topicSlideMap.has(topicText)) {
-          topicSlideMap.set(topicText, idx);
+    stacks.forEach((top, h) => {
+      const inner = Array.from(top.children).filter(c => c.tagName === "SECTION");
+      (inner.length ? inner : [top]).forEach((sec, v) => {
+        const activeLi = sec.querySelector(".sidebar-nav li.active");
+        if (activeLi) {
+          const topicText = activeLi.textContent.trim();
+          if (!topicSlideMap.has(topicText)) {
+            topicSlideMap.set(topicText, { h, v });
+          }
         }
-      }
+      });
     });
 
     document.querySelectorAll(".sidebar-nav li").forEach(li => {
@@ -102,14 +107,14 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         e.stopPropagation();
         if (targetIdx !== undefined && typeof Reveal !== "undefined") {
-          Reveal.slide(targetIdx);
+          Reveal.slide(targetIdx.h, targetIdx.v);
         }
       });
 
       li.addEventListener("keydown", function (e) {
         if ((e.key === "Enter" || e.key === " ") && targetIdx !== undefined && typeof Reveal !== "undefined") {
           e.preventDefault();
-          Reveal.slide(targetIdx);
+          Reveal.slide(targetIdx.h, targetIdx.v);
         }
       });
     });
@@ -127,7 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
       hash: true,
       controls: true,
       progress: true,
-      slideNumber: "c/t",
+      slideNumber: function (slide) {
+        return [Reveal.getIndices(slide).h + 1, "/", Reveal.getHorizontalSlides().length];
+      },
       transition: "none",
       transitionSpeed: "fast",
       backgroundTransition: "none",

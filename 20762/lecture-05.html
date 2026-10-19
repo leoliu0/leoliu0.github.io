@@ -1,1485 +1,2946 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20762 第05讲: 期权市场机制与股票期权性质</title>
-  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
-  <link rel="stylesheet" href="assets/slides.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第05讲: 期权市场机制与股票期权性质</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
 </head>
 <body>
-  <a href="index.html" class="deck-index-link">&larr; 返回课件导航</a>
-  <div class="reveal">
-    <div class="slides">
-
-      <!-- Slide 1 -->
-      <section id="l05-s01" data-kind="original" data-source-slide="1" data-pdf-page="1" data-pdf-half="top">
-        <div class="slide-container">
-          <div class="title-slide-container" style="width: 100%;">
-            <div class="title-slide-h1">第 05 讲</div>
-            <div class="title-slide-h1" style="margin-bottom: 16px">期权市场机制与<br>股票期权性质</div>
-            <div class="title-slide-h2">John C. Hull《期权、期货及其他衍生产品》第9章与第10章</div>
-            <div class="tip-of-the-week-box">
-              <div class="tip-title">本周核心要点 (Tip of the week)</div>
-              <div class="tip-text">
+<a class="deck-index-link" href="index.html">← 返回课件导航</a>
+<div class="reveal">
+<div class="slides">
+<!-- Slide 1 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l05-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 05 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 16px">期权市场机制与<br/>股票期权性质</div>
+<div class="title-slide-h2">John C. Hull《期权、期货及其他衍生产品》第9章与第10章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">本周核心要点 (Tip of the week)</div>
+<div class="tip-text">
                 买入看涨期权并卖出相同执行价格的看跌期权，等价于在到期日按该执行价格买入标的资产。换言之，该组合通过期权合成构建了一份远期多头合约 (Long Forward)。
               </div>
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS Business School • 悉尼科技大学商学院</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l05-s01-en" lang="en">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">Lecture 5</div>
+<div class="title-slide-h1" style="margin-bottom: 16px">Mechanics of Options Markets and<br/>Properties of Stock Options</div>
+<div class="title-slide-h2">Hull, Chapters 9 and 10</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">Tip of the week</div>
+<div class="tip-text">
+                Buying a call and selling a put with the same strike is equivalent to paying the strike price for the underlying asset at maturity. In other words, one has synthetically created a long forward contract.
+              </div>
+</div>
+<div class="uts-logo-text">
+<span style="color: #000; font-weight: 900;">✦</span> UTS Business School
             </div>
-            <div class="uts-logo-text"><span style="color: #000; font-weight: 900;">&#10022;</span> UTS Business School &bull; 悉尼科技大学商学院</div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 2 -->
-      <section id="l05-s02" data-kind="original" data-source-slide="2" data-pdf-page="1" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 2</div>
-            <ul class="sidebar-nav">
-              <li class="active">学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">学习目标 (Learning Objectives)</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>理解期权基础与期权市场运行机制：</strong>
-                  <ul>
-                    <li>四种基本期权头寸：看涨多头、看涨空头、看跌多头、看跌空头</li>
-                    <li>美式期权与欧式期权的核心差异</li>
-                    <li>内在价值 (Intrinsic Value) 与时间价值 (Time Value)</li>
-                    <li>期权值度 (Moneyness)：实值、平值与虚值</li>
-                    <li>期权做市商机制 (Market Making)</li>
-                    <li>现金红利派发与股票拆分对期权条款的调整</li>
-                  </ul>
-                </li>
-                <li><strong>探讨影响期权价格的关键决定因素</strong></li>
-                <li><strong>计算欧式与美式看涨、看跌期权价格的上下限：</strong>
-                  <ul>
-                    <li>深入理解红利现值对期权价格上下界的影响</li>
-                  </ul>
-                </li>
-                <li><strong>演示当市场价格突破理论边界时的无风险套利策略</strong></li>
-                <li><strong>掌握买卖权平价定理 (Put-Call Parity) 并利用平价偏离构建套利交易</strong></li>
-                <li><strong>分析美式看涨期权与看跌期权的提前行权 (Early Exercise) 边界条件</strong></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 3 -->
-      <section id="l05-s03" data-kind="original" data-source-slide="3" data-pdf-page="2" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 3</div>
-            <ul class="sidebar-nav">
-              <li class="active">学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">前置知识储备 (Assumed Knowledge)</h2>
-            <div class="slide-subtitle">25556 金融证券 (FS) &ndash; 第 12 讲：交易所交易期权</div>
-            <div class="slide-content">
-              <ul>
-                <li><strong>期权合约的基本结构要素</strong></li>
-                <li><strong>澳大利亚证券交易所 (ASX) 期权市场交易机制</strong></li>
-                <li><strong>看涨与看跌期权的损益特征与实际应用：</strong>
-                  <ul>
-                    <li>非对称内在价值收益曲线</li>
-                    <li>到期行权决策分析</li>
-                    <li>看涨期权用于投资杠杆与风险对冲</li>
-                    <li>看涨期权空头（立权人）的义务与风险</li>
-                  </ul>
-                </li>
-                <li><strong>期权价格构成原理：</strong>
-                  <ul>
-                    <li>时间价值及其经济来源</li>
-                  </ul>
-                </li>
-                <li><strong>行权 (Exercise) 与平仓对冲 (Closeout) 的决策对比</strong></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 4 -->
-      <section id="l05-s04" data-kind="original" data-source-slide="4" data-pdf-page="2" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 4</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">期权基础定义与分类 (Options)</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>期权类别 (Option class)：</strong>
-                  <ul>
-                    <li><strong>看涨期权 (Call)：</strong>买入标的资产的权利</li>
-                    <li><strong>看跌期权 (Put)：</strong>卖出标的资产的权利</li>
-                  </ul>
-                </li>
-                <li><strong>期权行权类型 (Option types)：</strong>
-                  <ul>
-                    <li><strong>欧式期权 (European options)：</strong>仅能在到期日当天行权</li>
-                    <li><strong>美式期权 (American options)：</strong>可在到期日或到期日之前的任何交易日行权</li>
-                  </ul>
-                </li>
-                <li><strong>期权头寸 (Option positions)：</strong>
-                  <ul>
-                    <li><strong>多头 (Long)：</strong>买方支付期权费，享有以有限下行风险博取杠杆收益的权利。
+</div>
+</div>
+<div class="slide-footer" style="left: 48px;">
+<span>20762 Derivatives and Risk Management • UTS Business School</span>
+<span class="slide-source-badge">Original Slide 1 of 24 (p.1 top)</span>
+</div>
+</section></section>
+<!-- Slide 2 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l05-s02">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标 (Learning Objectives)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>理解期权基础与期权市场运行机制：</strong>
+<ul>
+<li>四种基本期权头寸：看涨多头、看涨空头、看跌多头、看跌空头</li>
+<li>美式期权与欧式期权的核心差异</li>
+<li>内在价值 (Intrinsic Value) 与时间价值 (Time Value)</li>
+<li>期权值度 (Moneyness)：实值、平值与虚值</li>
+<li>期权做市商机制 (Market Making)</li>
+<li>现金红利派发与股票拆分对期权条款的调整</li>
+</ul>
+</li>
+<li><strong>探讨影响期权价格的关键决定因素</strong></li>
+<li><strong>计算欧式与美式看涨、看跌期权价格的上下限：</strong>
+<ul>
+<li>深入理解红利现值对期权价格上下界的影响</li>
+</ul>
+</li>
+<li><strong>演示当市场价格突破理论边界时的无风险套利策略</strong></li>
+<li><strong>掌握买卖权平价定理 (Put-Call Parity) 并利用平价偏离构建套利交易</strong></li>
+<li><strong>分析美式看涨期权与看跌期权的提前行权 (Early Exercise) 边界条件</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l05-s02-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Learning Objectives</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Understand options and options markets:</strong>
+<ul>
+<li>The four basic options positions: long call, short call, long put, short put</li>
+<li>American and European options</li>
+<li>Intrinsic value and time value</li>
+<li>Moneyness</li>
+<li>Market making</li>
+<li>The effect of dividends and stock splits</li>
+</ul>
+</li>
+<li><strong>Discuss the factors affecting option prices</strong></li>
+<li><strong>Calculate upper and lower bounds of call and put prices:</strong>
+<ul>
+<li>Understand the effect of dividends on the bounds</li>
+</ul>
+</li>
+<li><strong>Illustrate arbitrage opportunities</strong> when prices fall outside bounds</li>
+<li><strong>Understand put-call parity</strong> and construct arbitrage strategies from its violation</li>
+<li><strong>Understand the early exercise feature</strong> of American put and call options</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 3 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l05-s03">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 3</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">前置知识储备 (Assumed Knowledge)</h2>
+<div class="slide-subtitle">25556 金融证券 (FS) – 第 12 讲：交易所交易期权</div>
+<div class="slide-content">
+<ul>
+<li><strong>期权合约的基本结构要素</strong></li>
+<li><strong>澳大利亚证券交易所 (ASX) 期权市场交易机制</strong></li>
+<li><strong>看涨与看跌期权的损益特征与实际应用：</strong>
+<ul>
+<li>非对称内在价值收益曲线</li>
+<li>到期行权决策分析</li>
+<li>看涨期权用于投资杠杆与风险对冲</li>
+<li>看涨期权空头（立权人）的义务与风险</li>
+</ul>
+</li>
+<li><strong>期权价格构成原理：</strong>
+<ul>
+<li>时间价值及其经济来源</li>
+</ul>
+</li>
+<li><strong>行权 (Exercise) 与平仓对冲 (Closeout) 的决策对比</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l05-s03-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 3</div>
+<ul class="sidebar-nav">
+<li class="active">Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Assumed Knowledge</h2>
+<div class="slide-subtitle">25556 FS – Lecture 12: Exchange Traded Options</div>
+<div class="slide-content">
+<ul>
+<li><strong>Basic features of option contracts</strong></li>
+<li><strong>ASX options market</strong></li>
+<li><strong>The characteristics and uses of calls and puts:</strong>
+<ul>
+<li>Asymmetric intrinsic value</li>
+<li>The exercise decision</li>
+<li>Calls as investments and hedges</li>
+<li>The short call position</li>
+</ul>
+</li>
+<li><strong>Option prices:</strong>
+<ul>
+<li>Time value and its sources</li>
+</ul>
+</li>
+<li><strong>Exercise versus closeout</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 4 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l05-s04">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期权基础定义与分类 (Options)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>期权类别 (Option class)：</strong>
+<ul>
+<li><strong>看涨期权 (Call)：</strong>买入标的资产的权利</li>
+<li><strong>看跌期权 (Put)：</strong>卖出标的资产的权利</li>
+</ul>
+</li>
+<li><strong>期权行权类型 (Option types)：</strong>
+<ul>
+<li><strong>欧式期权 (European options)：</strong>仅能在到期日当天行权</li>
+<li><strong>美式期权 (American options)：</strong>可在到期日或到期日之前的任何交易日行权</li>
+</ul>
+</li>
+<li><strong>期权头寸 (Option positions)：</strong>
+<ul>
+<li><strong>多头 (Long)：</strong>买方支付期权费，享有以有限下行风险博取杠杆收益的权利。
                       <ul>
-                        <li>买入期权并支付期权费（价格）&bull; <strong>享有权利，无履约义务</strong></li>
-                      </ul>
-                    </li>
-                    <li><strong>空头 (Short)：</strong>卖方（立权人）收取期权费，但承担在买方行权时必须按约定履约的义务。
+<li>买入期权并支付期权费（价格）• <strong>享有权利，无履约义务</strong></li>
+</ul>
+</li>
+<li><strong>空头 (Short)：</strong>卖方（立权人）收取期权费，但承担在买方行权时必须按约定履约的义务。
                       <ul>
-                        <li>卖出（签发）期权并收取期权费（价格）&bull; <strong>承担履约义务，无主动选择权</strong></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 5 -->
-      <section id="l05-s05" data-kind="original" data-source-slide="5" data-pdf-page="3" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 5</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">符号表示法 (Notation)</h2>
-            <div class="slide-content">
-              <table class="slide-table" style="margin-top: 10px">
-                <thead>
-                  <tr>
-                    <th style="width: 25%;">数学符号</th>
-                    <th>专业定义与经济含义</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>\( c \)</td><td>欧式看涨期权价格 (European call option price)</td></tr>
-                  <tr><td>\( C \)</td><td>美式看涨期权价格 (American call option price)</td></tr>
-                  <tr><td>\( p \)</td><td>欧式看跌期权价格 (European put option price)</td></tr>
-                  <tr><td>\( P \)</td><td>美式看跌期权价格 (American put option price)</td></tr>
-                  <tr><td>\( T \)</td><td>期权到期期限（以年为单位）</td></tr>
-                  <tr><td>\( S_0 \)</td><td>当前标的股票价格 (Current stock price)</td></tr>
-                  <tr><td>\( S_T \)</td><td>期权到期日标的股票价格 (Stock price at maturity)</td></tr>
-                  <tr><td>\( K \)</td><td>执行价格 / 履约价格 (Strike price / Exercise price)</td></tr>
-                  <tr><td>\( \sigma \)</td><td>标的股票价格年化波动率 (Volatility)</td></tr>
-                  <tr><td>\( D \)</td><td>期权有效期内预期派发红利的贴现现值</td></tr>
-                  <tr><td>\( r \)</td><td>对应期限 \( T \) 的连续复利无风险年利率</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 6 -->
-      <section id="l05-s06" data-kind="original" data-source-slide="6" data-pdf-page="3" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 6</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li class="active">期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">四种基本期权头寸到期回报</h2>
-            <div class="slide-content">
-              <ul style="margin-bottom: 12px">
-                <li><strong>看涨期权多头 (Long call)：</strong>买方有权按执行价 \( K \) 买入标的资产：
+<li>卖出（签发）期权并收取期权费（价格）• <strong>承担履约义务，无主动选择权</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l05-s04-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 4</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Options</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Option class:</strong>
+<ul>
+<li><strong>Call:</strong> Option to buy an underlying asset</li>
+<li><strong>Put:</strong> Option to sell an underlying asset</li>
+</ul>
+</li>
+<li><strong>Option types:</strong>
+<ul>
+<li><strong>European options:</strong> Can only be exercised at maturity</li>
+<li><strong>American options:</strong> Can be exercised at any time before or at maturity</li>
+</ul>
+</li>
+<li><strong>Option positions:</strong>
+<ul>
+<li><strong>Long:</strong> The buyer has the opportunity to earn a leveraged profit with limited risk, for which they pay a premium.
+                      <ul>
+<li>Buys option and pays premium (price) • Has a right</li>
+</ul>
+</li>
+<li><strong>Short:</strong> The writer has the opportunity to earn premium income, but has the obligation to meet the claim of the buyer when exercised.
+                      <ul>
+<li>Sells (writes) option and receives premium (price) • Has an obligation</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 5 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l05-s05">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">符号表示法 (Notation)</h2>
+<div class="slide-content">
+<table class="slide-table" style="margin-top: 10px">
+<thead>
+<tr>
+<th style="width: 25%;">数学符号</th>
+<th>专业定义与经济含义</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>\( c \)</td><td>欧式看涨期权价格 (European call option price)</td></tr>
+<tr><td>\( C \)</td><td>美式看涨期权价格 (American call option price)</td></tr>
+<tr><td>\( p \)</td><td>欧式看跌期权价格 (European put option price)</td></tr>
+<tr><td>\( P \)</td><td>美式看跌期权价格 (American put option price)</td></tr>
+<tr><td>\( T \)</td><td>期权到期期限（以年为单位）</td></tr>
+<tr><td>\( S_0 \)</td><td>当前标的股票价格 (Current stock price)</td></tr>
+<tr><td>\( S_T \)</td><td>期权到期日标的股票价格 (Stock price at maturity)</td></tr>
+<tr><td>\( K \)</td><td>执行价格 / 履约价格 (Strike price / Exercise price)</td></tr>
+<tr><td>\( \sigma \)</td><td>标的股票价格年化波动率 (Volatility)</td></tr>
+<tr><td>\( D \)</td><td>期权有效期内预期派发红利的贴现现值</td></tr>
+<tr><td>\( r \)</td><td>对应期限 \( T \) 的连续复利无风险年利率</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l05-s05-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 5</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Notation</h2>
+<div class="slide-content">
+<table class="slide-table" style="margin-top: 10px">
+<thead>
+<tr>
+<th style="width: 25%;">Symbol</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>\( c \)</td><td>European call option price</td></tr>
+<tr><td>\( C \)</td><td>American call option price</td></tr>
+<tr><td>\( p \)</td><td>European put option price</td></tr>
+<tr><td>\( P \)</td><td>American put option price</td></tr>
+<tr><td>\( T \)</td><td>Option maturity (in years)</td></tr>
+<tr><td>\( S_0 \)</td><td>Stock price today</td></tr>
+<tr><td>\( S_T \)</td><td>Stock price at option maturity</td></tr>
+<tr><td>\( K \)</td><td>Strike price / Exercise price</td></tr>
+<tr><td>\( \sigma \)</td><td>Volatility of stock price</td></tr>
+<tr><td>\( D \)</td><td>Present value of dividends during option's life</td></tr>
+<tr><td>\( r \)</td><td>Continuously compounded risk-free rate for maturity \( T \)</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 6 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l05-s06">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li class="active">期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">四种基本期权头寸到期回报</h2>
+<div class="slide-content">
+<ul style="margin-bottom: 12px">
+<li><strong>看涨期权多头 (Long call)：</strong>买方有权按执行价 \( K \) 买入标的资产：
                   <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">
                     \(\text{到期回报 (Payoff)} = \max(S_T - K, 0)\)
                   </div>
-                </li>
-                <li><strong>看涨期权空头 (Short call)：</strong>卖方承担按执行价 \( K \) 卖出标的资产的义务：
+</li>
+<li><strong>看涨期权空头 (Short call)：</strong>卖方承担按执行价 \( K \) 卖出标的资产的义务：
                   <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">
                     \(\text{到期回报} = -\max(S_T - K, 0) = \min(K - S_T, 0)\)
                   </div>
-                </li>
-                <li><strong>看跌期权多头 (Long put)：</strong>买方有权按执行价 \( K \) 卖出标的资产：
+</li>
+<li><strong>看跌期权多头 (Long put)：</strong>买方有权按执行价 \( K \) 卖出标的资产：
                   <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">
                     \(\text{到期回报} = \max(K - S_T, 0)\)
                   </div>
-                </li>
-                <li><strong>看跌期权空头 (Short put)：</strong>卖方承担按执行价 \( K \) 买入标的资产的义务：
+</li>
+<li><strong>看跌期权空头 (Short put)：</strong>卖方承担按执行价 \( K \) 买入标的资产的义务：
                   <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">
                     \(\text{到期回报} = -\max(K - S_T, 0) = \min(S_T - K, 0)\)
                   </div>
-                </li>
-              </ul>
-              <div style="font-weight: bold; margin-bottom: 6px; color: #1e293b">执行价格 \( K = 50 \) 时的到期回报测算：</div>
-              <table class="slide-table" style="text-align: center">
-                <thead>
-                  <tr>
-                    <th>到期股票价格</th>
-                    <th>看涨期权多头</th>
-                    <th>看涨期权空头</th>
-                    <th>看跌期权多头</th>
-                    <th>看跌期权空头</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>\( S_T < 50 \)</strong></td>
-                    <td>\( 0 \)</td>
-                    <td>\( 0 \)</td>
-                    <td>\( 50 - S_T \)</td>
-                    <td>\( S_T - 50 \)</td>
-                  </tr>
-                  <tr>
-                    <td><strong>\( S_T > 50 \)</strong></td>
-                    <td>\( S_T - 50 \)</td>
-                    <td>\( 50 - S_T \)</td>
-                    <td>\( 0 \)</td>
-                    <td>\( 0 \)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 7 -->
-      <section id="l05-s07" data-kind="original" data-source-slide="7" data-pdf-page="4" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 7</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li class="active">期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">期权到期回报与净盈亏 (Payoffs & Profit/Loss)</h2>
-            <div class="slide-content">
-              <div style="text-align: center; margin: 6px 0 14px 0;">
-                <img src="assets/lecture-05/option_payoffs_diagram.png" alt="四种基本期权头寸到期回报与净盈亏图示" style="max-height: 380px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;">
-              </div>
-              <ul>
-                <li><strong>到期回报 (Payoff)：</strong>期权在到期日因行权（或放弃行权）所产生的现金结算流入或流出金额。</li>
-                <li><strong>净盈亏 / 净利润 (Profit / Loss)：</strong>期初支付或收取的期权费与到期回报的代数加总：
+</li>
+</ul>
+<div style="font-weight: bold; margin-bottom: 6px; color: #1e293b">执行价格 \( K = 50 \) 时的到期回报测算：</div>
+<table class="slide-table" style="text-align: center">
+<thead>
+<tr>
+<th>到期股票价格</th>
+<th>看涨期权多头</th>
+<th>看涨期权空头</th>
+<th>看跌期权多头</th>
+<th>看跌期权空头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>\( S_T &lt; 50 \)</strong></td>
+<td>\( 0 \)</td>
+<td>\( 0 \)</td>
+<td>\( 50 - S_T \)</td>
+<td>\( S_T - 50 \)</td>
+</tr>
+<tr>
+<td><strong>\( S_T &gt; 50 \)</strong></td>
+<td>\( S_T - 50 \)</td>
+<td>\( 50 - S_T \)</td>
+<td>\( 0 \)</td>
+<td>\( 0 \)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l05-s06-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 6</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li class="active">Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Options Positions</h2>
+<div class="slide-content">
+<ul style="margin-bottom: 12px">
+<li><strong>Long call:</strong> Buyer has right to buy underlying at strike \( K \):
+                  <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">\(\text{Payoff} = \max(S_T - K, 0)\)</div>
+</li>
+<li><strong>Short call:</strong> Writer has obligation to sell underlying at strike \( K \):
+                  <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">\(\text{Payoff} = -\max(S_T - K, 0) = \min(K - S_T, 0)\)</div>
+</li>
+<li><strong>Long put:</strong> Buyer has right to sell underlying at strike \( K \):
+                  <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">\(\text{Payoff} = \max(K - S_T, 0)\)</div>
+</li>
+<li><strong>Short put:</strong> Writer has obligation to buy underlying at strike \( K \):
+                  <div class="equation-box" style="padding: 4px 10px; margin: 4px 0; display: inline-block;">\(\text{Payoff} = -\max(K - S_T, 0) = \min(S_T - K, 0)\)</div>
+</li>
+</ul>
+<div style="font-weight: bold; margin-bottom: 6px;  color: #1e293b">Example Payoffs with Strike \( K = 50 \):</div>
+<table class="slide-table" style="text-align: center">
+<thead>
+<tr>
+<th>Terminal Price</th>
+<th>Long Call</th>
+<th>Short Call</th>
+<th>Long Put</th>
+<th>Short Put</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>\( S_T &lt; 50 \)</strong></td>
+<td>\( 0 \)</td>
+<td>\( 0 \)</td>
+<td>\( 50 - S_T \)</td>
+<td>\( S_T - 50 \)</td>
+</tr>
+<tr>
+<td><strong>\( S_T &gt; 50 \)</strong></td>
+<td>\( S_T - 50 \)</td>
+<td>\( 50 - S_T \)</td>
+<td>\( 0 \)</td>
+<td>\( 0 \)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 7 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l05-s07">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li class="active">期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期权到期回报与净盈亏 (Payoffs &amp; Profit/Loss)</h2>
+<div class="slide-content">
+<div style="text-align: center; margin: 6px 0 14px 0;">
+<img alt="四种基本期权头寸到期回报与净盈亏图示" src="assets/lecture-05/option_payoffs_diagram.png" style="max-height: 380px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+<ul>
+<li><strong>到期回报 (Payoff)：</strong>期权在到期日因行权（或放弃行权）所产生的现金结算流入或流出金额。</li>
+<li><strong>净盈亏 / 净利润 (Profit / Loss)：</strong>期初支付或收取的期权费与到期回报的代数加总：
                   \[ \text{买方净利润} = \text{到期回报} - \text{买入期权费} \]
                   \[ \text{卖方净利润} = \text{到期回报} + \text{卖出期权费} \]
                 </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 8 -->
-      <section id="l05-s08" data-kind="original" data-source-slide="8" data-pdf-page="4" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 8</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li class="active">期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">核心术语：内在价值与时间价值</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>内在价值 (Intrinsic value)：</strong>假定期权立即按标的资产当前价格行权所能获得的理论收益：
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l05-s07-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 7</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li class="active">Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Options Payoffs and Profit/Loss</h2>
+<div class="slide-content">
+<div style="text-align: center; margin: 6px 0 14px 0;">
+<img alt="Options Payoffs and Profit/Loss Diagrams for Long Call, Short Call, Long Put, Short Put" src="assets/lecture-05/option_payoffs_diagram.png" style="max-height: 380px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+<ul>
+<li><strong>Payoff:</strong> The amount received / paid at maturity when the option is exercised.</li>
+<li><strong>Profit / Loss:</strong> The combined amount calculated as the sum of the option's premium paid / received at initiation and the option's payoff at maturity.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 8 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l05-s08">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li class="active">期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">核心术语：内在价值与时间价值</h2>
+<div class="slide-content">
+<ul>
+<li><strong>内在价值 (Intrinsic value)：</strong>假定期权立即按标的资产当前价格行权所能获得的理论收益：
                   <ul>
-                    <li>看涨期权内在价值：\( \max(S_t - K, 0) \)</li>
-                    <li>看跌期权内在价值：\( \max(K - S_t, 0) \)</li>
-                  </ul>
-                </li>
-                <li><strong>时间价值 (Time value)：</strong>期权当前市场价格超出其内在价值的溢价差额：
+<li>看涨期权内在价值：\( \max(S_t - K, 0) \)</li>
+<li>看跌期权内在价值：\( \max(K - S_t, 0) \)</li>
+</ul>
+</li>
+<li><strong>时间价值 (Time value)：</strong>期权当前市场价格超出其内在价值的溢价差额：
                   <div class="equation-box" style="margin: 8px 0; padding: 6px 14px; display: inline-block;">
                     \(\text{期权价格 (Premium)} = \text{内在价值 (Intrinsic Value)} + \text{时间价值 (Time Value)}\)
                   </div>
+<ul>
+<li><em>为什么投资者愿意支付高于内在价值的溢价？</em>因为期权赋予了持有者在未来股价发生有利变动时赚取巨额收益的可能，同时严格锁定了最大潜在下行亏损。</li>
+</ul>
+</li>
+<li><strong>计算案例：</strong>6 月份某股票市场价格为 $43。8 月到期、执行价 $40 的看涨期权内在价值为 \( \$43 - \$40 = \$3 \)。若当前市场期权费报价为 $5，则其时间价值为 \( \$5 - \$3 = \$2 \)。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l05-s08-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 8</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li class="active">Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Terminology</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Intrinsic value:</strong> The payoff if the option was exercised at the current price of the underlying asset:
                   <ul>
-                    <li><em>为什么投资者愿意支付高于内在价值的溢价？</em>因为期权赋予了持有者在未来股价发生有利变动时赚取巨额收益的可能，同时严格锁定了最大潜在下行亏损。</li>
-                  </ul>
-                </li>
-                <li><strong>计算案例：</strong>6 月份某股票市场价格为 $43。8 月到期、执行价 $40 的看涨期权内在价值为 \( \$43 - \$40 = \$3 \)。若当前市场期权费报价为 $5，则其时间价值为 \( \$5 - \$3 = \$2 \)。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 9 -->
-      <section id="l05-s09" data-kind="original" data-source-slide="9" data-pdf-page="5" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 9</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li class="active">值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">核心术语：期权值度 (Moneyness)</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>平值期权 / 平价期权 (At-the-money, ATM)：</strong>
-                  <ul>
-                    <li>标的股票当前市场价格严格等于期权执行价格：\( S_t = K \)</li>
-                    <li>此时内在价值严格为零：\( \max(S_t - K, 0) = 0 \)</li>
-                  </ul>
-                </li>
-                <li><strong>实值期权 / 价内期权 (In-the-money, ITM)：</strong>
-                  <ul>
-                    <li>拥有严格大于零的内在价值的期权：</li>
-                    <li>看涨期权实值条件：\( S_t > K \)</li>
-                    <li>看跌期权实值条件：\( S_t < K \)</li>
-                  </ul>
-                </li>
-                <li><strong>虚值期权 / 价外期权 (Out-of-the-money, OTM)：</strong>
-                  <ul>
-                    <li>内在价值为零且在当前价格下绝不会立即行权的期权：</li>
-                    <li>看涨期权虚值条件：\( S_t < K \)</li>
-                    <li>看跌期权虚值条件：\( S_t > K \)</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- ENRICHMENT 5.A -->
-      <section id="l05-s09-v1" data-kind="enrichment" data-after-source-slide="9">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 拓展 A</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li class="active">值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h3 class="slide-title" style="margin-bottom: 10px">期权价值分解与非线性时间价值衰减</h3>
-            <div class="example-card" style="padding: 10px 16px; margin-bottom: 10px;">
-              <p style="margin: 0">
+<li>Call intrinsic value: \( \max(S_t - K, 0) \)</li>
+<li>Put intrinsic value: \( \max(K - S_t, 0) \)</li>
+</ul>
+</li>
+<li><strong>Time value:</strong> The excess of the option's current market price above its intrinsic value:
+                  <div class="equation-box" style="margin: 8px 0; padding: 6px 14px; display: inline-block;">
+                    \(\text{Option Premium} = \text{Intrinsic Value} + \text{Time Value}\)
+                  </div>
+<ul>
+<li><em>Why pay more than intrinsic value?</em> It provides the possibility of making substantial profit by exercising under favourable future price movements with strictly limited downside.</li>
+</ul>
+</li>
+<li><strong>Example:</strong> In June, a stock trades at $43. The August 40 call then has an intrinsic value of \( \$43 - \$40 = \$3 \). Suppose the option premium is quoted at $5. Its time value is thus \( \$5 - \$3 = \$2 \).</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 9 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l05-s09">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li class="active">值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">核心术语：期权值度 (Moneyness)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>平值期权 / 平价期权 (At-the-money, ATM)：</strong>
+<ul>
+<li>标的股票当前市场价格严格等于期权执行价格：\( S_t = K \)</li>
+<li>此时内在价值严格为零：\( \max(S_t - K, 0) = 0 \)</li>
+</ul>
+</li>
+<li><strong>实值期权 / 价内期权 (In-the-money, ITM)：</strong>
+<ul>
+<li>拥有严格大于零的内在价值的期权：</li>
+<li>看涨期权实值条件：\( S_t &gt; K \)</li>
+<li>看跌期权实值条件：\( S_t &lt; K \)</li>
+</ul>
+</li>
+<li><strong>虚值期权 / 价外期权 (Out-of-the-money, OTM)：</strong>
+<ul>
+<li>内在价值为零且在当前价格下绝不会立即行权的期权：</li>
+<li>看涨期权虚值条件：\( S_t &lt; K \)</li>
+<li>看跌期权虚值条件：\( S_t &gt; K \)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l05-s09-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 9</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li class="active">Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Terminology: Moneyness</h2>
+<div class="slide-content">
+<ul>
+<li><strong>At-the-money (ATM):</strong>
+<ul>
+<li>An option where the current stock price equals strike: \( S_t = K \)</li>
+<li>Its intrinsic value is zero: \( \max(S_t - K, 0) = 0 \)</li>
+</ul>
+</li>
+<li><strong>In-the-money (ITM):</strong>
+<ul>
+<li>An option with positive intrinsic value:</li>
+<li>\( S_t &gt; K \), if it is a call</li>
+<li>\( S_t &lt; K \), if it is a put</li>
+</ul>
+</li>
+<li><strong>Out-of-the-money (OTM):</strong>
+<ul>
+<li>An option with zero intrinsic value that would not be exercised today:</li>
+<li>\( S_t &lt; K \), if it is a call</li>
+<li>\( S_t &gt; K \), if it is a put</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- ENRICHMENT 5.A -->
+<section data-start-indexv="0"><section data-after-source-slide="9" data-kind="enrichment" id="l05-s09-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 拓展 A</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li class="active">值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 10px">期权价值分解与非线性时间价值衰减</h3>
+<div class="example-card" style="padding: 10px 16px; margin-bottom: 10px;">
+<p style="margin: 0">
                 期权的总市场价格由<strong>内在价值</strong>（立即行权价值）与<strong>时间价值</strong>（对未来波动的投机性溢价）两部分构成。时间价值衰减 (\(\theta\)) 呈现严格的<strong>非线性与指数加速特征</strong>，在距到期最后 30 天内衰减速度急剧加快。
               </p>
-            </div>
-            <table class="slide-table" style="margin: 8px 0">
-              <thead>
-                <tr>
-                  <th>执行价格 (\(K\))</th>
-                  <th>期权值度 (\(S_0 = \$125\))</th>
-                  <th>期权总价格</th>
-                  <th>内在价值</th>
-                  <th>时间价值</th>
-                  <th>到期演化行为</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>$120 看涨期权</strong></td>
-                  <td><span style="color: #16a34a; font-weight: bold;">实值 (ITM)</span></td>
-                  <td>$8.50</td>
-                  <td>\( 125 - 120 = \mathbf{\$5.00} \)</td>
-                  <td>$3.50</td>
-                  <td>保留 \( \max(S_T - 120, 0) \)；时间价值衰减归零</td>
-                </tr>
-                <tr>
-                  <td><strong>$125 看涨期权</strong></td>
-                  <td><span style="color: #2563eb; font-weight: bold;">平值 (ATM)</span></td>
-                  <td>$5.00</td>
-                  <td>\( \max(125 - 125, 0) = \mathbf{\$0.00} \)</td>
-                  <td>$5.00 (100%)</td>
-                  <td>拥有最高的时间价值与 Gamma；对波动率变化最敏感</td>
-                </tr>
-                <tr>
-                  <td><strong>$130 看涨期权</strong></td>
-                  <td><span style="color: #dc2626; font-weight: bold;">虚值 (OTM)</span></td>
-                  <td>$2.00</td>
-                  <td>\( \mathbf{\$0.00} \)</td>
-                  <td>$2.00 (100%)</td>
-                  <td>若 \( S_T \le 130 \)，到期价值将 100% 归零作废</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul style="margin-top: 6px">
-              <li><strong>虚值期权到期归宿：</strong>所有虚值期权内在价值均为零。若到期时未能进入实值区间，全部期权费将归零蒸发。</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 11 -->
-      <section id="l05-s10" data-kind="original" data-source-slide="10" data-pdf-page="5" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 10</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li class="active">值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">红利与股票拆分对期权条款的调整</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>公司行为导致的期权条款调整规则：</strong>
-                  <ul>
-                    <li>考虑标的为某股票的 \( N \) 份执行价格为 \( K \) 的期权。</li>
-                    <li><strong>现金红利 (Cash dividends)：</strong>交易所交易期权对上市公司发放的普通现金红利<strong>不作任何条款调整</strong>。</li>
-                    <li><strong>股票拆分 (Stock splits)：</strong>当公司执行 \( n \)-拆-\( m \)（即原 \( m \) 股拆细为 \( n \) 股）时：
+</div>
+<table class="slide-table" style="margin: 8px 0">
+<thead>
+<tr>
+<th>执行价格 (\(K\))</th>
+<th>期权值度 (\(S_0 = \$125\))</th>
+<th>期权总价格</th>
+<th>内在价值</th>
+<th>时间价值</th>
+<th>到期演化行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>$120 看涨期权</strong></td>
+<td><span style="color: #16a34a; font-weight: bold;">实值 (ITM)</span></td>
+<td>$8.50</td>
+<td>\( 125 - 120 = \mathbf{\$5.00} \)</td>
+<td>$3.50</td>
+<td>保留 \( \max(S_T - 120, 0) \)；时间价值衰减归零</td>
+</tr>
+<tr>
+<td><strong>$125 看涨期权</strong></td>
+<td><span style="color: #2563eb; font-weight: bold;">平值 (ATM)</span></td>
+<td>$5.00</td>
+<td>\( \max(125 - 125, 0) = \mathbf{\$0.00} \)</td>
+<td>$5.00 (100%)</td>
+<td>拥有最高的时间价值与 Gamma；对波动率变化最敏感</td>
+</tr>
+<tr>
+<td><strong>$130 看涨期权</strong></td>
+<td><span style="color: #dc2626; font-weight: bold;">虚值 (OTM)</span></td>
+<td>$2.00</td>
+<td>\( \mathbf{\$0.00} \)</td>
+<td>$2.00 (100%)</td>
+<td>若 \( S_T \le 130 \)，到期价值将 100% 归零作废</td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 6px">
+<li><strong>虚值期权到期归宿：</strong>所有虚值期权内在价值均为零。若到期时未能进入实值区间，全部期权费将归零蒸发。</li>
+</ul>
+</div>
+</div>
+</section><section data-after-source-slide="9" data-kind="enrichment" id="l05-s09-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li class="active">Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Decomposing Option Value &amp; Non-Linear Time Decay</h3>
+<div class="example-card" style="padding: 10px 16px; margin-bottom: 10px;">
+<p style="margin: 0"><strong>Core Principle:</strong> An option's total market price consists of two distinct components: <em>Intrinsic Value</em> (immediate exercise value) and <em>Time Value</em> (the speculative premium for potential future stock movements). Time decay (\(\theta\)) is strictly <strong>non-linear and exponential</strong>, accelerating rapidly during the final 30 days before expiration.</p>
+</div>
+<table class="slide-table" style="margin: 8px 0">
+<thead>
+<tr>
+<th>Strike (\(K\))</th>
+<th>Moneyness (\(S_0 = \$125\))</th>
+<th>Total Premium</th>
+<th>Intrinsic Value</th>
+<th>Time Value</th>
+<th>Behavior at Expiration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>$120 Call</strong></td>
+<td><span style="color: #16a34a; font-weight: bold;">In-The-Money (ITM)</span></td>
+<td>$8.50</td>
+<td>\( 125 - 120 = \mathbf{\$5.00} \)</td>
+<td>$3.50</td>
+<td>Retains \( \max(S_T - 120, 0) \); time value decays to $0</td>
+</tr>
+<tr>
+<td><strong>$125 Call</strong></td>
+<td><span style="color: #2563eb; font-weight: bold;">At-The-Money (ATM)</span></td>
+<td>$5.00</td>
+<td>\( \max(125 - 125, 0) = \mathbf{\$0.00} \)</td>
+<td>$5.00 (100%)</td>
+<td>Highest time value / gamma; greatest sensitivity to volatility</td>
+</tr>
+<tr>
+<td><strong>$130 Call</strong></td>
+<td><span style="color: #dc2626; font-weight: bold;">Out-of-The-Money (OTM)</span></td>
+<td>$2.00</td>
+<td>\( \mathbf{\$0.00} \)</td>
+<td>$2.00 (100%)</td>
+<td>Expires completely worthless if \( S_T \le 130 \)</td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 6px">
+<li><strong>OTM Expiration Reality:</strong> All out-of-the-money options have <em>zero intrinsic value</em>. If they remain OTM at maturity, they expire 100% worthless.</li>
+<li><strong>Why pay for OTM?</strong> Traders buy OTM options solely for leverage; small stock movements can produce large percentage gains in the option's time value prior to expiry.</li>
+</ul>
+</div>
+</div>
+</section></section>
+<!-- Slide 11 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l05-s10">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li class="active">值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">红利与股票拆分对期权条款的调整</h2>
+<div class="slide-content">
+<ul>
+<li><strong>公司行为导致的期权条款调整规则：</strong>
+<ul>
+<li>考虑标的为某股票的 \( N \) 份执行价格为 \( K \) 的期权。</li>
+<li><strong>现金红利 (Cash dividends)：</strong>交易所交易期权对上市公司发放的普通现金红利<strong>不作任何条款调整</strong>。</li>
+<li><strong>股票拆分 (Stock splits)：</strong>当公司执行 \( n \)-拆-\( m \)（即原 \( m \) 股拆细为 \( n \) 股）时：
                       <ul>
-                        <li>执行价格相应下调为 \( \frac{m}{n} K \)</li>
-                        <li>每份合约涵盖的股票数量调整为 \( \frac{n}{m} N \)</li>
-                      </ul>
-                    </li>
-                    <li><strong>送红股（股票股利）：</strong>与股票拆分遵循完全相同的调整比例处理。</li>
-                  </ul>
-                </li>
-                <li><strong>典型案例演示：</strong>假设某看涨期权涵盖以每股 $20 买入 100 股标的股票。
+<li>执行价格相应下调为 \( \frac{m}{n} K \)</li>
+<li>每份合约涵盖的股票数量调整为 \( \frac{n}{m} N \)</li>
+</ul>
+</li>
+<li><strong>送红股（股票股利）：</strong>与股票拆分遵循完全相同的调整比例处理。</li>
+</ul>
+</li>
+<li><strong>典型案例演示：</strong>假设某看涨期权涵盖以每股 $20 买入 100 股标的股票。
                   <ul>
-                    <li><em>2-拆-1 股票拆分：</em>该合约调整为有权按每股 \( \$20 \times \frac{1}{2} = \mathbf{\$10} \) 买入 200 股。</li>
-                    <li><em>5% 送红股（股票股利）：</em>等价于 21-拆-20 拆分。执行价调整为 \( \$20 \times \frac{20}{21} = \mathbf{\$19.05} \)，涵盖 105 股。</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 12 -->
-      <section id="l05-s11" data-kind="original" data-source-slide="11" data-pdf-page="6" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 11</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li class="active">值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">交易所交易期权机制 (ETOs)</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>交易所交易期权的标的资产类别：</strong>
+<li><em>2-拆-1 股票拆分：</em>该合约调整为有权按每股 \( \$20 \times \frac{1}{2} = \mathbf{\$10} \) 买入 200 股。</li>
+<li><em>5% 送红股（股票股利）：</em>等价于 21-拆-20 拆分。执行价调整为 \( \$20 \times \frac{20}{21} = \mathbf{\$19.05} \)，涵盖 105 股。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l05-s10-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 10</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li class="active">Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Dividends and Stock Splits</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Option adjustments for corporate actions:</strong>
+<ul>
+<li>Consider \( N \) options with strike \( K \).</li>
+<li><strong>Cash dividends:</strong> No adjustments are made to option terms for ordinary cash dividends on exchange-traded options.</li>
+<li><strong>Stock splits:</strong> When there is an \( n \)-for-\( m \) stock split:
+                      <ul>
+<li>The strike price is reduced to \( \frac{m}{n} K \)</li>
+<li>The number of options is increased to \( \frac{n}{m} N \)</li>
+</ul>
+</li>
+<li><strong>Stock dividends:</strong> Handled in a manner similar to stock splits.</li>
+</ul>
+</li>
+<li><strong>Examples:</strong> Consider a call option to buy 100 shares for $20/share.
                   <ul>
-                    <li>个股股票 &bull; 外汇汇率 (Hull 第15章) &bull; 股票价格指数 (Hull 第15章) &bull; 期货合约 (Hull 第16章)</li>
-                  </ul>
-                </li>
-                <li><strong>保证金制度 (Margins)：</strong>当投资者<strong>卖出（签发/立权）</strong>交易所期权时必须缴纳保证金：
+<li><em>2-for-1 stock split:</em> The option becomes a call to buy 200 shares at \( \$20 \times \frac{1}{2} = \mathbf{\$10} \) per share.</li>
+<li><em>5% stock dividend:</em> Equivalent to a 21-for-20 stock split. Strike becomes \( \$20 \times \frac{20}{21} = \mathbf{\$19.05} \) to buy 105 shares.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 12 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l05-s11">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li class="active">值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">交易所交易期权机制 (ETOs)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>交易所交易期权的标的资产类别：</strong>
+<ul>
+<li>个股股票 • 外汇汇率 (Hull 第15章) • 股票价格指数 (Hull 第15章) • 期货合约 (Hull 第16章)</li>
+</ul>
+</li>
+<li><strong>保证金制度 (Margins)：</strong>当投资者<strong>卖出（签发/立权）</strong>交易所期权时必须缴纳保证金：
                   <ul>
-                    <li>保证金资产形式可包括非现金资产，如合资格股票、银行保函等。</li>
-                    <li>资金流向：投资者 &rarr; 期货/证券经纪商 &rarr; 期权清算所 (OCH)。</li>
-                    <li>仅有现金形式的保证金方可计付利息。</li>
-                  </ul>
-                </li>
-                <li><strong>期权买方无保证金：</strong>买入看涨或看跌期权时，必须在期初全额预付期权费。<em>严禁利用保证金借贷杠杆购买期权。</em></li>
-                <li><strong>做市商制度 (Market Makers)：</strong>绝大多数交易所依托专业做市商持续提供双向流动性支持。</li>
-                <li><strong>双向报价 (The Double)：</strong>做市商在收到询价请求时，必须同时报出具有约束力的买价 (Bid) 与卖价 (Ask)。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 13 -->
-      <section id="l05-s12" data-kind="original" data-source-slide="12" data-pdf-page="6" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 12</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li class="active">价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">影响期权价格的决定因素汇总 (Hull 表 10.1)</h2>
-            <div class="slide-content">
-              <div style="color: #475569; margin-bottom: 10px">保持其他参数严格不变时，单一变量增加对期权理论价格的影响方向汇总：</div>
-              <table class="slide-table" style="text-align: center">
-                <thead>
-                  <tr>
-                    <th style="text-align: left; width: 35%;">市场输入变量</th>
-                    <th>欧式看涨 (\(c\))</th>
-                    <th>欧式看跌 (\(p\))</th>
-                    <th>美式看涨 (\(C\))</th>
-                    <th>美式看跌 (\(P\))</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="text-align: left;"><strong>当前股票价格 (\(S_0\))</strong></td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left;"><strong>执行价格 (\(K\))</strong></td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left;"><strong>距到期时间 (\(T\))</strong></td>
-                    <td style="color: #d97706; font-weight: bold;">?</td>
-                    <td style="color: #d97706; font-weight: bold;">?</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left;"><strong>标的价格波动率 (\(\sigma\))</strong></td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left;"><strong>无风险利率 (\(r\))</strong></td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left;"><strong>预期派发红利现值 (\(D\))</strong></td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                    <td style="color: #dc2626; font-weight: bold;">&minus;</td>
-                    <td style="color: #16a34a; font-weight: bold;">+</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 14 -->
-      <section id="l05-s13" data-kind="original" data-source-slide="13" data-pdf-page="7" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 13</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li class="active">价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">价格影响因素的经济学机制剖析</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>现货价格与执行价格：</strong>
+<li>保证金资产形式可包括非现金资产，如合资格股票、银行保函等。</li>
+<li>资金流向：投资者 → 期货/证券经纪商 → 期权清算所 (OCH)。</li>
+<li>仅有现金形式的保证金方可计付利息。</li>
+</ul>
+</li>
+<li><strong>期权买方无保证金：</strong>买入看涨或看跌期权时，必须在期初全额预付期权费。<em>严禁利用保证金借贷杠杆购买期权。</em></li>
+<li><strong>做市商制度 (Market Makers)：</strong>绝大多数交易所依托专业做市商持续提供双向流动性支持。</li>
+<li><strong>双向报价 (The Double)：</strong>做市商在收到询价请求时，必须同时报出具有约束力的买价 (Bid) 与卖价 (Ask)。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l05-s11-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 11</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li class="active">Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Exchange Traded Options (ETOs)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Assets Underlying ETOs:</strong>
+<ul>
+<li>Stocks • Foreign currency (Hull Ch 15) • Stock Indices (Hull Ch 15) • Futures (Hull Ch 16)</li>
+</ul>
+</li>
+<li><strong>Margins:</strong> Required when exchange-traded options are <strong>sold (written)</strong>:
                   <ul>
-                    <li>看涨期权内在价值：\( S_t - K \)（随 \(S_0\) 上涨而增加，随 \(K\) 上涨而减少）</li>
-                    <li>看跌期权内在价值：\( K - S_t \)（随 \(S_0\) 上涨而减少，随 \(K\) 上涨而增加）</li>
-                  </ul>
-                </li>
-                <li><strong>期限时间：</strong>
-                  <ul>
-                    <li>欧式期权：仅能在到期日行权一次。若延长期限内有大额红利派发，可能压低到期股票价格，导致其欧式看涨价格下降（故方向不确定 "?"）。</li>
-                    <li>美式期权：拥有随时行权的完全自主权 &rarr; 期限越长，选择权越多，价值必定越高。</li>
-                  </ul>
-                </li>
-                <li><strong>波动率：</strong>
-                  <ul>
-                    <li>期权具有“下行亏损有限、上行收益无限”的凸性收益特征：持有者享受有利波动的利润，不利波动时直接放弃行权。</li>
-                    <li>波动率越高，标的资产出现大幅极端有利波动的概率越大，同时推高看涨与看跌期权价值。</li>
-                  </ul>
-                </li>
-                <li><strong>无风险利率：</strong>
-                  <ul>
-                    <li>利率上升提高标的资产的预期增长漂移率，同时降低未来行权支付执行价 \(K\) 的贴现现值。</li>
-                    <li>当 \(r\) 上升时：看涨期权价格上升，看跌期权价格下降。</li>
-                  </ul>
-                </li>
-                <li><strong>预期红利：</strong>除息日股价会因红利剥离而下跌对应金额，因此红利增加降低看涨价格、推高看跌价格。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 15 -->
-      <section id="l05-s14" data-kind="original" data-source-slide="14" data-pdf-page="7" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 14</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li class="active">期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">欧式期权价格理论上下限</h2>
-            <div class="slide-content">
-              <div style="display: flex; gap: 20px; margin-bottom: 12px;">
-                <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
-                  <h4 style="margin: 0 0 8px 0; color: #1e3a8a">无红利资产 (No Dividends)</h4>
-                  <p style="margin: 0 0 6px 0"><strong>看涨期权价格边界：</strong></p>
-                  <ul style="margin: 0 0 10px 0">
-                    <li>下限：\( c \ge \max(S_0 - K e^{-rT}, 0) \)</li>
-                    <li>上限：\( c \le S_0 \)</li>
-                  </ul>
-                  <p style="margin: 0 0 6px 0"><strong>看跌期权价格边界：</strong></p>
-                  <ul style="margin: 0">
-                    <li>下限：\( p \ge \max(K e^{-rT} - S_0, 0) \)</li>
-                    <li>上限：\( p \le K e^{-rT} \)</li>
-                  </ul>
-                </div>
-                <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
-                  <h4 style="margin: 0 0 8px 0; color: #1e3a8a">支付已知红利资产 (\(D = \text{红利现值}\))</h4>
-                  <p style="margin: 0 0 6px 0"><strong>看涨期权价格边界：</strong></p>
-                  <ul style="margin: 0 0 10px 0">
-                    <li>下限：\( c \ge \max(S_0 - D - K e^{-rT}, 0) \)</li>
-                    <li>上限：\( c \le S_0 - D \)</li>
-                  </ul>
-                  <p style="margin: 0 0 6px 0"><strong>看跌期权价格边界：</strong></p>
-                  <ul style="margin: 0">
-                    <li>下限：\( p \ge \max(K e^{-rT} - S_0 + D, 0) \)</li>
-                    <li>上限：\( p \le K e^{-rT} \)</li>
-                  </ul>
-                </div>
+<li>Margin payments can be non-cash assets such as shares, bank guarantees, etc.</li>
+<li>Flow: Investor → Broker → OCH (Option Clearing House)</li>
+<li>Only cash margin earns interest.</li>
+</ul>
+</li>
+<li><strong>Option Buyers:</strong> When call or put options are bought, the option premium must be paid in full upfront. <em>You are not allowed to buy options on margin.</em></li>
+<li><strong>Market Makers:</strong> Most exchanges rely on market makers to facilitate options trading, which adds vital liquidity.</li>
+<li><strong>The Double:</strong> A market maker quotes both bid and ask prices when requested (quoting the "double").</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 13 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l05-s12">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li class="active">价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">影响期权价格的决定因素汇总 (Hull 表 10.1)</h2>
+<div class="slide-content">
+<div style="color: #475569; margin-bottom: 10px">保持其他参数严格不变时，单一变量增加对期权理论价格的影响方向汇总：</div>
+<table class="slide-table" style="text-align: center">
+<thead>
+<tr>
+<th style="text-align: left; width: 35%;">市场输入变量</th>
+<th>欧式看涨 (\(c\))</th>
+<th>欧式看跌 (\(p\))</th>
+<th>美式看涨 (\(C\))</th>
+<th>美式看跌 (\(P\))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>当前股票价格 (\(S_0\))</strong></td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>执行价格 (\(K\))</strong></td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>距到期时间 (\(T\))</strong></td>
+<td style="color: #d97706; font-weight: bold;">?</td>
+<td style="color: #d97706; font-weight: bold;">?</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>标的价格波动率 (\(\sigma\))</strong></td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>无风险利率 (\(r\))</strong></td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>预期派发红利现值 (\(D\))</strong></td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l05-s12-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 12</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li class="active">Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">How the Parameters Affect Option Prices</h2>
+<div class="slide-content">
+<div style="color: #475569; margin-bottom: 10px">
+                Summary of the effect on option price when increasing one variable while holding all other parameters fixed (Hull Table 10.1):
               </div>
-              <div style="color: #64748b">
-                <em>核心原理：</em>若期权实际市场价格违背了上限或下限，套利者即可构建零初始净投资的确定性交易策略，锁定无风险纯利润。
+<table class="slide-table" style="text-align: center">
+<thead>
+<tr>
+<th style="text-align: left; width: 35%;">Variable</th>
+<th>European Call (\(c\))</th>
+<th>European Put (\(p\))</th>
+<th>American Call (\(C\))</th>
+<th>American Put (\(P\))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Current stock price (\(S_0\))</strong></td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Strike price (\(K\))</strong></td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Time to expiration (\(T\))</strong></td>
+<td style="color: #d97706; font-weight: bold;">?</td>
+<td style="color: #d97706; font-weight: bold;">?</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Volatility (\(\sigma\))</strong></td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Risk-free interest rate (\(r\))</strong></td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Amount of future dividends (\(D\))</strong></td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+<td style="color: #dc2626; font-weight: bold;">−</td>
+<td style="color: #16a34a; font-weight: bold;">+</td>
+</tr>
+</tbody>
+</table>
+<div style="color: #64748b; margin-top: 10px">
+<em>Note on \(T\):</em> An American option always benefits from more time (\(+\)) due to early exercise rights. For European options, a longer maturity may push expiration past a major dividend date or compound heavy time decay, making the overall net effect uncertain (?).
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 16 -->
-      <section id="l05-s15" data-kind="original" data-source-slide="15" data-pdf-page="8" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 15</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li class="active">期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">案例 &ndash; 期权价格下限套利机会识别</h2>
-            <div class="slide-subtitle">Hull 课后习题 10.11</div>
-            <div class="slide-content">
-              <ul>
-                <li><strong>已知市场数据：</strong>
-                  <ul>
-                    <li>4 个月期欧式看涨期权：市价 \( c = \$5.00 \)，执行价 \( K = \$60 \)，期限 \( T = 4/12 \) 年</li>
-                    <li>当前标的股价：\( S_0 = \$64 \)，无风险连续年利率：\( r = 12\% \) p.a.</li>
-                    <li>预期 1 个月后派发红利：\( D^* = \$0.80 \)（在 \( t_d = 1/12 \) 年）</li>
-                  </ul>
-                </li>
-                <li><strong>是否存在无风险套利机会？</strong>
-                  <ul>
-                    <li>计算预期红利的贴现现值：\( D = 0.80 e^{-0.12 \times 1/12} = \mathbf{\$0.79} \)</li>
-                    <li>理论上限边界检验：\( c \le S_0 - D = 64 - 0.79 = \mathbf{\$63.21} \)</li>
-                    <li>理论下限边界测算：
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 14 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l05-s13">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li class="active">价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">价格影响因素的经济学机制剖析</h2>
+<div class="slide-content">
+<ul>
+<li><strong>现货价格与执行价格：</strong>
+<ul>
+<li>看涨期权内在价值：\( S_t - K \)（随 \(S_0\) 上涨而增加，随 \(K\) 上涨而减少）</li>
+<li>看跌期权内在价值：\( K - S_t \)（随 \(S_0\) 上涨而减少，随 \(K\) 上涨而增加）</li>
+</ul>
+</li>
+<li><strong>期限时间：</strong>
+<ul>
+<li>欧式期权：仅能在到期日行权一次。若延长期限内有大额红利派发，可能压低到期股票价格，导致其欧式看涨价格下降（故方向不确定 "?"）。</li>
+<li>美式期权：拥有随时行权的完全自主权 → 期限越长，选择权越多，价值必定越高。</li>
+</ul>
+</li>
+<li><strong>波动率：</strong>
+<ul>
+<li>期权具有“下行亏损有限、上行收益无限”的凸性收益特征：持有者享受有利波动的利润，不利波动时直接放弃行权。</li>
+<li>波动率越高，标的资产出现大幅极端有利波动的概率越大，同时推高看涨与看跌期权价值。</li>
+</ul>
+</li>
+<li><strong>无风险利率：</strong>
+<ul>
+<li>利率上升提高标的资产的预期增长漂移率，同时降低未来行权支付执行价 \(K\) 的贴现现值。</li>
+<li>当 \(r\) 上升时：看涨期权价格上升，看跌期权价格下降。</li>
+</ul>
+</li>
+<li><strong>预期红利：</strong>除息日股价会因红利剥离而下跌对应金额，因此红利增加降低看涨价格、推高看跌价格。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l05-s13-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 13</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li class="active">Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">How Parameters Affect Option Prices</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Spot and Strike:</strong>
+<ul>
+<li>Call intrinsic value: \( S_t - K \) (increases with \(S_0\), decreases with \(K\))</li>
+<li>Put intrinsic value: \( K - S_t \) (decreases with \(S_0\), increases with \(K\))</li>
+</ul>
+</li>
+<li><strong>Time:</strong>
+<ul>
+<li>European: only one opportunity to exercise at maturity.</li>
+<li>American: More flexibility on when to exercise → longer life always adds value.</li>
+<li>Dividend expected during the extended period? May reduce European call value.</li>
+</ul>
+</li>
+<li><strong>Volatility:</strong>
+<ul>
+<li>Options eliminate downside risk: owner benefits from upside, walks away on downside.</li>
+<li>Higher volatility increases the probability of large favorable outcomes, raising both calls and puts.</li>
+</ul>
+</li>
+<li><strong>Interest rates:</strong>
+<ul>
+<li>Higher risk-free rate increases expected stock drift and reduces the PV of strike \(K\).</li>
+<li>When \(r\) increases: call price increases, put price decreases.</li>
+</ul>
+</li>
+<li><strong>Dividends:</strong>
+<ul>
+<li>Stock price drops on ex-dividend date by the dividend amount.</li>
+<li>As dividend \(D\) increases: call price decreases, put price increases.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 15 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l05-s14">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li class="active">期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">欧式期权价格理论上下限</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; margin-bottom: 12px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">无红利资产 (No Dividends)</h4>
+<p style="margin: 0 0 6px 0"><strong>看涨期权价格边界：</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>下限：\( c \ge \max(S_0 - K e^{-rT}, 0) \)</li>
+<li>上限：\( c \le S_0 \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>看跌期权价格边界：</strong></p>
+<ul style="margin: 0">
+<li>下限：\( p \ge \max(K e^{-rT} - S_0, 0) \)</li>
+<li>上限：\( p \le K e^{-rT} \)</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">支付已知红利资产 (\(D = \text{红利现值}\))</h4>
+<p style="margin: 0 0 6px 0"><strong>看涨期权价格边界：</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>下限：\( c \ge \max(S_0 - D - K e^{-rT}, 0) \)</li>
+<li>上限：\( c \le S_0 - D \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>看跌期权价格边界：</strong></p>
+<ul style="margin: 0">
+<li>下限：\( p \ge \max(K e^{-rT} - S_0 + D, 0) \)</li>
+<li>上限：\( p \le K e^{-rT} \)</li>
+</ul>
+</div>
+</div>
+<div style="color: #64748b">
+<em>核心原理：</em>若期权实际市场价格违背了上限或下限，套利者即可构建零初始净投资的确定性交易策略，锁定无风险纯利润。
+              </div>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l05-s14-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 14</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li class="active">Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Bounds for European Option Prices</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; margin-bottom: 12px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">No Dividends</h4>
+<p style="margin: 0 0 6px 0"><strong>Call Bounds:</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>Lower Bound: \( c \ge \max(S_0 - K e^{-rT}, 0) \)</li>
+<li>Upper Bound: \( c \le S_0 \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>Put Bounds:</strong></p>
+<ul style="margin: 0">
+<li>Lower Bound: \( p \ge \max(K e^{-rT} - S_0, 0) \)</li>
+<li>Upper Bound: \( p \le K e^{-rT} \)</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">With Dividends (\(D = \text{PV of Dividends}\))</h4>
+<p style="margin: 0 0 6px 0"><strong>Call Bounds:</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>Lower Bound: \( c \ge \max(S_0 - D - K e^{-rT}, 0) \)</li>
+<li>Upper Bound: \( c \le S_0 - D \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>Put Bounds:</strong></p>
+<ul style="margin: 0">
+<li>Lower Bound: \( p \ge \max(K e^{-rT} - S_0 + D, 0) \)</li>
+<li>Upper Bound: \( p \le K e^{-rT} \)</li>
+</ul>
+</div>
+</div>
+<div style="color: #64748b">
+<em>Principle:</em> If the market price violates either the upper or lower bound, arbitrageurs can construct risk-free trading strategies to earn guaranteed profits without net investment.
+              </div>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 16 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l05-s15">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li class="active">期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – 期权价格下限套利机会识别</h2>
+<div class="slide-subtitle">Hull 课后习题 10.11</div>
+<div class="slide-content">
+<ul>
+<li><strong>已知市场数据：</strong>
+<ul>
+<li>4 个月期欧式看涨期权：市价 \( c = \$5.00 \)，执行价 \( K = \$60 \)，期限 \( T = 4/12 \) 年</li>
+<li>当前标的股价：\( S_0 = \$64 \)，无风险连续年利率：\( r = 12\% \) p.a.</li>
+<li>预期 1 个月后派发红利：\( D^* = \$0.80 \)（在 \( t_d = 1/12 \) 年）</li>
+</ul>
+</li>
+<li><strong>是否存在无风险套利机会？</strong>
+<ul>
+<li>计算预期红利的贴现现值：\( D = 0.80 e^{-0.12 \times 1/12} = \mathbf{\$0.79} \)</li>
+<li>理论上限边界检验：\( c \le S_0 - D = 64 - 0.79 = \mathbf{\$63.21} \)</li>
+<li>理论下限边界测算：
                       <div class="equation-box" style="margin: 6px 0; padding: 6px 12px; display: inline-block;">
                         \( c \ge (S_0 - D) - K e^{-rT} = (64 - 0.79) - 60 e^{-0.12 \times 4/12} = 63.21 - 57.65 = \mathbf{\$5.56} \)
                       </div>
-                    </li>
-                  </ul>
-                </li>
-                <li><strong>套利结论：</strong>
-                  当前看涨期权市场交易价格 <strong>$5.00 显著偏低</strong>（\( \$5.00 < \$5.56 \)）。
+</li>
+</ul>
+</li>
+<li><strong>套利结论：</strong>
+                  当前看涨期权市场交易价格 <strong>$5.00 显著偏低</strong>（\( \$5.00 &lt; \$5.56 \)）。
                   <ul>
-                    <li>跌破理论绝对下限 &rarr; <em>存在无风险套利机会（买入严重低估的看涨期权）！</em></li>
-                    <li>套利者今日即可在零初始资金下，锁定至少 \( \$5.56 - \$5.00 = \mathbf{\$0.56} \) 的确定性现值利润。</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 17 -->
-      <section id="l05-s16" data-kind="original" data-source-slide="16" data-pdf-page="8" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 16</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li class="active">期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">案例 &ndash; 期权下限套利策略具体执行</h2>
-            <div class="slide-subtitle">Hull 习题 10.11：分步套利交易策略设计</div>
-            <div class="slide-content">
-              <ul>
-                <li><strong>今日执行操作 (\(t = 0\))：</strong>
+<li>跌破理论绝对下限 → <em>存在无风险套利机会（买入严重低估的看涨期权）！</em></li>
+<li>套利者今日即可在零初始资金下，锁定至少 \( \$5.56 - \$5.00 = \mathbf{\$0.56} \) 的确定性现值利润。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l05-s15-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 15</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li class="active">Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Option Bound Arbitrage</h2>
+<div class="slide-subtitle">Hull Problem 10.11</div>
+<div class="slide-content">
+<ul>
+<li><strong>Given Data:</strong>
+<ul>
+<li>Four-month European call: \( c = \$5.00 \), Strike \( K = \$60 \), Maturity \( T = 4/12 \)</li>
+<li>Current stock price: \( S_0 = \$64 \), Risk-free rate: \( r = 12\% \) p.a.</li>
+<li>Dividend expected in one month: \( D^* = \$0.80 \) (at \( t_d = 1/12 \))</li>
+</ul>
+</li>
+<li><strong>Is there an arbitrage opportunity?</strong>
+<ul>
+<li>Present value of dividend: \( D = 0.80 e^{-0.12 \times 1/12} = \mathbf{\$0.79} \)</li>
+<li>Upper bound: \( c \le S_0 - D = 64 - 0.79 = \mathbf{\$63.21} \)</li>
+<li>Lower bound:
+                      <div class="equation-box" style="margin: 6px 0; padding: 6px 12px; display: inline-block;">
+                        \( c \ge (S_0 - D) - K e^{-rT} = (64 - 0.79) - 60 e^{-0.12 \times 4/12} = 63.21 - 57.65 = \mathbf{\$5.56} \)
+                      </div>
+</li>
+</ul>
+</li>
+<li><strong>Conclusion:</strong> The call market price of <strong>$5.00 is too low</strong> (\( \$5.00 &lt; \$5.56 \)).
                   <ul>
-                    <li>融券卖空 1 股标的股票，价格 $64 &rarr; <em>现金流入：+$64</em></li>
-                    <li>买入 1 份欧式看涨期权，价格 $5 &rarr; <em>现金流出：-$5</em></li>
-                    <li>将 $0.79 资金存入 1 个月期银行存款（按 12% 计息），以完全匹配应付红利</li>
-                    <li>将剩余全部款项 \( \$(64 - 5 - 0.79) = \mathbf{\$58.21} \) 存入 4 个月期银行存款（按 12% 计息）</li>
-                    <li><em>初始净现金流投入：严格等于 $0.00！</em></li>
-                  </ul>
-                </li>
-                <li><strong>1 个月后 (\(t = 1/12\))：</strong>
-                  <ul>
-                    <li>1 个月期银行存款本息收回：\( \$0.79 e^{0.12 \times 1/12} = \$0.80 \)。</li>
-                    <li>将该 $0.80 支付给融券出借人作为红利补偿。净现金流完全对冲为 $0。</li>
-                  </ul>
-                </li>
-                <li><strong>4 个月到期日 (\(t = 4/12\))：</strong>
-                  <ul>
-                    <li>收回 4 个月期银行存款本息：\( \$58.21 e^{0.12 \times 4/12} = \mathbf{\$60.58} \)。</li>
-                    <li>若 \( S_T \ge 60 \)：期权处于实值 &rarr; 行权按 $60 购买 1 股股票并还券平仓。</li>
-                    <li>若 \( S_T < 60 \)：期权处于虚值放弃 &rarr; 直接在现货市场以 \( S_T < 60 \) 买入股票还券平仓。</li>
-                    <li>无论股价如何，还券平仓成本最高不超过 $60。</li>
-                    <li><strong>到期确定性净利润：</strong>\( \$60.58 - \min(S_T, 60) \ge \mathbf{\$0.58} \)；折算为今日现值恰为 \( \mathbf{\$0.56} \)！</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- ENRICHMENT 5.B -->
-      <section id="l05-s16-v1" data-kind="enrichment" data-after-source-slide="16">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 拓展 B</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li class="active">期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h3 class="slide-title" style="margin-bottom: 8px">含红利看涨期权下限套利全流程现金流</h3>
-            <div style="margin-bottom: 8px; color: #334155">
+<li>Violates the lower bound → <em>arbitrage opportunity (buy the undervalued call)!</em></li>
+<li>A minimum risk-less profit of \( \$5.56 - \$5.00 = \mathbf{\$0.56} \) can be locked in today.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 17 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l05-s16">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li class="active">期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – 期权下限套利策略具体执行</h2>
+<div class="slide-subtitle">Hull 习题 10.11：分步套利交易策略设计</div>
+<div class="slide-content">
+<ul>
+<li><strong>今日执行操作 (\(t = 0\))：</strong>
+<ul>
+<li>融券卖空 1 股标的股票，价格 $64 → <em>现金流入：+$64</em></li>
+<li>买入 1 份欧式看涨期权，价格 $5 → <em>现金流出：-$5</em></li>
+<li>将 $0.79 资金存入 1 个月期银行存款（按 12% 计息），以完全匹配应付红利</li>
+<li>将剩余全部款项 \( \$(64 - 5 - 0.79) = \mathbf{\$58.21} \) 存入 4 个月期银行存款（按 12% 计息）</li>
+<li><em>初始净现金流投入：严格等于 $0.00！</em></li>
+</ul>
+</li>
+<li><strong>1 个月后 (\(t = 1/12\))：</strong>
+<ul>
+<li>1 个月期银行存款本息收回：\( \$0.79 e^{0.12 \times 1/12} = \$0.80 \)。</li>
+<li>将该 $0.80 支付给融券出借人作为红利补偿。净现金流完全对冲为 $0。</li>
+</ul>
+</li>
+<li><strong>4 个月到期日 (\(t = 4/12\))：</strong>
+<ul>
+<li>收回 4 个月期银行存款本息：\( \$58.21 e^{0.12 \times 4/12} = \mathbf{\$60.58} \)。</li>
+<li>若 \( S_T \ge 60 \)：期权处于实值 → 行权按 $60 购买 1 股股票并还券平仓。</li>
+<li>若 \( S_T &lt; 60 \)：期权处于虚值放弃 → 直接在现货市场以 \( S_T &lt; 60 \) 买入股票还券平仓。</li>
+<li>无论股价如何，还券平仓成本最高不超过 $60。</li>
+<li><strong>到期确定性净利润：</strong>\( \$60.58 - \min(S_T, 60) \ge \mathbf{\$0.58} \)；折算为今日现值恰为 \( \mathbf{\$0.56} \)！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l05-s16-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 16</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li class="active">Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Option Bound Arbitrage Execution</h2>
+<div class="slide-subtitle">Hull Problem 10.11: Step-by-Step Arbitrage Strategy</div>
+<div class="slide-content">
+<ul>
+<li><strong>Today (\(t = 0\)):</strong>
+<ul>
+<li>Short sell 1 share of stock at $64 → <em>cash inflow: +$64</em></li>
+<li>Buy 1 call option for $5 → <em>cash outflow: -$5</em></li>
+<li>Invest $0.79 of proceeds for 1 month at 12% to fund the dividend payment</li>
+<li>Invest remaining \( \$(64 - 5 - 0.79) = \mathbf{\$58.21} \) at 12% for four months</li>
+<li><em>Initial net investment: Exactly $0.00!</em></li>
+</ul>
+</li>
+<li><strong>After 1 month:</strong>
+<ul>
+<li>Collect \( \$0.79 e^{0.12 \times 1/12} = \$0.80 \) from the 1-month investment.</li>
+<li>Pay the $0.80 dividend required on the short stock position. Net cash flow = $0.</li>
+</ul>
+</li>
+<li><strong>After 4 months (Maturity):</strong>
+<ul>
+<li>Collect investment of \( \$58.21 e^{0.12 \times 4/12} = \mathbf{\$60.58} \)</li>
+<li>If \( S_T \ge 60 \): Call is ITM → exercise call to buy stock at $60.</li>
+<li>If \( S_T &lt; 60 \): Call is OTM → let call expire, buy stock on spot market for \( S_T &lt; 60 \).</li>
+<li>Deliver stock to close short position. Net cost is at most $60.</li>
+<li><strong>Guaranteed Net Profit:</strong> \( \$60.58 - \min(S_T, 60) \ge \mathbf{\$0.58} \) in 4 months, or \( \$0.58 e^{-0.12 \times 4/12} = \mathbf{\$0.56} \) today!</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- ENRICHMENT 5.B -->
+<section data-start-indexv="0"><section data-after-source-slide="16" data-kind="enrichment" id="l05-s16-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 拓展 B</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li class="active">期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">含红利看涨期权下限套利全流程现金流</h3>
+<div style="margin-bottom: 8px; color: #334155">
               XYZ 公司 10 个月期欧式看涨期权市价 \( c = \$3.00 \)。当前股价 \( S_0 = \$22.50 \)，执行价 \( K = \$18.00 \)，8 个月后预期派发红利 \( \$1.50 \)（\( t_d = 8/12 \)），无风险连续利率 \( r = 7\% \) p.a.。
-              <br>
-              <strong>下限边界测算：</strong>\( PV(D) = 1.50 e^{-0.07 \times 8/12} = \$1.43 \)。理论下限：\( c \ge S_0 - D - K e^{-rT} = 22.50 - 1.43 - 18 e^{-0.07 \times 10/12} = 21.07 - 16.98 = \mathbf{\$4.09} \)。由于市价 \( c = \$3.00 < \$4.09 \)，该期权被低估 $1.09！
+              <br/>
+<strong>下限边界测算：</strong>\( PV(D) = 1.50 e^{-0.07 \times 8/12} = \$1.43 \)。理论下限：\( c \ge S_0 - D - K e^{-rT} = 22.50 - 1.43 - 18 e^{-0.07 \times 10/12} = 21.07 - 16.98 = \mathbf{\$4.09} \)。由于市价 \( c = \$3.00 &lt; \$4.09 \)，该期权被低估 $1.09！
             </div>
-            <table class="slide-table" style="margin: 4px 0">
-              <thead>
-                <tr>
-                  <th>交易时间节点</th>
-                  <th>具体对冲交易动作</th>
-                  <th>现金流收支 ($)</th>
-                  <th>经济目标与结算机理</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>今日 (\(t=0\))</strong></td>
-                  <td>融券卖空 1 股 XYZ 股票<br>买入 1 份欧式看涨期权<br>存入 8 个月期红利专用存款 \(PV(D)\)<br>剩余资金存入 10 个月期存款</td>
-                  <td style="font-weight: bold;">
-                    \( +22.50 \)<br>\( -3.00 \)<br>\( -1.43 \)<br>\( -18.07 \)<br><strong>净投入: $0.00</strong>
+<table class="slide-table" style="margin: 4px 0">
+<thead>
+<tr>
+<th>交易时间节点</th>
+<th>具体对冲交易动作</th>
+<th>现金流收支 ($)</th>
+<th>经济目标与结算机理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>今日 (\(t=0\))</strong></td>
+<td>融券卖空 1 股 XYZ 股票<br/>买入 1 份欧式看涨期权<br/>存入 8 个月期红利专用存款 \(PV(D)\)<br/>剩余资金存入 10 个月期存款</td>
+<td style="font-weight: bold;">
+                    \( +22.50 \)<br/>\( -3.00 \)<br/>\( -1.43 \)<br/>\( -18.07 \)<br/><strong>净投入: $0.00</strong>
+</td>
+<td>以卖空现货所得资金资助被低估期权的买入。<br/>支付期权报价。<br/>按 7% 复利到期恰好支付 $1.50 红利。<br/>剩余资金 \( 22.50 - 3.00 - 1.43 = \$18.07 \) 赚取利息。<br/><strong>零初始资金投入（完全自融资）。</strong></td>
+</tr>
+<tr>
+<td><strong>第 8 个月 (\(t_d\))</strong></td>
+<td>收回 8 个月期红利专用存款本息<br/>向股票融券方支付 $1.50 红利</td>
+<td style="font-weight: bold;">
+                    \( +1.50 \)<br/>\( -1.50 \)<br/><strong>净现金流: $0.00</strong>
+</td>
+<td>\( \$1.43 e^{0.07 \times 8/12} = \$1.50 \)。<br/>红利支付义务被存款精确完全抵消，无额外现金敞口。</td>
+</tr>
+<tr>
+<td><strong>第 10 个月 (\(T\))</strong></td>
+<td>收回 10 个月期存款本金与利息<br/>平仓归还融券股票（行权或现货购买）</td>
+<td style="font-weight: bold;">
+                    \( +19.16 \)<br/>\( -\min(S_T, 18.00) \)<br/><strong>净利润: ≥ $1.16</strong>
+</td>
+<td>\( \$18.07 e^{0.07 \times 10/12} = \mathbf{\$19.16} \)。<br/>若 \( S_T \ge 18 \)，行权按 $18 买入；若 \( S_T &lt; 18 \)，按 \( S_T \) 现货买入。<br/><strong>到期锁定净利润 \( \$19.16 - \$18.00 = \mathbf{\$1.16} \)（现值 $1.09）！</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section data-after-source-slide="16" data-kind="enrichment" id="l05-s16-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li class="active">Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Dividend-Adjusted Call Lower Bound Arbitrage</h3>
+<div style="margin-bottom: 8px; color: #334155">
+<strong>Problem Setup:</strong> Ten-month European call on XYZ trading at \( c = \$3.00 \). Current share price \( S_0 = \$22.50 \), strike \( K = \$18.00 \), dividend of \( \$1.50 \) expected in 8 months (\( t_d = 8/12 \)), \( r = 7\% \) p.a. continuously compounded.<br/>
+<strong>Bound Calculation:</strong> \( PV(D) = 1.50 e^{-0.07 \times 8/12} = \$1.43 \). Lower bound: \( c \ge S_0 - D - K e^{-rT} = 22.50 - 1.43 - 18 e^{-0.07 \times 10/12} = 21.07 - 16.98 = \mathbf{\$4.09} \). Since market \( c = \$3.00 &lt; \$4.09 \), the call is underpriced by $1.09!
+            </div>
+<table class="slide-table" style="margin: 4px 0">
+<thead>
+<tr>
+<th>Time</th>
+<th>Action / Transaction</th>
+<th>Cash Flow</th>
+<th>Explanation / Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Today (\(t=0\))</strong></td>
+<td>Short sell 1 share of XYZ<br/>Buy 1 European call option<br/>Invest \(PV(D)\) in 8-month deposit<br/>Invest remaining cash in 10-month deposit</td>
+<td style="font-weight: bold;">
+                    \( +22.50 \)<br/>
+                    \( -3.00 \)<br/>
+                    \( -1.43 \)<br/>
+                    \( -18.07 \)<br/>
+<strong>Net: $0.00</strong>
+</td>
+<td>
+                    Sell stock at spot to fund purchase of cheap call.<br/>
+                    Quoted market premium.<br/>
+                    Compounds at 7% to exactly fund the $1.50 dividend.<br/>
+                    Remaining proceeds \( 22.50 - 3.00 - 1.43 = \$18.07 \) earn 7%.<br/>
+<strong>Zero initial investment (Cost-neutral).</strong>
+</td>
+</tr>
+<tr>
+<td><strong>Month 8 (\(t_d\))</strong></td>
+<td>Collect 8-month deposit<br/>Pay dividend on borrowed stock</td>
+<td style="font-weight: bold;">
+                    \( +1.50 \)<br/>
+                    \( -1.50 \)<br/>
+<strong>Net: $0.00</strong>
+</td>
+<td>
+                    \( \$1.43 e^{0.07 \times 8/12} = \$1.50 \).<br/>
+                    Obligation to lender paid in full; perfectly matched.
                   </td>
-                  <td>以卖空现货所得资金资助被低估期权的买入。<br>支付期权报价。<br>按 7% 复利到期恰好支付 $1.50 红利。<br>剩余资金 \( 22.50 - 3.00 - 1.43 = \$18.07 \) 赚取利息。<br><strong>零初始资金投入（完全自融资）。</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>第 8 个月 (\(t_d\))</strong></td>
-                  <td>收回 8 个月期红利专用存款本息<br>向股票融券方支付 $1.50 红利</td>
-                  <td style="font-weight: bold;">
-                    \( +1.50 \)<br>\( -1.50 \)<br><strong>净现金流: $0.00</strong>
+</tr>
+<tr>
+<td><strong>Month 10 (\(T\))</strong></td>
+<td>Collect 10-month deposit<br/>Close out short stock position:
+                    <ul style="margin: 0; padding-left: 14px;">
+<li>If \( S_T \ge 18 \): Exercise call at $18</li>
+<li>If \( S_T &lt; 18 \): Buy stock in market at \( S_T \)</li>
+</ul>
+</td>
+<td style="font-weight: bold;">
+                    \( +19.16 \)<br/>
+                    \( -\min(S_T, 18) \)<br/>
+<span style="color: #16a34a;"><strong>Min Net: +$1.16</strong></span>
+</td>
+<td>
+                    \( \$18.07 e^{0.07 \times 10/12} = \mathbf{\$19.16} \).<br/>
+                    Maximum cost to acquire stock to close short position is \( \$18.00 \).<br/>
+<strong>Guaranteed Risk-Free Profit:</strong><br/>
+                    \( \$19.16 - \$18.00 = \mathbf{\$1.16} \) at month 10<br/>
+                    (Present value: \( 1.16 e^{-0.07 \times 10/12} = \mathbf{\$1.09} \)).
                   </td>
-                  <td>\( \$1.43 e^{0.07 \times 8/12} = \$1.50 \)。<br>红利支付义务被存款精确完全抵消，无额外现金敞口。</td>
-                </tr>
-                <tr>
-                  <td><strong>第 10 个月 (\(T\))</strong></td>
-                  <td>收回 10 个月期存款本金与利息<br>平仓归还融券股票（行权或现货购买）</td>
-                  <td style="font-weight: bold;">
-                    \( +19.16 \)<br>\( -\min(S_T, 18.00) \)<br><strong>净利润: &ge; $1.16</strong>
-                  </td>
-                  <td>\( \$18.07 e^{0.07 \times 10/12} = \mathbf{\$19.16} \)。<br>若 \( S_T \ge 18 \)，行权按 $18 买入；若 \( S_T < 18 \)，按 \( S_T \) 现货买入。<br><strong>到期锁定净利润 \( \$19.16 - \$18.00 = \mathbf{\$1.16} \)（现值 $1.09）！</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 19 -->
-      <section id="l05-s17" data-kind="original" data-source-slide="17" data-pdf-page="9" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 17</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li class="active">买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">买卖权平价定理 (Put-Call Parity)</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>构建以下两个基准投资组合：</strong>
-                  <ul>
-                    <li><strong>组合 A (Portfolio A)：</strong>1 份欧式看涨期权 + 面值为执行价 \(K\) 的零息债券（现金贴现值）：\( c + K e^{-rT} \)</li>
-                    <li><strong>组合 B (Portfolio B)：</strong>1 份欧式看跌期权 + 1 股标的现货股票：\( p + S_0 \)</li>
-                  </ul>
-                </li>
-                <li><strong>到期日 (\(T\)) 两个组合的收益表现：</strong>
-                  <ul>
-                    <li>组合 A 到期价值：\( \max(S_T - K, 0) + K = \max(S_T, K) \)</li>
-                    <li>组合 B 到期价值：\( \max(K - S_T, 0) + S_T = \max(S_T, K) \)</li>
-                  </ul>
-                </li>
-                <li><strong>无套利平价等式：</strong>由于两个组合在到期日所有可能的状态下收益完全相同，根据一价定律，它们今日的市场价值必须严格相等：
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section></section>
+<!-- Slide 19 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l05-s17">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li class="active">买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">买卖权平价定理 (Put-Call Parity)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>构建以下两个基准投资组合：</strong>
+<ul>
+<li><strong>组合 A (Portfolio A)：</strong>1 份欧式看涨期权 + 面值为执行价 \(K\) 的零息债券（现金贴现值）：\( c + K e^{-rT} \)</li>
+<li><strong>组合 B (Portfolio B)：</strong>1 份欧式看跌期权 + 1 股标的现货股票：\( p + S_0 \)</li>
+</ul>
+</li>
+<li><strong>到期日 (\(T\)) 两个组合的收益表现：</strong>
+<ul>
+<li>组合 A 到期价值：\( \max(S_T - K, 0) + K = \max(S_T, K) \)</li>
+<li>组合 B 到期价值：\( \max(K - S_T, 0) + S_T = \max(S_T, K) \)</li>
+</ul>
+</li>
+<li><strong>无套利平价等式：</strong>由于两个组合在到期日所有可能的状态下收益完全相同，根据一价定律，它们今日的市场价值必须严格相等：
                   <div class="equation-box" style="margin: 10px 0">
                     \[ c + K e^{-rT} = p + S_0 \]
                   </div>
-                </li>
-                <li><strong>支付已知红利资产的修正形式（其中 \(D = \text{红利现值}\)):</strong>
-                  <div class="equation-box" style="margin: 10px 0">
+</li>
+<li><strong>支付已知红利资产的修正形式（其中 \(D = \text{红利现值}\)):</strong>
+<div class="equation-box" style="margin: 10px 0">
                     \[ c + K e^{-rT} = p + S_0 - D \]
                   </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 20 -->
-      <section id="l05-s18" data-kind="original" data-source-slide="18" data-pdf-page="9" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 18</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li class="active">平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">案例 &ndash; 买卖权平价套利机会识别</h2>
-            <div class="slide-subtitle">Hull 课后习题 10.15</div>
-            <div class="slide-content">
-              <ul>
-                <li><strong>已知市场数据：</strong>
-                  <ul>
-                    <li>欧式期权执行价 \( K = \$30 \)，期限 \( T = 0.5 \)（6 个月），无风险利率 \( r = 10\% \) p.a.</li>
-                    <li>当前市场价格：\( c = \$2.00 \)，\( p = \$3.00 \)，股票现价：\( S_0 = \$29.00 \)</li>
-                    <li>预期红利：2 个月后与 5 个月后分别派发 \( \$0.50 \)（\(t_1 = 2/12\), \(t_2 = 5/12\)）</li>
-                  </ul>
-                </li>
-                <li><strong>平价等式偏离检验：</strong>
-                  <ul>
-                    <li>红利贴现现值：\( D = 0.50 e^{-0.10 \times 2/12} + 0.50 e^{-0.10 \times 5/12} = 0.4917 + 0.4795 = \mathbf{\$0.97} \)</li>
-                    <li>测算平价方程两端价值：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l05-s17-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 17</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li class="active">Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Put-Call Parity</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Consider the following two portfolios:</strong>
+<ul>
+<li><strong>Portfolio A:</strong> One European call option on a stock plus the PV of the strike price in cash: \( c + K e^{-rT} \)</li>
+<li><strong>Portfolio B:</strong> One European put option on the stock plus one share of stock: \( p + S_0 \)</li>
+</ul>
+</li>
+<li><strong>Payoff at maturity (\(T\)):</strong>
+<ul>
+<li>Portfolio A: \( \max(S_T - K, 0) + K = \max(S_T, K) \)</li>
+<li>Portfolio B: \( \max(K - S_T, 0) + S_T = \max(S_T, K) \)</li>
+</ul>
+</li>
+<li><strong>No-Arbitrage Relationship:</strong> Both portfolios yield identical payoffs under all possible states of the world at maturity. Therefore, they must have the same market value today:
+                  <div class="equation-box" style="margin: 10px 0">
+                    \( c + K e^{-rT} = p + S_0 \)
+                  </div>
+</li>
+<li><strong>For a dividend-paying stock (with \(D = \text{PV of dividends}\)):</strong>
+<div class="equation-box" style="margin: 10px 0">
+                    \( c + K e^{-rT} = p + S_0 - D \)
+                  </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 20 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l05-s18">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li class="active">平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – 买卖权平价套利机会识别</h2>
+<div class="slide-subtitle">Hull 课后习题 10.15</div>
+<div class="slide-content">
+<ul>
+<li><strong>已知市场数据：</strong>
+<ul>
+<li>欧式期权执行价 \( K = \$30 \)，期限 \( T = 0.5 \)（6 个月），无风险利率 \( r = 10\% \) p.a.</li>
+<li>当前市场价格：\( c = \$2.00 \)，\( p = \$3.00 \)，股票现价：\( S_0 = \$29.00 \)</li>
+<li>预期红利：2 个月后与 5 个月后分别派发 \( \$0.50 \)（\(t_1 = 2/12\), \(t_2 = 5/12\)）</li>
+</ul>
+</li>
+<li><strong>平价等式偏离检验：</strong>
+<ul>
+<li>红利贴现现值：\( D = 0.50 e^{-0.10 \times 2/12} + 0.50 e^{-0.10 \times 5/12} = 0.4917 + 0.4795 = \mathbf{\$0.97} \)</li>
+<li>测算平价方程两端价值：
                       <div class="equation-box" style="margin: 6px 0; padding: 6px 12px">
                         \(\text{左端 (LHS)} = c + K e^{-rT} = 2.00 + 30 e^{-0.10 \times 6/12} = 2.00 + 28.54 = \mathbf{\$30.54}\)
-                        <br>
+                        <br/>
                         \(\text{右端 (RHS)} = p + S_0 - D = 3.00 + 29.00 - 0.97 = \mathbf{\$31.03}\)
                       </div>
-                    </li>
-                  </ul>
-                </li>
-                <li><strong>平价偏离套利结论：</strong>
+</li>
+</ul>
+</li>
+<li><strong>平价偏离套利结论：</strong>
                   \( \text{LHS } (\$30.54) \ne \text{RHS } (\$31.03) \)。
                   <ul>
-                    <li>右端（\(p + S_0 - D\)）相对<strong>被高估</strong>；左端（\(c + K e^{-rT}\)）相对<strong>被低估</strong>。</li>
-                    <li>套利策略：<strong>卖出高估的右端资产组合，买入低估的左端资产组合</strong>。</li>
-                    <li>今日即可锁定确定性无风险套利利润：\( \$31.03 - \$30.54 = \mathbf{\$0.49} \)！</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 21 -->
-      <section id="l05-s19" data-kind="original" data-source-slide="19" data-pdf-page="10" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 19</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li class="active">平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">案例 &ndash; 平价套利具体执行步骤</h2>
-            <div class="slide-subtitle">Hull 习题 10.15：分步套利交易策略执行</div>
-            <div class="slide-content">
-              <ul>
-                <li><strong>今日执行构建 (\(t = 0\))：</strong>
+<li>右端（\(p + S_0 - D\)）相对<strong>被高估</strong>；左端（\(c + K e^{-rT}\)）相对<strong>被低估</strong>。</li>
+<li>套利策略：<strong>卖出高估的右端资产组合，买入低估的左端资产组合</strong>。</li>
+<li>今日即可锁定确定性无风险套利利润：\( \$31.03 - \$30.54 = \mathbf{\$0.49} \)！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l05-s18-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 18</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li class="active">Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Put-Call Parity Arbitrage</h2>
+<div class="slide-subtitle">Hull Problem 10.15</div>
+<div class="slide-content">
+<ul>
+<li><strong>Given Data:</strong>
+<ul>
+<li>European options with \( K = \$30 \), \( T = 0.5 \) (6 months), \( r = 10\% \) p.a.</li>
+<li>Prices: \( c = \$2.00 \), \( p = \$3.00 \), Spot price: \( S_0 = \$29.00 \)</li>
+<li>Dividends: \( D^* = \$0.50 \) in two months (\(t_1 = 2/12\)) and five months (\(t_2 = 5/12\))</li>
+</ul>
+</li>
+<li><strong>Is there an arbitrage opportunity?</strong>
+<ul>
+<li>Present value of dividends:
+                      \( D = 0.50 e^{-0.10 \times 2/12} + 0.50 e^{-0.10 \times 5/12} = 0.4917 + 0.4795 = \mathbf{\$0.97} \)
+                    </li>
+<li>Evaluate Put-Call Parity:
+                      <div class="equation-box" style="margin: 6px 0; padding: 6px 12px">
+                        \(\text{LHS} = c + K e^{-rT} = 2.00 + 30 e^{-0.10 \times 6/12} = 2.00 + 28.54 = \mathbf{\$30.54}\)<br/>
+                        \(\text{RHS} = p + S_0 - D = 3.00 + 29.00 - 0.97 = \mathbf{\$31.03}\)
+                      </div>
+</li>
+</ul>
+</li>
+<li><strong>Violation:</strong> \( \text{LHS } (\$30.54) \ne \text{RHS } (\$31.03) \).
                   <ul>
-                    <li>融券卖空 1 股股票，得 $29 &rarr; <em>现金流入：+$29.00</em></li>
-                    <li>卖出（签发）1 份看跌期权，得 $3 &rarr; <em>现金流入：+$3.00</em></li>
-                    <li>买入 1 份看涨期权，支付 $2 &rarr; <em>现金流出：-$2.00</em></li>
-                    <li>将 $0.97 存入银行存款（按 10% 计息），专门用于支付两期红利</li>
-                    <li>将剩余全部净资金 \( \$(29 + 3 - 2 - 0.97) = \mathbf{\$29.03} \) 存入 6 个月期银行存款（按 10% 计息）</li>
-                    <li><em>初始净资金投入：严格等于 $0.00！</em></li>
-                  </ul>
-                </li>
-                <li><strong>第 2 个月与第 5 个月：</strong>利用到期的红利专用存款，精确支付两笔 $0.50 红利补偿。</li>
-                <li><strong>第 6 个月到期日 (\(T = 0.5\))：</strong>
-                  <ul>
-                    <li>若 \( S_T \ge 30 \)：看涨期权实值 &rarr; 主动行权按 $30 买入 1 股股票；看跌期权空头虚值作废。</li>
-                    <li>若 \( S_T < 30 \)：看跌期权被对手方行权 &rarr; 被动按 $30 履约买入 1 股股票；看涨期权虚值作废。</li>
-                    <li><em>无论股价如何，必定恰好以 $30 买入 1 股股票还券平仓！</em></li>
-                    <li>6 个月期存款本息收回：\( \$29.03 e^{0.10 \times 6/12} = \mathbf{\$30.52} \)。</li>
-                    <li><strong>到期锁定净套利利润：</strong>\( \$30.52 - \$30.00 = \mathbf{\$0.52} \)；今日折现净值为 \( \mathbf{\$0.49} \)！</li>
-                  </ul>
-                </li>
-              </ul>
+<li>The RHS (\(p + S_0 - D\)) is <strong>overvalued</strong>; the LHS (\(c + K e^{-rT}\)) is <strong>undervalued</strong>.</li>
+<li>Arbitrageur sells the overvalued RHS and buys the undervalued LHS.</li>
+<li>Lock in a risk-less arbitrage profit of \( \$31.03 - \$30.54 = \mathbf{\$0.49} \) today!</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 21 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l05-s19">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li class="active">平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – 平价套利具体执行步骤</h2>
+<div class="slide-subtitle">Hull 习题 10.15：分步套利交易策略执行</div>
+<div class="slide-content">
+<ul>
+<li><strong>今日执行构建 (\(t = 0\))：</strong>
+<ul>
+<li>融券卖空 1 股股票，得 $29 → <em>现金流入：+$29.00</em></li>
+<li>卖出（签发）1 份看跌期权，得 $3 → <em>现金流入：+$3.00</em></li>
+<li>买入 1 份看涨期权，支付 $2 → <em>现金流出：-$2.00</em></li>
+<li>将 $0.97 存入银行存款（按 10% 计息），专门用于支付两期红利</li>
+<li>将剩余全部净资金 \( \$(29 + 3 - 2 - 0.97) = \mathbf{\$29.03} \) 存入 6 个月期银行存款（按 10% 计息）</li>
+<li><em>初始净资金投入：严格等于 $0.00！</em></li>
+</ul>
+</li>
+<li><strong>第 2 个月与第 5 个月：</strong>利用到期的红利专用存款，精确支付两笔 $0.50 红利补偿。</li>
+<li><strong>第 6 个月到期日 (\(T = 0.5\))：</strong>
+<ul>
+<li>若 \( S_T \ge 30 \)：看涨期权实值 → 主动行权按 $30 买入 1 股股票；看跌期权空头虚值作废。</li>
+<li>若 \( S_T &lt; 30 \)：看跌期权被对手方行权 → 被动按 $30 履约买入 1 股股票；看涨期权虚值作废。</li>
+<li><em>无论股价如何，必定恰好以 $30 买入 1 股股票还券平仓！</em></li>
+<li>6 个月期存款本息收回：\( \$29.03 e^{0.10 \times 6/12} = \mathbf{\$30.52} \)。</li>
+<li><strong>到期锁定净套利利润：</strong>\( \$30.52 - \$30.00 = \mathbf{\$0.52} \)；今日折现净值为 \( \mathbf{\$0.49} \)！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l05-s19-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 19</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li class="active">Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Parity Arbitrage Execution</h2>
+<div class="slide-subtitle">Hull Problem 10.15: Step-by-Step Arbitrage Strategy</div>
+<div class="slide-content">
+<ul>
+<li><strong>Today (\(t = 0\)):</strong>
+<ul>
+<li>Short sell stock at $29 → <em>+$29.00</em></li>
+<li>Sell (write) the put option for $3 → <em>+$3.00</em></li>
+<li>Buy the call option for $2 → <em>-$2.00</em></li>
+<li>Invest $0.97 at 10% to fund the two dividend payments</li>
+<li>Invest the remaining proceeds \( \$(29 + 3 - 2 - 0.97) = \mathbf{\$29.03} \) at 10% for 6 months</li>
+<li><em>Net initial investment: Exactly $0.00!</em></li>
+</ul>
+</li>
+<li><strong>After 2 and 5 months:</strong>
+<ul>
+<li>Pay the two $0.50 dividends using the maturing dividend investments.</li>
+</ul>
+</li>
+<li><strong>After 6 months (Maturity):</strong>
+<ul>
+<li>If \( S_T \ge 30 \): Long call is ITM → exercise call to buy stock at $30; short put expires worthless.</li>
+<li>If \( S_T &lt; 30 \): Short put is ITM → put is exercised against us → buy stock at strike $30; long call expires worthless.</li>
+<li><em>In both scenarios, we buy 1 share for exactly $30 and close the short stock position.</em></li>
+<li>Collect 6-month investment: \( \$29.03 e^{0.10 \times 6/12} = \mathbf{\$30.52} \).</li>
+<li><strong>Net Arbitrage Profit:</strong> \( \$30.52 - \$30.00 = \mathbf{\$0.52} \) in 6 months, or \( \$0.52 e^{-0.10 \times 6/12} = \mathbf{\$0.49} \) today!</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- ENRICHMENT 5.C -->
+<section data-start-indexv="0"><section data-after-source-slide="19" data-kind="enrichment" id="l05-s19-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 拓展 C</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li class="active">平价套利策略</li>
+<li>美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">复制合成头寸与套利现金流表</h3>
+<div style="margin-bottom: 6px; color: #334155">
+<strong>买卖权平价合成恒等式 (Synthetic Identities)：</strong>重排 \( c + K e^{-rT} = p + S_0 - D \)：<br/>
+              • <em>合成看涨：</em>\( c = p + S_0 - D - K e^{-rT} \) • <em>合成看跌：</em>\( p = c + K e^{-rT} - S_0 + D \)<br/>
+              • <em>合成现货股票：</em>\( S_0 = c - p + K e^{-rT} + D \) • <em>合成无风险债券：</em>\( K e^{-rT} = p - c + S_0 - D \)
             </div>
-          </div>
-        </div>
-      </section>
-      <!-- ENRICHMENT 5.C -->
-      <section id="l05-s19-v1" data-kind="enrichment" data-after-source-slide="19">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 拓展 C</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li class="active">平价套利策略</li>
-              <li>美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h3 class="slide-title" style="margin-bottom: 6px">复制合成头寸与套利现金流表</h3>
-            <div style="margin-bottom: 6px; color: #334155">
-              <strong>买卖权平价合成恒等式 (Synthetic Identities)：</strong>重排 \( c + K e^{-rT} = p + S_0 - D \)：<br>
-              &bull; <em>合成看涨：</em>\( c = p + S_0 - D - K e^{-rT} \) &bull; <em>合成看跌：</em>\( p = c + K e^{-rT} - S_0 + D \)<br>
-              &bull; <em>合成现货股票：</em>\( S_0 = c - p + K e^{-rT} + D \) &bull; <em>合成无风险债券：</em>\( K e^{-rT} = p - c + S_0 - D \)
+<div style="margin-bottom: 6px; background: #eef2ff; border-left: 3px solid #4f46e5; padding: 4px 10px">
+              ASX 欧式期权，\( K = \$20 \)，\( T = 0.25 \)（3 个月），\( c = \$3.00 \)，\( p = \$3.00 \)，\( S_0 = \$19.00 \)，\( r = 10\% \)，1 个月后红利 \( \$1.00 \)（\(PV(D) = 1.00 e^{-0.10 \times 1/12} = \$0.99\)）。<br/>
+              \(\text{LHS} = c + K e^{-rT} = 3 + 20 e^{-0.025} = 3 + 19.51 = \mathbf{\$22.51}\) vs \(\text{RHS} = p + S_0 - D = 3 + 19 - 0.99 = \mathbf{\$21.01}\)。<br/>
+              LHS 高于 RHS 达 <strong>$1.50</strong> → 卖出高估的 LHS（卖看涨、借入资金），买入低估的 RHS（买看跌、买现货股票）。
             </div>
-            <div style="margin-bottom: 6px; background: #eef2ff; border-left: 3px solid #4f46e5; padding: 4px 10px">
-              ASX 欧式期权，\( K = \$20 \)，\( T = 0.25 \)（3 个月），\( c = \$3.00 \)，\( p = \$3.00 \)，\( S_0 = \$19.00 \)，\( r = 10\% \)，1 个月后红利 \( \$1.00 \)（\(PV(D) = 1.00 e^{-0.10 \times 1/12} = \$0.99\)）。<br>
-              \(\text{LHS} = c + K e^{-rT} = 3 + 20 e^{-0.025} = 3 + 19.51 = \mathbf{\$22.51}\) vs \(\text{RHS} = p + S_0 - D = 3 + 19 - 0.99 = \mathbf{\$21.01}\)。<br>
-              LHS 高于 RHS 达 <strong>$1.50</strong> &rarr; 卖出高估的 LHS（卖看涨、借入资金），买入低估的 RHS（买看跌、买现货股票）。
+<table class="slide-table" style="margin: 4px 0">
+<thead>
+<tr>
+<th>时间节点</th>
+<th>对冲交易组合操作</th>
+<th>现金流收支 ($)</th>
+<th>机制运作与到期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>今日 (\(t=0\))</strong></td>
+<td>卖出 1 份欧式看涨期权<br/>买入 1 份欧式看跌期权<br/>买入 1 股标的股票<br/>向银行融入 3 个月借款</td>
+<td style="font-weight: bold;">
+                    \( +3.00 \)<br/>\( -3.00 \)<br/>\( -19.00 \)<br/>\( +19.00 \)<br/><strong>净投入: $0.00</strong>
+</td>
+<td>收取高估看涨期权费。<br/>支付看跌期权保护费。<br/>买入被低估的现货股票。<br/>精确借入差额 \( 19 + 3 - 3 = \$19.00 \)。<br/><strong>零初始资金投入！</strong></td>
+</tr>
+<tr>
+<td><strong>第 1 个月 (\(t=1/12\))</strong></td>
+<td>收取股票分配红利<br/>将红利存入银行计息 2 个月</td>
+<td style="font-weight: bold;">
+                    \( +1.00 \)<br/>\( -1.00 \)<br/><strong>净现金流: $0.00</strong>
+</td>
+<td>收到持有股票所享有的现金分红。<br/>按 10% 存入存款，至到期日产生 \( 1.00 e^{0.10 \times 2/12} = \$1.02 \)。</td>
+</tr>
+<tr>
+<td><strong>第 3 个月 (\(T=0.25\))</strong></td>
+<td>股票按 \( K=\$20 \) 卖出平仓<br/>收回红利存款本息<br/>偿还银行贷款本息</td>
+<td style="font-weight: bold;">
+                    \( +20.00 \)<br/>\( +1.02 \)<br/>\( -19.48 \)<br/><strong>净利润: +$1.54</strong>
+</td>
+<td>无论 \( S_T \ge 20 \) 或 \( S_T &lt; 20 \)，必定以 $20 卖出股票。<br/>红利本息收回 $1.02。<br/>还款 \( \$19 e^{0.10 \times 0.25} = \$19.48 \)。<br/><strong>锁定净利润 \( 20 + 1.02 - 19.48 = \mathbf{\$1.54} \)（现值 $1.50）！</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section data-after-source-slide="19" data-kind="enrichment" id="l05-s19-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li class="active">Parity Arbitrage</li>
+<li>American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Synthetic Positions &amp; ETQ 10 Cash Flow Table</h3>
+<div style="margin-bottom: 6px; color: #334155">
+<strong>Put-Call Parity Synthetic Identities:</strong> Rearranging \( c + K e^{-rT} = p + S_0 - D \):<br/>
+              • <em>Synthetic Call:</em> \( c = p + S_0 - D - K e^{-rT} \) • <em>Synthetic Put:</em> \( p = c + K e^{-rT} - S_0 + D \)<br/>
+              • <em>Synthetic Stock:</em> \( S_0 = c - p + K e^{-rT} + D \) • <em>Synthetic Bond (Lending):</em> \( K e^{-rT} = p - c + S_0 - D \)
             </div>
-            <table class="slide-table" style="margin: 4px 0">
-              <thead>
-                <tr>
-                  <th>时间节点</th>
-                  <th>对冲交易组合操作</th>
-                  <th>现金流收支 ($)</th>
-                  <th>机制运作与到期结果</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>今日 (\(t=0\))</strong></td>
-                  <td>卖出 1 份欧式看涨期权<br>买入 1 份欧式看跌期权<br>买入 1 股标的股票<br>向银行融入 3 个月借款</td>
-                  <td style="font-weight: bold;">
-                    \( +3.00 \)<br>\( -3.00 \)<br>\( -19.00 \)<br>\( +19.00 \)<br><strong>净投入: $0.00</strong>
+<div style="margin-bottom: 6px; background: #eef2ff; border-left: 3px solid #4f46e5; padding: 4px 10px">
+<strong>ETQ 10 Data:</strong> European options on ASX, \( K = \$20 \), \( T = 0.25 \) (3 mo), \( c = \$3.00 \), \( p = \$3.00 \), \( S_0 = \$19.00 \), \( r = 10\% \), Dividend of \( \$1.00 \) in 1 month (\(PV(D) = 1.00 e^{-0.10 \times 1/12} = \$0.99\)).<br/>
+              \(\text{LHS} = c + K e^{-rT} = 3 + 20 e^{-0.025} = 3 + 19.51 = \mathbf{\$22.51}\) vs \(\text{RHS} = p + S_0 - D = 3 + 19 - 0.99 = \mathbf{\$21.01}\).<br/>
+              LHS &gt; RHS by <strong>$1.50</strong> → Sell overvalued LHS (Sell call, borrow), Buy undervalued RHS (Buy put, buy stock).
+            </div>
+<table class="slide-table" style="margin: 4px 0">
+<thead>
+<tr>
+<th>Timing</th>
+<th>Action / Trade</th>
+<th>Cash Flow</th>
+<th>Mechanics &amp; Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Today (\(t=0\))</strong></td>
+<td>Short (sell) European call<br/>Buy European put<br/>Buy 1 share of stock<br/>Borrow from bank (3 months @ 10%)</td>
+<td style="font-weight: bold;">
+                    \( +3.00 \)<br/>
+                    \( -3.00 \)<br/>
+                    \( -19.00 \)<br/>
+                    \( +19.00 \)<br/>
+<strong>Net: $0.00</strong>
+</td>
+<td>
+                    Sell overvalued call premium.<br/>
+                    Buy undervalued put protection.<br/>
+                    Buy undervalued share.<br/>
+                    Borrow the exact net deficit \( 19 + 3 - 3 = \$19 \).<br/>
+<strong>Zero initial investment!</strong>
+</td>
+</tr>
+<tr>
+<td><strong>Month 1 (\(t=1/12\))</strong></td>
+<td>Receive dividend on owned stock<br/>Invest dividend for remaining 2 months</td>
+<td style="font-weight: bold;">
+                    \( +1.00 \)<br/>
+                    \( -1.00 \)<br/>
+<strong>Net: $0.00</strong>
+</td>
+<td>
+                    As stock owner, collect $1.00 cash dividend.<br/>
+                    Reinvest at 10% risk-free rate for 2 months.
                   </td>
-                  <td>收取高估看涨期权费。<br>支付看跌期权保护费。<br>买入被低估的现货股票。<br>精确借入差额 \( 19 + 3 - 3 = \$19.00 \)。<br><strong>零初始资金投入！</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>第 1 个月 (\(t=1/12\))</strong></td>
-                  <td>收取股票分配红利<br>将红利存入银行计息 2 个月</td>
-                  <td style="font-weight: bold;">
-                    \( +1.00 \)<br>\( -1.00 \)<br><strong>净现金流: $0.00</strong>
+</tr>
+<tr>
+<td><strong>Month 3 (\(T=0.25\))</strong></td>
+<td>Collect 2-month dividend deposit<br/>Deliver stock at strike \( K = 20 \):<br/>
+                    • If \( S_T &gt; 20 \): Call exercised against us → sell stock at $20<br/>
+                    • If \( S_T \le 20 \): Exercise put → sell stock at $20<br/>
+                    Repay bank loan with interest</td>
+<td style="font-weight: bold;">
+                    \( +1.02 \)<br/>
+                    \( +20.00 \)<br/><br/>
+                    \( -19.48 \)<br/>
+<span style="color: #16a34a;"><strong>Net Profit: +$1.54</strong></span>
+</td>
+<td>
+                    \( \$1.00 e^{0.10 \times 2/12} = \mathbf{\$1.017 \approx \$1.02} \).<br/>
+<strong>Guaranteed:</strong> In all states, stock is sold for exactly the strike price of <strong>$20.00</strong>!<br/>
+                    Loan repayment: \( \$19.00 e^{0.10 \times 3/12} = \mathbf{\$19.48} \).<br/>
+<strong>Risk-free Arbitrage Profit:</strong><br/>
+                    \( 20.00 + 1.02 - 19.48 = \mathbf{\$1.54} \) (PV \(= \mathbf{\$1.50}\)).
                   </td>
-                  <td>收到持有股票所享有的现金分红。<br>按 10% 存入存款，至到期日产生 \( 1.00 e^{0.10 \times 2/12} = \$1.02 \)。</td>
-                </tr>
-                <tr>
-                  <td><strong>第 3 个月 (\(T=0.25\))</strong></td>
-                  <td>股票按 \( K=\$20 \) 卖出平仓<br>收回红利存款本息<br>偿还银行贷款本息</td>
-                  <td style="font-weight: bold;">
-                    \( +20.00 \)<br>\( +1.02 \)<br>\( -19.48 \)<br><strong>净利润: +$1.54</strong>
-                  </td>
-                  <td>无论 \( S_T \ge 20 \) 或 \( S_T < 20 \)，必定以 $20 卖出股票。<br>红利本息收回 $1.02。<br>还款 \( \$19 e^{0.10 \times 0.25} = \$19.48 \)。<br><strong>锁定净利润 \( 20 + 1.02 - 19.48 = \mathbf{\$1.54} \)（现值 $1.50）！</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 23 -->
-      <section id="l05-s20" data-kind="original" data-source-slide="20" data-pdf-page="10" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 20</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li class="active">美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">美式期权核心性质 (American Options)</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>与欧式期权的价值关系：</strong>美式期权价值必定不低于对应的欧式期权，因为美式期权包含了欧式期权的全部行权权利外加提前行权的灵活性：
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section></section>
+<!-- Slide 23 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l05-s20">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 20</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li class="active">美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">美式期权核心性质 (American Options)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>与欧式期权的价值关系：</strong>美式期权价值必定不低于对应的欧式期权，因为美式期权包含了欧式期权的全部行权权利外加提前行权的灵活性：
                   <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 4px 14px">
                     \[ C \ge c \quad \text{且} \quad P \ge p \]
                   </div>
-                </li>
-                <li><strong>提前行权概率：</strong>通常情况下，美式期权存在正的提前行权概率溢价。</li>
-                <li><strong>最关键的例外定理：</strong>对于<strong>不支付红利的股票</strong>，美式看涨期权<strong>提前行权永远不是最优选择</strong>。因此：
+</li>
+<li><strong>提前行权概率：</strong>通常情况下，美式期权存在正的提前行权概率溢价。</li>
+<li><strong>最关键的例外定理：</strong>对于<strong>不支付红利的股票</strong>，美式看涨期权<strong>提前行权永远不是最优选择</strong>。因此：
                   <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 4px 14px">
                     \[ C = c \]
                   </div>
-                  <ul>
-                    <li><strong>资金时间价值：</strong>推迟行权可将支付执行价所需的资金 \(K\) 保留在银行持续赚取无风险利息。</li>
-                    <li><strong>无红利损失：</strong>由于股票不分红，推迟行权不会遭受任何股利流失。</li>
-                    <li><strong>下行保险保护：</strong>持有看涨期权提供了防范股价跌破执行价的保险功能。提前行权过早将受保护的期权转化为了承担完全下跌风险的现货股票。</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 24 -->
-      <section id="l05-s21" data-kind="original" data-source-slide="21" data-pdf-page="11" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 21</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li class="active">美式期权性质</li>
-              <li>提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">案例 &ndash; 美式看涨期权不可提前行权分析</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>情景设定：</strong>考虑某不分红股票的美式看涨期权，参数如下：
+<ul>
+<li><strong>资金时间价值：</strong>推迟行权可将支付执行价所需的资金 \(K\) 保留在银行持续赚取无风险利息。</li>
+<li><strong>无红利损失：</strong>由于股票不分红，推迟行权不会遭受任何股利流失。</li>
+<li><strong>下行保险保护：</strong>持有看涨期权提供了防范股价跌破执行价的保险功能。提前行权过早将受保护的期权转化为了承担完全下跌风险的现货股票。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l05-s20-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 20</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li class="active">American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">American Options</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Value relation to European options:</strong> An American option is worth at least as much as the corresponding European option because it includes all European exercise rights plus early exercise:
+                  <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 4px 14px">
+                    \( C \ge c \quad \text{and} \quad P \ge p \)
+                  </div>
+</li>
+<li><strong>Early exercise probability:</strong> Usually there is some positive probability that an American option will be exercised early.</li>
+<li><strong>The Major Exception:</strong> An American call on a <strong>non-dividend paying stock</strong> is <em>never optimal to exercise early</em>. Therefore:
+                  <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 4px 14px">
+                    \( C = c \)
+                  </div>
+<ul>
+<li><strong>Time value of money:</strong> Delaying exercise keeps the strike price \(K\) earning interest in the bank.</li>
+<li><strong>No dividend sacrifice:</strong> No income is foregone, as the stock pays no dividend.</li>
+<li><strong>Downside protection:</strong> Holding the call option provides insurance against the stock price falling below the strike. Exercising early converts an insured option into risky stock.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 24 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l05-s21">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 21</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li class="active">美式期权性质</li>
+<li>提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – 美式看涨期权不可提前行权分析</h2>
+<div class="slide-content">
+<ul>
+<li><strong>情景设定：</strong>考虑某不分红股票的美式看涨期权，参数如下：
                   <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 6px 14px;">
                     \( S_0 = \$50, \quad T = 0.25 \text{（3 个月）}, \quad K = \$40 \)
                   </div>
-                  <p><em>此时是否应当立即行使该看涨期权？</em></p>
-                </li>
-                <li><strong>决策严谨分析：</strong>
-                  <ul>
-                    <li><strong>若希望持有股票：</strong>应坚持推迟行权至到期日 \(T\)。这样可让 $40 资金在银行赚取利息，同时享有完全相同的股票上涨潜力与下行保护。</li>
-                    <li><strong>若不希望持有股票：</strong>绝不可提前行权！<strong>应直接在市场上卖出期权平仓。</strong></li>
-                  </ul>
-                </li>
-                <li><strong>严谨数学证明：</strong>
-                  <div class="equation-box" style="margin: 10px 0">
-                    \[ C \ge c > \max(S_0 - K e^{-rT}, 0) > S_0 - K \]
+<p><em>此时是否应当立即行使该看涨期权？</em></p>
+</li>
+<li><strong>决策严谨分析：</strong>
+<ul>
+<li><strong>若希望持有股票：</strong>应坚持推迟行权至到期日 \(T\)。这样可让 $40 资金在银行赚取利息，同时享有完全相同的股票上涨潜力与下行保护。</li>
+<li><strong>若不希望持有股票：</strong>绝不可提前行权！<strong>应直接在市场上卖出期权平仓。</strong></li>
+</ul>
+</li>
+<li><strong>严谨数学证明：</strong>
+<div class="equation-box" style="margin: 10px 0">
+                    \[ C \ge c &gt; \max(S_0 - K e^{-rT}, 0) &gt; S_0 - K \]
                   </div>
-                  <ul>
-                    <li>立即行权所能兑现的仅为内在价值 \( S_0 - K = \$50 - \$40 = \mathbf{\$10} \)。</li>
-                    <li>而在市场上，期权价格 \( C \) 严格大于 $10（因贴现使得 \( K e^{-rT} < K \)）。</li>
-                    <li>提前行权无端白白丢弃了期权剩余的全部时间价值！</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 25 -->
-      <section id="l05-s22" data-kind="original" data-source-slide="22" data-pdf-page="11" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 22</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li class="active">提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">美式看跌期权是否应当提前行权？</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>资金时间价值驱动提前行权：</strong>行使看跌期权可立即收回执行价现金 \(K\)，立即存入银行赚取利息收入。</li>
-                <li><strong>利息收益与下行保险价值的权衡：</strong>
-                  <ul>
-                    <li>持有看跌期权保留了防范股票进一步下跌的保险保护。</li>
-                    <li>但若看跌期权处于<strong>深度实值 (Deep In-The-Money)</strong>（股价已逼近零），股票进一步下跌的空间极其有限，保险价值近乎为零！</li>
-                    <li>此时立即收回现金 \(K\) 并赚取利息，远比持有缺乏增值潜力的期权更有吸引力。</li>
-                  </ul>
-                </li>
-                <li><strong>量化分析案例：</strong>考虑美式看跌期权参数：
+<ul>
+<li>立即行权所能兑现的仅为内在价值 \( S_0 - K = \$50 - \$40 = \mathbf{\$10} \)。</li>
+<li>而在市场上，期权价格 \( C \) 严格大于 $10（因贴现使得 \( K e^{-rT} &lt; K \)）。</li>
+<li>提前行权无端白白丢弃了期权剩余的全部时间价值！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l05-s21-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 21</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li class="active">American Options</li>
+<li>Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – American Call Options</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Scenario:</strong> Consider an American call option on a non-dividend paying stock with:
+                  <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 6px 14px;">
+                    \( S_0 = \$50, \quad T = 0.25 \text{ (3 months)}, \quad K = \$40 \)
+                  </div>
+<p><em>Should you exercise the call option immediately?</em></p>
+</li>
+<li><strong>Decision Analysis:</strong>
+<ul>
+<li><strong>If you want to hold the stock:</strong> Delay exercise until maturity \(T\). You keep the $40 strike earning interest, while retaining the exact same upside and downside protection.</li>
+<li><strong>If you do not want to hold the stock:</strong> Do NOT exercise! <strong>Sell the option in the market.</strong></li>
+</ul>
+</li>
+<li><strong>Mathematical Proof:</strong>
+<div class="equation-box" style="margin: 10px 0">
+                    \( C \ge c &gt; \max(S_0 - K e^{-rT}, 0) &gt; S_0 - K \)
+                  </div>
+<ul>
+<li>Immediate exercise value is only \( S_0 - K = \$50 - \$40 = \mathbf{\$10} \).</li>
+<li>Market price \( C \) is strictly greater than $10 because \( K e^{-rT} &lt; K \).</li>
+<li>Exercising early throws away the remaining time value!</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 25 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l05-s22">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 22</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li class="active">提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">美式看跌期权是否应当提前行权？</h2>
+<div class="slide-content">
+<ul>
+<li><strong>资金时间价值驱动提前行权：</strong>行使看跌期权可立即收回执行价现金 \(K\)，立即存入银行赚取利息收入。</li>
+<li><strong>利息收益与下行保险价值的权衡：</strong>
+<ul>
+<li>持有看跌期权保留了防范股票进一步下跌的保险保护。</li>
+<li>但若看跌期权处于<strong>深度实值 (Deep In-The-Money)</strong>（股价已逼近零），股票进一步下跌的空间极其有限，保险价值近乎为零！</li>
+<li>此时立即收回现金 \(K\) 并赚取利息，远比持有缺乏增值潜力的期权更有吸引力。</li>
+</ul>
+</li>
+<li><strong>量化分析案例：</strong>考虑美式看跌期权参数：
                   <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 6px 14px;">
                     \( S_0 = \$10, \quad T = 0.25, \quad K = \$50, \quad r = 10\% \)
                   </div>
-                  <ul>
-                    <li><em>是否应立即行使该看跌期权？</em><strong>应当立即行权！</strong></li>
-                    <li>立即行权可获得现金：\( K - S_0 = \$50 - \$10 = \mathbf{\$40} \)。</li>
-                    <li>将 $40 存入银行 3 个月按 10% 计息，获得利息收益 \( 40(e^{0.025} - 1) \approx \mathbf{\$1.01} \)。</li>
-                    <li>即便股价彻底归零，额外最大行权收益也仅为 $10，很可能还不如利息收益可靠！</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 26 -->
-      <section id="l05-s23" data-kind="original" data-source-slide="23" data-pdf-page="12" data-pdf-half="top">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 23</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li class="active">提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">美式期权价格理论上下限</h2>
-            <div class="slide-content">
-              <div style="display: flex; gap: 20px; margin-bottom: 12px;">
-                <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
-                  <h4 style="margin: 0 0 8px 0; color: #1e3a8a">无红利资产 (No Dividends)</h4>
-                  <p style="margin: 0 0 6px 0"><strong>美式看涨价格边界：</strong></p>
-                  <ul style="margin: 0 0 10px 0">
-                    <li>下限：\( C = c \ge \max(S_0 - K e^{-rT}, 0) \)</li>
-                    <li>上限：\( C = c \le S_0 \)</li>
-                  </ul>
-                  <p style="margin: 0 0 6px 0"><strong>美式看跌价格边界：</strong></p>
-                  <ul style="margin: 0">
-                    <li>下限：\( P \ge \max(K - S_0, 0) \)</li>
-                    <li>上限：\( P \le K \)</li>
-                  </ul>
-                </div>
-                <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
-                  <h4 style="margin: 0 0 8px 0; color: #1e3a8a">支付红利资产 (\(D = \text{红利现值}\))</h4>
-                  <p style="margin: 0 0 6px 0"><strong>美式看涨价格边界：</strong></p>
-                  <ul style="margin: 0 0 10px 0">
-                    <li>下限：\( C \ge \max(S_0 - D - K e^{-rT}, 0) \)</li>
-                    <li>上限：\( C \le S_0 - D \)</li>
-                  </ul>
-                  <p style="margin: 0 0 6px 0"><strong>美式看跌价格边界：</strong></p>
-                  <ul style="margin: 0">
-                    <li>下限：\( P \ge \max(K - S_0 + D, 0) \)</li>
-                    <li>上限：\( P \le K \)</li>
-                  </ul>
-                </div>
+<ul>
+<li><em>是否应立即行使该看跌期权？</em><strong>应当立即行权！</strong></li>
+<li>立即行权可获得现金：\( K - S_0 = \$50 - \$10 = \mathbf{\$40} \)。</li>
+<li>将 $40 存入银行 3 个月按 10% 计息，获得利息收益 \( 40(e^{0.025} - 1) \approx \mathbf{\$1.01} \)。</li>
+<li>即便股价彻底归零，额外最大行权收益也仅为 $10，很可能还不如利息收益可靠！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l05-s22-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 22</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li class="active">Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Should Puts Be Exercised Early?</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Time value of money favor early exercise:</strong> Exercising a put realizes the cash strike price \(K\) immediately, which can be invested to earn interest.</li>
+<li><strong>Trade-off with downside protection:</strong>
+<ul>
+<li>Holding the put option provides downside protection against the stock falling below \(K\).</li>
+<li>However, if the put is <strong>deep in the money</strong> (stock price is very close to zero), the stock cannot fall much further. The insurance value is near zero!</li>
+<li>It becomes far more attractive to receive \(K\) immediately and earn interest than to hold an option with no remaining upside.</li>
+</ul>
+</li>
+<li><strong>Example:</strong> Consider an American put with:
+                  <div class="equation-box" style="display: inline-block; margin: 6px 0; padding: 6px 14px;">
+                    \( S_0 = \$10, \quad T = 0.25, \quad K = \$50, \quad r = 10\% \)
+                  </div>
+<ul>
+<li><em>Should you exercise immediately?</em> <strong>YES!</strong></li>
+<li>Exercising yields \( K - S_0 = \$50 - \$10 = \mathbf{\$40} \) today.</li>
+<li>Investing $40 at 10% for 3 months yields interest of \( 40(e^{0.025} - 1) \approx \mathbf{\$1.01} \).</li>
+<li>Even if the stock price drops to $0, the extra payoff is only $10, which may be less than the interest earned.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 26 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l05-s23">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 23</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li class="active">提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">美式期权价格理论上下限</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; margin-bottom: 12px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">无红利资产 (No Dividends)</h4>
+<p style="margin: 0 0 6px 0"><strong>美式看涨价格边界：</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>下限：\( C = c \ge \max(S_0 - K e^{-rT}, 0) \)</li>
+<li>上限：\( C = c \le S_0 \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>美式看跌价格边界：</strong></p>
+<ul style="margin: 0">
+<li>下限：\( P \ge \max(K - S_0, 0) \)</li>
+<li>上限：\( P \le K \)</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">支付红利资产 (\(D = \text{红利现值}\))</h4>
+<p style="margin: 0 0 6px 0"><strong>美式看涨价格边界：</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>下限：\( C \ge \max(S_0 - D - K e^{-rT}, 0) \)</li>
+<li>上限：\( C \le S_0 - D \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>美式看跌价格边界：</strong></p>
+<ul style="margin: 0">
+<li>下限：\( P \ge \max(K - S_0 + D, 0) \)</li>
+<li>上限：\( P \le K \)</li>
+</ul>
+</div>
+</div>
+<div style="color: #64748b">
+<em>重点差异剖析：</em>对于美式看跌期权，其理论下限是未折现的内在价值 \( K - S_0 \)，而非折现形式 \( K e^{-rT} - S_0 \)，因为美式看跌期权拥有随时按面值 \(K\) 立即行权的法定权利。
               </div>
-              <div style="color: #64748b">
-                <em>重点差异剖析：</em>对于美式看跌期权，其理论下限是未折现的内在价值 \( K - S_0 \)，而非折现形式 \( K e^{-rT} - S_0 \)，因为美式看跌期权拥有随时按面值 \(K\) 立即行权的法定权利。
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l05-s23-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 23</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li class="active">Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Bounds for American Option Prices</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; margin-bottom: 12px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">No Dividends</h4>
+<p style="margin: 0 0 6px 0"><strong>Call Bounds:</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>Lower Bound: \( C = c \ge \max(S_0 - K e^{-rT}, 0) \)</li>
+<li>Upper Bound: \( C = c \le S_0 \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>Put Bounds:</strong></p>
+<ul style="margin: 0">
+<li>Lower Bound: \( P \ge \max(K - S_0, 0) \)</li>
+<li>Upper Bound: \( P \le K \)</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px;">
+<h4 style="margin: 0 0 8px 0; color: #1e3a8a">With Dividends (\(D = \text{PV of Dividends}\))</h4>
+<p style="margin: 0 0 6px 0"><strong>Call Bounds:</strong></p>
+<ul style="margin: 0 0 10px 0">
+<li>Lower Bound: \( C \ge \max(S_0 - D - K e^{-rT}, 0) \)</li>
+<li>Upper Bound: \( C \le S_0 - D \)</li>
+</ul>
+<p style="margin: 0 0 6px 0"><strong>Put Bounds:</strong></p>
+<ul style="margin: 0">
+<li>Lower Bound: \( P \ge \max(K - S_0 + D, 0) \)</li>
+<li>Upper Bound: \( P \le K \)</li>
+</ul>
+</div>
+</div>
+<div style="color: #64748b">
+<em>Notice:</em> For American puts, the lower bound is \( K - S_0 \) (its intrinsic value) rather than discounted \( K e^{-rT} - S_0 \), because an American put can be exercised immediately.
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Slide 27 -->
-      <section id="l05-s24" data-kind="original" data-source-slide="24" data-pdf-page="12" data-pdf-half="bottom">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 24</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li class="active">提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h2 class="slide-title">美式期权买卖权平价不等式</h2>
-            <div class="slide-content">
-              <ul>
-                <li><strong>美式期权买卖权平价不等式约束：</strong>由于美式期权具备随时提前行权的权利，严格的等式关系不再成立，转变为严格的上下界区间不等式：
+</div>
+</div>
+</div>
+</section></section>
+<!-- Slide 27 -->
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="12" data-source-slide="24" id="l05-s24">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 24</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li class="active">提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">美式期权买卖权平价不等式</h2>
+<div class="slide-content">
+<ul>
+<li><strong>美式期权买卖权平价不等式约束：</strong>由于美式期权具备随时提前行权的权利，严格的等式关系不再成立，转变为严格的上下界区间不等式：
                   <div class="equation-box" style="margin: 10px 0">
                     \[ S_0 - K \le C - P \le S_0 - K e^{-rT} \]
                   </div>
-                  <div style="color: #64748b; margin-bottom: 12px">公式 (10.7)，Hull 英文原书第 259 页</div>
-                </li>
-                <li><strong>支付红利资产的平价不等式 (\(D = \text{红利现值}\)):</strong>
-                  <div class="equation-box" style="margin: 10px 0">
+<div style="color: #64748b; margin-bottom: 12px">公式 (10.7)，Hull 英文原书第 259 页</div>
+</li>
+<li><strong>支付红利资产的平价不等式 (\(D = \text{红利现值}\)):</strong>
+<div class="equation-box" style="margin: 10px 0">
                     \[ S_0 - D - K \le C - P \le S_0 - K e^{-rT} \]
                   </div>
-                  <div style="color: #64748b; margin-bottom: 12px">公式 (10.11)，Hull 英文原书第 265 页</div>
-                </li>
-                <li><strong>现实市场中买卖权平价关系偏离严格等式的原因：</strong>
-                  <ul>
-                    <li><strong>市场摩擦与交易成本：</strong>买卖买卖价差与经纪手续费构筑了一定宽度的无套利缓冲区间。</li>
-                    <li><strong>提前行权权利溢价：</strong>交易所期权（如 ASX 挂牌期权）多为美式，提前行权价值使得等式转化为不等式边界。</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- ENRICHMENT 5.D -->
-      <section id="l05-s24-v1" data-kind="enrichment" data-after-source-slide="24">
-        <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 5 讲 - 拓展 D</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>期权术语</li>
-              <li>期权基本头寸</li>
-              <li>值度与红利调整</li>
-              <li>价格决定因素</li>
-              <li>期权价格上下限</li>
-              <li>买卖权平价定理</li>
-              <li>平价套利策略</li>
-              <li>美式期权性质</li>
-              <li class="active">提前行权边界</li>
-            </ul>
-          </aside>
-          <div class="slide-body">
-            <h3 class="slide-title" style="margin-bottom: 8px">提前行权边界：美式看跌期权 vs 看涨期权</h3>
-            <div class="example-card" style="padding: 10px 16px; margin-bottom: 10px;">
-              <h4 style="margin: 0 0 6px 0">看涨与看跌期权的核心非对称性</h4>
-              <p style="margin: 0">
+<div style="color: #64748b; margin-bottom: 12px">公式 (10.11)，Hull 英文原书第 265 页</div>
+</li>
+<li><strong>现实市场中买卖权平价关系偏离严格等式的原因：</strong>
+<ul>
+<li><strong>市场摩擦与交易成本：</strong>买卖买卖价差与经纪手续费构筑了一定宽度的无套利缓冲区间。</li>
+<li><strong>提前行权权利溢价：</strong>交易所期权（如 ASX 挂牌期权）多为美式，提前行权价值使得等式转化为不等式边界。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="12" data-source-slide="24" id="l05-s24-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - 24</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li class="active">Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Put-Call Parity for American Option Prices</h2>
+<div class="slide-content">
+<ul>
+<li><strong>American Put-Call Parity Inequalities:</strong> Because American options can be exercised early, exact equality does not hold. Instead, option prices satisfy strict bounds:
+                  <div class="equation-box" style="margin: 10px 0">
+                    \( S_0 - K \le C - P \le S_0 - K e^{-rT} \)
+                  </div>
+<div style="color: #64748b; margin-bottom: 12px">Equation (10.7), Hull Page 259</div>
+</li>
+<li><strong>With Dividends (\(D = \text{PV of Dividends}\)):</strong>
+<div class="equation-box" style="margin: 10px 0">
+                    \( S_0 - D - K \le C - P \le S_0 - K e^{-rT} \)
+                  </div>
+<div style="color: #64748b; margin-bottom: 12px">Equation (10.11), Hull Page 265</div>
+</li>
+<li><strong>Why does Put-Call Parity not always hold as an exact equality?</strong>
+<ul>
+<li><strong>Transaction costs:</strong> Bid-ask spreads and brokerage fees create a no-arbitrage band.</li>
+<li><strong>Early exercise rights:</strong> Exchange traded options (such as on the ASX) are usually American-style, introducing early exercise premiums.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<!-- ENRICHMENT 5.D -->
+<section data-start-indexv="0"><section data-after-source-slide="24" data-kind="enrichment" id="l05-s24-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 5 讲 - 拓展 D</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>期权术语</li>
+<li>期权基本头寸</li>
+<li>值度与红利调整</li>
+<li>价格决定因素</li>
+<li>期权价格上下限</li>
+<li>买卖权平价定理</li>
+<li>平价套利策略</li>
+<li>美式期权性质</li>
+<li class="active">提前行权边界</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">提前行权边界：美式看跌期权 vs 看涨期权</h3>
+<div class="example-card" style="padding: 10px 16px; margin-bottom: 10px;">
+<h4 style="margin: 0 0 6px 0">看涨与看跌期权的核心非对称性</h4>
+<p style="margin: 0">
                 提前行权本质上是<strong>现金利息收入</strong>与<strong>下行保险保护价值</strong>之间的微观经济权衡。
               </p>
+</div>
+<div style="display: flex; gap: 16px; margin-bottom: 10px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+<h5 style="margin: 0 0 6px 0; color: #1e3a8a">美式看涨期权（无红利）</h5>
+<ul style="margin: 0; padding-left: 16px; line-height: 1.4">
+<li><strong>提前行权绝非最优：</strong>\( C = c \)。</li>
+<li>行权需要提前支付现金 \( K \)，放弃资金在银行的利息收入 \( rK \)。</li>
+<li>股价理论上具有无限上涨空间；持有期权保留了免受跌破 \( K \) 损失的保护。</li>
+<li><em>支付红利情形：</em>仅在除息日前夕，且预期红利现值超过推迟行权节省的利息损失 \( D &gt; K(1 - e^{-r(T-t_d)}) \) 时，提前行权才可能成立。</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+<h5 style="margin: 0 0 6px 0; color: #1e3a8a">美式看跌期权（深度实值）</h5>
+<ul style="margin: 0; padding-left: 16px; line-height: 1.4">
+<li><strong>提前行权频繁为最优：</strong>\( P &gt; p \)。</li>
+<li>行权可立即收取执行价现金 \( K \)，随即开始计收无风险利息 \( rK \)。</li>
+<li>股价下行有严格底线（最低为 $0）。当 \( S_t \to 0 \) 时，下行保险价值趋近于零，而资金利息收益确定无疑。</li>
+<li><strong>临界行权边界 \( S^* \)：</strong>在每个时刻 \( t &lt; T \)，均存在一个临界行权价格阈值 \( S^*(t) &lt; K \)，股价一旦跌破该边界，立即行权便为严格最优决策。</li>
+</ul>
+</div>
+</div>
+<div style="background: #eef2ff; border-left: 3px solid #6366f1; padding: 8px 14px">
+<strong>实用交易法则：</strong>绝不要提前行权美式看涨期权（除非遇上除息日前夕的大额分红）——若欲平仓，应直接在市场上卖出该期权！对于深度实值的美式看跌期权，密切监控股价是否击穿临界边界 \( S^* \)，一旦击穿应立即行权锁定资金时间价值。
             </div>
-            <div style="display: flex; gap: 16px; margin-bottom: 10px;">
-              <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
-                <h5 style="margin: 0 0 6px 0; color: #1e3a8a">美式看涨期权（无红利）</h5>
-                <ul style="margin: 0; padding-left: 16px; line-height: 1.4">
-                  <li><strong>提前行权绝非最优：</strong>\( C = c \)。</li>
-                  <li>行权需要提前支付现金 \( K \)，放弃资金在银行的利息收入 \( rK \)。</li>
-                  <li>股价理论上具有无限上涨空间；持有期权保留了免受跌破 \( K \) 损失的保护。</li>
-                  <li><em>支付红利情形：</em>仅在除息日前夕，且预期红利现值超过推迟行权节省的利息损失 \( D > K(1 - e^{-r(T-t_d)}) \) 时，提前行权才可能成立。</li>
-                </ul>
-              </div>
-              <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
-                <h5 style="margin: 0 0 6px 0; color: #1e3a8a">美式看跌期权（深度实值）</h5>
-                <ul style="margin: 0; padding-left: 16px; line-height: 1.4">
-                  <li><strong>提前行权频繁为最优：</strong>\( P > p \)。</li>
-                  <li>行权可立即收取执行价现金 \( K \)，随即开始计收无风险利息 \( rK \)。</li>
-                  <li>股价下行有严格底线（最低为 $0）。当 \( S_t \to 0 \) 时，下行保险价值趋近于零，而资金利息收益确定无疑。</li>
-                  <li><strong>临界行权边界 \( S^* \)：</strong>在每个时刻 \( t < T \)，均存在一个临界行权价格阈值 \( S^*(t) < K \)，股价一旦跌破该边界，立即行权便为严格最优决策。</li>
-                </ul>
-              </div>
+</div>
+</div>
+</section><section data-after-source-slide="24" data-kind="enrichment" id="l05-s24-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 5 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Options Terminology</li>
+<li>Option Positions</li>
+<li>Moneyness &amp; Dividends</li>
+<li>Price Determinants</li>
+<li>Option Price Bounds</li>
+<li>Put-Call Parity</li>
+<li>Parity Arbitrage</li>
+<li>American Options</li>
+<li class="active">Early Exercise</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">The Early Exercise Boundary: American Puts vs Calls</h3>
+<div class="example-card" style="padding: 10px 16px; margin-bottom: 10px;">
+<h4 style="margin: 0 0 6px 0">Core Asymmetry Between Calls and Puts</h4>
+<p style="margin: 0">Early exercise is fundamentally an economic trade-off between <strong>interest earned on cash</strong> and <strong>the value of downside insurance</strong>.</p>
+</div>
+<div style="display: flex; gap: 16px; margin-bottom: 10px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+<h5 style="margin: 0 0 6px 0; color: #1e3a8a">American Calls (No Dividends)</h5>
+<ul style="margin: 0; padding-left: 16px; line-height: 1.4">
+<li><strong>Never optimal to exercise early:</strong> \( C = c \).</li>
+<li>Exercising requires paying cash \( K \) early, forfeiting interest income \( rK \).</li>
+<li>Stock price has unlimited upside; holding the call preserves insurance against a decline below \( K \).</li>
+<li><em>With dividends:</em> Early exercise can only be optimal immediately prior to an ex-dividend date if the dividend exceeds foregone interest: \( D &gt; K(1 - e^{-r(T-t_d)}) \).</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+<h5 style="margin: 0 0 6px 0; color: #1e3a8a">American Puts (Deep In-The-Money)</h5>
+<ul style="margin: 0; padding-left: 16px; line-height: 1.4">
+<li><strong>Frequently optimal to exercise early:</strong> \( P &gt; p \).</li>
+<li>Exercising receives cash \( K \) immediately, which starts earning risk-free interest \( rK \).</li>
+<li>Stock price cannot fall below $0 (bounded below). As \( S_t \to 0 \), downside insurance becomes worthless while interest on \( K \) is guaranteed.</li>
+<li><strong>Critical Boundary \( S^* \):</strong> At each time \( t &lt; T \), there exists a critical threshold \( S^*(t) &lt; K \) below which immediate exercise is strictly optimal.</li>
+</ul>
+</div>
+</div>
+<div style="background: #eef2ff; border-left: 3px solid #6366f1; padding: 8px 14px">
+<strong>Practical Trading Rule:</strong> If you hold an American call on a non-dividend stock and wish to exit, <em>never exercise early</em> — sell it in the secondary market to capture both intrinsic value and unexpired time value!
             </div>
-            <div style="background: #eef2ff; border-left: 3px solid #6366f1; padding: 8px 14px">
-              <strong>实用交易法则：</strong>绝不要提前行权美式看涨期权（除非遇上除息日前夕的大额分红）&mdash;&mdash;若欲平仓，应直接在市场上卖出该期权！对于深度实值的美式看跌期权，密切监控股价是否击穿临界边界 \( S^* \)，一旦击穿应立即行权锁定资金时间价值。
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  </div>
-
-  <script src="vendor/reveal/dist/reveal.js"></script>
-  <script src="vendor/reveal/plugin/math/math.js"></script>
-  <script src="vendor/mathjax/tex-svg.js" id="MathJax-script" async></script>
-  <script src="assets/deck.js"></script>
+</div>
+</div>
+</section></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
 </body>
 </html>

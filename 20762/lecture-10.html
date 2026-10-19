@@ -1,1322 +1,2538 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20762 第10讲：期权头寸对冲 – 希腊字母</title>
-  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
-  <link rel="stylesheet" href="assets/slides.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第10讲：期权头寸对冲 – 希腊字母</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
 </head>
 <body>
-  <a href="index.html" class="deck-index-link">&larr; 返回课程主页</a>
-  <div class="reveal">
-    <div class="slides">
-<section id="l10-s01" data-kind="original" data-source-slide="1" data-pdf-page="1" data-pdf-half="top">
-  <div class="slide-container">
-    <div class="title-slide-container" style="width: 100%;">
-      <div class="title-slide-h1">第 10 讲</div>
-      <div class="title-slide-h1" style="margin-bottom: 20px">期权头寸对冲 &ndash; 希腊字母 (The Greek Letters)</div>
-      <div class="title-slide-h2">Hull，第 17 章</div>
-      <div class="tip-of-the-week-box">
-        <div class="tip-title">每周经典文献</div>
-        <div class="tip-text">
+<a class="deck-index-link" href="index.html">← 返回课程主页</a>
+<div class="reveal">
+<div class="slides">
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l10-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 10 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">期权头寸对冲 – 希腊字母 (The Greek Letters)</div>
+<div class="title-slide-h2">Hull，第 17 章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">每周经典文献</div>
+<div class="tip-text">
           Delta中性为微小价格变动提供风险保护，而Gamma中性则在对冲再平衡的时间间隔之间，为标的资产的大幅价格跳变提供稳健保护。
         </div>
-      </div>
-      <div class="uts-logo-text"><span style="color: #000; font-weight: 900;">&#10022;</span> UTS 商学院</div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s02" data-kind="original" data-source-slide="2" data-pdf-page="1" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 2</div>
-            <ul class="sidebar-nav">
-              <li class="active">学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">学习目标</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>深入理解并熟练计算各项希腊字母（Greek Letters）：</strong>
-            <ul>
-              <li>Delta (\(\Delta\)) &bull; Gamma (\(\Gamma\))</li>
-              <li>Vega (\(\mathcal{V}\)) &bull; Rho (\(\rho\)) &bull; Theta (\(\Theta\))</li>
-            </ul>
-          </li>
-          <li><strong>构建多维度风险中性的期权投资组合：</strong>
-            <ul>
-              <li>Delta 中性 &bull; Gamma 中性 &bull; Vega 中性</li>
-            </ul>
-          </li>
-          <li><strong>探讨期权头寸的各类对冲模式：</strong>
-            <ul>
-              <li>裸空头头寸（Naked positions）&bull; 备兑头寸（Covered positions）</li>
-              <li>止损对冲策略（Stop-loss strategies）&bull; 动态 Delta 对冲（Dynamic delta hedging）</li>
-            </ul>
-          </li>
-          <li><strong>探讨合成期权的构建原理以及静态对冲与动态对冲的对比分析</strong></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s03" data-kind="original" data-source-slide="3" data-pdf-page="2" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 3</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Delta (\(\Delta\)) 敏感度</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>定义：</strong> Delta 是期权价格 \(f\) 相对于标的资产价格 \(S\) 的变化率（一阶偏导数）：
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS 商学院</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l10-s01-en" lang="en">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">Lecture 10</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">Hedging Options Positions – The Greek Letters</div>
+<div class="title-slide-h2">Hull, Chapter 17</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">Tip of the week</div>
+<div class="tip-text">
+          Delta neutrality provides protection against small price moves, while gamma neutrality provides protection against large price moves between hedge rebalancing.
+        </div>
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS Business School</div>
+</div>
+</div>
+<div class="slide-footer" style="left: 48px;">
+<span>20762 Derivatives and Risk Management • UTS Business School</span>
+<span class="slide-source-badge">Original Slide 1 of 28 (p.1 top)</span>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l10-s02">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li><strong>深入理解并熟练计算各项希腊字母（Greek Letters）：</strong>
+<ul>
+<li>Delta (\(\Delta\)) • Gamma (\(\Gamma\))</li>
+<li>Vega (\(\mathcal{V}\)) • Rho (\(\rho\)) • Theta (\(\Theta\))</li>
+</ul>
+</li>
+<li><strong>构建多维度风险中性的期权投资组合：</strong>
+<ul>
+<li>Delta 中性 • Gamma 中性 • Vega 中性</li>
+</ul>
+</li>
+<li><strong>探讨期权头寸的各类对冲模式：</strong>
+<ul>
+<li>裸空头头寸（Naked positions）• 备兑头寸（Covered positions）</li>
+<li>止损对冲策略（Stop-loss strategies）• 动态 Delta 对冲（Dynamic delta hedging）</li>
+</ul>
+</li>
+<li><strong>探讨合成期权的构建原理以及静态对冲与动态对冲的对比分析</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l10-s02-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Learning Objectives</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Understand and calculate the Greek Letters:</strong>
+<ul>
+<li>Delta (\(\Delta\)) • Gamma (\(\Gamma\))</li>
+<li>Vega (\(\mathcal{V}\)) • Rho (\(\rho\)) • Theta (\(\Theta\))</li>
+</ul>
+</li>
+<li><strong>Make a portfolio of options:</strong>
+<ul>
+<li>Delta neutral • Gamma neutral • Vega neutral</li>
+</ul>
+</li>
+<li><strong>Discuss the hedging of option positions:</strong>
+<ul>
+<li>Naked positions • Covered positions</li>
+<li>Stop-loss strategies • Dynamic delta hedging</li>
+</ul>
+</li>
+<li><strong>Discuss the creation of synthetic options &amp; static vs dynamic hedges</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l10-s03">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta (\(\Delta\)) 敏感度</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong> Delta 是期权价格 \(f\) 相对于标的资产价格 \(S\) 的变化率（一阶偏导数）：
             <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 6px 0;">
               \[ \Delta = \frac{\partial f}{\partial S} \]
             </div>
-          </li>
-          <li><strong>无红利资产的欧式看涨与看跌期权：</strong>
-            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
-              \[ \Delta_{\text{call}} = N(d_1) > 0, \quad \Delta_{\text{put}} = N(d_1) - 1 < 0 \]
+</li>
+<li><strong>无红利资产的欧式看涨与看跌期权：</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \Delta_{\text{call}} = N(d_1) &gt; 0, \quad \Delta_{\text{put}} = N(d_1) - 1 &lt; 0 \]
             </div>
-          </li>
-          <li><strong>Delta 取值范围：</strong>
-            <ul>
-              <li>看涨期权 Delta 介于 \(0\) 至 \(+1\) 之间（平值 \(\text{ATM} \approx 0.5\)，深度实值 ITM \(\to 1\)，深度虚值 OTM \(\to 0\)）。</li>
-              <li>看跌期权 Delta 介于 \(-1\) 至 \(0\) 之间（平值 \(\text{ATM} \approx -0.5\)，深度实值 ITM \(\to -1\)，深度虚值 OTM \(\to 0\)）。</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s04" data-kind="original" data-source-slide="4" data-pdf-page="2" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 4</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Delta 的核心性质</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>斜率的几何含义：</strong> Delta 是期权价格关于标的资产价格 \(S\) 曲线上的切线斜率：
+</li>
+<li><strong>Delta 取值范围：</strong>
+<ul>
+<li>看涨期权 Delta 介于 \(0\) 至 \(+1\) 之间（平值 \(\text{ATM} \approx 0.5\)，深度实值 ITM \(\to 1\)，深度虚值 OTM \(\to 0\)）。</li>
+<li>看跌期权 Delta 介于 \(-1\) 至 \(0\) 之间（平值 \(\text{ATM} \approx -0.5\)，深度实值 ITM \(\to -1\)，深度虚值 OTM \(\to 0\)）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l10-s03-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 3</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta (\(\Delta\))</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Definition:</strong> Delta is the rate of change of the option price \(f\) with respect to the underlying asset price \(S\):
+            <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 6px 0;">
+              \[ \Delta = \frac{\partial f}{\partial S} \]
+            </div>
+</li>
+<li><strong>European Calls and Puts on Non-Dividend Paying Assets:</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \Delta_{\text{call}} = N(d_1) &gt; 0, \quad \Delta_{\text{put}} = N(d_1) - 1 &lt; 0 \]
+            </div>
+</li>
+<li><strong>Delta Ranges:</strong>
+<ul>
+<li>Call Delta lies between \(0\) and \(+1\) (\(\text{ATM} \approx 0.5\), deep ITM \(\to 1\), deep OTM \(\to 0\)).</li>
+<li>Put Delta lies between \(-1\) and \(0\) (\(\text{ATM} \approx -0.5\), deep ITM \(\to -1\), deep OTM \(\to 0\)).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l10-s04">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta 的核心性质</h2>
+<div class="slide-content">
+<ul>
+<li><strong>斜率的几何含义：</strong> Delta 是期权价格关于标的资产价格 \(S\) 曲线上的切线斜率：
             <div class="equation-box" style="padding: 6px 16px; margin: 8px 0;">
               \[ \text{切线斜率} = \Delta = \lim_{\Delta S \to 0} \frac{\Delta f}{\Delta S} \]
             </div>
-          </li>
-          <li><strong>Delta 与到期时间的关系：</strong>
-            <ul>
-              <li>当到期时间 \(T \to 0\) 时，Delta 曲线在执行价格 \(K\) 附近显著变陡：
+</li>
+<li><strong>Delta 与到期时间的关系：</strong>
+<ul>
+<li>当到期时间 \(T \to 0\) 时，Delta 曲线在执行价格 \(K\) 附近显著变陡：
                 <ul>
-                  <li>对于实值看涨期权（\(S > K\)）：\(\Delta \to 1.0\)</li>
-                  <li>对于虚值看涨期权（\(S < K\)）：\(\Delta \to 0.0\)</li>
-                  <li>对于平值看涨期权（\(S = K\)）：\(\Delta \approx 0.5\)，呈现阶跃函数的形态过渡。</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s05" data-kind="original" data-source-slide="5" data-pdf-page="3" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 5</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Delta 的性质（一阶线性近似）</h2>
-      <div class="slide-content">
-        <ul>
-          <li>Delta 衡量期权价值对标的资产价格微小变动的敏感度：
-            <ul>
-              <li>若标的价格 \(S\) 变动 \(\Delta S\)，则：
+<li>对于实值看涨期权（\(S &gt; K\)）：\(\Delta \to 1.0\)</li>
+<li>对于虚值看涨期权（\(S &lt; K\)）：\(\Delta \to 0.0\)</li>
+<li>对于平值看涨期权（\(S = K\)）：\(\Delta \approx 0.5\)，呈现阶跃函数的形态过渡。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l10-s04-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 4</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Properties of Delta</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Slope Interpretation:</strong> Delta is the slope of the curve plotting option price against the underlying asset price \(S\):
+            <div class="equation-box" style="padding: 6px 16px; margin: 8px 0;">
+              \[ \text{Slope of tangent line} = \Delta = \lim_{\Delta S \to 0} \frac{\Delta f}{\Delta S} \]
+            </div>
+</li>
+<li><strong>Relation between Delta and Time to Maturity:</strong>
+<ul>
+<li>As time to maturity \(T \to 0\), the delta curve steepens around the strike \(K\):
                 <ul>
-                  <li>看涨期权价值变动约为 \(\Delta_c \times \Delta S\)</li>
-                  <li>看跌期权价值变动约为 \(\Delta_p \times \Delta S = -|\Delta_p| \times \Delta S\)</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><strong>数值算例：</strong>
-            <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 16px; margin: 10px 0;">
-              股票价格从 <strong>$49.00</strong> 上涨至 <strong>$50.50</strong>（\(\Delta S = +\$1.50\)）。<br>
-              该股票看涨期权的 Delta 为 <strong>0.43</strong>。<br>
+<li>For an ITM call (\(S &gt; K\)): \(\Delta \to 1.0\)</li>
+<li>For an OTM call (\(S &lt; K\)): \(\Delta \to 0.0\)</li>
+<li>For an ATM call (\(S = K\)): \(\Delta \approx 0.5\), transitioning like a step function.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l10-s05">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta 的性质（一阶线性近似）</h2>
+<div class="slide-content">
+<ul>
+<li>Delta 衡量期权价值对标的资产价格微小变动的敏感度：
+            <ul>
+<li>若标的价格 \(S\) 变动 \(\Delta S\)，则：
+                <ul>
+<li>看涨期权价值变动约为 \(\Delta_c \times \Delta S\)</li>
+<li>看跌期权价值变动约为 \(\Delta_p \times \Delta S = -|\Delta_p| \times \Delta S\)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>数值算例：</strong>
+<div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 16px; margin: 10px 0;">
+              股票价格从 <strong>$49.00</strong> 上涨至 <strong>$50.50</strong>（\(\Delta S = +\$1.50\)）。<br/>
+              该股票看涨期权的 Delta 为 <strong>0.43</strong>。<br/>
               预计该看涨期权价值将上涨：
               \[ \Delta \times \Delta S = 0.43 \times \$1.50 = \mathbf{\$0.645} \]
             </div>
-          </li>
-          <li>对于深度实值期权：\(\Delta_{\text{call}} \approx 1, \quad \Delta_{\text{put}} \approx -1\)。</li>
-          <li>对于深度虚值期权：\(\Delta_{\text{call}} \approx 0, \quad \Delta_{\text{put}} \approx 0\)。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s06" data-kind="original" data-source-slide="6" data-pdf-page="3" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 6</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">远期与期货合约的 Delta</h2>
-      <div class="slide-content">
-        <ul>
-          <li>标的现货资产本身的 Delta 恒为 \(\mathbf{1}\)。</li>
-          <li>支付连续红利率 \(q\)、期限为 \(T\) 的资产远期合约的 Delta：
+</li>
+<li>对于深度实值期权：\(\Delta_{\text{call}} \approx 1, \quad \Delta_{\text{put}} \approx -1\)。</li>
+<li>对于深度虚值期权：\(\Delta_{\text{call}} \approx 0, \quad \Delta_{\text{put}} \approx 0\)。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l10-s05-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 5</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Properties of Delta (Approximation)</h2>
+<div class="slide-content">
+<ul>
+<li>Delta measures the sensitivity of option value to small changes in underlying price:
+            <ul>
+<li>If \(S\) increases by \(\Delta S\), then:
+                <ul>
+<li>Call value changes by approximately \(\Delta_c \times \Delta S\)</li>
+<li>Put value changes by approximately \(\Delta_p \times \Delta S = -|\Delta_p| \times \Delta S\)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Numerical Example:</strong>
+<div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 16px; margin: 10px 0;">
+              The stock price increases from <strong>$49.00</strong> to <strong>$50.50</strong> (\(\Delta S = +\$1.50\)).<br/>
+              The delta of a call option on this stock is <strong>0.43</strong>.<br/>
+              The value of the option is expected to increase by:
+              \[ \Delta \times \Delta S = 0.43 \times \$1.50 = \mathbf{\$0.645} \]
+            </div>
+</li>
+<li>For deep ITM options: \(\Delta_{\text{call}} \approx 1, \quad \Delta_{\text{put}} \approx -1\).</li>
+<li>For deep OTM options: \(\Delta_{\text{call}} \approx 0, \quad \Delta_{\text{put}} \approx 0\).</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l10-s06">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期与期货合约的 Delta</h2>
+<div class="slide-content">
+<ul>
+<li>标的现货资产本身的 Delta 恒为 \(\mathbf{1}\)。</li>
+<li>支付连续红利率 \(q\)、期限为 \(T\) 的资产远期合约的 Delta：
             <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
               \[ \Delta_{\text{forward}} = e^{-qT} \quad (\text{若 } q = 0 \implies \Delta_{\text{forward}} = 1) \]
             </div>
-          </li>
-          <li>支付连续红利率 \(q\)、期限为 \(T\) 的资产期货合约的 Delta：
+</li>
+<li>支付连续红利率 \(q\)、期限为 \(T\) 的资产期货合约的 Delta：
             <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
               \[ \Delta_{\text{futures}} = e^{(r - q)T} \]
             </div>
-          </li>
-          <li><strong>典型期货实例：</strong>
-            <ul>
-              <li>股指期货：\(\Delta = e^{(r - q)T}\)</li>
-              <li>外汇期货：\(\Delta = e^{(r - r_f)T}\)（\(r_f\) 为外国无风险利率）</li>
-              <li>商品期货（黄金/白银）：\(\Delta = e^{rT}\)</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s07" data-kind="original" data-source-slide="7" data-pdf-page="4" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 7</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">期权合约的 Delta</h2>
-      <div class="slide-content">
-        <ul>
-          <li>以支付连续红利率 \(q\)、期限为 \(T\) 的资产为标的的期权合约 Delta：
+</li>
+<li><strong>典型期货实例：</strong>
+<ul>
+<li>股指期货：\(\Delta = e^{(r - q)T}\)</li>
+<li>外汇期货：\(\Delta = e^{(r - r_f)T}\)（\(r_f\) 为外国无风险利率）</li>
+<li>商品期货（黄金/白银）：\(\Delta = e^{rT}\)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l10-s06-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 6</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta of Forward and Futures Contracts</h2>
+<div class="slide-content">
+<ul>
+<li>The delta of the spot contract (underlying asset itself) is \(\mathbf{1}\).</li>
+<li>The delta of a forward contract with maturity \(T\) on an asset paying continuous dividend yield \(q\):
+            <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+              \[ \Delta_{\text{forward}} = e^{-qT} \quad (\text{if } q = 0 \implies \Delta_{\text{forward}} = 1) \]
+            </div>
+</li>
+<li>The delta of a futures contract with maturity \(T\) on an asset paying continuous dividend yield \(q\):
+            <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+              \[ \Delta_{\text{futures}} = e^{(r - q)T} \]
+            </div>
+</li>
+<li><strong>Examples:</strong>
+<ul>
+<li>Index Futures: \(\Delta = e^{(r - q)T}\)</li>
+<li>Currency Futures: \(\Delta = e^{(r - r_f)T}\) (where \(r_f\) is foreign risk-free rate)</li>
+<li>Commodity (Gold/Silver) Futures: \(\Delta = e^{rT}\)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l10-s07">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期权合约的 Delta</h2>
+<div class="slide-content">
+<ul>
+<li>以支付连续红利率 \(q\)、期限为 \(T\) 的资产为标的的期权合约 Delta：
             <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
               \[ \Delta_{\text{call}} = e^{-qT} N(d_1), \quad \Delta_{\text{put}} = e^{-qT} [N(d_1) - 1] \]
             </div>
-          </li>
-          <li><strong>各类衍生品期权具体形式：</strong>
-            <ul>
-              <li><strong>股指期权：</strong> \(\Delta_c = e^{-qT} N(d_1), \quad \Delta_p = e^{-qT} [N(d_1) - 1]\)</li>
-              <li><strong>外汇期权：</strong> \(\Delta_c = e^{-r_f T} N(d_1), \quad \Delta_p = e^{-r_f T} [N(d_1) - 1]\)</li>
-              <li><strong>期货期权：</strong> \(\Delta_c = e^{-rT} N(d_1), \quad \Delta_p = e^{-rT} [N(d_1) - 1]\)</li>
-            </ul>
-          </li>
-          <li>其中代入相应参数计算 \(d_1\)：
+</li>
+<li><strong>各类衍生品期权具体形式：</strong>
+<ul>
+<li><strong>股指期权：</strong> \(\Delta_c = e^{-qT} N(d_1), \quad \Delta_p = e^{-qT} [N(d_1) - 1]\)</li>
+<li><strong>外汇期权：</strong> \(\Delta_c = e^{-r_f T} N(d_1), \quad \Delta_p = e^{-r_f T} [N(d_1) - 1]\)</li>
+<li><strong>期货期权：</strong> \(\Delta_c = e^{-rT} N(d_1), \quad \Delta_p = e^{-rT} [N(d_1) - 1]\)</li>
+</ul>
+</li>
+<li>其中代入相应参数计算 \(d_1\)：
             \[ d_1 = \frac{\ln(S_0 / K) + (r - q + \frac{1}{2}\sigma^2)T}{\sigma \sqrt{T}} \]
           </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s08" data-kind="original" data-source-slide="8" data-pdf-page="4" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 8</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li class="active">Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Theta (\(\Theta\)) 时间衰减</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>定义：</strong> Theta 是期权价格 \(f\) 相对于时间流逝 \(t\) 的变化率（时间价值损耗速率）：
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l10-s07-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 7</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta of Option Contracts</h2>
+<div class="slide-content">
+<ul>
+<li>The delta of an option with maturity \(T\) on an asset paying continuous dividend yield \(q\):
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \Delta_{\text{call}} = e^{-qT} N(d_1), \quad \Delta_{\text{put}} = e^{-qT} [N(d_1) - 1] \]
+            </div>
+</li>
+<li><strong>Examples:</strong>
+<ul>
+<li><strong>Index Options:</strong> \(\Delta_c = e^{-qT} N(d_1), \quad \Delta_p = e^{-qT} [N(d_1) - 1]\)</li>
+<li><strong>Currency Options:</strong> \(\Delta_c = e^{-r_f T} N(d_1), \quad \Delta_p = e^{-r_f T} [N(d_1) - 1]\)</li>
+<li><strong>Futures Options:</strong> \(\Delta_c = e^{-rT} N(d_1), \quad \Delta_p = e^{-rT} [N(d_1) - 1]\)</li>
+</ul>
+</li>
+<li>where by choice of \(q\) (or \(r_f\) or \(r\)), the appropriate \(d_1\) is used:
+            \[ d_1 = \frac{\ln(S_0 / K) + (r - q + \frac{1}{2}\sigma^2)T}{\sigma \sqrt{T}} \]
+          </li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l10-s08">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li class="active">Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Theta (\(\Theta\)) 时间衰减</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong> Theta 是期权价格 \(f\) 相对于时间流逝 \(t\) 的变化率（时间价值损耗速率）：
             <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 6px 0;">
               \[ \Theta = \frac{\partial f}{\partial t} \]
             </div>
-          </li>
-          <li><strong>支付连续红利率 \(q\) 资产的欧式看涨期权 Theta：</strong>
-            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
+</li>
+<li><strong>支付连续红利率 \(q\) 资产的欧式看涨期权 Theta：</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
               \[ \Theta_c = -\frac{S_0 N'(d_1) \sigma e^{-qT}}{2\sqrt{T}} - r K e^{-rT} N(d_2) + q S_0 N(d_1) e^{-qT} \]
             </div>
             其中 \(N'(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2 / 2}\)。
           </li>
-          <li>期权多头的 Theta 通常为<strong>负值</strong> &ndash; 随着时间流逝，期权不断损失时间价值。</li>
-          <li><strong>算例：</strong> \(S_0 = 49, K = 50, r = 0.05, \sigma = 0.20, T = 20/52\)：
+<li>期权多头的 Theta 通常为<strong>负值</strong> – 随着时间流逝，期权不断损失时间价值。</li>
+<li><strong>算例：</strong> \(S_0 = 49, K = 50, r = 0.05, \sigma = 0.20, T = 20/52\)：
             \[ \Theta = -4.31 \text{ / 年} = \frac{-4.31}{252} = \mathbf{-0.0171} \text{ / 交易日} \]
             这意味着该期权价值每个交易日因时间流逝自然衰减约 $0.0171。
           </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s09" data-kind="original" data-source-slide="9" data-pdf-page="5" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 9</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li class="active">Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Theta 的性质与特征</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>Theta 与标的资产价格的关系：</strong>
-            <ul>
-              <li>参数设定：\(K = 50, r = 0.08, \sigma = 0.25, T = 0.5\)。</li>
-              <li>当期权处于<strong>平值状态</strong>（\(\text{ATM}, S \approx K = 50\)）时，Theta 负值绝对值最大（时间价值损耗速度最快）。</li>
-              <li>对于深度实值或深度虚值期权，Theta 趋近于 0（因为期权价格被内在价值主导，或者外在时间价值本身极小）。</li>
-            </ul>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l10-s08-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 8</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li class="active">Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Theta (\(\Theta\))</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Definition:</strong> Theta is the rate of change of option price \(f\) with respect to the passage of time \(t\):
+            <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 6px 0;">
+              \[ \Theta = \frac{\partial f}{\partial t} \]
+            </div>
+</li>
+<li><strong>Theta of a European Call on a Stock paying Continuous Yield \(q\):</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
+              \[ \Theta_c = -\frac{S_0 N'(d_1) \sigma e^{-qT}}{2\sqrt{T}} - r K e^{-rT} N(d_2) + q S_0 N(d_1) e^{-qT} \]
+            </div>
+            where \(N'(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2 / 2}\).
           </li>
-          <li><strong>Theta 与到期时间的关系：</strong>
-            <ul>
-              <li>对于平值期权，随着到期日临近（\(T \to 0\)），时间衰减急剧加速。</li>
-              <li>交易员持有临近到期的平值多头期权时，必须警惕严峻的日度时间价值侵蚀。</li>
-            </ul>
+<li>Theta is usually <strong>negative</strong> – as time passes, the option loses time value (time decay).</li>
+<li><strong>Example:</strong> \(S_0 = 49, K = 50, r = 0.05, \sigma = 0.20, T = 20/52\):
+            \[ \Theta = -4.31 \text{ p.a.} = \frac{-4.31}{252} = \mathbf{-0.0171} \text{ per trading day} \]
+            The option value decays by approximately $0.0171 per trading day.
           </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s10" data-kind="original" data-source-slide="10" data-pdf-page="5" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 10</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li class="active">Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Gamma (\(\Gamma\)) 曲率</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>定义：</strong> Gamma 是 Delta (\(\Delta\)) 相对于标的资产价格 \(S\) 的变化率（期权价格对标的资产价格的二阶偏导数）：
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l10-s09">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li class="active">Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Theta 的性质与特征</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Theta 与标的资产价格的关系：</strong>
+<ul>
+<li>参数设定：\(K = 50, r = 0.08, \sigma = 0.25, T = 0.5\)。</li>
+<li>当期权处于<strong>平值状态</strong>（\(\text{ATM}, S \approx K = 50\)）时，Theta 负值绝对值最大（时间价值损耗速度最快）。</li>
+<li>对于深度实值或深度虚值期权，Theta 趋近于 0（因为期权价格被内在价值主导，或者外在时间价值本身极小）。</li>
+</ul>
+</li>
+<li><strong>Theta 与到期时间的关系：</strong>
+<ul>
+<li>对于平值期权，随着到期日临近（\(T \to 0\)），时间衰减急剧加速。</li>
+<li>交易员持有临近到期的平值多头期权时，必须警惕严峻的日度时间价值侵蚀。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l10-s09-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 9</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li class="active">Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Properties of Theta</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Relation between Theta and Underlying Asset Price:</strong>
+<ul>
+<li>Parameters: \(K = 50, r = 0.08, \sigma = 0.25, T = 0.5\).</li>
+<li>Theta is most negative (time decay is fastest) when the option is <strong>at-the-money</strong> (\(S \approx K = 50\)).</li>
+<li>For deep in-the-money or deep out-of-the-money options, Theta approaches zero because option value is dominated by intrinsic value or approaches zero.</li>
+</ul>
+</li>
+<li><strong>Relation with Time to Maturity:</strong>
+<ul>
+<li>For ATM options, time decay accelerates sharply as expiration approaches (\(T \to 0\)).</li>
+<li>Traders must be cautious when holding short-dated ATM long option positions due to severe daily theta decay.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l10-s10">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li class="active">Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Gamma (\(\Gamma\)) 曲率</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong> Gamma 是 Delta (\(\Delta\)) 相对于标的资产价格 \(S\) 的变化率（期权价格对标的资产价格的二阶偏导数）：
             <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 4px 0;">
               \[ \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 f}{\partial S^2} \]
             </div>
-          </li>
-          <li><strong>欧式看涨与看跌期权公式（两者完全相同！）：</strong>
-            <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+</li>
+<li><strong>欧式看涨与看跌期权公式（两者完全相同！）：</strong>
+<div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
               \[ \Gamma = \frac{N'(d_1)}{S_0 \sigma \sqrt{T}} \quad \text{若含连续红利率 } q: \quad \Gamma = \frac{N'(d_1) e^{-qT}}{S_0 \sigma \sqrt{T}} \]
             </div>
-          </li>
-          <li>若标的价格变动 \(\Delta S\)，Delta 的变动量约为 \(\Gamma \times \Delta S\)。</li>
-          <li><strong>算例：</strong> \(S_0 = 49, K = 50, r = 0.05, \sigma = 0.20, T = 20/52 \implies \Gamma = 0.066, \Delta = 0.5216\)。<br>
+</li>
+<li>若标的价格变动 \(\Delta S\)，Delta 的变动量约为 \(\Gamma \times \Delta S\)。</li>
+<li><strong>算例：</strong> \(S_0 = 49, K = 50, r = 0.05, \sigma = 0.20, T = 20/52 \implies \Gamma = 0.066, \Delta = 0.5216\)。<br/>
             若股票价格从 $49 上涨至 $50.50（\(\Delta S = \$1.50\)）：
             \[ \Delta_{\text{new}} \approx 0.5216 + (0.066 \times 1.50) = 0.5216 + 0.099 = \mathbf{0.6206} \]
           </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s11" data-kind="original" data-source-slide="11" data-pdf-page="6" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 11</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li class="active">Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Gamma 的性质</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>虚实值程度对 Gamma 的影响：</strong>
-            <ul>
-              <li><strong>深度虚值（Deep OTM）：</strong> Delta \(\approx 0\)，随 \(S\) 变动极慢 &rarr; \(\Gamma \approx 0\)。</li>
-              <li><strong>平值状态（ATM）：</strong> Delta \(\approx 0.5\)，对标的价格微小变动极度敏感 &rarr; \(\mathbf{\Gamma}\) <strong>达到峰值最大值！</strong></li>
-              <li><strong>深度实值（Deep ITM）：</strong> Delta \(\approx 1.0\)，随 \(S\) 变动极慢 &rarr; \(\Gamma \approx 0\)。</li>
-            </ul>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l10-s10-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 10</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li class="active">Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Gamma (\(\Gamma\))</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Definition:</strong> Gamma is the rate of change of delta \(\Delta\) with respect to the price \(S\) of the underlying asset (second derivative of option price):
+            <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 4px 0;">
+              \[ \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 f}{\partial S^2} \]
+            </div>
+</li>
+<li><strong>Formula for European Call and Put (identical for both!):</strong>
+<div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+              \[ \Gamma = \frac{N'(d_1)}{S_0 \sigma \sqrt{T}} \quad \text{or with dividend } q: \quad \Gamma = \frac{N'(d_1) e^{-qT}}{S_0 \sigma \sqrt{T}} \]
+            </div>
+</li>
+<li>If \(S\) increases by \(\Delta S\), delta changes by approximately \(\Gamma \times \Delta S\).</li>
+<li><strong>Example:</strong> \(S_0 = 49, K = 50, r = 0.05, \sigma = 0.20, T = 20/52 \implies \Gamma = 0.066, \Delta = 0.5216\).<br/>
+            If stock price rises from $49 to $50.50 (\(\Delta S = \$1.50\)):
+            \[ \Delta_{\text{new}} \approx 0.5216 + (0.066 \times 1.50) = 0.5216 + 0.099 = \mathbf{0.6206} \]
           </li>
-          <li><strong>Gamma 与标的资产价格的关系：</strong>
-            <p style="color: #374151; margin-top: 8px">
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l10-s11">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li class="active">Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Gamma 的性质</h2>
+<div class="slide-content">
+<ul>
+<li><strong>虚实值程度对 Gamma 的影响：</strong>
+<ul>
+<li><strong>深度虚值（Deep OTM）：</strong> Delta \(\approx 0\)，随 \(S\) 变动极慢 → \(\Gamma \approx 0\)。</li>
+<li><strong>平值状态（ATM）：</strong> Delta \(\approx 0.5\)，对标的价格微小变动极度敏感 → \(\mathbf{\Gamma}\) <strong>达到峰值最大值！</strong></li>
+<li><strong>深度实值（Deep ITM）：</strong> Delta \(\approx 1.0\)，随 \(S\) 变动极慢 → \(\Gamma \approx 0\)。</li>
+</ul>
+</li>
+<li><strong>Gamma 与标的资产价格的关系：</strong>
+<p style="color: #374151; margin-top: 8px">
               Gamma 随标的资产价格呈现以执行价格 \(S = K\) 为对称中心的尖锐钟形峰值曲线。
             </p>
-          </li>
-          <li>对冲者必须高度关注持有平值期权的组合，其 Gamma 风险极为集中。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s12" data-kind="original" data-source-slide="12" data-pdf-page="6" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 12</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li class="active">Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Gamma 的性质与曲率修正</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>Gamma 与到期时间的关系：</strong>
-            <ul>
-              <li>当 \(T \to 0\) 时，平值期权的 Gamma 趋于无穷大，导致在 \(S = K\) 附近的敏感度极端集中。</li>
-            </ul>
-          </li>
-          <li><strong>Gamma 刻画了 Delta 对冲中的二阶曲率效应：</strong>
-            <ul>
-              <li>若 \(\Gamma\) 较小：Delta 变动缓慢 &rarr; 较低频率的再平衡即可满足要求。</li>
-              <li>若 \(\Gamma\) 较大：Delta 高度敏感 &rarr; 若不及时调整对冲比例，将引发严重的跟踪误差！</li>
-            </ul>
-          </li>
-          <li><strong>曲率增益直观示例：</strong>
-            <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 16px; margin-top: 10px;">
-              在 \(S = 49\) 时，看涨期权价格为 $2.40（\(\Delta = 0.52\)）。若股票上涨至 $50（\(\Delta S = +1\)）：<br>
-              一阶线性 Delta 预测值：\(2.40 + 0.52 \times 1 = \mathbf{\$2.92}\)<br>
-              考虑非线性曲率后的实际看涨期权价格：\(\mathbf{\$2.95}\)<br>
-              <em>多出的 +$0.03 正是二阶曲率带来的正向收益（\(\frac{1}{2}\Gamma \Delta S^2\)）！</em>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s13" data-kind="original" data-source-slide="13" data-pdf-page="7" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 13</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li class="active">Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title" >Delta、Theta 与 Gamma 之间的内在关系</h2>
-      <div class="slide-content">
-        <table class="slide-table" style="text-align: center; margin: 8px 0;">
-          <tr style="background: #f1f5f9;">
-            <th>头寸方向</th><th>Delta (\(\Delta\))</th><th>Gamma (\(\Gamma\))</th><th>Theta (\(\Theta\))</th>
-          </tr>
-          <tr><td><strong>多头看涨 (Long Call)</strong></td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">&minus;</td></tr>
-          <tr><td><strong>多头看跌 (Long Put)</strong></td><td style="color: #dc2626; font-weight: bold;">&minus;</td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">&minus;</td></tr>
-          <tr><td><strong>空头看涨 (Short Call)</strong></td><td style="color: #dc2626; font-weight: bold;">&minus;</td><td style="color: #dc2626; font-weight: bold;">&minus;</td><td style="color: #16a34a; font-weight: bold;">+</td></tr>
-          <tr><td><strong>空头看跌 (Short Put)</strong></td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">&minus;</td><td style="color: #16a34a; font-weight: bold;">+</td></tr>
-        </table>
-        <p style="margin: 6px 0">对于 <strong>Delta 中性组合</strong>（\(\Delta_P = 0\)），由泰勒级数展开可得：</p>
-        <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+</li>
+<li>对冲者必须高度关注持有平值期权的组合，其 Gamma 风险极为集中。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l10-s11-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 11</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li class="active">Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Properties of Gamma</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Moneyness Effect on Gamma:</strong>
+<ul>
+<li><strong>Deep OTM:</strong> Delta \(\approx 0\), changes very slowly with \(S\) → \(\Gamma \approx 0\).</li>
+<li><strong>At-the-Money (ATM):</strong> Delta \(\approx 0.5\), highly sensitive to small moves in \(S\) → \(\mathbf{\Gamma}\) <strong>reaches its maximum!</strong></li>
+<li><strong>Deep ITM:</strong> Delta \(\approx 1.0\), changes very slowly with \(S\) → \(\Gamma \approx 0\).</li>
+</ul>
+</li>
+<li><strong>Relation between Gamma and Asset Price:</strong>
+<p style="color: #374151; margin-top: 8px">
+              The curve of Gamma against asset price forms a sharp bell-shaped peak centered right around the strike price \(S = K\).
+            </p>
+</li>
+<li>Hedgers must be especially attentive to portfolios with ATM options where Gamma risk is concentrated.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l10-s12">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li class="active">Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Gamma 的性质与曲率修正</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Gamma 与到期时间的关系：</strong>
+<ul>
+<li>当 \(T \to 0\) 时，平值期权的 Gamma 趋于无穷大，导致在 \(S = K\) 附近的敏感度极端集中。</li>
+</ul>
+</li>
+<li><strong>Gamma 刻画了 Delta 对冲中的二阶曲率效应：</strong>
+<ul>
+<li>若 \(\Gamma\) 较小：Delta 变动缓慢 → 较低频率的再平衡即可满足要求。</li>
+<li>若 \(\Gamma\) 较大：Delta 高度敏感 → 若不及时调整对冲比例，将引发严重的跟踪误差！</li>
+</ul>
+</li>
+<li><strong>曲率增益直观示例：</strong>
+<div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 16px; margin-top: 10px;">
+              在 \(S = 49\) 时，看涨期权价格为 $2.40（\(\Delta = 0.52\)）。若股票上涨至 $50（\(\Delta S = +1\)）：<br/>
+              一阶线性 Delta 预测值：\(2.40 + 0.52 \times 1 = \mathbf{\$2.92}\)<br/>
+              考虑非线性曲率后的实际看涨期权价格：\(\mathbf{\$2.95}\)<br/>
+<em>多出的 +$0.03 正是二阶曲率带来的正向收益（\(\frac{1}{2}\Gamma \Delta S^2\)）！</em>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l10-s12-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 12</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li class="active">Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Properties of Gamma &amp; Curvature</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Relation between Gamma and Time to Maturity:</strong>
+<ul>
+<li>As \(T \to 0\), Gamma for an ATM option tends to infinity, concentrating extreme sensitivity at \(S = K\).</li>
+</ul>
+</li>
+<li><strong>Gamma Accounts for Curvature in Delta Hedging:</strong>
+<ul>
+<li>If \(\Gamma\) is small: Delta changes slowly → infrequent rebalancing is sufficient.</li>
+<li>If \(\Gamma\) is large: Delta is highly sensitive → leaving the hedge unadjusted introduces significant tracking error!</li>
+</ul>
+</li>
+<li><strong>Curvature Illustration:</strong>
+<div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 16px; margin-top: 10px;">
+              At \(S = 49\), call price is $2.40 (\(\Delta = 0.52\)). If stock rises to $50 (\(\Delta S = +1\)):<br/>
+              Linear Delta prediction: \(2.40 + 0.52 \times 1 = \mathbf{\$2.92}\)<br/>
+              Actual call price with curvature: \(\mathbf{\$2.95}\)<br/>
+<em>The extra +$0.03 is the second-order curvature gain (\(\frac{1}{2}\Gamma \Delta S^2\))!</em>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l10-s13">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li class="active">Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Delta、Theta 与 Gamma 之间的内在关系</h2>
+<div class="slide-content">
+<table class="slide-table" style="text-align: center; margin: 8px 0;">
+<tr style="background: #f1f5f9;">
+<th>头寸方向</th><th>Delta (\(\Delta\))</th><th>Gamma (\(\Gamma\))</th><th>Theta (\(\Theta\))</th>
+</tr>
+<tr><td><strong>多头看涨 (Long Call)</strong></td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">−</td></tr>
+<tr><td><strong>多头看跌 (Long Put)</strong></td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">−</td></tr>
+<tr><td><strong>空头看涨 (Short Call)</strong></td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #16a34a; font-weight: bold;">+</td></tr>
+<tr><td><strong>空头看跌 (Short Put)</strong></td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #16a34a; font-weight: bold;">+</td></tr>
+</table>
+<p style="margin: 6px 0">对于 <strong>Delta 中性组合</strong>（\(\Delta_P = 0\)），由泰勒级数展开可得：</p>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
           \[ \Delta \Pi \approx \Theta \Delta t + \frac{1}{2} \Gamma (\Delta S)^2 \]
         </div>
-        <ul >
-          <li>当 \(\Gamma > 0\)（此时 \(\Theta < 0\)）：若标的价格不移动（\(\Delta S = 0\)），组合遭受 \(\Theta\) 时间衰减损失；但若标的价格大幅跳变，组合将通过 \(\Gamma\) 获取丰厚曲率收益！</li>
-          <li>当 \(\Gamma < 0\)（此时 \(\Theta > 0\)）：若标的价格平稳不移动，组合赚取正向时间价值损耗收益；但一旦标的价格大幅跳变，组合将遭受严重损失！</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s14" data-kind="original" data-source-slide="14" data-pdf-page="7" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 14</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li class="active">Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Vega (\(\mathcal{V}\)) 波动率敏感度</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>定义：</strong> Vega 是期权价格 \(f\) 相对于标的资产波动率 \(\sigma\) 的变化率：
+<ul>
+<li>当 \(\Gamma &gt; 0\)（此时 \(\Theta &lt; 0\)）：若标的价格不移动（\(\Delta S = 0\)），组合遭受 \(\Theta\) 时间衰减损失；但若标的价格大幅跳变，组合将通过 \(\Gamma\) 获取丰厚曲率收益！</li>
+<li>当 \(\Gamma &lt; 0\)（此时 \(\Theta &gt; 0\)）：若标的价格平稳不移动，组合赚取正向时间价值损耗收益；但一旦标的价格大幅跳变，组合将遭受严重损失！</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l10-s13-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 13</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li class="active">Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Relationship between Delta, Theta and Gamma</h2>
+<div class="slide-content">
+<table class="slide-table" style="text-align: center; margin: 8px 0;">
+<tr style="background: #f1f5f9;">
+<th>Position</th><th>Delta (\(\Delta\))</th><th>Gamma (\(\Gamma\))</th><th>Theta (\(\Theta\))</th>
+</tr>
+<tr><td><strong>Long Call</strong></td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">−</td></tr>
+<tr><td><strong>Long Put</strong></td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">−</td></tr>
+<tr><td><strong>Short Call</strong></td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #16a34a; font-weight: bold;">+</td></tr>
+<tr><td><strong>Short Put</strong></td><td style="color: #16a34a; font-weight: bold;">+</td><td style="color: #dc2626; font-weight: bold;">−</td><td style="color: #16a34a; font-weight: bold;">+</td></tr>
+</table>
+<p style="margin: 6px 0">For a <strong>delta-neutral portfolio</strong> (\(\Delta_P = 0\)), Taylor series gives:</p>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+          \[ \Delta \Pi \approx \Theta \Delta t + \frac{1}{2} \Gamma (\Delta S)^2 \]
+        </div>
+<ul>
+<li>When \(\Gamma &gt; 0\) (\(\Theta &lt; 0\)): If \(S\) doesn't move (\(\Delta S = 0\)), portfolio loses value via \(\Theta\). If \(S\) makes large moves, portfolio profits via \(\Gamma\)!</li>
+<li>When \(\Gamma &lt; 0\) (\(\Theta &gt; 0\)): If \(S\) doesn't move, portfolio earns positive time decay. But large moves in \(S\) inflict severe losses!</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l10-s14">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li class="active">Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Vega (\(\mathcal{V}\)) 波动率敏感度</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong> Vega 是期权价格 \(f\) 相对于标的资产波动率 \(\sigma\) 的变化率：
             <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 4px 0;">
               \[ \mathcal{V} = \frac{\partial f}{\partial \sigma} \]
             </div>
-          </li>
-          <li><strong>欧式看涨与看跌期权公式（两者完全相同）：</strong>
-            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+</li>
+<li><strong>欧式看涨与看跌期权公式（两者完全相同）：</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
               \[ \mathcal{V} = S_0 \sqrt{T} N'(d_1) \quad \text{若含连续红利率 } q: \quad \mathcal{V} = S_0 \sqrt{T} N'(d_1) e^{-qT} \]
             </div>
-          </li>
-          <li>无论看涨期权多头还是看跌期权多头，Vega <strong>恒为正值</strong>。</li>
-          <li><strong>经济含义：</strong> 若标的波动率 \(\sigma\) 上升 1%（0.01），期权价格相应上涨约 \(0.01 \times \mathcal{V}\)。</li>
-          <li>平值期权（ATM）的 Vega 达到最高，随着深入实值或虚值逐渐下降。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s15" data-kind="original" data-source-slide="15" data-pdf-page="8" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 15</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li class="active">Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">Rho (\(\rho\)) 利率敏感度</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>定义：</strong> Rho 是期权价格 \(f\) 相对于无风险利率 \(r\) 的变化率：
+</li>
+<li>无论看涨期权多头还是看跌期权多头，Vega <strong>恒为正值</strong>。</li>
+<li><strong>经济含义：</strong> 若标的波动率 \(\sigma\) 上升 1%（0.01），期权价格相应上涨约 \(0.01 \times \mathcal{V}\)。</li>
+<li>平值期权（ATM）的 Vega 达到最高，随着深入实值或虚值逐渐下降。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l10-s14-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 14</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li class="active">Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Vega (\(\mathcal{V}\))</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Definition:</strong> Vega is the rate of change of option price \(f\) with respect to the volatility \(\sigma\) of the underlying asset:
+            <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 4px 0;">
+              \[ \mathcal{V} = \frac{\partial f}{\partial \sigma} \]
+            </div>
+</li>
+<li><strong>Formula for European Call and Put (identical for both):</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \mathcal{V} = S_0 \sqrt{T} N'(d_1) \quad \text{or with dividend } q: \quad \mathcal{V} = S_0 \sqrt{T} N'(d_1) e^{-qT} \]
+            </div>
+</li>
+<li>Vega is <strong>strictly positive</strong> for both long calls and long puts.</li>
+<li><strong>Interpretation:</strong> If volatility \(\sigma\) increases by 1% (0.01), the option price increases by approximately \(0.01 \times \mathcal{V}\).</li>
+<li>Vega is highest for at-the-money options and drops off for deep ITM/OTM options.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l10-s15">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li class="active">Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Rho (\(\rho\)) 利率敏感度</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong> Rho 是期权价格 \(f\) 相对于无风险利率 \(r\) 的变化率：
             <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 6px 0;">
               \[ \rho = \frac{\partial f}{\partial r} \]
             </div>
-          </li>
-          <li><strong>欧式期权计算公式：</strong>
-            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
-              \[ \rho_{\text{call}} = K T e^{-rT} N(d_2) > 0, \quad \rho_{\text{put}} = -K T e^{-rT} N(-d_2) < 0 \]
+</li>
+<li><strong>欧式期权计算公式：</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \rho_{\text{call}} = K T e^{-rT} N(d_2) &gt; 0, \quad \rho_{\text{put}} = -K T e^{-rT} N(-d_2) &lt; 0 \]
             </div>
-          </li>
-          <li><strong>经济含义：</strong> 若利率 \(r\) 上升 1%（0.01），期权价格相应变动约 \(0.01 \times \rho\)。</li>
-          <li><strong>外汇期权中的双 Rho 参数：</strong>
+</li>
+<li><strong>经济含义：</strong> 若利率 \(r\) 上升 1%（0.01），期权价格相应变动约 \(0.01 \times \rho\)。</li>
+<li><strong>外汇期权中的双 Rho 参数：</strong>
+<ul>
+<li>本国利率 Rho（\(\rho_{\text{domestic}}\)），衡量对本国无风险利率 \(r\) 的敏感度。</li>
+<li>外国利率 Rho（\(\rho_{\text{foreign}}\)），衡量对外国无风险利率 \(r_f\) 的敏感度。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l10-s15-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 15</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li class="active">Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Rho (\(\rho\))</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Definition:</strong> Rho is the rate of change of option price \(f\) with respect to the risk-free interest rate \(r\):
+            <div class="equation-box" style="display: inline-block; padding: 4px 20px; margin: 6px 0;">
+              \[ \rho = \frac{\partial f}{\partial r} \]
+            </div>
+</li>
+<li><strong>Formulas for European Options:</strong>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \rho_{\text{call}} = K T e^{-rT} N(d_2) &gt; 0, \quad \rho_{\text{put}} = -K T e^{-rT} N(-d_2) &lt; 0 \]
+            </div>
+</li>
+<li><strong>Interpretation:</strong> If interest rate \(r\) increases by 1% (0.01), option price changes by approximately \(0.01 \times \rho\).</li>
+<li><strong>Currency Options:</strong> There are two rho parameters:
             <ul>
-              <li>本国利率 Rho（\(\rho_{\text{domestic}}\)），衡量对本国无风险利率 \(r\) 的敏感度。</li>
-              <li>外国利率 Rho（\(\rho_{\text{foreign}}\)），衡量对外国无风险利率 \(r_f\) 的敏感度。</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s16" data-kind="original" data-source-slide="16" data-pdf-page="8" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 16</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li class="active">希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">希腊字母组合管理：Delta、Gamma 与 Vega 的协同控制</h2>
-      <div class="slide-content">
-        <ul>
-          <li>期权投资组合的整体希腊字母是其各个成分合约希腊字母的加权和：
+<li>Domestic Rho (\(\rho_{\text{domestic}}\)) with respect to domestic rate \(r\).</li>
+<li>Foreign Rho (\(\rho_{\text{foreign}}\)) with respect to foreign rate \(r_f\).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l10-s16">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li class="active">希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">希腊字母组合管理：Delta、Gamma 与 Vega 的协同控制</h2>
+<div class="slide-content">
+<ul>
+<li>期权投资组合的整体希腊字母是其各个成分合约希腊字母的加权和：
             <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
               \[ \Delta_P = \sum_{i=1}^n w_i \Delta_i, \quad \Gamma_P = \sum_{i=1}^n w_i \Gamma_i, \quad \mathcal{V}_P = \sum_{i=1}^n w_i \mathcal{V}_i \]
             </div>
-          </li>
-          <li><strong>实现 Delta 中性（\(\Delta_P = 0\)）：</strong> 可通过持有标的现货资产或期货合约达成（现货与期货的 \(\Gamma = 0, \mathcal{V} = 0\)）。
+</li>
+<li><strong>实现 Delta 中性（\(\Delta_P = 0\)）：</strong> 可通过持有标的现货资产或期货合约达成（现货与期货的 \(\Gamma = 0, \mathcal{V} = 0\)）。
             <ul>
-              <li>若期货头寸为 \(w_F\)，现货头寸为 \(w_S\)：\(w_F = e^{-(r-q)T^*} w_S\)。</li>
-            </ul>
-          </li>
-          <li><strong>实现 Gamma 与 Vega 中性（\(\Gamma_P = 0, \mathcal{V}_P = 0\)）：</strong>
+<li>若期货头寸为 \(w_F\)，现货头寸为 \(w_S\)：\(w_F = e^{-(r-q)T^*} w_S\)。</li>
+</ul>
+</li>
+<li><strong>实现 Gamma 与 Vega 中性（\(\Gamma_P = 0, \mathcal{V}_P = 0\)）：</strong>
+<ul>
+<li>标的现货与期货合约的 \(\Gamma\) 与 \(\mathcal{V}\) 恒为零。</li>
+<li>因此，要调节组合的 Gamma 或 Vega，<strong>必须在组合中额外加入场内挂牌的期权合约</strong>！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l10-s16-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 16</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li class="active">Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Managing Delta, Gamma and Vega</h2>
+<div class="slide-content">
+<ul>
+<li>The Greek letters of a portfolio of options are weighted sums of the individual Greeks:
+            <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+              \[ \Delta_P = \sum_{i=1}^n w_i \Delta_i, \quad \Gamma_P = \sum_{i=1}^n w_i \Gamma_i, \quad \mathcal{V}_P = \sum_{i=1}^n w_i \mathcal{V}_i \]
+            </div>
+</li>
+<li><strong>Delta Neutrality (\(\Delta_P = 0\)):</strong> Can be achieved using positions in the underlying spot asset or in futures contracts (\(\Gamma_{\text{spot}} = 0, \mathcal{V}_{\text{spot}} = 0\)).
             <ul>
-              <li>标的现货与期货合约的 \(\Gamma\) 与 \(\mathcal{V}\) 恒为零。</li>
-              <li>因此，要调节组合的 Gamma 或 Vega，<strong>必须在组合中额外加入场内挂牌的期权合约</strong>！</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s17" data-kind="original" data-source-slide="17" data-pdf-page="9" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 17</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li class="active">Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">案例 &ndash; Delta 与 Gamma 综合对冲</h2>
-      <div class="slide-content">
-        <p style="margin-bottom: 8px">
+<li>If \(w_F\) is futures position and \(w_S\) is spot position: \(w_F = e^{-(r-q)T^*} w_S\).</li>
+</ul>
+</li>
+<li><strong>Gamma &amp; Vega Neutrality (\(\Gamma_P = 0, \mathcal{V}_P = 0\)):</strong>
+<ul>
+<li>The underlying asset and futures have \(\Gamma = 0\) and \(\mathcal{V} = 0\).</li>
+<li>Therefore, to alter Gamma or Vega, <strong>traded options must be added</strong> to the portfolio!</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l10-s17">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li class="active">Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – Delta 与 Gamma 综合对冲</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px">
           某金融机构持有美元场外期权组合，敏感度为 \(\Delta = -450\)，\(\Gamma = -6,000\)。市场上有一只可交易期权，其参数为 \(\Delta_T = 0.6, \Gamma_T = 1.5\)。
         </p>
-        <ul>
-          <li>需要持有多少单位可交易期权（\(w\)）和美元现货（\(w_S\)）才能使该组合同时达到 Gamma 中性与 Delta 中性？</li>
-          <li>Gamma 与 Delta 中性联立条件：
+<ul>
+<li>需要持有多少单位可交易期权（\(w\)）和美元现货（\(w_S\)）才能使该组合同时达到 Gamma 中性与 Delta 中性？</li>
+<li>Gamma 与 Delta 中性联立条件：
             <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
               \[ \Gamma: \quad -6,000 + w \times 1.5 + w_S \times 0 = 0 \]
               \[ \Delta: \quad -450 + w \times 0.6 + w_S \times 1 = 0 \]
             </div>
-          </li>
-          <li>求解方程组：
+</li>
+<li>求解方程组：
             \[ w = \frac{6,000}{1.5} = \mathbf{4,000 \text{ 份可交易期权}} \]
             \[ w_S = -(-450 + 4,000 \times 0.6) = -( -450 + 2,400) = \mathbf{-\$1,950} \]
           </li>
-          <li><strong>对冲策略：</strong> 买入 4,000 份可交易期权，并在现货市场做空 $1,950 的标的货币。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s18" data-kind="original" data-source-slide="18" data-pdf-page="9" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 18</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li class="active">Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">案例 &ndash; Delta、Gamma 与 Vega 联合对冲</h2>
-      <div class="slide-content">
-        <p style="margin-bottom: 6px">
+<li><strong>对冲策略：</strong> 买入 4,000 份可交易期权，并在现货市场做空 $1,950 的标的货币。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l10-s17-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 17</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li class="active">Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Delta and Gamma Hedging</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px">
+          A financial institution has a portfolio of OTC options on dollars with \(\Delta = -450\) and \(\Gamma = -6,000\). A traded option has \(\Delta_T = 0.6, \Gamma_T = 1.5\).
+        </p>
+<ul>
+<li>What position in the traded option (\(w\)) and in dollars (\(w_S\)) would make the portfolio both gamma and delta neutral?</li>
+<li>Gamma and delta neutrality imply:
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \Gamma: \quad -6,000 + w \times 1.5 + w_S \times 0 = 0 \]
+              \[ \Delta: \quad -450 + w \times 0.6 + w_S \times 1 = 0 \]
+            </div>
+</li>
+<li>Solving the system:
+            \[ w = \frac{6,000}{1.5} = \mathbf{4,000 \text{ traded options}} \]
+            \[ w_S = -(-450 + 4,000 \times 0.6) = -( -450 + 2,400) = \mathbf{-\$1,950} \]
+          </li>
+<li><strong>Strategy:</strong> Long 4,000 traded options and short $1,950 of the underlying currency.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l10-s18">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li class="active">Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – Delta、Gamma 与 Vega 联合对冲</h2>
+<div class="slide-content">
+<p style="margin-bottom: 6px">
           某场外期权组合的敏感度为 \(\Delta = -450, \Gamma = -6,000, \mathcal{V} = -4,000\)。市场上有两只可交易期权：
         </p>
-        <ul >
-          <li>期权 1：\(\Delta_1 = 0.6, \Gamma_1 = 1.5, \mathcal{V}_1 = 0.8\)</li>
-          <li>期权 2：\(\Delta_2 = 0.1, \Gamma_2 = 0.5, \mathcal{V}_2 = 0.6\)</li>
-        </ul>
-        <p style="margin: 6px 0">
+<ul>
+<li>期权 1：\(\Delta_1 = 0.6, \Gamma_1 = 1.5, \mathcal{V}_1 = 0.8\)</li>
+<li>期权 2：\(\Delta_2 = 0.1, \Gamma_2 = 0.5, \mathcal{V}_2 = 0.6\)</li>
+</ul>
+<p style="margin: 6px 0">
           设加入期权 1 数量为 \(w_1\)，期权 2 为 \(w_2\)，现货资金为 \(w_S\)。三维度完全中性要求：
         </p>
-        <div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
           \[ \Gamma: \quad \Gamma_P + w_1 \Gamma_1 + w_2 \Gamma_2 + w_S(0) = 0 \]
           \[ \mathcal{V}: \quad \mathcal{V}_P + w_1 \mathcal{V}_1 + w_2 \mathcal{V}_2 + w_S(0) = 0 \]
           \[ \Delta: \quad \Delta_P + w_1 \Delta_1 + w_2 \Delta_2 + w_S(1) = 0 \]
         </div>
-        <p style="color: #4b5563; margin-top: 4px">
-          <em>核心逻辑：</em> 必须先通过两只可交易期权联立求解出满足 Gamma 和 Vega 中性的期权头寸，随后使用标的现货资产消除剩余 Delta！
+<p style="color: #4b5563; margin-top: 4px">
+<em>核心逻辑：</em> 必须先通过两只可交易期权联立求解出满足 Gamma 和 Vega 中性的期权头寸，随后使用标的现货资产消除剩余 Delta！
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s19" data-kind="original" data-source-slide="19" data-pdf-page="10" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 19</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li class="active">Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">案例 &ndash; Delta、Gamma 与 Vega 联合对冲（求解计算）</h2>
-      <div class="slide-content">
-        <p style="margin-bottom: 6px">联立线性方程组：</p>
-        <div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l10-s18-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 18</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li class="active">Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Delta, Gamma and Vega Hedging</h2>
+<div class="slide-content">
+<p style="margin-bottom: 6px">
+          An OTC portfolio has \(\Delta = -450, \Gamma = -6,000, \mathcal{V} = -4,000\). Two traded options are available:
+        </p>
+<ul>
+<li>Option 1: \(\Delta_1 = 0.6, \Gamma_1 = 1.5, \mathcal{V}_1 = 0.8\)</li>
+<li>Option 2: \(\Delta_2 = 0.1, \Gamma_2 = 0.5, \mathcal{V}_2 = 0.6\)</li>
+</ul>
+<p style="margin: 6px 0">
+          Let \(w_1, w_2\) be options added, and \(w_S\) dollars added. Neutrality requires:
+        </p>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
+          \[ \Gamma: \quad \Gamma_P + w_1 \Gamma_1 + w_2 \Gamma_2 + w_S(0) = 0 \]
+          \[ \mathcal{V}: \quad \mathcal{V}_P + w_1 \mathcal{V}_1 + w_2 \mathcal{V}_2 + w_S(0) = 0 \]
+          \[ \Delta: \quad \Delta_P + w_1 \Delta_1 + w_2 \Delta_2 + w_S(1) = 0 \]
+        </div>
+<p style="color: #4b5563; margin-top: 4px">
+<em>Key observation:</em> Gamma and Vega must be solved simultaneously using the two traded options first, then Delta is neutralized using the spot asset!
+        </p>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l10-s19">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li class="active">Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – Delta、Gamma 与 Vega 联合对冲（求解计算）</h2>
+<div class="slide-content">
+<p style="margin-bottom: 6px">联立线性方程组：</p>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
           \[ -6,000 + 1.5 w_1 + 0.5 w_2 = 0 \]
           \[ -4,000 + 0.8 w_1 + 0.6 w_2 = 0 \]
           \[ -450 + 0.6 w_1 + 0.1 w_2 + w_S = 0 \]
         </div>
-        <ul >
-          <li>联立求解前两式关于期权的方程组：
+<ul>
+<li>联立求解前两式关于期权的方程组：
             \[ w_1 = \mathbf{3,200 \text{ 份期权 1}}, \quad w_2 = \mathbf{2,400 \text{ 份期权 2}} \]
           </li>
-          <li>将 \(w_1\) 与 \(w_2\) 代入 Delta 方程：
+<li>将 \(w_1\) 与 \(w_2\) 代入 Delta 方程：
             \[ -450 + 0.6(3,200) + 0.1(2,400) + w_S = 0 \implies -450 + 1,920 + 240 + w_S = 0 \]
             \[ w_S = -(1,710) = \mathbf{-\$1,710} \]
           </li>
-          <li><strong>对冲方案：</strong> 买入 3,200 份期权 1，买入 2,400 份期权 2，并在现货市场做空 $1,710 的货币。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s19-v1" data-kind="enrichment" data-after-source-slide="19">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - v1</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li class="active">Delta与Gamma对冲</li>
-              <li>动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h3 class="slide-title">组合多重希腊字母对冲：现货 vs CME 期货 vs Vega 维度深度对比</h3>
-      <div class="example-card" style="padding: 8px 14px">
-        <p style="margin: 0 0 4px 0;">
-          <strong>英镑场外期权组合：</strong> 汇总希腊字母：\(\mathbf{\Delta_P = +10,900}, \quad \mathbf{\Gamma_P = -264,500}, \quad \mathbf{\mathcal{V}_P = -190,500}\)。<br>
+<li><strong>对冲方案：</strong> 买入 3,200 份期权 1，买入 2,400 份期权 2，并在现货市场做空 $1,710 的货币。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l10-s19-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 19</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li class="active">Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Delta, Gamma and Vega Hedging (Solution)</h2>
+<div class="slide-content">
+<p style="margin-bottom: 6px">Setting up the simultaneous linear equations:</p>
+<div class="equation-box" style="padding: 6px 14px; margin: 6px 0">
+          \[ -6,000 + 1.5 w_1 + 0.5 w_2 = 0 \]
+          \[ -4,000 + 0.8 w_1 + 0.6 w_2 = 0 \]
+          \[ -450 + 0.6 w_1 + 0.1 w_2 + w_S = 0 \]
+        </div>
+<ul>
+<li>Solving the \(2 \times 2\) system for options:
+            \[ w_1 = \mathbf{3,200 \text{ options (Option 1)}}, \quad w_2 = \mathbf{2,400 \text{ options (Option 2)}} \]
+          </li>
+<li>Substituting \(w_1\) and \(w_2\) into the Delta equation:
+            \[ -450 + 0.6(3,200) + 0.1(2,400) + w_S = 0 \implies -450 + 1,920 + 240 + w_S = 0 \]
+            \[ w_S = -(1,710) = \mathbf{-\$1,710} \]
+          </li>
+<li><strong>Trade:</strong> Long 3,200 Option 1, Long 2,400 Option 2, and Short $1,710 of spot currency.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="19" data-kind="enrichment" id="l10-s19-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - v1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li class="active">Delta与Gamma对冲</li>
+<li>动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">组合多重希腊字母对冲：现货 vs CME 期货 vs Vega 维度深度对比</h3>
+<div class="example-card" style="padding: 8px 14px">
+<p style="margin: 0 0 4px 0;">
+<strong>英镑场外期权组合：</strong> 汇总希腊字母：\(\mathbf{\Delta_P = +10,900}, \quad \mathbf{\Gamma_P = -264,500}, \quad \mathbf{\mathcal{V}_P = -190,500}\)。<br/>
           可交易期权：\(\Delta_T = 0.60, \quad \Gamma_T = 1.5, \quad \mathcal{V}_T = 0.80\)。
         </p>
-        <ul style="margin: 4px 0; padding-left: 18px;">
-          <li><strong>(a) 利用可交易期权与现货英镑实现 Delta 与 Gamma 中性：</strong><br>
-            \(\Gamma: -264,500 + 1.5 w_T = 0 \implies w_T = \mathbf{+176,333 \text{ 份期权（多头）}}\)。<br>
+<ul style="margin: 4px 0; padding-left: 18px;">
+<li><strong>(a) 利用可交易期权与现货英镑实现 Delta 与 Gamma 中性：</strong><br/>
+            \(\Gamma: -264,500 + 1.5 w_T = 0 \implies w_T = \mathbf{+176,333 \text{ 份期权（多头）}}\)。<br/>
             \(\Delta: 10,900 + (176,333 \times 0.60) + w_S = 0 \implies w_S = \mathbf{-116,700 \text{ \pounds}}\)。
           </li>
-          <li><strong>(b) 利用可交易期权与 CME 货币期货实现 Delta 与 Gamma 中性：</strong><br>
-            参数设定：\(r_{\text{US}} = 3\%, r_{\text{UK}} = 5.5\%, T = 0.5 \text{ 年}\)，CME 合约规模 \(= £62,500\)。<br>
-            期货 Delta：\(\Delta_F = e^{(0.03 - 0.055) \times 0.5} = \mathbf{0.9876}\)。（期货自身 \(\Gamma_F = 0\)）。<br>
-            可交易期权头寸保持不变 \(w_T = \mathbf{+176,333}\)。<br>
-            所需期货名义英镑额：\(w_F = \frac{-116,700}{0.9876} = \mathbf{-118,168 \text{ \pounds}}\)。<br>
-            CME 期货合约张数：\(N_F = \frac{-118,168}{62,500} = -1.89 \approx \mathbf{-2 \text{ 张空头合约}}\)。<br>
-            <em>注：</em> 取整为 2 张合约覆盖了 &minus;£125,000，留下微小的残差 Delta。
+<li><strong>(b) 利用可交易期权与 CME 货币期货实现 Delta 与 Gamma 中性：</strong><br/>
+            参数设定：\(r_{\text{US}} = 3\%, r_{\text{UK}} = 5.5\%, T = 0.5 \text{ 年}\)，CME 合约规模 \(= £62,500\)。<br/>
+            期货 Delta：\(\Delta_F = e^{(0.03 - 0.055) \times 0.5} = \mathbf{0.9876}\)。（期货自身 \(\Gamma_F = 0\)）。<br/>
+            可交易期权头寸保持不变 \(w_T = \mathbf{+176,333}\)。<br/>
+            所需期货名义英镑额：\(w_F = \frac{-116,700}{0.9876} = \mathbf{-118,168 \text{ \pounds}}\)。<br/>
+            CME 期货合约张数：\(N_F = \frac{-118,168}{62,500} = -1.89 \approx \mathbf{-2 \text{ 张空头合约}}\)。<br/>
+<em>注：</em> 取整为 2 张合约覆盖了 −£125,000，留下微小的残差 Delta。
           </li>
-          <li><strong>(c) 利用可交易期权与现货英镑实现 Delta 与 Vega 中性：</strong><br>
-            \(\mathcal{V}: -190,500 + 0.80 w_T = 0 \implies w_T = \frac{190,500}{0.80} = \mathbf{+238,125 \text{ 份期权（多头）}}\)。<br>
+<li><strong>(c) 利用可交易期权与现货英镑实现 Delta 与 Vega 中性：</strong><br/>
+            \(\mathcal{V}: -190,500 + 0.80 w_T = 0 \implies w_T = \frac{190,500}{0.80} = \mathbf{+238,125 \text{ 份期权（多头）}}\)。<br/>
             \(\Delta: 10,900 + 142,875 + w_S = 0 \implies w_S = \mathbf{-153,775 \text{ \pounds}}\)。
           </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s20" data-kind="original" data-source-slide="20" data-pdf-page="10" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 20</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">实务中的对冲运作 (Hedging in Practice)</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>日常 Delta 动态对冲：</strong> 交易员通常确保其账户头寸<strong>每日至少实现一次 Delta 中性</strong>（在现代量化交易中，往往利用算法执行进行实时动态微调）。</li>
-          <li><strong>相机管理 Gamma 与 Vega：</strong> 每当市场机会出现且交易成本允许时，交易员会交易场内期权以改善 <strong>Gamma 和 Vega 中性程度</strong>。</li>
-          <li><strong>规模经济效应：</strong> 随着资产组合规模的扩大，对冲的相对成本显著降低，因为固定交易成本与买卖价差摩擦分摊到了更大的名义交易量上。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s20-v1"  data-kind="enrichment" data-after-source-slide="20">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - v1</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h3 class="slide-title">风险对冲的权衡考量：曲率、波动率与再平衡频率</h3>
-      <div class="example-card" style="padding: 10px 16px">
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
-          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
-            <strong style="color: #1e3a8a;">Delta 中性 (\(\Delta = 0\))</strong><br>
-            <em>一阶线性保护。</em> 切线拟合。防范微小的价格渐进变动。利用高流动性现货股票或期货易于执行。
+</ul>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="19" data-kind="enrichment" id="l10-s19-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li class="active">Delta &amp; Gamma Hedging</li>
+<li>Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Multi-Greek Portfolio Hedging: Spot vs CME Futures vs Vega (ETQ 21)</h3>
+<div class="example-card" style="padding: 8px 14px">
+<p style="margin: 0 0 4px 0;">
+<strong>OTC Portfolio on GBP:</strong> Aggregate Greeks: \(\mathbf{\Delta_P = +10,900}, \quad \mathbf{\Gamma_P = -264,500}, \quad \mathbf{\mathcal{V}_P = -190,500}\).<br/>
+          Traded Option: \(\Delta_T = 0.60, \quad \Gamma_T = 1.5, \quad \mathcal{V}_T = 0.80\).
+        </p>
+<ul style="margin: 4px 0; padding-left: 18px;">
+<li><strong>(a) Delta &amp; Gamma Neutral with Traded Option and Spot GBP:</strong><br/>
+            \(\Gamma: -264,500 + 1.5 w_T = 0 \implies w_T = \mathbf{+176,333 \text{ options (long)}}\).<br/>
+            \(\Delta: 10,900 + (176,333 \times 0.60) + w_S = 0 \implies w_S = \mathbf{-116,700 \text{ \pounds}}\).
+          </li>
+<li><strong>(b) Delta &amp; Gamma Neutral with Traded Option and CME Currency Futures:</strong><br/>
+            Parameters: \(r_{\text{US}} = 3\%, r_{\text{UK}} = 5.5\%, T = 0.5 \text{ yr}\), CME contract size \(= £62,500\).<br/>
+            Futures Delta: \(\Delta_F = e^{(0.03 - 0.055) \times 0.5} = \mathbf{0.9876}\). (Futures \(\Gamma_F = 0\)).<br/>
+            Traded options remain \(w_T = \mathbf{+176,333}\).<br/>
+            Required futures: \(w_F = \frac{-116,700}{0.9876} = \mathbf{-118,168 \text{ \pounds}}\).<br/>
+            Number of CME contracts: \(N_F = \frac{-118,168}{62,500} = -1.89 \approx \mathbf{-2 \text{ short contracts}}\).<br/>
+<em>Note:</em> Rounding to 2 contracts covers −£125,000, leaving a slight residual delta.
+          </li>
+<li><strong>(c) Delta &amp; Vega Neutral with Traded Option and Spot GBP:</strong><br/>
+            \(\mathcal{V}: -190,500 + 0.80 w_T = 0 \implies w_T = \frac{190,500}{0.80} = \mathbf{+238,125 \text{ options (long)}}\).<br/>
+            \(\Delta: 10,900 + 142,875 + w_S = 0 \implies w_S = \mathbf{-153,775 \text{ \pounds}}\).
+          </li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l10-s20">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 20</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">实务中的对冲运作 (Hedging in Practice)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>日常 Delta 动态对冲：</strong> 交易员通常确保其账户头寸<strong>每日至少实现一次 Delta 中性</strong>（在现代量化交易中，往往利用算法执行进行实时动态微调）。</li>
+<li><strong>相机管理 Gamma 与 Vega：</strong> 每当市场机会出现且交易成本允许时，交易员会交易场内期权以改善 <strong>Gamma 和 Vega 中性程度</strong>。</li>
+<li><strong>规模经济效应：</strong> 随着资产组合规模的扩大，对冲的相对成本显著降低，因为固定交易成本与买卖价差摩擦分摊到了更大的名义交易量上。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l10-s20-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 20</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Hedging in Practice</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Daily Delta Hedging:</strong> Traders usually ensure that their books and portfolios are <strong>delta-neutral at least once a day</strong> (often dynamically rebalanced in real time using algorithmic execution).</li>
+<li><strong>Opportunistic Gamma and Vega Management:</strong> Whenever the opportunity arises and transaction costs allow, traders trade exchange-traded options to improve <strong>gamma and vega neutrality</strong>.</li>
+<li><strong>Economies of Scale:</strong> As a portfolio becomes larger, hedging becomes relatively less expensive because fixed transaction costs and bid-ask overheads are spread over a much larger notional volume.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="20" data-kind="enrichment" id="l10-s20-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - v1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">风险对冲的权衡考量：曲率、波动率与再平衡频率</h3>
+<div class="example-card" style="padding: 10px 16px">
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+<div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
+<strong style="color: #1e3a8a;">Delta 中性 (\(\Delta = 0\))</strong><br/>
+<em>一阶线性保护。</em> 切线拟合。防范微小的价格渐进变动。利用高流动性现货股票或期货易于执行。
           </div>
-          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
-            <strong style="color: #1e3a8a;">Gamma 中性 (\(\Gamma = 0\))</strong><br>
-            <em>二阶曲率保护。</em> 二次抛物线拟合。防范再平衡间隔期间的价格大幅跳变。消除 \(\Delta\) 的快速漂移。
+<div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
+<strong style="color: #1e3a8a;">Gamma 中性 (\(\Gamma = 0\))</strong><br/>
+<em>二阶曲率保护。</em> 二次抛物线拟合。防范再平衡间隔期间的价格大幅跳变。消除 \(\Delta\) 的快速漂移。
           </div>
-          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
-            <strong style="color: #1e3a8a;">Vega 中性 (\(\mathcal{V} = 0\))</strong><br>
-            <em>波动率冲击保护。</em> 防范市场突发体制转变与隐含波动率激增（例如金融危机或黑天鹅事件）。
+<div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
+<strong style="color: #1e3a8a;">Vega 中性 (\(\mathcal{V} = 0\))</strong><br/>
+<em>波动率冲击保护。</em> 防范市场突发体制转变与隐含波动率激增（例如金融危机或黑天鹅事件）。
           </div>
-        </div>
-        <p style="margin: 4px 0 2px 0;"><strong>实务中连续对冲与离散对冲的权衡：</strong></p>
-        <ul style="margin: 2px 0; padding-left: 18px;">
-          <li><strong>BSM 理想状态：</strong> 零摩擦的连续再平衡可实现完全无风险对冲（\(\Delta \Pi = 0\)）。</li>
-          <li><strong>市场现实：</strong> 真实交易中，高频连续再平衡会产生巨大的交易手续费与买卖价差摩擦损耗。</li>
-          <li><strong>离散跟踪误差：</strong> 在离散时间间隔 \(\Delta t\) 内，未对冲的跟踪误差满足：\(\Delta \Pi \approx \frac{1}{2} \Gamma (\Delta S)^2 + \Theta \Delta t + \mathcal{V} \Delta \sigma\)。</li>
-          <li><strong>机构折中策略：</strong> 每日利用低成本现货或期货维持 Delta 中性，当挂牌期权具有经济可行性时，阶段性调整对冲 Gamma 与 Vega。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s21" data-kind="original" data-source-slide="21" data-pdf-page="11" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 21</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">案例 &ndash; 欧式看涨期权对冲模拟</h2>
-      <div class="slide-content">
-        <p style="margin-bottom: 8px">
+</div>
+<p style="margin: 4px 0 2px 0;"><strong>实务中连续对冲与离散对冲的权衡：</strong></p>
+<ul style="margin: 2px 0; padding-left: 18px;">
+<li><strong>BSM 理想状态：</strong> 零摩擦的连续再平衡可实现完全无风险对冲（\(\Delta \Pi = 0\)）。</li>
+<li><strong>市场现实：</strong> 真实交易中，高频连续再平衡会产生巨大的交易手续费与买卖价差摩擦损耗。</li>
+<li><strong>离散跟踪误差：</strong> 在离散时间间隔 \(\Delta t\) 内，未对冲的跟踪误差满足：\(\Delta \Pi \approx \frac{1}{2} \Gamma (\Delta S)^2 + \Theta \Delta t + \mathcal{V} \Delta \sigma\)。</li>
+<li><strong>机构折中策略：</strong> 每日利用低成本现货或期货维持 Delta 中性，当挂牌期权具有经济可行性时，阶段性调整对冲 Gamma 与 Vega。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="20" data-kind="enrichment" id="l10-s20-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Risk Management Trade-Offs: Curvature, Volatility &amp; Rebalancing</h3>
+<div class="example-card" style="padding: 10px 16px">
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+<div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
+<strong style="color: #1e3a8a;">Delta Neutrality (\(\Delta = 0\))</strong><br/>
+<em>First-order protection.</em> Linear tangent fit. Protects against small, incremental price moves. Easily executed with liquid underlying shares or futures.
+          </div>
+<div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
+<strong style="color: #1e3a8a;">Gamma Neutrality (\(\Gamma = 0\))</strong><br/>
+<em>Second-order curvature.</em> Quadratic parabolic fit. Protects against large price jumps between rebalancing intervals. Eliminates rapid drift in \(\Delta\).
+          </div>
+<div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px;">
+<strong style="color: #1e3a8a;">Vega Neutrality (\(\mathcal{V} = 0\))</strong><br/>
+<em>Volatility shock protection.</em> Protects against sudden market regime shifts and implied volatility spikes (e.g. market crashes, COVID crisis).
+          </div>
+</div>
+<p style="margin: 4px 0 2px 0;"><strong>Continuous vs Discrete Hedging in Practice:</strong></p>
+<ul style="margin: 2px 0; padding-left: 18px;">
+<li><strong>The BSM Ideal:</strong> Continuous rebalancing with zero friction produces an exact riskless hedge (\(\Delta \Pi = 0\)).</li>
+<li><strong>Market Reality:</strong> In real markets, continuous rebalancing incurs prohibitive transaction costs and bid-ask spread friction.</li>
+<li><strong>Discrete Tracking Error:</strong> An unadjusted delta hedge over interval \(\Delta t\) incurs tracking variance: \(\Delta \Pi \approx \frac{1}{2} \Gamma (\Delta S)^2 + \Theta \Delta t + \mathcal{V} \Delta \sigma\).</li>
+<li><strong>Institutional Compromise:</strong> Maintain Delta neutrality daily using low-cost spot or futures contracts, and neutralize Gamma/Vega periodically when liquid exchange-traded options are economically accessible.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l10-s21">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 21</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例 – 欧式看涨期权对冲模拟</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px">
           某金融机构以 <strong>$300,000</strong> 的价格售出了 <strong>100,000 股</strong>（10万股）无红利股票的欧式看涨期权。
         </p>
-        <ul>
-          <li><strong>参数设定：</strong> \(S_0 = 49, \quad K = 50, \quad r = 5\%, \quad \sigma = 20\%, \quad T = 20 \text{ 周}\)。</li>
-          <li>Black-Scholes 理论期权价格为 <strong>$240,000</strong>；因此该金融机构初始锁定了 <strong>$60,000</strong> 的理论利润。</li>
-          <li><strong>金融机构如何对冲其空头风险？</strong>
-            <ol style="margin-top: 6px">
-              <li><strong>裸空头头寸（Naked position）：</strong> 不采取任何行动。</li>
-              <li><strong>备兑头寸（Covered position）：</strong> 立即全额买入 100,000 股标的股票。</li>
-              <li><strong>止损对冲策略（Stop-loss strategy）：</strong> 股价涨过 $50 时买入股票，跌破 $50 时卖出股票。</li>
-              <li><strong>动态 Delta 对冲（Dynamic delta hedging）：</strong> 动态调整股票持仓，实时维持 Delta 中性组合。</li>
-            </ol>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s22" data-kind="original" data-source-slide="22" data-pdf-page="11" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 22</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">裸空头头寸 (Naked Position)</h2>
-      <div class="slide-content">
-        <ul>
-          <li>采取<strong>裸空头看涨期权</strong>时，金融机构不采取任何对冲措施，直接留存初始收取的 $300,000 权利金。</li>
-          <li><strong>到期损益特征：</strong>
-            <ul>
-              <li>若 \(S_T \le 50\)：期权未被行权，金融机构全额保留权利金 \(= +\$300,000\)。</li>
-              <li>若 \(S_T > 50\)：期权被对手方行权，金融机构面临无限的上行潜在亏损！</li>
-            </ul>
-          </li>
-          <li><strong>数值示例：</strong> 假设 \(S_T = \$60\)：
+<ul>
+<li><strong>参数设定：</strong> \(S_0 = 49, \quad K = 50, \quad r = 5\%, \quad \sigma = 20\%, \quad T = 20 \text{ 周}\)。</li>
+<li>Black-Scholes 理论期权价格为 <strong>$240,000</strong>；因此该金融机构初始锁定了 <strong>$60,000</strong> 的理论利润。</li>
+<li><strong>金融机构如何对冲其空头风险？</strong>
+<ol style="margin-top: 6px">
+<li><strong>裸空头头寸（Naked position）：</strong> 不采取任何行动。</li>
+<li><strong>备兑头寸（Covered position）：</strong> 立即全额买入 100,000 股标的股票。</li>
+<li><strong>止损对冲策略（Stop-loss strategy）：</strong> 股价涨过 $50 时买入股票，跌破 $50 时卖出股票。</li>
+<li><strong>动态 Delta 对冲（Dynamic delta hedging）：</strong> 动态调整股票持仓，实时维持 Delta 中性组合。</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l10-s21-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 21</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Hedging a European Call</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px">
+          A financial institution (FI) has sold a European call option on <strong>100,000 shares</strong> of a non-dividend paying stock for <strong>$300,000</strong>.
+        </p>
+<ul>
+<li><strong>Parameters:</strong> \(S_0 = 49, \quad K = 50, \quad r = 5\%, \quad \sigma = 20\%, \quad T = 20 \text{ weeks}\).</li>
+<li>The theoretical Black-Scholes option price is <strong>$240,000</strong>; thus the FI makes an initial theoretical profit of <strong>$60,000</strong>.</li>
+<li><strong>How does the FI hedge its risk?</strong>
+<ol style="margin-top: 6px">
+<li><strong>Naked position:</strong> Take no action.</li>
+<li><strong>Covered position:</strong> Buy the underlying stock immediately.</li>
+<li><strong>Stop-loss strategy:</strong> Buy stock when price exceeds $50, sell when price drops below $50.</li>
+<li><strong>Dynamic delta hedging:</strong> Maintain a delta-neutral portfolio by dynamically rebalancing stock holdings.</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l10-s22">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 22</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">裸空头头寸 (Naked Position)</h2>
+<div class="slide-content">
+<ul>
+<li>采取<strong>裸空头看涨期权</strong>时，金融机构不采取任何对冲措施，直接留存初始收取的 $300,000 权利金。</li>
+<li><strong>到期损益特征：</strong>
+<ul>
+<li>若 \(S_T \le 50\)：期权未被行权，金融机构全额保留权利金 \(= +\$300,000\)。</li>
+<li>若 \(S_T &gt; 50\)：期权被对手方行权，金融机构面临无限的上行潜在亏损！</li>
+</ul>
+</li>
+<li><strong>数值示例：</strong> 假设 \(S_T = \$60\)：
             <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
               \[ \text{损益} = (K - S_T) \times 100,000 + \text{期权权利金} \]
               \[ \text{损益} = (\$50 - \$60) \times 100,000 + \$300,000 = -\$1,000,000 + \$300,000 = \mathbf{-\$700,000} \]
             </div>
-          </li>
-          <li><strong>结论：</strong> 裸卖空看涨期权使机构暴露于不可控的巨额上行市场风险之中。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s23" data-kind="original" data-source-slide="23" data-pdf-page="12" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 23</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">备兑头寸 (Covered Position)</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>备兑看涨期权策略：</strong> 卖出 1 份看涨期权 + 以 \(S_0 = \$49\) 买入 100,000 股股票（初始现金流出 \(= \$4,900,000\)）。</li>
-          <li><strong>损益特征：</strong>
-            <ul>
-              <li>若 \(S_T \ge 50\)：股票在行权价 \(K = 50\) 被交割出售。
+</li>
+<li><strong>结论：</strong> 裸卖空看涨期权使机构暴露于不可控的巨额上行市场风险之中。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l10-s22-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 22</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Naked Position</h2>
+<div class="slide-content">
+<ul>
+<li>With a <strong>naked short call</strong>, the FI takes no hedging action and keeps the initial premium of $300,000.</li>
+<li><strong>Payoff &amp; Profit Profile:</strong>
+<ul>
+<li>If \(S_T \le 50\): Option expires unexercised. FI keeps the entire premium \(= +\$300,000\).</li>
+<li>If \(S_T &gt; 50\): The option is exercised against the FI, with unlimited potential loss!</li>
+</ul>
+</li>
+<li><strong>Numerical Example:</strong> Suppose \(S_T = \$60\):
+            <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+              \[ \text{P/L} = (K - S_T) \times 100,000 + \text{Call Premium} \]
+              \[ \text{P/L} = (\$50 - \$60) \times 100,000 + \$300,000 = -\$1,000,000 + \$300,000 = \mathbf{-\$700,000} \]
+            </div>
+</li>
+<li><strong>Conclusion:</strong> Writing naked calls exposes the institution to catastrophic upside market risk.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l10-s23">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 23</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">备兑头寸 (Covered Position)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>备兑看涨期权策略：</strong> 卖出 1 份看涨期权 + 以 \(S_0 = \$49\) 买入 100,000 股股票（初始现金流出 \(= \$4,900,000\)）。</li>
+<li><strong>损益特征：</strong>
+<ul>
+<li>若 \(S_T \ge 50\)：股票在行权价 \(K = 50\) 被交割出售。
                 \[ \text{损益} = (50 - 49) \times 100,000 + \$300,000 = \mathbf{+\$400,000} \]
               </li>
-              <li>若 \(S_T < 50\)：看涨期权虽作废，但所持有的现货股票遭受严重跌价损失！</li>
-            </ul>
-          </li>
-          <li><strong>数值示例：</strong> 假设 \(S_T = \$40\)：
+<li>若 \(S_T &lt; 50\)：看涨期权虽作废，但所持有的现货股票遭受严重跌价损失！</li>
+</ul>
+</li>
+<li><strong>数值示例：</strong> 假设 \(S_T = \$40\)：
             <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
               \[ \text{损益} = (S_T - S_0) \times 100,000 + \text{期权权利金} \]
               \[ \text{损益} = (-\$9) \times 100,000 + \$300,000 = \mathbf{-\$600,000} \]
             </div>
-          </li>
-          <li><strong>结论：</strong> 卖出备兑看涨期权仅仅是将上行风险转换成了严重的下行风险 &ndash; 根据买卖权平价定理，这在本质上等价于卖出<strong>裸看跌期权</strong>！</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s24" data-kind="original" data-source-slide="24" data-pdf-page="12" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 24</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">止损对冲策略 (Stop-Loss Strategy)</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>策略机制：</strong>
-            <ul>
-              <li>一旦股票价格突破执行价格 \(K = \$50\)，立刻买入 100,000 股股票。</li>
-              <li>一旦股票价格跌破执行价格 \(K = \$50\)，立刻卖出 100,000 股股票。</li>
-            </ul>
-          </li>
-          <li><strong>理论直觉：</strong> 期权在实值时持有股票（形成备兑），期权在虚值时持有现金（避免股票跌价）。</li>
-          <li><strong>为何在实务中必然失败：</strong>
-            <ul>
-              <li><strong>反复拉锯震荡亏损（Whipsaw Losses）：</strong> 当股票价格在 $50 附近反复震荡时，交易员不断高买（$50.05）低卖（$49.95），资金迅速失血！</li>
-              <li><strong>价格跳空与滑点（Gapping & Slippage）：</strong> 市场价格跳跃离散，买入和卖出根本无法精确在 $50.00 成交。</li>
-              <li><strong>货币时间价值：</strong> 现金流发生在不同时间点，必须进行折现考量。</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s25" data-kind="original" data-source-slide="25" data-pdf-page="13" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 25</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">动态 Delta 对冲 (Dynamic Delta Hedging)</h2>
-      <div class="slide-content">
-        <ul>
-          <li><strong>BSM 模型的理论基石：</strong> 由 \(\Delta\) 单位标的资产和 1 单位衍生品空头构成的资产组合在局部瞬时是完全无风险的：
+</li>
+<li><strong>结论：</strong> 卖出备兑看涨期权仅仅是将上行风险转换成了严重的下行风险 – 根据买卖权平价定理，这在本质上等价于卖出<strong>裸看跌期权</strong>！</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l10-s23-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 23</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Covered Position</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Covered Call Strategy:</strong> Short 1 call option + Buy 100,000 shares of stock at \(S_0 = \$49\) (initial outlay \(= \$4,900,000\)).</li>
+<li><strong>Payoff &amp; Profit Profile:</strong>
+<ul>
+<li>If \(S_T \ge 50\): Stock is sold at strike \(K = 50\).
+                \[ \text{P/L} = (50 - 49) \times 100,000 + \$300,000 = \mathbf{+\$400,000} \]
+              </li>
+<li>If \(S_T &lt; 50\): Call expires worthless, but the stock position plunges!</li>
+</ul>
+</li>
+<li><strong>Numerical Example:</strong> Suppose \(S_T = \$40\):
+            <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+              \[ \text{P/L} = (S_T - S_0) \times 100,000 + \text{Call Premium} \]
+              \[ \text{P/L} = (-\$9) \times 100,000 + \$300,000 = \mathbf{-\$600,000} \]
+            </div>
+</li>
+<li><strong>Conclusion:</strong> Writing a covered call converts upside risk into downside risk – by put-call parity, this is equivalent to writing a <strong>naked put</strong>!</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="12" data-source-slide="24" id="l10-s24">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 24</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">止损对冲策略 (Stop-Loss Strategy)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>策略机制：</strong>
+<ul>
+<li>一旦股票价格突破执行价格 \(K = \$50\)，立刻买入 100,000 股股票。</li>
+<li>一旦股票价格跌破执行价格 \(K = \$50\)，立刻卖出 100,000 股股票。</li>
+</ul>
+</li>
+<li><strong>理论直觉：</strong> 期权在实值时持有股票（形成备兑），期权在虚值时持有现金（避免股票跌价）。</li>
+<li><strong>为何在实务中必然失败：</strong>
+<ul>
+<li><strong>反复拉锯震荡亏损（Whipsaw Losses）：</strong> 当股票价格在 $50 附近反复震荡时，交易员不断高买（$50.05）低卖（$49.95），资金迅速失血！</li>
+<li><strong>价格跳空与滑点（Gapping &amp; Slippage）：</strong> 市场价格跳跃离散，买入和卖出根本无法精确在 $50.00 成交。</li>
+<li><strong>货币时间价值：</strong> 现金流发生在不同时间点，必须进行折现考量。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="12" data-source-slide="24" id="l10-s24-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 24</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Stop-Loss Strategy</h2>
+<div class="slide-content">
+<ul>
+<li><strong>The Strategy:</strong>
+<ul>
+<li>Buy 100,000 shares as soon as the stock price exceeds strike \(K = \$50\).</li>
+<li>Sell 100,000 shares as soon as the stock price falls below strike \(K = \$50\).</li>
+</ul>
+</li>
+<li><strong>Theoretical Intuition:</strong> Hold the stock when the option is in-the-money (covered), and hold cash when the option is out-of-the-money (naked).</li>
+<li><strong>Why it Fails in Practice:</strong>
+<ul>
+<li><strong>Whipsaw Trading Losses:</strong> When the stock price oscillates around $50, the trader is repeatedly buying high ($50.05) and selling low ($49.95), hemorrhaging money!</li>
+<li><strong>Gapping &amp; Slippage:</strong> Prices jump discretely; purchases and sales cannot be executed at exactly $50.00.</li>
+<li><strong>Time Value of Money:</strong> Cash flows occur at different points in time and must be discounted.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="13" data-source-slide="25" id="l10-s25">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 25</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">动态 Delta 对冲 (Dynamic Delta Hedging)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>BSM 模型的理论基石：</strong> 由 \(\Delta\) 单位标的资产和 1 单位衍生品空头构成的资产组合在局部瞬时是完全无风险的：
             <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
               \[ \Pi = \Delta S - f \implies d\Pi = r \Pi \, dt \]
             </div>
-          </li>
-          <li>金融机构通过持有 \(100,000 \times \Delta\) 股股票来对冲售出 100,000 股看涨期权的空头风险敞口。</li>
-          <li>亦可使用期货合约对冲：\(w_F = e^{(r-q)T^*} w_S\)。</li>
-          <li><strong>为何必须“动态”对冲？</strong>
-            <ul>
-              <li>期权 Delta \(\Delta\) 是标的价格 \(S\) 和时间 \(t\) 的连续函数。</li>
-              <li>随着股票价格变动和时间推移，\(\Delta\) 时刻处于变动之中。</li>
-              <li>必须定期或连续再平衡持仓，才能维系 Delta 中性状态。</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s26" data-kind="original" data-source-slide="26" data-pdf-page="13" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 26</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body" style="padding: 24px 32px 20px 32px;">
-      <h2 class="slide-title" style="margin-bottom: 6px">案例 &ndash; 动态 Delta 对冲模拟 1（期权到期处于实值）</h2>
-      <div class="slide-content" >
-        <table class="slide-table" style="text-align: center; margin: 2px 0">
-          <thead>
-            <tr style="background: #e2e8f0;">
-              <th>周次</th><th>股价</th><th>Delta</th><th>交易股数</th><th>交易成本 ($000)</th><th>累计成本 ($000)</th><th>利息 ($000)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>0</td><td>49.00</td><td>0.522</td><td>52,200</td><td>2,557.8</td><td>2,557.8</td><td>2.5</td></tr>
-            <tr><td>1</td><td>48.12</td><td>0.458</td><td>(6,400)</td><td>(308.0)</td><td>2,252.3</td><td>2.2</td></tr>
-            <tr><td>2</td><td>47.37</td><td>0.400</td><td>(5,800)</td><td>(274.7)</td><td>1,979.8</td><td>1.9</td></tr>
-            <tr><td>3</td><td>50.25</td><td>0.596</td><td>19,600</td><td>984.9</td><td>2,966.6</td><td>2.9</td></tr>
-            <tr><td>4</td><td>51.75</td><td>0.693</td><td>9,700</td><td>502.0</td><td>3,471.5</td><td>3.3</td></tr>
-            <tr><td>5</td><td>53.12</td><td>0.774</td><td>8,100</td><td>430.3</td><td>3,905.1</td><td>3.8</td></tr>
-            <tr><td>6</td><td>53.00</td><td>0.771</td><td>(300)</td><td>(15.9)</td><td>3,893.0</td><td>3.7</td></tr>
-            <tr><td>7</td><td>51.87</td><td>0.706</td><td>(6,500)</td><td>(337.2)</td><td>3,559.5</td><td>3.4</td></tr>
-            <tr><td>8</td><td>51.38</td><td>0.674</td><td>(3,200)</td><td>(164.4)</td><td>3,398.5</td><td>3.3</td></tr>
-            <tr><td>9</td><td>53.00</td><td>0.787</td><td>11,300</td><td>598.9</td><td>4,000.7</td><td>3.8</td></tr>
-            <tr><td>10</td><td>49.88</td><td>0.550</td><td>(23,700)</td><td>(1,182.2)</td><td>2,822.3</td><td>2.7</td></tr>
-            <tr><td>11</td><td>48.50</td><td>0.413</td><td>(13,700)</td><td>(664.4)</td><td>2,160.6</td><td>2.1</td></tr>
-            <tr><td>12</td><td>49.88</td><td>0.542</td><td>12,900</td><td>643.5</td><td>2,806.2</td><td>2.7</td></tr>
-            <tr><td>13</td><td>50.37</td><td>0.591</td><td>4,900</td><td>246.8</td><td>3,055.7</td><td>2.9</td></tr>
-            <tr><td>14</td><td>52.13</td><td>0.768</td><td>17,700</td><td>922.7</td><td>3,981.3</td><td>3.8</td></tr>
-            <tr><td>15</td><td>51.88</td><td>0.759</td><td>(900)</td><td>(46.7)</td><td>3,938.4</td><td>3.8</td></tr>
-            <tr><td>16</td><td>52.87</td><td>0.865</td><td>10,600</td><td>560.4</td><td>4,502.6</td><td>4.3</td></tr>
-            <tr><td>17</td><td>54.87</td><td>0.978</td><td>11,300</td><td>620.0</td><td>5,126.9</td><td>4.9</td></tr>
-            <tr><td>18</td><td>54.62</td><td>0.990</td><td>1,200</td><td>65.5</td><td>5,197.3</td><td>5.0</td></tr>
-            <tr><td>19</td><td>55.87</td><td>1.000</td><td>1,000</td><td>55.9</td><td>5,258.2</td><td>5.1</td></tr>
-            <tr style="background: #fef08a; font-weight: bold;"><td>20</td><td>57.25</td><td>1.000</td><td>0</td><td>0.0</td><td>5,263.3</td><td>&mdash;</td></tr>
-          </tbody>
-        </table>
-        <p style="margin: 4px 0 0 0; color: #1e3a8a">
-          在第 20 周，期权到期处于实值（\(S_{20}=57.25 > 50\)）。买方行权，支付 \(\$5,000,000\) 购买 100,000 股股票。<br>
+</li>
+<li>金融机构通过持有 \(100,000 \times \Delta\) 股股票来对冲售出 100,000 股看涨期权的空头风险敞口。</li>
+<li>亦可使用期货合约对冲：\(w_F = e^{(r-q)T^*} w_S\)。</li>
+<li><strong>为何必须“动态”对冲？</strong>
+<ul>
+<li>期权 Delta \(\Delta\) 是标的价格 \(S\) 和时间 \(t\) 的连续函数。</li>
+<li>随着股票价格变动和时间推移，\(\Delta\) 时刻处于变动之中。</li>
+<li>必须定期或连续再平衡持仓，才能维系 Delta 中性状态。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="13" data-source-slide="25" id="l10-s25-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 25</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Dynamic Delta Hedging</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Fundamental Principle of BSM:</strong> A portfolio consisting of \(\Delta\) units of the underlying asset and a short derivative position is locally risk-free:
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \Pi = \Delta S - f \implies d\Pi = r \Pi \, dt \]
+            </div>
+</li>
+<li>The FI hedges its exposure to a short call on 100,000 shares by holding \(100,000 \times \Delta\) shares of stock.</li>
+<li>Futures can also be used: \(w_F = e^{(r-q)T^*} w_S\).</li>
+<li><strong>Why Dynamic?</strong>
+<ul>
+<li>Option delta \(\Delta\) is a continuous function of stock price \(S\) and time \(t\).</li>
+<li>As \(S\) moves and time passes, \(\Delta\) changes continually.</li>
+<li>The hedge must be rebalanced frequently to maintain delta neutrality.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="13" data-source-slide="26" id="l10-s26">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 26</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body" style="padding: 24px 32px 20px 32px;">
+<h2 class="slide-title" style="margin-bottom: 6px">案例 – 动态 Delta 对冲模拟 1（期权到期处于实值）</h2>
+<div class="slide-content">
+<table class="slide-table" style="text-align: center; margin: 2px 0">
+<thead>
+<tr style="background: #e2e8f0;">
+<th>周次</th><th>股价</th><th>Delta</th><th>交易股数</th><th>交易成本 ($000)</th><th>累计成本 ($000)</th><th>利息 ($000)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>49.00</td><td>0.522</td><td>52,200</td><td>2,557.8</td><td>2,557.8</td><td>2.5</td></tr>
+<tr><td>1</td><td>48.12</td><td>0.458</td><td>(6,400)</td><td>(308.0)</td><td>2,252.3</td><td>2.2</td></tr>
+<tr><td>2</td><td>47.37</td><td>0.400</td><td>(5,800)</td><td>(274.7)</td><td>1,979.8</td><td>1.9</td></tr>
+<tr><td>3</td><td>50.25</td><td>0.596</td><td>19,600</td><td>984.9</td><td>2,966.6</td><td>2.9</td></tr>
+<tr><td>4</td><td>51.75</td><td>0.693</td><td>9,700</td><td>502.0</td><td>3,471.5</td><td>3.3</td></tr>
+<tr><td>5</td><td>53.12</td><td>0.774</td><td>8,100</td><td>430.3</td><td>3,905.1</td><td>3.8</td></tr>
+<tr><td>6</td><td>53.00</td><td>0.771</td><td>(300)</td><td>(15.9)</td><td>3,893.0</td><td>3.7</td></tr>
+<tr><td>7</td><td>51.87</td><td>0.706</td><td>(6,500)</td><td>(337.2)</td><td>3,559.5</td><td>3.4</td></tr>
+<tr><td>8</td><td>51.38</td><td>0.674</td><td>(3,200)</td><td>(164.4)</td><td>3,398.5</td><td>3.3</td></tr>
+<tr><td>9</td><td>53.00</td><td>0.787</td><td>11,300</td><td>598.9</td><td>4,000.7</td><td>3.8</td></tr>
+<tr><td>10</td><td>49.88</td><td>0.550</td><td>(23,700)</td><td>(1,182.2)</td><td>2,822.3</td><td>2.7</td></tr>
+<tr><td>11</td><td>48.50</td><td>0.413</td><td>(13,700)</td><td>(664.4)</td><td>2,160.6</td><td>2.1</td></tr>
+<tr><td>12</td><td>49.88</td><td>0.542</td><td>12,900</td><td>643.5</td><td>2,806.2</td><td>2.7</td></tr>
+<tr><td>13</td><td>50.37</td><td>0.591</td><td>4,900</td><td>246.8</td><td>3,055.7</td><td>2.9</td></tr>
+<tr><td>14</td><td>52.13</td><td>0.768</td><td>17,700</td><td>922.7</td><td>3,981.3</td><td>3.8</td></tr>
+<tr><td>15</td><td>51.88</td><td>0.759</td><td>(900)</td><td>(46.7)</td><td>3,938.4</td><td>3.8</td></tr>
+<tr><td>16</td><td>52.87</td><td>0.865</td><td>10,600</td><td>560.4</td><td>4,502.6</td><td>4.3</td></tr>
+<tr><td>17</td><td>54.87</td><td>0.978</td><td>11,300</td><td>620.0</td><td>5,126.9</td><td>4.9</td></tr>
+<tr><td>18</td><td>54.62</td><td>0.990</td><td>1,200</td><td>65.5</td><td>5,197.3</td><td>5.0</td></tr>
+<tr><td>19</td><td>55.87</td><td>1.000</td><td>1,000</td><td>55.9</td><td>5,258.2</td><td>5.1</td></tr>
+<tr style="background: #fef08a; font-weight: bold;"><td>20</td><td>57.25</td><td>1.000</td><td>0</td><td>0.0</td><td>5,263.3</td><td>—</td></tr>
+</tbody>
+</table>
+<p style="margin: 4px 0 0 0; color: #1e3a8a">
+          在第 20 周，期权到期处于实值（\(S_{20}=57.25 &gt; 50\)）。买方行权，支付 \(\$5,000,000\) 购买 100,000 股股票。<br/>
           动态对冲净总成本 \(= \$5,263,300 - \$5,000,000 = \mathbf{\$263,300} \approx \$240,000\)（理论 BS 价格）。
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s27" data-kind="original" data-source-slide="27" data-pdf-page="14" data-pdf-half="top">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 27</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body" style="padding: 24px 32px 20px 32px;">
-      <h2 class="slide-title" style="margin-bottom: 6px">案例 &ndash; 动态 Delta 对冲模拟 2（期权到期处于虚值）</h2>
-      <div class="slide-content" >
-        <table class="slide-table" style="text-align: center; margin: 2px 0">
-          <thead>
-            <tr style="background: #e2e8f0;">
-              <th>周次</th><th>股价</th><th>Delta</th><th>交易股数</th><th>交易成本 ($000)</th><th>累计成本 ($000)</th><th>利息 ($000)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>0</td><td>49.00</td><td>0.522</td><td>52,200</td><td>2,557.8</td><td>2,557.8</td><td>2.5</td></tr>
-            <tr><td>1</td><td>49.75</td><td>0.568</td><td>4,600</td><td>228.9</td><td>2,789.2</td><td>2.7</td></tr>
-            <tr><td>2</td><td>52.00</td><td>0.705</td><td>13,700</td><td>712.4</td><td>3,504.3</td><td>3.4</td></tr>
-            <tr><td>3</td><td>50.00</td><td>0.579</td><td>(12,600)</td><td>(630.0)</td><td>2,877.7</td><td>2.8</td></tr>
-            <tr><td>4</td><td>48.38</td><td>0.459</td><td>(12,000)</td><td>(580.6)</td><td>2,299.9</td><td>2.2</td></tr>
-            <tr><td>5</td><td>48.25</td><td>0.443</td><td>(1,600)</td><td>(77.2)</td><td>2,224.9</td><td>2.1</td></tr>
-            <tr><td>6</td><td>48.75</td><td>0.478</td><td>3,200</td><td>156.0</td><td>2,383.0</td><td>2.3</td></tr>
-            <tr><td>7</td><td>49.63</td><td>0.540</td><td>6,500</td><td>322.6</td><td>2,707.9</td><td>2.6</td></tr>
-            <tr><td>8</td><td>48.25</td><td>0.420</td><td>(12,000)</td><td>(579.0)</td><td>2,131.5</td><td>2.1</td></tr>
-            <tr><td>9</td><td>48.25</td><td>0.410</td><td>(1,000)</td><td>(48.2)</td><td>2,085.4</td><td>2.0</td></tr>
-            <tr><td>10</td><td>51.12</td><td>0.658</td><td>24,800</td><td>1,267.8</td><td>3,355.2</td><td>3.2</td></tr>
-            <tr><td>11</td><td>51.50</td><td>0.692</td><td>3,400</td><td>175.1</td><td>3,533.5</td><td>3.4</td></tr>
-            <tr><td>12</td><td>49.88</td><td>0.542</td><td>(15,000)</td><td>(748.2)</td><td>2,788.7</td><td>2.7</td></tr>
-            <tr><td>13</td><td>49.88</td><td>0.538</td><td>(400)</td><td>(20.0)</td><td>2,771.4</td><td>2.7</td></tr>
-            <tr><td>14</td><td>48.75</td><td>0.400</td><td>(13,800)</td><td>(672.7)</td><td>2,101.4</td><td>2.0</td></tr>
-            <tr><td>15</td><td>47.50</td><td>0.236</td><td>(16,400)</td><td>(779.0)</td><td>1,324.4</td><td>1.3</td></tr>
-            <tr><td>16</td><td>48.00</td><td>0.261</td><td>2,500</td><td>120.0</td><td>1,445.7</td><td>1.4</td></tr>
-            <tr><td>17</td><td>46.25</td><td>0.062</td><td>(19,900)</td><td>(920.4)</td><td>526.7</td><td>0.5</td></tr>
-            <tr><td>18</td><td>48.13</td><td>0.183</td><td>12,100</td><td>582.4</td><td>1,110.6</td><td>1.1</td></tr>
-            <tr><td>19</td><td>46.63</td><td>0.007</td><td>(17,600)</td><td>(820.7)</td><td>291.0</td><td>0.3</td></tr>
-            <tr style="background: #fef08a; font-weight: bold;"><td>20</td><td>48.12</td><td>0.000</td><td>(700)</td><td>(33.7)</td><td>257.6</td><td>&mdash;</td></tr>
-          </tbody>
-        </table>
-        <p style="margin: 4px 0 0 0; color: #1e3a8a">
-          在第 20 周，期权到期处于虚值作废（\(S_{20}=48.12 < 50\)）。卖出剩余 700 股股票收回 \(\$33,700\)。<br>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="13" data-source-slide="26" id="l10-s26-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 26</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body" style="padding: 24px 32px 20px 32px;">
+<h2 class="slide-title" style="margin-bottom: 6px">Example – Dynamic Delta Hedging 1 (Option Expires ITM)</h2>
+<div class="slide-content">
+<table class="slide-table" style="text-align: center; margin: 2px 0">
+<thead>
+<tr style="background: #e2e8f0;">
+<th>Wk</th><th>Stock</th><th>Delta</th><th>Shares Traded</th><th>Cost ($000)</th><th>Cumul. Cost ($000)</th><th>Int. ($000)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>49.00</td><td>0.522</td><td>52,200</td><td>2,557.8</td><td>2,557.8</td><td>2.5</td></tr>
+<tr><td>1</td><td>48.12</td><td>0.458</td><td>(6,400)</td><td>(308.0)</td><td>2,252.3</td><td>2.2</td></tr>
+<tr><td>2</td><td>47.37</td><td>0.400</td><td>(5,800)</td><td>(274.7)</td><td>1,979.8</td><td>1.9</td></tr>
+<tr><td>3</td><td>50.25</td><td>0.596</td><td>19,600</td><td>984.9</td><td>2,966.6</td><td>2.9</td></tr>
+<tr><td>4</td><td>51.75</td><td>0.693</td><td>9,700</td><td>502.0</td><td>3,471.5</td><td>3.3</td></tr>
+<tr><td>5</td><td>53.12</td><td>0.774</td><td>8,100</td><td>430.3</td><td>3,905.1</td><td>3.8</td></tr>
+<tr><td>6</td><td>53.00</td><td>0.771</td><td>(300)</td><td>(15.9)</td><td>3,893.0</td><td>3.7</td></tr>
+<tr><td>7</td><td>51.87</td><td>0.706</td><td>(6,500)</td><td>(337.2)</td><td>3,559.5</td><td>3.4</td></tr>
+<tr><td>8</td><td>51.38</td><td>0.674</td><td>(3,200)</td><td>(164.4)</td><td>3,398.5</td><td>3.3</td></tr>
+<tr><td>9</td><td>53.00</td><td>0.787</td><td>11,300</td><td>598.9</td><td>4,000.7</td><td>3.8</td></tr>
+<tr><td>10</td><td>49.88</td><td>0.550</td><td>(23,700)</td><td>(1,182.2)</td><td>2,822.3</td><td>2.7</td></tr>
+<tr><td>11</td><td>48.50</td><td>0.413</td><td>(13,700)</td><td>(664.4)</td><td>2,160.6</td><td>2.1</td></tr>
+<tr><td>12</td><td>49.88</td><td>0.542</td><td>12,900</td><td>643.5</td><td>2,806.2</td><td>2.7</td></tr>
+<tr><td>13</td><td>50.37</td><td>0.591</td><td>4,900</td><td>246.8</td><td>3,055.7</td><td>2.9</td></tr>
+<tr><td>14</td><td>52.13</td><td>0.768</td><td>17,700</td><td>922.7</td><td>3,981.3</td><td>3.8</td></tr>
+<tr><td>15</td><td>51.88</td><td>0.759</td><td>(900)</td><td>(46.7)</td><td>3,938.4</td><td>3.8</td></tr>
+<tr><td>16</td><td>52.87</td><td>0.865</td><td>10,600</td><td>560.4</td><td>4,502.6</td><td>4.3</td></tr>
+<tr><td>17</td><td>54.87</td><td>0.978</td><td>11,300</td><td>620.0</td><td>5,126.9</td><td>4.9</td></tr>
+<tr><td>18</td><td>54.62</td><td>0.990</td><td>1,200</td><td>65.5</td><td>5,197.3</td><td>5.0</td></tr>
+<tr><td>19</td><td>55.87</td><td>1.000</td><td>1,000</td><td>55.9</td><td>5,258.2</td><td>5.1</td></tr>
+<tr style="background: #fef08a; font-weight: bold;"><td>20</td><td>57.25</td><td>1.000</td><td>0</td><td>0.0</td><td>5,263.3</td><td>—</td></tr>
+</tbody>
+</table>
+<p style="margin: 4px 0 0 0; color: #1e3a8a">
+          In week 20, option expires ITM (\(S_{20}=57.25 &gt; 50\)). Buyer exercises, paying \(\$5,000,000\) for 100,000 shares.<br/>
+          Total cost of hedging \(= \$5,263,300 - \$5,000,000 = \mathbf{\$263,300} \approx \$240,000\) (theoretical BS price).
+        </p>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="14" data-source-slide="27" id="l10-s27">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 27</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body" style="padding: 24px 32px 20px 32px;">
+<h2 class="slide-title" style="margin-bottom: 6px">案例 – 动态 Delta 对冲模拟 2（期权到期处于虚值）</h2>
+<div class="slide-content">
+<table class="slide-table" style="text-align: center; margin: 2px 0">
+<thead>
+<tr style="background: #e2e8f0;">
+<th>周次</th><th>股价</th><th>Delta</th><th>交易股数</th><th>交易成本 ($000)</th><th>累计成本 ($000)</th><th>利息 ($000)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>49.00</td><td>0.522</td><td>52,200</td><td>2,557.8</td><td>2,557.8</td><td>2.5</td></tr>
+<tr><td>1</td><td>49.75</td><td>0.568</td><td>4,600</td><td>228.9</td><td>2,789.2</td><td>2.7</td></tr>
+<tr><td>2</td><td>52.00</td><td>0.705</td><td>13,700</td><td>712.4</td><td>3,504.3</td><td>3.4</td></tr>
+<tr><td>3</td><td>50.00</td><td>0.579</td><td>(12,600)</td><td>(630.0)</td><td>2,877.7</td><td>2.8</td></tr>
+<tr><td>4</td><td>48.38</td><td>0.459</td><td>(12,000)</td><td>(580.6)</td><td>2,299.9</td><td>2.2</td></tr>
+<tr><td>5</td><td>48.25</td><td>0.443</td><td>(1,600)</td><td>(77.2)</td><td>2,224.9</td><td>2.1</td></tr>
+<tr><td>6</td><td>48.75</td><td>0.478</td><td>3,200</td><td>156.0</td><td>2,383.0</td><td>2.3</td></tr>
+<tr><td>7</td><td>49.63</td><td>0.540</td><td>6,500</td><td>322.6</td><td>2,707.9</td><td>2.6</td></tr>
+<tr><td>8</td><td>48.25</td><td>0.420</td><td>(12,000)</td><td>(579.0)</td><td>2,131.5</td><td>2.1</td></tr>
+<tr><td>9</td><td>48.25</td><td>0.410</td><td>(1,000)</td><td>(48.2)</td><td>2,085.4</td><td>2.0</td></tr>
+<tr><td>10</td><td>51.12</td><td>0.658</td><td>24,800</td><td>1,267.8</td><td>3,355.2</td><td>3.2</td></tr>
+<tr><td>11</td><td>51.50</td><td>0.692</td><td>3,400</td><td>175.1</td><td>3,533.5</td><td>3.4</td></tr>
+<tr><td>12</td><td>49.88</td><td>0.542</td><td>(15,000)</td><td>(748.2)</td><td>2,788.7</td><td>2.7</td></tr>
+<tr><td>13</td><td>49.88</td><td>0.538</td><td>(400)</td><td>(20.0)</td><td>2,771.4</td><td>2.7</td></tr>
+<tr><td>14</td><td>48.75</td><td>0.400</td><td>(13,800)</td><td>(672.7)</td><td>2,101.4</td><td>2.0</td></tr>
+<tr><td>15</td><td>47.50</td><td>0.236</td><td>(16,400)</td><td>(779.0)</td><td>1,324.4</td><td>1.3</td></tr>
+<tr><td>16</td><td>48.00</td><td>0.261</td><td>2,500</td><td>120.0</td><td>1,445.7</td><td>1.4</td></tr>
+<tr><td>17</td><td>46.25</td><td>0.062</td><td>(19,900)</td><td>(920.4)</td><td>526.7</td><td>0.5</td></tr>
+<tr><td>18</td><td>48.13</td><td>0.183</td><td>12,100</td><td>582.4</td><td>1,110.6</td><td>1.1</td></tr>
+<tr><td>19</td><td>46.63</td><td>0.007</td><td>(17,600)</td><td>(820.7)</td><td>291.0</td><td>0.3</td></tr>
+<tr style="background: #fef08a; font-weight: bold;"><td>20</td><td>48.12</td><td>0.000</td><td>(700)</td><td>(33.7)</td><td>257.6</td><td>—</td></tr>
+</tbody>
+</table>
+<p style="margin: 4px 0 0 0; color: #1e3a8a">
+          在第 20 周，期权到期处于虚值作废（\(S_{20}=48.12 &lt; 50\)）。卖出剩余 700 股股票收回 \(\$33,700\)。<br/>
           动态对冲净总成本 \(= \mathbf{\$257,600} \approx \$240,000\)（理论 BS 价格）。
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="l10-s28" data-kind="original" data-source-slide="28" data-pdf-page="14" data-pdf-half="bottom">
-  <div class="slide-container">
-    <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 10 讲 - 28</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>Delta敏感度</li>
-              <li>Theta时间衰减</li>
-              <li>Gamma曲率</li>
-              <li>Delta-Theta-Gamma关系</li>
-              <li>Vega波动率敏感度</li>
-              <li>Rho利率敏感度</li>
-              <li>希腊字母组合管理</li>
-              <li>Delta与Gamma对冲</li>
-              <li class="active">动态对冲实务</li>
-            </ul>
-          </aside>
-    <div class="slide-body">
-      <h2 class="slide-title">动态对冲与静态对冲的对比分析</h2>
-      <div class="slide-content">
-        <ul>
-          <li>动态对冲期权的总成本现值约等于其 <strong>Black-Scholes 理论价值</strong>（$240,000）。</li>
-          <li>动态对冲组合构建了期权的<strong>合成多头头寸</strong>，从而精确中和了期权卖方的空头敞口。</li>
-          <li><strong>再平衡频率的权衡：</strong> 提高再平衡频率可以降低跟踪误差及对冲成本的波动，但会显著增加累积的交易手续费。</li>
-          <li><strong>利用远期合约进行静态对冲：</strong>
-            <ul>
-              <li>由于远期合约的 Delta 恒等于 1（\(\Delta = 1\)），由 1 股标的股票多头与 1 份远期合约空头构成的组合<strong>完全不需要任何再平衡</strong>！</li>
-              <li>远期合约可以实现<em>“对冲后即可高枕无忧”</em>（静态对冲）。而期权因具有内在非线性曲率，本质上依赖动态 Delta 对冲。</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-    </div>
-  </div>
-  <script src="vendor/reveal/dist/reveal.js"></script>
-  <script src="vendor/reveal/plugin/math/math.js"></script>
-  <script src="vendor/mathjax/tex-svg.js" id="MathJax-script" async></script>
-  <script src="assets/deck.js"></script>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="14" data-source-slide="27" id="l10-s27-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 27</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body" style="padding: 24px 32px 20px 32px;">
+<h2 class="slide-title" style="margin-bottom: 6px">Example – Dynamic Delta Hedging 2 (Option Expires OTM)</h2>
+<div class="slide-content">
+<table class="slide-table" style="text-align: center; margin: 2px 0">
+<thead>
+<tr style="background: #e2e8f0;">
+<th>Wk</th><th>Stock</th><th>Delta</th><th>Shares Traded</th><th>Cost ($000)</th><th>Cumul. Cost ($000)</th><th>Int. ($000)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>49.00</td><td>0.522</td><td>52,200</td><td>2,557.8</td><td>2,557.8</td><td>2.5</td></tr>
+<tr><td>1</td><td>49.75</td><td>0.568</td><td>4,600</td><td>228.9</td><td>2,789.2</td><td>2.7</td></tr>
+<tr><td>2</td><td>52.00</td><td>0.705</td><td>13,700</td><td>712.4</td><td>3,504.3</td><td>3.4</td></tr>
+<tr><td>3</td><td>50.00</td><td>0.579</td><td>(12,600)</td><td>(630.0)</td><td>2,877.7</td><td>2.8</td></tr>
+<tr><td>4</td><td>48.38</td><td>0.459</td><td>(12,000)</td><td>(580.6)</td><td>2,299.9</td><td>2.2</td></tr>
+<tr><td>5</td><td>48.25</td><td>0.443</td><td>(1,600)</td><td>(77.2)</td><td>2,224.9</td><td>2.1</td></tr>
+<tr><td>6</td><td>48.75</td><td>0.478</td><td>3,200</td><td>156.0</td><td>2,383.0</td><td>2.3</td></tr>
+<tr><td>7</td><td>49.63</td><td>0.540</td><td>6,500</td><td>322.6</td><td>2,707.9</td><td>2.6</td></tr>
+<tr><td>8</td><td>48.25</td><td>0.420</td><td>(12,000)</td><td>(579.0)</td><td>2,131.5</td><td>2.1</td></tr>
+<tr><td>9</td><td>48.25</td><td>0.410</td><td>(1,000)</td><td>(48.2)</td><td>2,085.4</td><td>2.0</td></tr>
+<tr><td>10</td><td>51.12</td><td>0.658</td><td>24,800</td><td>1,267.8</td><td>3,355.2</td><td>3.2</td></tr>
+<tr><td>11</td><td>51.50</td><td>0.692</td><td>3,400</td><td>175.1</td><td>3,533.5</td><td>3.4</td></tr>
+<tr><td>12</td><td>49.88</td><td>0.542</td><td>(15,000)</td><td>(748.2)</td><td>2,788.7</td><td>2.7</td></tr>
+<tr><td>13</td><td>49.88</td><td>0.538</td><td>(400)</td><td>(20.0)</td><td>2,771.4</td><td>2.7</td></tr>
+<tr><td>14</td><td>48.75</td><td>0.400</td><td>(13,800)</td><td>(672.7)</td><td>2,101.4</td><td>2.0</td></tr>
+<tr><td>15</td><td>47.50</td><td>0.236</td><td>(16,400)</td><td>(779.0)</td><td>1,324.4</td><td>1.3</td></tr>
+<tr><td>16</td><td>48.00</td><td>0.261</td><td>2,500</td><td>120.0</td><td>1,445.7</td><td>1.4</td></tr>
+<tr><td>17</td><td>46.25</td><td>0.062</td><td>(19,900)</td><td>(920.4)</td><td>526.7</td><td>0.5</td></tr>
+<tr><td>18</td><td>48.13</td><td>0.183</td><td>12,100</td><td>582.4</td><td>1,110.6</td><td>1.1</td></tr>
+<tr><td>19</td><td>46.63</td><td>0.007</td><td>(17,600)</td><td>(820.7)</td><td>291.0</td><td>0.3</td></tr>
+<tr style="background: #fef08a; font-weight: bold;"><td>20</td><td>48.12</td><td>0.000</td><td>(700)</td><td>(33.7)</td><td>257.6</td><td>—</td></tr>
+</tbody>
+</table>
+<p style="margin: 4px 0 0 0; color: #1e3a8a">
+          In week 20, option expires worthless (\(S_{20}=48.12 &lt; 50\)). Remaining 700 shares sold for \(\$33,700\).<br/>
+          Total cost of hedging \(= \mathbf{\$257,600} \approx \$240,000\) (theoretical BS price).
+        </p>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="14" data-source-slide="28" id="l10-s28">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 10 讲 - 28</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>Delta敏感度</li>
+<li>Theta时间衰减</li>
+<li>Gamma曲率</li>
+<li>Delta-Theta-Gamma关系</li>
+<li>Vega波动率敏感度</li>
+<li>Rho利率敏感度</li>
+<li>希腊字母组合管理</li>
+<li>Delta与Gamma对冲</li>
+<li class="active">动态对冲实务</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">动态对冲与静态对冲的对比分析</h2>
+<div class="slide-content">
+<ul>
+<li>动态对冲期权的总成本现值约等于其 <strong>Black-Scholes 理论价值</strong>（$240,000）。</li>
+<li>动态对冲组合构建了期权的<strong>合成多头头寸</strong>，从而精确中和了期权卖方的空头敞口。</li>
+<li><strong>再平衡频率的权衡：</strong> 提高再平衡频率可以降低跟踪误差及对冲成本的波动，但会显著增加累积的交易手续费。</li>
+<li><strong>利用远期合约进行静态对冲：</strong>
+<ul>
+<li>由于远期合约的 Delta 恒等于 1（\(\Delta = 1\)），由 1 股标的股票多头与 1 份远期合约空头构成的组合<strong>完全不需要任何再平衡</strong>！</li>
+<li>远期合约可以实现<em>“对冲后即可高枕无忧”</em>（静态对冲）。而期权因具有内在非线性曲率，本质上依赖动态 Delta 对冲。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="14" data-source-slide="28" id="l10-s28-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 10 - 28</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Delta</li>
+<li>Theta</li>
+<li>Gamma</li>
+<li>Delta-Theta-Gamma</li>
+<li>Vega</li>
+<li>Rho</li>
+<li>Managing Greeks</li>
+<li>Delta &amp; Gamma Hedging</li>
+<li class="active">Dynamic Hedging</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Dynamic Hedge vs Static Hedge</h2>
+<div class="slide-content">
+<ul>
+<li>The present value of the total cost of hedging the option dynamically is approximately equal to its <strong>Black-Scholes theoretical value</strong> ($240,000).</li>
+<li>The dynamic hedge portfolio represents a <strong>synthetic long position</strong> in the option, neutralizing the short position of the writer.</li>
+<li><strong>Rebalancing Frequency:</strong> More frequent rebalancing reduces the tracking error / variation in the cost of hedging, but increases cumulative transaction costs.</li>
+<li><strong>Static Hedge with Forward Contracts:</strong>
+<ul>
+<li>Since the delta of a forward contract is 1 (\(\Delta = 1\)), a portfolio consisting of Long 1 share of stock and Short 1 forward contract requires <strong>no rebalancing</strong>!</li>
+<li>With forward contracts we can <em>“hedge and forget”</em> (static hedge). Options inherently require dynamic delta hedging.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
 </body>
 </html>

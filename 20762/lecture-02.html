@@ -14,7 +14,7 @@
 <a class="deck-index-link" href="index.html">← 返回讲义目录</a>
 <div class="reveal">
 <div class="slides">
-<section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l02-s01">
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l02-s01">
 <div class="slide-container">
 <div class="title-slide-container" style="width: 100%;">
 <div class="title-slide-h1">第 2 讲</div>
@@ -32,8 +32,30 @@
             </div>
 </div>
 </div>
-</section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l02-s02"><div class="slide-container">
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l02-s01-en" lang="en">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">Lecture 2</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">Hedging Strategies using Futures</div>
+<div class="title-slide-h2">Hull, Chapter 3</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">Tip of the week</div>
+<div class="tip-text">
+          What is the purpose of hedging?<br/>
+<strong>Reduce the standard deviation of the outcome</strong><br/>
+          OR<br/>
+          Increase the expected value of the outcome? → <em>Hedging reduces variance/risk; it does not promise higher expected returns!</em>
+</div>
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS Business School</div>
+</div>
+</div>
+<div class="slide-footer" style="left: 48px;">
+<span>20762 Derivatives and Risk Management • UTS Business School</span>
+<span class="slide-source-badge">Original Slide 1 of 23 (p.1 top)</span>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l02-s02"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 2</div>
@@ -72,8 +94,49 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l02-s03"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l02-s02-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Learning Objectives</h2>
+<div class="slide-content">
+<ul>
+<li>Discuss long and short hedges</li>
+<li>Define basis risk:
+            <ul>
+<li>Discuss the factors affecting basis risk</li>
+<li>How does basis risk affect hedging profitability?</li>
+</ul>
+</li>
+<li>Calculate and interpret the minimum variance hedge ratio (\(h^*\))</li>
+<li>Determine the optimal number of contracts in a hedge (\(N^*\))</li>
+<li>Use index futures to:
+            <ul>
+<li>Hedge a stock portfolio</li>
+<li>Change the beta of a stock portfolio</li>
+</ul>
+</li>
+<li>Explain how to “roll the hedge forward” (stack-and-roll)</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l02-s03"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 3</div>
@@ -109,8 +172,46 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l02-s04"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l02-s03-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 3</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Risk Exposure</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Long Asset Exposure:</strong>
+<ul>
+<li>Already own the asset or have contracted to produce it.</li>
+<li>Wish to sell it in the future.</li>
+<li><strong>Risk:</strong> Asset price falls → hedge by taking a <strong>Short Futures position</strong>.</li>
+</ul>
+</li>
+<li><strong>Short Asset Exposure:</strong>
+<ul>
+<li>Need to purchase the asset in the future.</li>
+<li><strong>Risk:</strong> Asset price rises → hedge by taking a <strong>Long Futures position</strong>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l02-s04"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 4</div>
@@ -143,8 +244,43 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l02-s05"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l02-s04-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 4</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">The Basis in a Hedging Situation</h2>
+<div class="slide-content">
+<ul>
+<li>In a hedging situation, the <strong>basis</strong> is defined as:
+            <div class="equation-box">
+              \[ \text{Basis} = b_t = S_t - F_t \]
+            </div>
+</li>
+<li>where \(S_t\) is the spot price of the asset being hedged, and \(F_t\) is the futures price of the contract used.</li>
+<li>If the asset being hedged and the asset underlying the futures contract are identical, then at contract maturity \(T\):
+            \[ b_T = S_T - F_T = 0 \]
+          </li>
+<li>Prior to maturity, the basis can be positive or negative, and fluctuates over time.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l02-s05"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 5</div>
@@ -176,8 +312,42 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l02-s06"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l02-s05-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 5</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li class="active">Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Short Hedge</h2>
+<div class="slide-content">
+<ul>
+<li>A <strong>short hedge</strong> involves taking a short position in a futures contract.</li>
+<li>It is appropriate when the hedger already owns an asset and expects to sell it at some future date.</li>
+<li>Alternatively, it is appropriate when an asset is not currently owned but will be produced and sold in the future.</li>
+<li><strong>Mechanism:</strong>
+<ul>
+<li>If the spot price falls, the loss on the spot sale is offset by the gain on the short futures position.</li>
+<li>If the spot price rises, the gain on the spot sale is offset by the loss on the short futures position.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l02-s06"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 6</div>
@@ -211,8 +381,44 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l02-s07"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l02-s06-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 6</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li class="active">Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Short Hedge (Corn Producer)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>March:</strong> A farmer expects to harvest and sell 50,000 bushels of corn in September.</li>
+<li>September corn futures price is currently <strong>$5.20 / bushel</strong> on CBOT.</li>
+<li>Contract size = 5,000 bushels → Farmer shorts 10 September futures contracts.</li>
+<li><strong>September Outcome:</strong>
+<ul>
+<li>Suppose spot price drops to $4.80. Futures price converges to $4.80.</li>
+<li>Revenue from selling crop in local market: \( 50,000 \times \$4.80 = \$240,000 \).</li>
+<li>Gain on short futures: \( 50,000 \times (\$5.20 - \$4.80) = \$20,000 \).</li>
+<li><strong>Total Proceeds:</strong> \( \$240,000 + \$20,000 = \mathbf{\$260,000} \) (\( \$5.20/\text{bu} \) locked in!).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l02-s07"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 7</div>
@@ -249,8 +455,47 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l02-s08"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l02-s07-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 7</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li class="active">Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Short Hedge and Basis</h2>
+<div class="slide-content">
+<ul>
+<li>Suppose a short hedge is initiated at time \(t_1\) and closed out at time \(t_2\):
+            <ul>
+<li>\(F_1\): Futures price when hedge entered at \(t_1\)</li>
+<li>\(S_2\): Spot price when asset sold at \(t_2\)</li>
+<li>\(F_2\): Futures price when hedge closed out at \(t_2\)</li>
+<li>\(b_2 = S_2 - F_2\): Basis at \(t_2\)</li>
+</ul>
+</li>
+<li><strong>Effective Price Received:</strong>
+<div class="equation-box">
+              \[ \text{Effective Selling Price} = S_2 + (F_1 - F_2) = F_1 + (S_2 - F_2) = F_1 + b_2 \]
+            </div>
+</li>
+<li>In a short hedge, the hedger benefits if the basis <strong>strengthens</strong> (\(b_2\) increases).</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l02-s08"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 8</div>
@@ -281,8 +526,41 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l02-s09"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l02-s08-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 8</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li class="active">Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Long Hedge</h2>
+<div class="slide-content">
+<ul>
+<li>A <strong>long hedge</strong> involves taking a long position in futures contracts.</li>
+<li>Appropriate when a company knows it will have to purchase an asset in the future and wants to lock in the purchase price.</li>
+<li><strong>Example:</strong> An electrical manufacturer knows it will need 100,000 lbs of copper in May. In January, May copper futures trade at $3.20/lb.
+            <ul>
+<li>Manufacturer buys 4 May copper futures contracts (25,000 lbs each).</li>
+<li>In May, buys copper in physical spot market at \(S_2\) and closes out futures at \(F_2\).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l02-s09"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 9</div>
@@ -319,8 +597,47 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-after-source-slide="9" data-kind="enrichment" id="l02-s09-v1"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l02-s09-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 9</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li class="active">Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Long Hedge and Basis</h2>
+<div class="slide-content">
+<ul>
+<li>For a long hedge initiated at \(t_1\) and closed at \(t_2\):
+            <div class="equation-box">
+              \[ \text{Effective Purchasing Price} = S_2 - (F_2 - F_1) = F_1 + (S_2 - F_2) = F_1 + b_2 \]
+            </div>
+</li>
+<li>Notice that in both long and short hedges, the effective price is:
+            \[ \text{Effective Price} = F_1 + b_2 \]
+          </li>
+<li><strong>Comparison:</strong>
+<ul>
+<li>In a short hedge, hedger wants higher selling price → benefits if basis <strong>strengthens</strong> (increases).</li>
+<li>In a long hedge, hedger wants lower purchase cost → benefits if basis <strong>weakens</strong> (decreases).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="9" data-kind="enrichment" id="l02-s09-v1"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 拓展</div>
@@ -351,8 +668,41 @@
 <p style="margin: 0;">当对冲平仓日期早于期货到期月份时产生期限错配（\(t_2 &lt; T\)）；当被对冲资产（如航油）与期货标的（取暖油）不同时产生资产错配。</p>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l02-s10"><div class="slide-container">
+</div></section><section data-after-source-slide="9" data-kind="enrichment" id="l02-s09-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li class="active">Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Hedger Balance: Commercial Objectives &amp; Basis Signs</h3>
+<div class="example-card">
+<p><strong>Producer (Farmer) vs Consumer (Cereal Maker):</strong></p>
+<ul>
+<li><strong>Corn Farmer (Short Hedger):</strong> Harvests all supply at once. Massive local supply depresses harvest prices. Sells futures early to guarantee survival revenue. If spot collapses, futures gain compensates.</li>
+<li><strong>Cereal Company (Long Hedger):</strong> Cannot store a full year's grain upfront due to storage costs. Longs futures to lock in raw ingredient budget and protect consumers from food price inflation.</li>
+</ul>
+<p><strong>Decomposition of Basis Risk (Chalkboard Derivation):</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 8px 0;">
+          \[ \text{Effective Price} = F_1 + \underbrace{(S_2 - F_2)}_{\text{Timing Mismatch}} + \underbrace{(S_2^* - S_2)}_{\text{Asset Mismatch}} \]
+        </div>
+<p style="margin: 0;">Timing mismatch occurs when hedge is closed before contract maturity (\(t_2 &lt; T\)); asset mismatch occurs when hedging a product (e.g. jet fuel) using a related contract (heating oil).</p>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l02-s10"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 10</div>
@@ -384,8 +734,42 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l02-s11"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l02-s10-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 10</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li class="active">Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Basis Risk</h2>
+<div class="slide-content">
+<ul>
+<li>Hedging strategies minimize risk, but in practice rarely eliminate it completely. This remaining risk is <strong>basis risk</strong>.</li>
+<li>Basis risk arises because the basis \(b_2\) is uncertain when the hedge is initiated at \(t_1\).</li>
+<li><strong>Sources of Basis Risk:</strong>
+<ul>
+<li><strong>Maturity mismatch:</strong> The date the asset is bought/sold differs from the futures delivery month.</li>
+<li><strong>Asset mismatch (Cross-hedging):</strong> The asset being hedged is different from the asset underlying the futures contract.</li>
+<li><strong>Location mismatch:</strong> Delivery specifications are at a different geographical point.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l02-s11"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 11</div>
@@ -419,8 +803,44 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l02-s12"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l02-s11-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 11</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li class="active">Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Minimizing Basis Risk – Contract Choice</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Choice of Delivery Month:</strong>
+<ul>
+<li>Choose a delivery month that is <em>as close as possible to, but later than</em>, the expiration of the hedge.</li>
+<li>Avoid holding futures into the actual delivery month: trading can become illiquid and erratic price spikes occur due to delivery logistics.</li>
+</ul>
+</li>
+<li><strong>Choice of Underlying Asset:</strong>
+<ul>
+<li>Choose the contract whose futures price is most highly correlated with the price of the asset being hedged.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l02-s12"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 12</div>
@@ -457,8 +877,47 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l02-s13"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l02-s12-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 12</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li class="active">Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Minimum Variance Hedge Ratio</h2>
+<div class="slide-content">
+<ul>
+<li>The <strong>hedge ratio</strong> \(h\) is the size of the position taken in futures contracts relative to the size of the exposure.</li>
+<li>To minimize the variance of the hedged position value:
+            <div class="equation-box">
+              \[ h^* = \rho \frac{\sigma_S}{\sigma_F} \]
+            </div>
+</li>
+<li>where:
+            <ul>
+<li>\(\sigma_S\): standard deviation of \(\Delta S\) (change in spot price over hedge horizon)</li>
+<li>\(\sigma_F\): standard deviation of \(\Delta F\) (change in futures price over hedge horizon)</li>
+<li>\(\rho\): coefficient of correlation between \(\Delta S\) and \(\Delta F\)</li>
+</ul>
+</li>
+<li>\(h^*\) is the slope of the best-fit OLS linear regression of \(\Delta S\) on \(\Delta F\).</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l02-s13"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 13</div>
@@ -497,8 +956,49 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l02-s14"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l02-s13-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 13</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li class="active">Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Optimal Number of Contracts</h2>
+<div class="slide-content">
+<ul>
+<li>Let:
+            <ul>
+<li>\(Q_A\): Size of the position being hedged (in units)</li>
+<li>\(Q_F\): Size of one futures contract (in units)</li>
+<li>\(h^*\): Optimal minimum-variance hedge ratio</li>
+</ul>
+</li>
+<li><strong>Optimal Number of Contracts Formula:</strong>
+<div class="equation-box">
+              \[ N^* = h^* \frac{Q_A}{Q_F} = \rho \frac{\sigma_S}{\sigma_F} \frac{Q_A}{Q_F} \]
+            </div>
+</li>
+<li>If daily settlement (tailing the hedge) is taken into account:
+            \[ N^* = h^* \frac{V_A}{V_F} \]
+            where \(V_A = Q_A S\) is the spot value and \(V_F = Q_F F\) is contract value.
+          </li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l02-s14"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 14</div>
@@ -534,8 +1034,46 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-after-source-slide="14" data-kind="enrichment" id="l02-s14-v1"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l02-s14-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 14</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li class="active">Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Optimal Number of Contracts (Beef)</h2>
+<div class="slide-content">
+<ul>
+<li>A cattle producer wants to hedge the sale of <strong>18,000 kg</strong> of beef.</li>
+<li>Each futures contract is for the delivery of <strong>1,500 kg</strong>.</li>
+<li>Historical data shows:
+            <ul>
+<li>\(\sigma_S = 0.04\) • \(\sigma_F = 0.05\) • \(\rho = 0.85\)</li>
+</ul>
+</li>
+<li><strong>Calculations:</strong>
+<div class="equation-box">
+              \[ h^* = 0.85 \times \frac{0.04}{0.05} = 0.68 \]
+              \[ N^* = 0.68 \times \frac{18,000}{1,500} = 0.68 \times 12 = \mathbf{8.16} \approx \mathbf{8 \text{ contracts}} \]
+            </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="14" data-kind="enrichment" id="l02-s14-v1"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 拓展</div>
@@ -564,8 +1102,39 @@
 <p><strong>尾随对冲调整 (Tailing the Hedge)：</strong> 由于期货每日结算而非到期一次性结算，每日现金流可按短期利率 \(r\) 滚动再投资。尾随调整将现货实物数量替换为现值规模 \(V_A / V_F\)，略微调低所需合约数量（例如从 37 张微调至 36 张）。</p>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l02-s15"><div class="slide-container">
+</div></section><section data-after-source-slide="14" data-kind="enrichment" id="l02-s14-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li class="active">Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Cross-Hedge Sizing &amp; Tailing Adjustments</h3>
+<div class="example-card">
+<p><strong>Classic Problem (Airline Jet Fuel hedged with Heating Oil Futures):</strong><br/>
+        Airline needs 2,000,000 gallons of jet fuel (\(Q_A\)). Heating oil contract size \(Q_F = 42,000\) gallons.<br/>
+        \(\sigma_S = 0.0263\), \(\sigma_F = 0.0313\), \(\rho = 0.928\).</p>
+<div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+          \[ h^* = \rho \frac{\sigma_S}{\sigma_F} = 0.928 \times \frac{0.0263}{0.0313} = \mathbf{0.7796} \]
+          \[ N^*_{\text{untailed}} = 0.7796 \times \frac{2,000,000}{42,000} = 37.12 \approx \mathbf{37 \text{ contracts}} \]
+        </div>
+<p><strong>Tailing the Hedge (Daily Settlement Impact):</strong> Because futures are settled every day rather than at maturity, gains/losses can be reinvested at interest rate \(r\). Tailing replaces physical quantities with present values \(V_A / V_F\), slightly reducing contract count (e.g. from 37 to 36).</p>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l02-s15"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 15</div>
@@ -601,8 +1170,46 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l02-s16"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l02-s15-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 15</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li class="active">Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Hedging an Equity Portfolio with Index Futures</h2>
+<div class="slide-content">
+<ul>
+<li>Unsystematic (firm-specific) risk is eliminated by diversification.</li>
+<li>Systematic (market) risk cannot be diversified away, but it can be hedged using stock index futures!</li>
+<li>The Capital Asset Pricing Model (CAPM) relates the return on the portfolio to the return on the market:
+            <div class="equation-box">
+              \[ R_P - R_F = \beta (R_M - R_F) \]
+            </div>
+</li>
+<li>To eliminate market risk (reduce \(\beta\) to 0):
+            <div class="equation-box">
+              \[ N^* = \beta \frac{P}{F} = \beta \frac{V_P}{V_F} \]
+            </div>
+            where \(P\) is current portfolio market value and \(F\) is index futures contract value.
+          </li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l02-s16"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 16</div>
@@ -657,8 +1264,60 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l02-s17"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l02-s16-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 16</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li class="active">Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">CME S&amp;P 500 Index Futures and ASX SPI 200</h2>
+<div class="slide-content">
+<table class="slide-table">
+<thead>
+<tr><th>Contract</th><th>Underlying</th><th>Contract Multiplier</th><th>Notional Value</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CME S&amp;P 500</strong></td>
+<td>S&amp;P 500 Index</td>
+<td>$250 per index point</td>
+<td>\( 250 \times \text{Index} \)</td>
+</tr>
+<tr>
+<td><strong>CME E-Mini S&amp;P 500</strong></td>
+<td>S&amp;P 500 Index</td>
+<td>$50 per index point</td>
+<td>\( 50 \times \text{Index} \)</td>
+</tr>
+<tr>
+<td><strong>ASX SPI 200</strong></td>
+<td>S&amp;P/ASX 200 Index</td>
+<td>A$25 per index point</td>
+<td>\( 25 \times \text{Index} \)</td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 14px;">
+<li>All major stock index futures are <strong>cash-settled</strong>.</li>
+<li>Physical delivery is impossible because one cannot deliver the entire market index basket of shares in exact index proportions.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l02-s17"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 17</div>
@@ -690,8 +1349,42 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l02-s18"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l02-s17-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 17</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li class="active">Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Hedging an Equity Portfolio</h2>
+<div class="slide-content">
+<ul>
+<li>An investor holds a <strong>$50 million</strong> portfolio with beta \( \beta = 0.80 \).</li>
+<li>Pessimistic about the market over the next 4 months.</li>
+<li>Current index = 1,000; 4-month futures price = <strong>1,010</strong>.</li>
+<li>Futures contract multiplier = $250 → Value of 1 contract \( F = 1,010 \times 250 = \mathbf{\$252,500} \).</li>
+<li><strong>Optimal number of contracts to short:</strong>
+<div class="equation-box">
+              \[ N^* = \beta \frac{P}{F} = 0.80 \times \frac{50,000,000}{252,500} = 158.41 \approx \mathbf{158 \text{ contracts}} \]
+            </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l02-s18"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 18</div>
@@ -750,8 +1443,44 @@
 <p style="color: #1e3a8a">无论大盘如何波动，对冲后组合总市值几乎保持绝对稳定（稳定在约 5040 万美元 / ~$50.4M）！</p>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l02-s19"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l02-s18-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 18</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li class="active">Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Hedging an Equity Portfolio – Performance Table</h2>
+<div class="slide-content">
+<p>Testing outcome across different index levels in 4 months:</p>
+<table class="slide-table">
+<thead>
+<tr><th>Index in 4m</th><th>Unhedged Portfolio ($)</th><th>Gain/Loss on 158 Futures ($)</th><th>Total Hedged Value ($)</th></tr>
+</thead>
+<tbody>
+<tr><td>900 (-10%)</td><td>$46,000,000</td><td>+ $4,345,000</td><td><strong>$50,345,000</strong></td></tr>
+<tr><td>950 (-5%)</td><td>$48,000,000</td><td>+ $2,370,000</td><td><strong>$50,370,000</strong></td></tr>
+<tr><td>1,000 (0%)</td><td>$50,000,000</td><td>+ $395,000</td><td><strong>$50,395,000</strong></td></tr>
+<tr><td>1,050 (+5%)</td><td>$52,000,000</td><td>- $1,580,000</td><td><strong>$50,420,000</strong></td></tr>
+</tbody>
+</table>
+<p style="color: #1e3a8a">Portfolio value remains almost completely invariant across market states (~$50.4M)!</p>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l02-s19"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 19</div>
@@ -782,8 +1511,41 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l02-s20"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l02-s19-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 19</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li class="active">Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Reasons for Hedging vs Selling Shares</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Why not just liquidate the stock portfolio and invest in risk-free T-bills?</strong>
+<ul>
+<li><strong>Preserve Stock Selection Alpha:</strong> The manager may be confident that selected individual stocks will outperform their benchmarks, even during a market-wide downturn.</li>
+<li><strong>Avoid Massive Transaction Costs:</strong> Brokerage, bid-ask spread slippage, and market impact from dumping a $50M portfolio.</li>
+<li><strong>Avoid Realizing Capital Gains Tax:</strong> Selling triggers immediate tax liabilities.</li>
+<li><strong>Mandate &amp; Institutional Constraints:</strong> Pension/mutual funds often have strict mandates requiring them to remain fully invested in equities.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l02-s20"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 20</div>
@@ -817,8 +1579,44 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l02-s21"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l02-s20-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 20</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li class="active">Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Return on Hedged Position</h2>
+<div class="slide-content">
+<ul>
+<li>The expected return on a perfectly hedged equity position is the <strong>risk-free rate</strong>:
+            <div class="equation-box">
+              \[ E(R_{\text{hedged}}) = R_F \]
+            </div>
+</li>
+<li>Expected value of hedger's position in 4 months:
+            \[ \$50,000,000 \times (1 + R_F \times 4/12) \approx \$51,000,000 \]
+          </li>
+<li>If the portfolio earns positive alpha relative to CAPM (\(\alpha &gt; 0\)), the hedged return will be:
+            \[ R_F + \alpha \]
+          </li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l02-s21"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 21</div>
@@ -853,8 +1651,45 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l02-s22"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l02-s21-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 21</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li class="active">Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Changing the Portfolio Beta</h2>
+<div class="slide-content">
+<ul>
+<li>What if the manager does not want to eliminate market risk entirely, but wants to adjust exposure from current beta \(\beta\) to target beta \(\beta^*\)?</li>
+<li><strong>Formula for Number of Contracts:</strong>
+<div class="equation-box">
+              \[ N^* = (\beta - \beta^*) \frac{P}{F} \]
+            </div>
+</li>
+<li><strong>Decision Rules:</strong>
+<ul>
+<li>If \(\beta &gt; \beta^*\) (reducing market exposure): Short \(N^*\) contracts.</li>
+<li>If \(\beta &lt; \beta^*\) (increasing market exposure): Long \(N^*\) contracts.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l02-s22"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 22</div>
@@ -888,8 +1723,44 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-after-source-slide="22" data-kind="enrichment" id="l02-s22-v1"><div class="slide-container">
+</div></section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l02-s22-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 22</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li class="active">Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Example – Changing Beta Exposure</h2>
+<div class="slide-content">
+<ul>
+<li>Portfolio value \(P = \$50\text{M}\), current \(\beta = 0.80\), futures value \(F = \$252,500\).</li>
+<li><strong>Case 1: Reduce beta to \(\beta^* = 0.50\):</strong>
+<div class="equation-box">
+              \[ N^* = (0.80 - 0.50) \times \frac{50,000,000}{252,500} = 59.4 \approx \mathbf{59 \text{ short}} \]
+            </div>
+</li>
+<li><strong>Case 2: Increase beta to \(\beta^* = 1.50\):</strong>
+<div class="equation-box">
+              \[ N^* = (0.80 - 1.50) \times \frac{50,000,000}{252,500} = -138.6 \approx \mathbf{139 \text{ long}} \]
+            </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="22" data-kind="enrichment" id="l02-s22-v1"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 拓展</div>
@@ -925,8 +1796,46 @@
 </ul>
 </div>
 </div>
-</div></section>
-<section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l02-s23"><div class="slide-container">
+</div></section><section data-after-source-slide="22" data-kind="enrichment" id="l02-s22-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li class="active">Changing Portfolio Beta</li>
+<li>Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Equity Portfolio Hedge &amp; Changing Beta (ETQ 3)</h3>
+<div class="example-card">
+<p><strong>Parameters:</strong> Portfolio \(P = \$2\text{M}\), \(\beta = 1.31\), 6-month futures on index with multiplier 250.<br/>
+        Current index = 3,500 • Theoretical futures price \(F_0 = 3,552.90\) • Contract value \(V_F = 3,552.90 \times 250 = \$888,225\).</p>
+<ul style="margin: 6px 0;">
+<li><strong>(a) Eliminate Exposure (\(\beta^* = 0\)):</strong>
+            \[ N^* = 1.31 \times \frac{2,000,000}{888,225} = 2.95 \approx \mathbf{3 \text{ short contracts}} \]
+          </li>
+<li><strong>(b) Outcome after 4 months (Index drops to 2,800, futures = 2,814.04):</strong>
+            \[ \text{Futures Gain} = 3 \times 250 \times (3,552.90 - 2,814.04) = +\$554,145 \]
+            Capital return on market = \((2,800 - 3,500)/3,500 = -20\%\). Expected portfolio capital drop \(= 1.31 \times (-20\%) = -26.2\%\) → Portfolio loss \(= -\$524,000\).<br/>
+            Net position outcome is protected! (Gain on futures fully offsets equity slide).
+          </li>
+<li><strong>(c) Reduce Beta to \(\beta^* = 0.95\):</strong>
+            \[ N^* = (1.31 - 0.95) \times \frac{2,000,000}{888,225} = 0.36 \times 2.25 = 0.81 \approx \mathbf{1 \text{ short contract}} \]
+          </li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l02-s23"><div class="slide-container">
 <aside class="slide-sidebar">
 <div class="sidebar-course-code">20762 DRM</div>
 <div class="sidebar-slide-id">第 2 讲 - 23</div>
@@ -962,7 +1871,45 @@
 </ul>
 </div>
 </div>
-</div></section>
+</div></section><section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l02-s23-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 2 - 23</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Risk Exposure</li>
+<li>Short &amp; Long Hedges</li>
+<li>Basis Risk</li>
+<li>Optimal Hedge Ratio</li>
+<li>Optimal Contracts</li>
+<li>Hedging Equity Portfolios</li>
+<li>Changing Portfolio Beta</li>
+<li class="active">Rolling the Hedge</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Rolling the Hedge Forward (Stack and Roll)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>The Problem:</strong> A hedger has a long-dated exposure (e.g., 2 years), but futures contracts are only liquid for short maturities (e.g., 3 to 6 months).</li>
+<li><strong>The Strategy:</strong>
+<ul>
+<li>Take a hedge position in short-dated contracts.</li>
+<li>Just before maturity, close out existing contracts and open a new position in the next contract (rolling forward).</li>
+</ul>
+</li>
+<li><strong>Roll-over Basis Risk:</strong>
+<ul>
+<li>Each time a contract is rolled over, the hedger incurs basis risk at that rollover point.</li>
+<li>Made famous by Metallgesellschaft (1993), which suffered massive losses on rolling forward short oil hedges during market contango.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
 </div>
 </div>
 <script src="vendor/reveal/dist/reveal.js"></script>

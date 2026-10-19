@@ -1,248 +1,418 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20762 第8讲：Black-Scholes-Merton 模型</title>
-  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
-  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
-  <link rel="stylesheet" href="assets/slides.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第8讲：Black-Scholes-Merton 模型</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
 </head>
 <body>
-  <a href="index.html" class="deck-index-link">&larr; 返回课程主页</a>
-  <div class="reveal">
-    <div class="slides">
-      
-    <section id="l08-s01" data-kind="original" data-source-slide="1" data-pdf-page="1" data-pdf-half="top">
-      <div class="slide-container">
-        <div class="title-slide-container" style="width: 100%;">
-          <div class="title-slide-h1">第 8 讲</div>
-          <div class="title-slide-h1" style="margin-bottom: 20px">Black-Scholes-Merton 模型</div>
-          <div class="title-slide-h2">Hull，第 13 章</div>
-          <div class="tip-of-the-week-box">
-            <div class="tip-title">每周经典文献</div>
-            <div class="tip-text">
-              Black, F. and Scholes, M., (1973) &ldquo;The pricing of Options and Corporate Liabilities&rdquo;, <em>Journal of Political Economy</em>, 81, 637-59
+<a class="deck-index-link" href="index.html">← 返回课程主页</a>
+<div class="reveal">
+<div class="slides">
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l08-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 8 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">Black-Scholes-Merton 模型</div>
+<div class="title-slide-h2">Hull，第 13 章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">每周经典文献</div>
+<div class="tip-text">
+              Black, F. and Scholes, M., (1973) “The pricing of Options and Corporate Liabilities”, <em>Journal of Political Economy</em>, 81, 637-59
             </div>
-          </div>
-          <div class="uts-logo-text"><span style="color: #000; font-weight: 900;">&#10022;</span> UTS 商学院</div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s02" data-kind="original" data-source-slide="2" data-pdf-page="1" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 2</div>
-            <ul class="sidebar-nav">
-              <li class="active">学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">学习目标</h2>
-          <div class="slide-content">
-            <ul>
-              <li>阐明随机游走假设的核心性质：
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS 商学院</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l08-s01-en" lang="en">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">Lecture 8</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">The Black-Scholes-Merton Model</div>
+<div class="title-slide-h2">Hull, Chapter 13</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">Tip of the week</div>
+<div class="tip-text">
+              Black, F. and Scholes, M., (1973) “The pricing of Options and Corporate Liabilities”, <em>Journal of Political Economy</em>, 81, 637-59
+            </div>
+</div>
+<div class="uts-logo-text"><span style="color: #000; font-weight: 900;">✦</span> UTS Business School</div>
+</div>
+</div>
+<div class="slide-footer" style="left: 48px;">
+<span>20762 Derivatives and Risk Management • UTS Business School</span>
+<span class="slide-source-badge">Original Slide 1 of 16 (p.1 top)</span>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l08-s02">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li>阐明随机游走假设的核心性质：
                 <ul>
-                  <li>正态分布与对数正态分布</li>
-                  <li>预期收益率、方差与标准差</li>
-                  <li>标准正态累积分布函数 \( N(x) \)</li>
-                </ul>
-              </li>
-              <li>掌握 Black-Scholes 模型的基本假设</li>
-              <li>运用 Black-Scholes 定价公式计算无红利股票欧式看涨期权与看跌期权的价格</li>
-              <li>波动率相关分析：
+<li>正态分布与对数正态分布</li>
+<li>预期收益率、方差与标准差</li>
+<li>标准正态累积分布函数 \( N(x) \)</li>
+</ul>
+</li>
+<li>掌握 Black-Scholes 模型的基本假设</li>
+<li>运用 Black-Scholes 定价公式计算无红利股票欧式看涨期权与看跌期权的价格</li>
+<li>波动率相关分析：
                 <ul>
-                  <li>利用历史资产价格数据估算波动率</li>
-                  <li>阐明隐含波动率的定义并探讨其重要意义</li>
-                </ul>
-              </li>
-              <li>模型拓展与应用：
+<li>利用历史资产价格数据估算波动率</li>
+<li>阐明隐含波动率的定义并探讨其重要意义</li>
+</ul>
+</li>
+<li>模型拓展与应用：
                 <ul>
-                  <li>调整 Black-Scholes 公式以对支付红利股票的期权进行定价</li>
-                  <li>运用布莱克近似法（Black's approximation）估算支付红利股票的美式看涨期权价格</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s03" data-kind="original" data-source-slide="3" data-pdf-page="2" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 3</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li class="active">随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">随机游走假设 (The Random Walk Assumption)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>令 \( \phi[m, s] \) 表示均值为 \( m \)、标准差为 \( s \) 的正态分布。</li>
-              <li>考虑一只当前价格为 \( S_0 \)、年化预期收益率为 \( \mu \)、价格波动率为 \( \sigma \) 的股票。</li>
-              <li>在随机游走假设下，在极短时间间隔 \( \Delta t \) 内：
+<li>调整 Black-Scholes 公式以对支付红利股票的期权进行定价</li>
+<li>运用布莱克近似法（Black's approximation）估算支付红利股票的美式看涨期权价格</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l08-s02-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Learning Objectives</h2>
+<div class="slide-content">
+<ul>
+<li>Highlight the properties of the random walk assumption:
                 <ul>
-                  <li>股票价格的变动量 \( \Delta S \) 服从正态分布：
+<li>Normal distribution and lognormal distribution</li>
+<li>Expected return, variance and standard deviation</li>
+<li>Cumulative normal distribution function \( N(x) \)</li>
+</ul>
+</li>
+<li>Assumptions underlying the Black-Scholes model</li>
+<li>Calculate the prices of European calls and puts on non-dividend-paying stocks using the Black-Scholes formula</li>
+<li>Volatility:
+                <ul>
+<li>Estimate volatility from historical prices</li>
+<li>Define implied volatility and discuss its importance</li>
+</ul>
+</li>
+<li>Extensions:
+                <ul>
+<li>Adjust the Black-Scholes formula to price options on a dividend-paying stock</li>
+<li>Estimate the prices of American calls on dividend-paying stocks using Black's approximation</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l08-s03">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">随机游走假设 (The Random Walk Assumption)</h2>
+<div class="slide-content">
+<ul>
+<li>令 \( \phi[m, s] \) 表示均值为 \( m \)、标准差为 \( s \) 的正态分布。</li>
+<li>考虑一只当前价格为 \( S_0 \)、年化预期收益率为 \( \mu \)、价格波动率为 \( \sigma \) 的股票。</li>
+<li>在随机游走假设下，在极短时间间隔 \( \Delta t \) 内：
+                <ul>
+<li>股票价格的变动量 \( \Delta S \) 服从正态分布：
                     <div class="equation-box">
                       \[ \Delta S \sim \phi[\mu S_0 \Delta t, \, \sigma S_0 \sqrt{\Delta t}] \]
                     </div>
-                  </li>
-                  <li>换言之，股票的收益率（相对价格变动比例）\( \frac{\Delta S}{S_0} \) 服从正态分布：
+</li>
+<li>换言之，股票的收益率（相对价格变动比例）\( \frac{\Delta S}{S_0} \) 服从正态分布：
                     <div class="equation-box">
                       \[ \frac{\Delta S}{S_0} \sim \phi[\mu \Delta t, \, \sigma \sqrt{\Delta t}] \]
                     </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s04" data-kind="original" data-source-slide="4" data-pdf-page="2" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 4</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li class="active">对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">对数正态分布 (Lognormal Distribution)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>由此可推导得出，股票的对数价格 \( \ln S_T \) 服从正态分布：
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l08-s03-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 3</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li class="active">Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">The Random Walk Assumption</h2>
+<div class="slide-content">
+<ul>
+<li>Let \( \phi[m, s] \) denote normal distribution with mean \( m \) and standard deviation \( s \).</li>
+<li>Consider a stock with price \( S_0 \), expected return \( \mu \) and price volatility \( \sigma \).</li>
+<li>Under the random walk assumption, in a short period \( \Delta t \):
+                <ul>
+<li>the change in the stock price, \( \Delta S \), is normally distributed:
+                    <div class="equation-box">
+                      \[ \Delta S \sim \phi[\mu S_0 \Delta t, \, \sigma S_0 \sqrt{\Delta t}] \]
+                    </div>
+</li>
+<li>In other words, the proportional stock return, \( \frac{\Delta S}{S_0} \), is normally distributed:
+                    <div class="equation-box">
+                      \[ \frac{\Delta S}{S_0} \sim \phi[\mu \Delta t, \, \sigma \sqrt{\Delta t}] \]
+                    </div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l08-s04">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li class="active">对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">对数正态分布 (Lognormal Distribution)</h2>
+<div class="slide-content">
+<ul>
+<li>由此可推导得出，股票的对数价格 \( \ln S_T \) 服从正态分布：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ \ln S_T \sim \phi\left[\ln S_0 + \left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \]
                   \[ \ln \frac{S_T}{S_0} \sim \phi\left[\left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \]
                 </div>
-              </li>
-              <li>根据定义，若一个随机变量的自然对数服从正态分布，则该随机变量服从<strong>对数正态分布</strong>。</li>
-              <li>因此，若 \( \ln S_T \) 与 \( \ln \frac{S_T}{S_0} \) 服从正态分布，则 \( S_T \) 与 \( \frac{S_T}{S_0} \) 服从对数正态分布：
+</li>
+<li>根据定义，若一个随机变量的自然对数服从正态分布，则该随机变量服从<strong>对数正态分布</strong>。</li>
+<li>因此，若 \( \ln S_T \) 与 \( \ln \frac{S_T}{S_0} \) 服从正态分布，则 \( S_T \) 与 \( \frac{S_T}{S_0} \) 服从对数正态分布：
                 <ul>
-                  <li>股票价格的期望值（均值）为：\( E[S_T] = S_0 e^{\mu T} \)</li>
-                  <li>其方差为：\( \text{var}[S_T] = S_0^2 e^{2\mu T} (e^{\sigma^2 T} - 1) \)</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s05" data-kind="original" data-source-slide="5" data-pdf-page="3" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 5</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li class="active">预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">预期收益率 (Expected Return)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>\( \mu \) 为股票的年化预期收益率：
+<li>股票价格的期望值（均值）为：\( E[S_T] = S_0 e^{\mu T} \)</li>
+<li>其方差为：\( \text{var}[S_T] = S_0^2 e^{2\mu T} (e^{\sigma^2 T} - 1) \)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l08-s04-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 4</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li class="active">Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Lognormal Distribution</h2>
+<div class="slide-content">
+<ul>
+<li>It follows that the stock log-return, \( \ln S_T \), is normally distributed:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ \ln S_T \sim \phi\left[\ln S_0 + \left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \]
+                  \[ \ln \frac{S_T}{S_0} \sim \phi\left[\left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \]
+                </div>
+</li>
+<li>A random variable whose natural logarithm is normally distributed, by definition, is <strong>log-normally distributed</strong>.</li>
+<li>Thus if \( \ln S_T \) and \( \ln \frac{S_T}{S_0} \) are normally distributed, then \( S_T \) and \( \frac{S_T}{S_0} \) are log-normally distributed:
                 <ul>
-                  <li>股票价格的期望值为 \( E(S_T) = S_0 e^{\mu T} \)</li>
-                </ul>
-              </li>
-              <li>股票实际实现的连续复利收益率 \( R \) 满足以下数学关系：
+<li>The mean stock price is: \( E[S_T] = S_0 e^{\mu T} \)</li>
+<li>Its variance is: \( \text{var}[S_T] = S_0^2 e^{2\mu T} (e^{\sigma^2 T} - 1) \)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l08-s05">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li class="active">预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">预期收益率 (Expected Return)</h2>
+<div class="slide-content">
+<ul>
+<li>\( \mu \) 为股票的年化预期收益率：
+                <ul>
+<li>股票价格的期望值为 \( E(S_T) = S_0 e^{\mu T} \)</li>
+</ul>
+</li>
+<li>股票实际实现的连续复利收益率 \( R \) 满足以下数学关系：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ S_T = S_0 e^{RT} \implies R = \frac{1}{T} \ln \frac{S_T}{S_0} \]
                 </div>
-              </li>
-              <li>由于 \( \ln \frac{S_T}{S_0} \sim \phi\left[\left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \)，因此：
+</li>
+<li>由于 \( \ln \frac{S_T}{S_0} \sim \phi\left[\left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \)，因此：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ R \sim \phi\left[\mu - \frac{\sigma^2}{2}, \, \frac{\sigma}{\sqrt{T}}\right] \implies E[R] = \mu - \frac{\sigma^2}{2} \]
                 </div>
-              </li>
-              <li>这是因为时间间隔 \( \Delta t \) 内股票收益率的算术平均值 \( \mu \) 不同于这些收益率的几何平均值 \( \mu - \frac{\sigma^2}{2} \)。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s06" data-kind="original" data-source-slide="6" data-pdf-page="3" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 6</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li class="active">预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">波动率 (Volatility)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>股票价格的波动率 \( \sigma \) 是其年化连续复利收益率的标准差。</li>
-              <li>股票在时间段 \( \Delta t \) 内收益率的标准差为：
+</li>
+<li>这是因为时间间隔 \( \Delta t \) 内股票收益率的算术平均值 \( \mu \) 不同于这些收益率的几何平均值 \( \mu - \frac{\sigma^2}{2} \)。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l08-s05-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 5</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li class="active">Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Expected Return</h2>
+<div class="slide-content">
+<ul>
+<li>\( \mu \) is the annual expected return on stock:
+                <ul>
+<li>The expected value of the stock price is \( E(S_T) = S_0 e^{\mu T} \)</li>
+</ul>
+</li>
+<li>The actual continuously compounded return on the stock \( R \) satisfies the relationship:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ S_T = S_0 e^{RT} \implies R = \frac{1}{T} \ln \frac{S_T}{S_0} \]
+                </div>
+</li>
+<li>Since \( \ln \frac{S_T}{S_0} \sim \phi\left[\left(\mu - \frac{\sigma^2}{2}\right)T, \, \sigma\sqrt{T}\right] \), then:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ R \sim \phi\left[\mu - \frac{\sigma^2}{2}, \, \frac{\sigma}{\sqrt{T}}\right] \implies E[R] = \mu - \frac{\sigma^2}{2} \]
+                </div>
+</li>
+<li>This is due to the fact that the arithmetic mean, \( \mu \), of the stock returns over a period \( \Delta t \) is different to the geometric mean, \( \mu - \frac{\sigma^2}{2} \), of these returns.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l08-s06">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li class="active">预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">波动率 (Volatility)</h2>
+<div class="slide-content">
+<ul>
+<li>股票价格的波动率 \( \sigma \) 是其年化连续复利收益率的标准差。</li>
+<li>股票在时间段 \( \Delta t \) 内收益率的标准差为：
                 <div class="equation-box">
                   \[ \sigma \sqrt{\Delta t} \]
                 </div>
-              </li>
-              <li><strong>算例：</strong> 若股票当前价格为 <strong>$50</strong>，其波动率为 <strong>25%</strong>，则其日收益率的标准差为多少？
+</li>
+<li><strong>算例：</strong> 若股票当前价格为 <strong>$50</strong>，其波动率为 <strong>25%</strong>，则其日收益率的标准差为多少？
                 <div class="equation-box">
                   \[ \frac{25\%}{\sqrt{252}} = \mathbf{1.57\% \text{ / 交易日}} \]
                 </div>
@@ -250,91 +420,169 @@
                 <div class="equation-box">
                   \[ \$50 \times 0.0157 = \mathbf{\$0.79} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s07" data-kind="original" data-source-slide="7" data-pdf-page="4" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 7</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li class="active">Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">Black-Scholes 模型的底层逻辑与基本假设</h2>
-          <div class="slide-content">
-            <ul>
-              <li>期权价格与标的股票价格依赖于同一个底层不确定性来源（布朗运动随机扰动项）。</li>
-              <li><strong>无套利论证（No-arbitrage arguments）：</strong> 我们可以构建一个由标的股票与期权组成的投资组合，从而完全消除这一不确定性来源：
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l08-s06-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 6</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li class="active">Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Volatility</h2>
+<div class="slide-content">
+<ul>
+<li>The volatility \( \sigma \) of the stock price is the standard deviation of its annual continuously compounded return.</li>
+<li>The standard deviation of its return over the period \( \Delta t \) is then:
+                <div class="equation-box">
+                  \[ \sigma \sqrt{\Delta t} \]
+                </div>
+</li>
+<li><strong>Example:</strong> If the stock price is <strong>$50</strong> and its volatility is <strong>25%</strong>, what is the standard deviation of its daily return?
+                <div class="equation-box">
+                  \[ \frac{25\%}{\sqrt{252}} = \mathbf{1.57\% \text{ per day}} \]
+                </div>
+                The expected price change per day is:
+                <div class="equation-box">
+                  \[ \$50 \times 0.0157 = \mathbf{\$0.79} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l08-s07">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li class="active">Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Black-Scholes 模型的底层逻辑与基本假设</h2>
+<div class="slide-content">
+<ul>
+<li>期权价格与标的股票价格依赖于同一个底层不确定性来源（布朗运动随机扰动项）。</li>
+<li><strong>无套利论证（No-arbitrage arguments）：</strong> 我们可以构建一个由标的股票与期权组成的投资组合，从而完全消除这一不确定性来源：
                 <ul>
-                  <li>该投资组合在瞬时是无风险的，因此在瞬时必须获取无风险利率 \( r \)。</li>
-                </ul>
-              </li>
-              <li>Black-Scholes 模型可视为对冲组合进行无限次频繁再平衡的二叉树极限模型：
+<li>该投资组合在瞬时是无风险的，因此在瞬时必须获取无风险利率 \( r \)。</li>
+</ul>
+</li>
+<li>Black-Scholes 模型可视为对冲组合进行无限次频繁再平衡的二叉树极限模型：
                 <ul>
-                  <li>当时间步长 \( \Delta t \to 0 \) 时，二叉树期权价格的极限即为 Black-Scholes 价格。</li>
-                </ul>
-              </li>
-              <li><strong>Black-Scholes 模型的核心假设：</strong>
+<li>当时间步长 \( \Delta t \to 0 \) 时，二叉树期权价格的极限即为 Black-Scholes 价格。</li>
+</ul>
+</li>
+<li><strong>Black-Scholes 模型的核心假设：</strong>
+<ul>
+<li>股票价格服从对数正态分布，且预期收益率 \( \mu \) 与波动率 \( \sigma \) 为常数。</li>
+<li>在期权存续期内，标的股票不支付红利。</li>
+<li>投资者可以按相同的恒定无风险利率 \( r \) 无限制借入或贷出资金。</li>
+<li>无交易成本与税收；证券交易连续进行且完全可分。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l08-s07-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 7</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li class="active">Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Concepts Underlying Black-Scholes</h2>
+<div class="slide-content">
+<ul>
+<li>The option price and the stock price depend on the same underlying source of uncertainty.</li>
+<li><strong>No-arbitrage arguments:</strong> We can form a portfolio consisting of the stock and the option, which eliminates this source of uncertainty:
                 <ul>
-                  <li>股票价格服从对数正态分布，且预期收益率 \( \mu \) 与波动率 \( \sigma \) 为常数。</li>
-                  <li>在期权存续期内，标的股票不支付红利。</li>
-                  <li>投资者可以按相同的恒定无风险利率 \( r \) 无限制借入或贷出资金。</li>
-                  <li>无交易成本与税收；证券交易连续进行且完全可分。</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s08" data-kind="original" data-source-slide="8" data-pdf-page="4" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 8</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li class="active">Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">Black-Scholes 定价公式</h2>
-          <div class="slide-content">
-            <p>考虑执行价格为 \( K \)、到期期限为 \( T \) 的欧式看涨期权与欧式看跌期权：</p>
-            <ul>
-              <li>欧式看涨期权的价格为：
+<li>The portfolio is instantaneously riskless and therefore instantaneously earns the risk-free rate \( r \).</li>
+</ul>
+</li>
+<li>The Black-Scholes model is a binomial model where the hedge portfolio is rebalanced infinitely often:
+                <ul>
+<li>The Black-Scholes price is the limit of the binomial tree price as the length of the time step \( \Delta t \to 0 \).</li>
+</ul>
+</li>
+<li><strong>Assumptions of the Black-Scholes Model:</strong>
+<ul>
+<li>The stock price has a lognormal distribution with constant \( \mu \) and \( \sigma \).</li>
+<li>The stock pays no dividends during the life of the option.</li>
+<li>Investors can borrow or lend at the same constant risk-free rate \( r \).</li>
+<li>No transaction costs or taxes; continuous security trading.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l08-s08">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li class="active">Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Black-Scholes 定价公式</h2>
+<div class="slide-content">
+<p>考虑执行价格为 \( K \)、到期期限为 \( T \) 的欧式看涨期权与欧式看跌期权：</p>
+<ul>
+<li>欧式看涨期权的价格为：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ c = S_0 N(d_1) - K e^{-rT} N(d_2) \quad (1) \]
                 </div>
-              </li>
-              <li>欧式看跌期权的价格为：
+</li>
+<li>欧式看跌期权的价格为：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ p = K e^{-rT} N(-d_2) - S_0 N(-d_1) \quad (2) \]
                 </div>
@@ -342,289 +590,541 @@
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ d_1 = \frac{\ln(S_0 / K) + (r + \frac{\sigma^2}{2})T}{\sigma \sqrt{T}}, \qquad d_2 = d_1 - \sigma \sqrt{T} \]
                 </div>
-              </li>
-              <li>\( N(x) \) 为标准正态随机变量 \( X \sim \phi(0, 1) \) 的累积分布函数（CDF）。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s09" data-kind="original" data-source-slide="9" data-pdf-page="5" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 9</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li class="active">正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">标准正态分布累积函数 (Normal CDF)</h2>
-          <div class="slide-content">
-            <div style="display: flex; gap: 20px; align-items: flex-start;">
-              <div style="flex: 1.1;">
-                <ul>
-                  <li>\( N(x) \) 表示均值为 0、标准差为 1 的标准正态分布随机变量小于 \( x \) 的概率：
-                    \[ N(d) = \text{Prob}\{z < d\}, \quad z \sim \phi(0, 1) \]
+</li>
+<li>\( N(x) \) 为标准正态随机变量 \( X \sim \phi(0, 1) \) 的累积分布函数（CDF）。</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l08-s08-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 8</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li class="active">Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Black-Scholes Formulae</h2>
+<div class="slide-content">
+<p>We consider a European call and European put with strike \( K \) and maturity \( T \):</p>
+<ul>
+<li>The price of the call is:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ c = S_0 N(d_1) - K e^{-rT} N(d_2) \quad (1) \]
+                </div>
+</li>
+<li>The price of the put is:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ p = K e^{-rT} N(-d_2) - S_0 N(-d_1) \quad (2) \]
+                </div>
+                with:
+                <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                  \[ d_1 = \frac{\ln(S_0 / K) + (r + \frac{\sigma^2}{2})T}{\sigma \sqrt{T}}, \qquad d_2 = d_1 - \sigma \sqrt{T} \]
+                </div>
+</li>
+<li>\( N(x) \) is the cumulative distribution function of a standard normal random variable \( X \sim \phi(0, 1) \).</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l08-s09">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li class="active">正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">标准正态分布累积函数 (Normal CDF)</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li>\( N(x) \) 表示均值为 0、标准差为 1 的标准正态分布随机变量小于 \( x \) 的概率：
+                    \[ N(d) = \text{Prob}\{z &lt; d\}, \quad z \sim \phi(0, 1) \]
                   </li>
-                  <li>\( N(x) \) 的数值可以通过以下方式获取：
+<li>\( N(x) \) 的数值可以通过以下方式获取：
                     <ul>
-                      <li>使用 Excel 内置函数 <code>NORMSDIST</code>（或 <code>NORM.S.DIST</code>）</li>
-                      <li>查阅标准正态分布概率数值表</li>
-                    </ul>
-                  </li>
-                  <li><strong>算例 &ndash; 线性插值法：</strong> 求 \( N(0.5875) \) 的值？<br>
+<li>使用 Excel 内置函数 <code>NORMSDIST</code>（或 <code>NORM.S.DIST</code>）</li>
+<li>查阅标准正态分布概率数值表</li>
+</ul>
+</li>
+<li><strong>算例 – 线性插值法：</strong> 求 \( N(0.5875) \) 的值？<br/>
                     查表可得：\( N(0.58) = 0.7190 \) 以及 \( N(0.59) = 0.7224 \)。
                     <div class="equation-box" style="padding: 4px 8px; margin: 4px 0">
                       \[ N(0.5875) \approx 0.7190 + 0.75(0.7224 - 0.7190) = \mathbf{0.7216} \]
                     </div>
+</li>
+</ul>
+</div>
+<div style="flex: 0.9; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center;">
+<img alt="标准正态分布累积函数阴影概率示意图 P(z &lt; d)" src="assets/lecture-08/slide-09-normal-cdf.png" style="width: 100%; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l08-s09-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 9</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li class="active">Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">The Normal Cumulative Distribution Function (CDF)</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li>\( N(x) \) is the probability that a normally distributed variable with mean 0 and standard deviation 1 is less than \( x \):
+                    \[ N(d) = \text{Prob}\{z &lt; d\}, \quad z \sim \phi(0, 1) \]
                   </li>
-                </ul>
-              </div>
-              <div style="flex: 0.9; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center;">
-                <img src="assets/lecture-08/slide-09-normal-cdf.png" alt="标准正态分布累积函数阴影概率示意图 P(z < d)" style="width: 100%; border-radius: 4px;">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s10" data-kind="original" data-source-slide="10" data-pdf-page="5" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 10</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li class="active">正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">Black-Scholes 模型的性质</h2>
-          <div class="slide-content">
-            <div style="display: flex; gap: 20px; align-items: flex-start;">
-              <div style="flex: 1.1;">
-                <ul>
-                  <li>\( N(d_1) \) 为期权的 <strong>Delta (\( \Delta \))</strong>：衡量期权价格对标的资产价格微小变动的敏感度（\( \Delta_{\text{call}} = N(d_1) \)）。</li>
-                  <li>\( N(d_2) \)：看涨期权最终被行权（\( S_T > K \)）的<strong>风险中性概率</strong>。</li>
-                  <li><strong>渐近边界行为：</strong>
+<li>\( N(x) \) can be approximated by:
                     <ul>
-                      <li>当 \( S_0 \to \infty \) 时：\( c \to S_0 - K e^{-rT} \)，且 \( p \to 0 \)。</li>
-                      <li>当 \( S_0 \to 0 \) 时：\( c \to 0 \)，且 \( p \to K e^{-rT} - S_0 \)。</li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div style="flex: 0.9; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; text-align: center;">
-                <img src="assets/lecture-08/slide-10-properties.png" alt="看涨期权与看跌期权价格及Delta渐近曲线" style="width: 100%; border-radius: 4px;">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s10-v1" data-kind="enrichment" data-after-source-slide="10">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - v1</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li class="active">正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        <div class="slide-body">
-          <h3 class="slide-title" style="margin-bottom: 6px">无红利股票 Black-Scholes 完整估值算例</h3>
-          <div class="slide-content" >
-            <p style="margin-bottom: 4px;"><strong>参数设定：</strong> \( S_0 = \$85, \, K = \$88, \, r = 10\%, \, \sigma = 22\%, \, T = 9/12 = 0.75 \) 年。股票不支付红利。</p>
-            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
-              <!-- Left: d1, d2 and CDF -->
-              <div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
-                <h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 1：计算 \( d_1, d_2 \) 及正态分布 CDF 值</h4>
-                <div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+<li>Using the Excel built-in function <code>NORMSDIST</code></li>
+<li>Using a standard normal table of probabilities</li>
+</ul>
+</li>
+<li><strong>Example – Linear Interpolation:</strong> What is \( N(0.5875) \)?<br/>
+                    From table: \( N(0.58) = 0.7190 \) and \( N(0.59) = 0.7224 \).
+                    <div class="equation-box" style="padding: 4px 8px; margin: 4px 0">
+                      \[ N(0.5875) \approx 0.7190 + 0.75(0.7224 - 0.7190) = \mathbf{0.7216} \]
+                    </div>
+</li>
+</ul>
+</div>
+<div style="flex: 0.9; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center;">
+<img alt="Normal CDF showing shaded probability P(z &lt; d)" src="assets/lecture-08/slide-09-normal-cdf.png" style="width: 100%; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l08-s10">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li class="active">正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Black-Scholes 模型的性质</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li>\( N(d_1) \) 为期权的 <strong>Delta (\( \Delta \))</strong>：衡量期权价格对标的资产价格微小变动的敏感度（\( \Delta_{\text{call}} = N(d_1) \)）。</li>
+<li>\( N(d_2) \)：看涨期权最终被行权（\( S_T &gt; K \)）的<strong>风险中性概率</strong>。</li>
+<li><strong>渐近边界行为：</strong>
+<ul>
+<li>当 \( S_0 \to \infty \) 时：\( c \to S_0 - K e^{-rT} \)，且 \( p \to 0 \)。</li>
+<li>当 \( S_0 \to 0 \) 时：\( c \to 0 \)，且 \( p \to K e^{-rT} - S_0 \)。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="flex: 0.9; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; text-align: center;">
+<img alt="看涨期权与看跌期权价格及Delta渐近曲线" src="assets/lecture-08/slide-10-properties.png" style="width: 100%; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l08-s10-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 10</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li class="active">Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Properties of the Black-Scholes Model</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li>\( N(d_1) \) is the <strong>delta</strong> of the option: the sensitivity of option price to spot price changes (\( \Delta_{\text{call}} = N(d_1) \)).</li>
+<li>\( N(d_2) \): The risk-neutral probability that the call option will be exercised (\( S_T &gt; K \)).</li>
+<li><strong>Asymptotic Behavior:</strong>
+<ul>
+<li>As \( S_0 \to \infty \): \( c \to S_0 - K e^{-rT} \), and \( p \to 0 \).</li>
+<li>As \( S_0 \to 0 \): \( c \to 0 \), and \( p \to K e^{-rT} - S_0 \).</li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="flex: 0.9; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; text-align: center;">
+<img alt="Call and Put option price and delta asymptotic curves" src="assets/lecture-08/slide-10-properties.png" style="width: 100%; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="10" data-kind="enrichment" id="l08-s10-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - v1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li class="active">正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">无红利股票 Black-Scholes 完整估值算例</h3>
+<div class="slide-content">
+<p style="margin-bottom: 4px;"><strong>参数设定：</strong> \( S_0 = \$85, \, K = \$88, \, r = 10\%, \, \sigma = 22\%, \, T = 9/12 = 0.75 \) 年。股票不支付红利。</p>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
+<!-- Left: d1, d2 and CDF -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 1：计算 \( d_1, d_2 \) 及正态分布 CDF 值</h4>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
                   \[ \ln(85/88) = -0.0347, \quad \sigma\sqrt{T} = 0.1905 \]
                   \[ (r + \tfrac{1}{2}\sigma^2)T = (0.10 + 0.0242) \times 0.75 = 0.09315 \]
                   \[ d_1 = \frac{-0.034686 + 0.09315}{0.190526} = \mathbf{0.3069} \]
                   \[ d_2 = 0.3069 - 0.1905 = \mathbf{0.1163} \]
                 </div>
-                <p style="margin: 3px 0">标准正态累积分布函数值：</p>
-                <div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+<p style="margin: 3px 0">标准正态累积分布函数值：</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
                   \[ N(d_1) = N(0.31) = \mathbf{0.6205}, \quad N(d_2) = N(0.12) = \mathbf{0.5463} \]
                   \[ N(-d_1) = 1 - 0.6205 = \mathbf{0.3795}, \quad N(-d_2) = 1 - 0.5463 = \mathbf{0.4537} \]
                 </div>
-              </div>
-              <!-- Right: Prices and Parity -->
-              <div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
-                <h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 2：期权定价与买卖权平价检验</h4>
-                <p style="margin: 2px 0">折现执行价格：\( K e^{-rT} = 88 e^{-0.10 \times 0.75} = 88 \times 0.92774 = \$81.6414 \)</p>
-                <div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+</div>
+<!-- Right: Prices and Parity -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">步骤 2：期权定价与买卖权平价检验</h4>
+<p style="margin: 2px 0">折现执行价格：\( K e^{-rT} = 88 e^{-0.10 \times 0.75} = 88 \times 0.92774 = \$81.6414 \)</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
                   \[ c = 85(0.6205) - 81.6414(0.5463) = 52.74 - 44.60 = \mathbf{\$8.14} \]
                   \[ p = 81.6414(0.4537) - 85(0.3795) = 37.04 - 32.26 = \mathbf{\$4.78} \]
                   \[ C_{\text{Amer}} = c = \mathbf{\$8.14} \text{（无红利股票美式看涨期权永不应提前行权！）} \]
                 </div>
-                <h4 style="color: #047857; margin: 4px 0 2px 0">买卖权平价定理检验：</h4>
-                <div class="equation-box" style="padding: 4px 6px; margin: 3px 0;  background: #ecfdf5; border-color: #a7f3d0">
+<h4 style="color: #047857; margin: 4px 0 2px 0">买卖权平价定理检验：</h4>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0;  background: #ecfdf5; border-color: #a7f3d0">
                   \[ c + K e^{-rT} = 8.1434 + 81.6414 = \mathbf{\$89.78} \]
                   \[ p + S_0 = 4.7848 + 85.0000 = \mathbf{\$89.78} \]
-                  <span style="color: #065f46; font-weight: bold;">&check; 买卖权平价定理精确成立！</span>
+                  <span style="color: #065f46; font-weight: bold;">✓ 买卖权平价定理精确成立！</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="10" data-kind="enrichment" id="l08-s10-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li class="active">Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Complete Black-Scholes Valuation on Non-Dividend Stock</h3>
+<div class="slide-content">
+<p style="margin-bottom: 4px;"><strong>Setup:</strong> \( S_0 = \$85, \, K = \$88, \, r = 10\%, \, \sigma = 22\%, \, T = 9/12 = 0.75 \) years. Stock pays no dividends.</p>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
+<!-- Left: d1, d2 and CDF -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">Step 1: Compute \( d_1, d_2 \) and Normal CDFs</h4>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+                  \[ \ln(85/88) = -0.0347, \quad \sigma\sqrt{T} = 0.1905 \]
+                  \[ (r + \tfrac{1}{2}\sigma^2)T = (0.10 + 0.0242) \times 0.75 = 0.09315 \]
+                  \[ d_1 = \frac{-0.034686 + 0.09315}{0.190526} = \mathbf{0.3069} \]
+                  \[ d_2 = 0.3069 - 0.1905 = \mathbf{0.1163} \]
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s11" data-kind="original" data-source-slide="11" data-pdf-page="6" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 11</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li class="active">风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">风险中性定价原理 (Risk-Neutral Valuation)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>变量 \( \mu \)（股票预期收益率）并未出现在 Black-Scholes 公式中：
+<p style="margin: 3px 0">Standard Normal CDF values:</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+                  \[ N(d_1) = N(0.31) = \mathbf{0.6205}, \quad N(d_2) = N(0.12) = \mathbf{0.5463} \]
+                  \[ N(-d_1) = 1 - 0.6205 = \mathbf{0.3795}, \quad N(-d_2) = 1 - 0.5463 = \mathbf{0.4537} \]
+                </div>
+</div>
+<!-- Right: Prices and Parity -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">Step 2: Option Prices &amp; Parity Check</h4>
+<p style="margin: 2px 0">Discounted strike: \( K e^{-rT} = 88 e^{-0.10 \times 0.75} = 88 \times 0.92774 = \$81.6414 \)</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+                  \[ c = 85(0.6205) - 81.6414(0.5463) = 52.74 - 44.60 = \mathbf{\$8.14} \]
+                  \[ p = 81.6414(0.4537) - 85(0.3795) = 37.04 - 32.26 = \mathbf{\$4.78} \]
+                  \[ C_{\text{Amer}} = c = \mathbf{\$8.14} \text{ (never exercise call early!)} \]
+                </div>
+<h4 style="color: #047857; margin: 4px 0 2px 0">Put-Call Parity Verification:</h4>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0;  background: #ecfdf5; border-color: #a7f3d0">
+                  \[ c + K e^{-rT} = 8.1434 + 81.6414 = \mathbf{\$89.78} \]
+                  \[ p + S_0 = 4.7848 + 85.0000 = \mathbf{\$89.78} \]
+                  <span style="color: #065f46; font-weight: bold;">✓ Parity holds exactly!</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l08-s11">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li class="active">风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">风险中性定价原理 (Risk-Neutral Valuation)</h2>
+<div class="slide-content">
+<ul>
+<li>变量 \( \mu \)（股票预期收益率）并未出现在 Black-Scholes 公式中：
                 <ul>
-                  <li>投资者的风险偏好完全不影响期权理论价格！</li>
-                </ul>
-              </li>
-              <li>Black-Scholes 公式独立于风险偏好的这一性质，使其与<strong>风险中性定价原理</strong>完全契合：
+<li>投资者的风险偏好完全不影响期权理论价格！</li>
+</ul>
+</li>
+<li>Black-Scholes 公式独立于风险偏好的这一性质，使其与<strong>风险中性定价原理</strong>完全契合：
                 <ul>
-                  <li>在“风险中性”世界中，资产的初始价值等于其在到期日预期收益按无风险利率 \( r \) 进行折现的现值。</li>
-                </ul>
-              </li>
-              <li>当前资产价格：\( S_0 = e^{-rT} E[S_T] \implies E[S_T] = S_0 e^{rT} \)</li>
-              <li>远期合约（多头）当前价值：
+<li>在“风险中性”世界中，资产的初始价值等于其在到期日预期收益按无风险利率 \( r \) 进行折现的现值。</li>
+</ul>
+</li>
+<li>当前资产价格：\( S_0 = e^{-rT} E[S_T] \implies E[S_T] = S_0 e^{rT} \)</li>
+<li>远期合约（多头）当前价值：
                 <div class="equation-box" style="padding: 6px 12px; margin: 4px 0;">
                   \[ f_0 = e^{-rT} E[f_T] = e^{-rT} E[F_T - F_0] = S_0 - F_0 e^{-rT} = (F_T - F_0)e^{-rT} \]
                 </div>
-              </li>
-              <li>看涨期权当前价值：
+</li>
+<li>看涨期权当前价值：
                 <div class="equation-box" style="padding: 6px 12px; margin: 4px 0;">
                   \[ c_0 = e^{-rT} E[c_T] = e^{-rT} E[\max[S_T - K, 0]] = \dots \text{Black-Scholes 公式} \]
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s12" data-kind="original" data-source-slide="12" data-pdf-page="6" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 12</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li class="active">历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">波动率的本质特征 (The Nature of Volatility)</h2>
-          <div class="slide-content">
-            <ul>
-              <li><strong>波动率产生的根源：</strong>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l08-s11-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 11</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li class="active">Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Risk-Neutral Valuation</h2>
+<div class="slide-content">
+<ul>
+<li>The variable \( \mu \) does not feature in the Black-Scholes analysis:
                 <ul>
-                  <li>在有效市场假说（EMH）下，波动率反映了新信息持续流入市场的过程。</li>
-                  <li>交易活动本身也会产生波动（市场微观结构效应、流动性冲击）。</li>
-                </ul>
-              </li>
-              <li><strong>交易日 vs 日历日：</strong>
+<li>The risk preferences of investors do not affect option prices!</li>
+</ul>
+</li>
+<li>The preference-independent nature of the Black-Scholes formula makes it consistent with the <strong>risk-neutral valuation principle</strong>:
                 <ul>
-                  <li>市场开市交易时的资产波动率通常显著高于闭市期间（周末、节假日）。</li>
-                  <li>因此，在估算波动率和期权定价时，时间期限 \( T \) 通常以<strong>交易日</strong>（通常按每年 252 个交易日计算）而非日历日（365 天）进行折算计量。</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s13" data-kind="original" data-source-slide="13" data-pdf-page="7" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 13</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li class="active">历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">利用历史数据估算波动率<br><span style="color: #4338ca">(Hull，第 320&ndash;321 页)</span></h2>
-          <div class="slide-content">
-            <ul>
-              <li>假设我们在时间间隔为 \( \tau \) 年的时间点上拥有价格观测值 \( S_0, S_1, \dots, S_n \)。</li>
-              <li>定义连续复利收益率（对数收益率）：
+<li>In a “risk-neutral” world, the initial value of an asset is equal to its discounted expected payoff at maturity, discounted at \( r \).</li>
+</ul>
+</li>
+<li>Current asset price: \( S_0 = e^{-rT} E[S_T] \implies E[S_T] = S_0 e^{rT} \)</li>
+<li>Current value of a (long) forward contract:
+                <div class="equation-box" style="padding: 6px 12px; margin: 4px 0;">
+                  \[ f_0 = e^{-rT} E[f_T] = e^{-rT} E[F_T - F_0] = S_0 - F_0 e^{-rT} = (F_T - F_0)e^{-rT} \]
+                </div>
+</li>
+<li>Current value of a call option:
+                <div class="equation-box" style="padding: 6px 12px; margin: 4px 0;">
+                  \[ c_0 = e^{-rT} E[c_T] = e^{-rT} E[\max[S_T - K, 0]] = \dots \text{Black-Scholes formula} \]
+                </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l08-s12">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li class="active">历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">波动率的本质特征 (The Nature of Volatility)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>波动率产生的根源：</strong>
+<ul>
+<li>在有效市场假说（EMH）下，波动率反映了新信息持续流入市场的过程。</li>
+<li>交易活动本身也会产生波动（市场微观结构效应、流动性冲击）。</li>
+</ul>
+</li>
+<li><strong>交易日 vs 日历日：</strong>
+<ul>
+<li>市场开市交易时的资产波动率通常显著高于闭市期间（周末、节假日）。</li>
+<li>因此，在估算波动率和期权定价时，时间期限 \( T \) 通常以<strong>交易日</strong>（通常按每年 252 个交易日计算）而非日历日（365 天）进行折算计量。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l08-s12-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 12</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li class="active">Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">The Nature of Volatility</h2>
+<div class="slide-content">
+<ul>
+<li><strong>Causes of volatility:</strong>
+<ul>
+<li>Under the Efficient Market Hypothesis (EMH), volatility represents new information arriving in the market.</li>
+<li>Trading itself causes volatility (market microstructure, liquidity shocks).</li>
+</ul>
+</li>
+<li><strong>Trading Days vs Calendar Days:</strong>
+<ul>
+<li>Volatility is usually much greater when the market is open (i.e. the asset is trading), than when it is closed (weekends, holidays).</li>
+<li>For this reason, time \( T \) is usually measured in <strong>trading days</strong> (typically 252 days per year), not calendar days (365 days), for the purposes of estimating volatility and pricing options.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l08-s13">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li class="active">历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用历史数据估算波动率<br/><span style="color: #4338ca">(Hull，第 320–321 页)</span></h2>
+<div class="slide-content">
+<ul>
+<li>假设我们在时间间隔为 \( \tau \) 年的时间点上拥有价格观测值 \( S_0, S_1, \dots, S_n \)。</li>
+<li>定义连续复利收益率（对数收益率）：
                 <div class="equation-box">
                   \[ u_i = \ln\left(\frac{S_i}{S_{i-1}}\right) \]
                 </div>
-              </li>
-              <li>若 \( s \) 表示样本收益率 \( u_1, u_2, \dots, u_n \) 的样本标准差：
+</li>
+<li>若 \( s \) 表示样本收益率 \( u_1, u_2, \dots, u_n \) 的样本标准差：
                 <div class="equation-box">
                   \[ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (u_i - \bar{u})^2} \]
                 </div>
@@ -632,206 +1132,409 @@
                 <div class="equation-box">
                   \[ \hat{\sigma} = \frac{s}{\sqrt{\tau}} \]
                 </div>
-              </li>
-              <li><em>历史波动率反映的是历史信息（向后看），并不总能作为未来波动率的可靠预测指标。</em></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s14" data-kind="original" data-source-slide="14" data-pdf-page="7" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 14</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li class="active">历史波动率估算</li>
-              <li>红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">隐含波动率 (Implied Volatility)</h2>
-          <div class="slide-content">
-            <ul>
-              <li>市场期权实际交易价格与<strong>隐含波动率</strong>之间存在严格的一一对应关系。</li>
-              <li>期权的隐含波动率，是指使得 Black-Scholes 理论定价恰好等于市场上观察到的期权实际交易价格的波动率参数。</li>
-              <li>计算隐含波动率需要对 Black-Scholes 公式进行反向求解（不存在解析求导的代数显式逆函数）：
+</li>
+<li><em>历史波动率反映的是历史信息（向后看），并不总能作为未来波动率的可靠预测指标。</em></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l08-s13-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 13</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li class="active">Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Estimating Volatility from Historical Data<br/><span style="color: #4338ca">(Hull, pages 320–321)</span></h2>
+<div class="slide-content">
+<ul>
+<li>Suppose we have observations \( S_0, S_1, \dots, S_n \) at intervals of \( \tau \) years.</li>
+<li>Define the continuously compounded returns (log-returns):
+                <div class="equation-box">
+                  \[ u_i = \ln\left(\frac{S_i}{S_{i-1}}\right) \]
+                </div>
+</li>
+<li>If \( s \) denotes the sample standard deviation of the returns \( u_1, u_2, \dots, u_n \):
+                <div class="equation-box">
+                  \[ s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (u_i - \bar{u})^2} \]
+                </div>
+                then the estimated annual historical volatility is:
+                <div class="equation-box">
+                  \[ \hat{\sigma} = \frac{s}{\sqrt{\tau}} \]
+                </div>
+</li>
+<li><em>Historical volatility is not always a reliable estimate of future volatility (backward looking).</em></li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l08-s14">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li class="active">历史波动率估算</li>
+<li>红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">隐含波动率 (Implied Volatility)</h2>
+<div class="slide-content">
+<ul>
+<li>市场期权实际交易价格与<strong>隐含波动率</strong>之间存在严格的一一对应关系。</li>
+<li>期权的隐含波动率，是指使得 Black-Scholes 理论定价恰好等于市场上观察到的期权实际交易价格的波动率参数。</li>
+<li>计算隐含波动率需要对 Black-Scholes 公式进行反向求解（不存在解析求导的代数显式逆函数）：
                 <ul>
-                  <li>数值迭代算法：试错法（Trial and error）、牛顿-拉夫逊法（Newton-Raphson）</li>
-                  <li>Excel 单变量求解工具（数据 &rarr; 模拟分析 &rarr; 单变量求解）</li>
-                </ul>
-              </li>
-              <li><strong>隐含波动率的关键重要性：</strong>
+<li>数值迭代算法：试错法（Trial and error）、牛顿-拉夫逊法（Newton-Raphson）</li>
+<li>Excel 单变量求解工具（数据 → 模拟分析 → 单变量求解）</li>
+</ul>
+</li>
+<li><strong>隐含波动率的关键重要性：</strong>
+<ul>
+<li>能够利用市场一致认可的波动率水平对缺乏流动性或场外交易（OTC）的期权进行合理定价。</li>
+<li>期权交易员在市场上普遍使用隐含波动率而非美元绝对价格进行报价沟通。</li>
+<li>反映市场对未来波动率预期的前瞻性指标（例如著名的标普500波动率指数 VIX）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l08-s14-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 14</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li class="active">Estimating Volatility</li>
+<li>Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">Implied Volatility</h2>
+<div class="slide-content">
+<ul>
+<li>There is a one-to-one correspondence between market option prices and <strong>implied volatilities</strong>.</li>
+<li>The implied volatility of an option is the volatility for which the Black-Scholes price equals the observed market option price.</li>
+<li>Computing implied volatility requires inverting the Black-Scholes formula (no closed-form algebraic inverse exists):
                 <ul>
-                  <li>能够利用市场一致认可的波动率水平对缺乏流动性或场外交易（OTC）的期权进行合理定价。</li>
-                  <li>期权交易员在市场上普遍使用隐含波动率而非美元绝对价格进行报价沟通。</li>
-                  <li>反映市场对未来波动率预期的前瞻性指标（例如著名的标普500波动率指数 VIX）。</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s15" data-kind="original" data-source-slide="15" data-pdf-page="8" data-pdf-half="top">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 15</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li class="active">红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">红利对期权价格的影响</h2>
-          <div class="slide-content">
-            <ul>
-              <li>对支付红利股票的欧式期权进行估值时，只需将 Black-Scholes 公式中的现货股票价格 \( S_0 \) 替换为扣除红利现值后的调整后股票价格：
+<li>Iterative numerical methods: Trial and error, Newton-Raphson</li>
+<li>Excel's Goal Seek / Solver tool (Data → What-If Analysis → Goal Seek)</li>
+</ul>
+</li>
+<li><strong>The Importance of Implied Volatility:</strong>
+<ul>
+<li>Allows pricing of illiquid or OTC options using market-consistent volatility.</li>
+<li>Traders quote options in terms of implied vol rather than dollar prices.</li>
+<li>Forward-looking measure of expected future market volatility (e.g. VIX index).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l08-s15">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li class="active">红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">红利对期权价格的影响</h2>
+<div class="slide-content">
+<ul>
+<li>对支付红利股票的欧式期权进行估值时，只需将 Black-Scholes 公式中的现货股票价格 \( S_0 \) 替换为扣除红利现值后的调整后股票价格：
                 <div class="equation-box">
                   \[ S_0 \to S_0^* = S_0 - D \]
                 </div>
-                <em>注意：此处仅需扣除在期权有效期内发生除息的红利现值。</em>
-              </li>
-              <li>因此，支付红利股票的欧式看涨期权价格为：
+<em>注意：此处仅需扣除在期权有效期内发生除息的红利现值。</em>
+</li>
+<li>因此，支付红利股票的欧式看涨期权价格为：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ c = S_0^* N(d_1) - K e^{-rT} N(d_2) \quad (3) \]
                 </div>
-              </li>
-              <li>支付红利股票的欧式看跌期权价格为：
+</li>
+<li>支付红利股票的欧式看跌期权价格为：
                 <div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
                   \[ p = K e^{-rT} N(-d_2) - S_0^* N(-d_1) \quad (4) \]
                 </div>
                 其中计算 \( d_1, d_2 \) 时均使用 \( S_0^* \) 代替 \( S_0 \)。
               </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s16" data-kind="original" data-source-slide="16" data-pdf-page="8" data-pdf-half="bottom">
-      <div class="slide-container">
-        
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - 16</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li class="active">红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        
-        <div class="slide-body">
-          <h2 class="slide-title">美式看涨期权与看跌期权</h2>
-          <div class="slide-content">
-            <ul>
-              <li>对于不支付红利的股票，美式看涨期权<strong>绝不应提前行权</strong>（\( C = c \)）。</li>
-              <li>对于支付红利的股票，美式看涨期权<strong>仅在除息日即刻之前提前行权才可能最优</strong>。</li>
-              <li>美式看跌期权在满足特定条件时（深度实值、利率较高），即使标的股票不支付红利，通常也应提前行权。</li>
-              <li>美式看涨期权的价格可以通过两个欧式看涨期权价格的最大值进行近似估算（<strong>布莱克近似法 / Black's approximation</strong>）：
-                <ul>
-                  <li><strong>期权 1：</strong> 到期日与美式期权相同、标的资产扣除红利现值的欧式看涨期权（即使用 \( S_0^* = S_0 - PV(D) \)）。</li>
-                  <li><strong>期权 2：</strong> 在最后一个除息日即刻前到期的欧式看涨期权（使用未经扣减的标的现价 \( S_0 \)）。</li>
-                </ul>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l08-s15-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 15</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li class="active">Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">The Impact of Dividends on Option Prices</h2>
+<div class="slide-content">
+<ul>
+<li>European options on dividend-paying stocks are valued by substituting into the Black-Scholes formula, the stock price \( S_0 \) with the difference between the stock price and the present value of the dividends:
+                <div class="equation-box">
+                  \[ S_0 \to S_0^* = S_0 - D \]
+                </div>
+<em>Only dividends with ex-dividend dates during the life of the option should be included.</em>
+</li>
+<li>Thus the price of a call on a dividend-paying stock is:
+                <div class="equation-box">
+                  \[ c = S_0^* N(d_1) - K e^{-rT} N(d_2) \quad (3) \]
+                </div>
+</li>
+<li>The price of a put on a dividend-paying stock is:
+                <div class="equation-box">
+                  \[ p = K e^{-rT} N(-d_2) - S_0^* N(-d_1) \quad (4) \]
+                </div>
+                with \( d_1, d_2 \) computed using \( S_0^* \) in place of \( S_0 \).
               </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    <section id="l08-s16-v1"  data-kind="enrichment" data-after-source-slide="16">
-      <div class="slide-container">
-        <aside class="slide-sidebar">
-            <div class="sidebar-course-code">20762 DRM</div>
-            <div class="sidebar-slide-id">第 8 讲 - v1</div>
-            <ul class="sidebar-nav">
-              <li>学习目标</li>
-              <li>随机游走假设</li>
-              <li>对数正态分布</li>
-              <li>预期收益与波动率</li>
-              <li>Black-Scholes-Merton模型</li>
-              <li>正态分布累积函数</li>
-              <li>风险中性定价原理</li>
-              <li>历史波动率估算</li>
-              <li class="active">红利与美式看涨期权</li>
-            </ul>
-          </aside>
-        <div class="slide-body">
-          <h3 class="slide-title" style="margin-bottom: 6px">离散红利 BSM 模型与美式看涨期权布莱克近似</h3>
-          <div class="slide-content" >
-            <p style="margin-bottom: 4px;"><strong>参数设定：</strong> \( S_0 = \$42, \, \sigma = 25\%, \, r = 6\% \)。预计 4 个月后（\( t_1 = 4/12 \)）支付红利 \( D = \$1.80 \)。看涨期权执行价格 \( K = \$40 \)，期限 \( T = 6/12 = 0.5 \) 年。</p>
-            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
-              <!-- Part (a): European Call -->
-              <div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
-                <h4 style="color: #1e3a8a; margin-bottom: 4px">部分 (a)：欧式看涨期权 (\( c = \$3.55 \))</h4>
-                <p style="margin-bottom: 2px">红利现值：\( PV(D) = 1.80 e^{-0.06 \times (4/12)} = \$1.7644 \)。</p>
-                <p style="margin-bottom: 2px">调整后股票价格：\( S_0^* = 42 - 1.7644 = \mathbf{\$40.2356} \)。</p>
-                <div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l08-s16">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li class="active">红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">美式看涨期权与看跌期权</h2>
+<div class="slide-content">
+<ul>
+<li>对于不支付红利的股票，美式看涨期权<strong>绝不应提前行权</strong>（\( C = c \)）。</li>
+<li>对于支付红利的股票，美式看涨期权<strong>仅在除息日即刻之前提前行权才可能最优</strong>。</li>
+<li>美式看跌期权在满足特定条件时（深度实值、利率较高），即使标的股票不支付红利，通常也应提前行权。</li>
+<li>美式看涨期权的价格可以通过两个欧式看涨期权价格的最大值进行近似估算（<strong>布莱克近似法 / Black's approximation</strong>）：
+                <ul>
+<li><strong>期权 1：</strong> 到期日与美式期权相同、标的资产扣除红利现值的欧式看涨期权（即使用 \( S_0^* = S_0 - PV(D) \)）。</li>
+<li><strong>期权 2：</strong> 在最后一个除息日即刻前到期的欧式看涨期权（使用未经扣减的标的现价 \( S_0 \)）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l08-s16-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - 16</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li class="active">Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">American Calls and Puts</h2>
+<div class="slide-content">
+<ul>
+<li>An American call on a non-dividend-paying stock should <strong>never be exercised early</strong> (\( C = c \)).</li>
+<li>An American call on a dividend-paying stock should <strong>only ever be exercised immediately prior to an ex-dividend date</strong>.</li>
+<li>American puts are typically exercised early under the right conditions, even when the stock pays no dividends.</li>
+<li>The price of the American call is estimated as the maximum of two European option prices (<strong>Black's approximation</strong>):
+                <ul>
+<li><strong>Option 1:</strong> The European call maturing at the same date as the American option (with \( S_0^* = S_0 - PV(D) \)).</li>
+<li><strong>Option 2:</strong> The European call maturing just before the final ex-dividend date (with unadjusted \( S_0 \)).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section data-start-indexv="0"><section data-after-source-slide="16" data-kind="enrichment" id="l08-s16-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 8 讲 - v1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>随机游走假设</li>
+<li>对数正态分布</li>
+<li>预期收益与波动率</li>
+<li>Black-Scholes-Merton模型</li>
+<li>正态分布累积函数</li>
+<li>风险中性定价原理</li>
+<li>历史波动率估算</li>
+<li class="active">红利与美式看涨期权</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">离散红利 BSM 模型与美式看涨期权布莱克近似</h3>
+<div class="slide-content">
+<p style="margin-bottom: 4px;"><strong>参数设定：</strong> \( S_0 = \$42, \, \sigma = 25\%, \, r = 6\% \)。预计 4 个月后（\( t_1 = 4/12 \)）支付红利 \( D = \$1.80 \)。看涨期权执行价格 \( K = \$40 \)，期限 \( T = 6/12 = 0.5 \) 年。</p>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
+<!-- Part (a): European Call -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">部分 (a)：欧式看涨期权 (\( c = \$3.55 \))</h4>
+<p style="margin-bottom: 2px">红利现值：\( PV(D) = 1.80 e^{-0.06 \times (4/12)} = \$1.7644 \)。</p>
+<p style="margin-bottom: 2px">调整后股票价格：\( S_0^* = 42 - 1.7644 = \mathbf{\$40.2356} \)。</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
                   \[ d_1 = \frac{\ln(40.2356/40) + (0.06 + \tfrac{0.25^2}{2})0.5}{0.25\sqrt{0.5}} = \mathbf{0.2913} \]
                   \[ d_2 = 0.2913 - 0.1768 = \mathbf{0.1145} \]
                   \[ N(d_1) = 0.6146, \quad N(d_2) = 0.5456 \]
                   \[ c = 40.2356(0.6146) - 40 e^{-0.03}(0.5456) = \mathbf{\$3.55} \]
                 </div>
-              </div>
-              <!-- Part (b): American Call with Black's Approx -->
-              <div class="example-card" style="padding: 8px 12px; margin-bottom: 0; border-left: 4px solid #059669;">
-                <h4 style="color: #065f46; margin-bottom: 4px">部分 (b)：布莱克近似估算美式看涨期权 (\( C = \$3.99 \))</h4>
-                <p style="margin-bottom: 2px">对比两只欧式看涨期权：</p>
-                <ul style="margin: 0 0 4px 0; padding-left: 14px">
-                  <li><strong>期权 1（期限 \( T = 0.5 \)）：</strong> 股票价格 \( S_0^* = \$40.2356 \implies c_1 = \mathbf{\$3.55} \)</li>
-                  <li><strong>期权 2（期限 \( t_1 = 4/12 \)）：</strong> 紧邻除息日之前；未经扣除现价 \( S_0 = \$42 \)（红利尚未除息）：
+</div>
+<!-- Part (b): American Call with Black's Approx -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0; border-left: 4px solid #059669;">
+<h4 style="color: #065f46; margin-bottom: 4px">部分 (b)：布莱克近似估算美式看涨期权 (\( C = \$3.99 \))</h4>
+<p style="margin-bottom: 2px">对比两只欧式看涨期权：</p>
+<ul style="margin: 0 0 4px 0; padding-left: 14px">
+<li><strong>期权 1（期限 \( T = 0.5 \)）：</strong> 股票价格 \( S_0^* = \$40.2356 \implies c_1 = \mathbf{\$3.55} \)</li>
+<li><strong>期权 2（期限 \( t_1 = 4/12 \)）：</strong> 紧邻除息日之前；未经扣除现价 \( S_0 = \$42 \)（红利尚未除息）：
                     <div class="equation-box" style="padding: 3px 6px; margin: 2px 0">
                       \[ d_1 = 0.5488, \, d_2 = 0.4044 \implies c_2 = \mathbf{\$3.99} \]
                     </div>
-                  </li>
-                </ul>
-                <div class="equation-box" style="padding: 4px 6px; margin: 2px 0;  background: #ecfdf5; border-color: #a7f3d0">
+</li>
+</ul>
+<div class="equation-box" style="padding: 4px 6px; margin: 2px 0;  background: #ecfdf5; border-color: #a7f3d0">
                   \[ C_{\text{Amer}} \approx \max(c_1, c_2) = \max(\$3.55, \$3.99) = \mathbf{\$3.99} \]
                 </div>
-              </div>
+</div>
+</div>
+<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px 12px; margin-top: 6px;  color: #1e3a8a">
+              在除息日即刻前（\( t_1 = 4 \) 个月）提前行使美式看涨期权是最优决策，因为 \( c_2 = \$3.99 &gt; c_1 = \$3.55 \)。提前行权可以立刻锁定高达 $1.80 的丰厚红利，其收益明显超过了放弃剩余 2 个月时间价值所带来的损失！
             </div>
-            <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px 12px; margin-top: 6px;  color: #1e3a8a">
-              在除息日即刻前（\( t_1 = 4 \) 个月）提前行使美式看涨期权是最优决策，因为 \( c_2 = \$3.99 > c_1 = \$3.55 \)。提前行权可以立刻锁定高达 $1.80 的丰厚红利，其收益明显超过了放弃剩余 2 个月时间价值所带来的损失！
+</div>
+</div>
+</div>
+</section><section data-after-source-slide="16" data-kind="enrichment" id="l08-s16-v1-en" lang="en">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">Lecture 8 - v1</div>
+<ul class="sidebar-nav">
+<li>Learning Objectives</li>
+<li>Random Walk Assumption</li>
+<li>Lognormal Distribution</li>
+<li>Expected Return &amp; Volatility</li>
+<li>Black-Scholes-Merton Model</li>
+<li>Normal CDF &amp; d1, d2</li>
+<li>Risk-Neutral Valuation</li>
+<li>Estimating Volatility</li>
+<li class="active">Dividends &amp; American Calls</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title">Discrete Dividend BSM &amp; Black's Approximation for American Call</h3>
+<div class="slide-content">
+<p style="margin-bottom: 4px;"><strong>Setup:</strong> \( S_0 = \$42, \, \sigma = 25\%, \, r = 6\% \). Dividend \( D = \$1.80 \) expected in 4 months (\( t_1 = 4/12 \)). Call strike \( K = \$40 \), maturity \( T = 6/12 = 0.5 \) years.</p>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
+<!-- Part (a): European Call -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0;">
+<h4 style="color: #1e3a8a; margin-bottom: 4px">Part (a): European Call (\( c = \$3.55 \))</h4>
+<p style="margin-bottom: 2px">PV of dividend: \( PV(D) = 1.80 e^{-0.06 \times (4/12)} = \$1.7644 \).</p>
+<p style="margin-bottom: 2px">Adjusted stock: \( S_0^* = 42 - 1.7644 = \mathbf{\$40.2356} \).</p>
+<div class="equation-box" style="padding: 4px 6px; margin: 3px 0">
+                  \[ d_1 = \frac{\ln(40.2356/40) + (0.06 + \tfrac{0.25^2}{2})0.5}{0.25\sqrt{0.5}} = \mathbf{0.2913} \]
+                  \[ d_2 = 0.2913 - 0.1768 = \mathbf{0.1145} \]
+                  \[ N(d_1) = 0.6146, \quad N(d_2) = 0.5456 \]
+                  \[ c = 40.2356(0.6146) - 40 e^{-0.03}(0.5456) = \mathbf{\$3.55} \]
+                </div>
+</div>
+<!-- Part (b): American Call with Black's Approx -->
+<div class="example-card" style="padding: 8px 12px; margin-bottom: 0; border-left: 4px solid #059669;">
+<h4 style="color: #065f46; margin-bottom: 4px">Part (b): Black's Approximation (\( C = \$3.99 \))</h4>
+<p style="margin-bottom: 2px">Compare two European calls:</p>
+<ul style="margin: 0 0 4px 0; padding-left: 14px">
+<li><strong>Option 1 (Maturity \( T = 0.5 \)):</strong> Stock price \( S_0^* = \$40.2356 \implies c_1 = \mathbf{\$3.55} \)</li>
+<li><strong>Option 2 (Maturity \( t_1 = 4/12 \)):</strong> Just before ex-dividend date; unadjusted \( S_0 = \$42 \) (dividend not yet paid):
+                    <div class="equation-box" style="padding: 3px 6px; margin: 2px 0">
+                      \[ d_1 = 0.5488, \, d_2 = 0.4044 \implies c_2 = \mathbf{\$3.99} \]
+                    </div>
+</li>
+</ul>
+<div class="equation-box" style="padding: 4px 6px; margin: 2px 0;  background: #ecfdf5; border-color: #a7f3d0">
+                  \[ C_{\text{Amer}} \approx \max(c_1, c_2) = \max(\$3.55, \$3.99) = \mathbf{\$3.99} \]
+                </div>
+</div>
+</div>
+<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px 12px; margin-top: 6px;  color: #1e3a8a">
+<strong>Core Principle:</strong> It is optimal to exercise the American call early at \( t_1 = 4\text{m} \) just prior to the ex-dividend date because \( c_2 = \$3.99 &gt; c_1 = \$3.55 \). Exercising early captures the generous $1.80 dividend which outweighs the lost remaining 2 months of time value!
             </div>
-          </div>
-        </div>
-      </div>
-</section>
-    
-    </div>
-  </div>
-  <script src="vendor/reveal/dist/reveal.js"></script>
-  <script src="vendor/reveal/plugin/math/math.js"></script>
-  <script src="vendor/mathjax/tex-svg.js" id="MathJax-script" async></script>
-  <script src="assets/deck.js"></script>
+</div>
+</div>
+</div>
+</section></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
 </body>
 </html>
