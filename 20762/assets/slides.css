@@ -216,6 +216,13 @@ body {
   margin-bottom: 8px;
 }
 
+/* Nested items are marked by the ::before square only; Reveal's theme would also draw a
+   native square/circle marker beside it. */
+.slide-content ul ul,
+.slide-content ul ul ul {
+  list-style: none;
+}
+
 .slide-content ul ul > li {
   font-size: var(--font-nested);
   padding-left: 20px;
@@ -229,6 +236,35 @@ body {
   border-radius: 1px;
   background-color: #93c5fd;
   top: 10px;
+}
+
+/* Short bullet lists inside paragraphs, cards and tables: same size and colour as the
+   surrounding text, wrapped lines indented under the first. */
+.reveal ul.text-list {
+  display: block;
+  list-style: none;
+  margin: 2px 0;
+  padding: 0;
+}
+
+.reveal ul.text-list > li {
+  position: relative;
+  padding-left: 1.1em;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.reveal ul.text-list > li::before {
+  content: "•";
+  position: absolute;
+  left: 0.2em;
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
 }
 
 /* Modern Card / Callout Styles */
