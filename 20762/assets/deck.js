@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
       center: false,
       hash: true,
       controls: true,
+      scrollActivationWidth: null,
       progress: true,
       slideNumber: function (slide) {
         return [Reveal.getIndices(slide).h + 1, "/", Reveal.getHorizontalSlides().length];
