@@ -1,0 +1,449 @@
+:root {
+  --slide-width: 1024px;
+  --slide-height: 768px;
+
+  /* Modern Clean Web Palette (Chinese Edition) */
+  --theme-primary: #1e3a8a;
+  --theme-accent: #2563eb;
+  --theme-accent-light: #eff6ff;
+  --theme-text: #0f172a;
+  --theme-text-muted: #475569;
+  --theme-text-light: #64748b;
+  --theme-bg: #ffffff;
+  --theme-surface: #f8fafc;
+  --theme-surface-border: #e2e8f0;
+  --theme-sidebar-bg: #f8fafc;
+  --theme-sidebar-border: #e2e8f0;
+
+  /* Typography Scale */
+  --font-title: 36px;
+  --font-subtitle: 26px;
+  --font-body: 22.5px;
+  --font-nested: 19px;
+  --font-table: 17px;
+  --font-caption: 14px;
+  --line-height-base: 1.55;
+}
+
+body {
+  background-color: #090d16;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  color: var(--theme-text);
+  margin: 0;
+  padding: 0;
+}
+
+.reveal {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: var(--font-body);
+  line-height: var(--line-height-base);
+  color: var(--theme-text);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides > section {
+  width: var(--slide-width);
+  height: var(--slide-height);
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--theme-bg);
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* Master Slide Layout: Sleek Minimalist Sidebar (180px) + Open Content Stage (844px) */
+.slide-container {
+  display: flex;
+  width: 1024px;
+  height: 768px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Modern Light Sidebar Rail */
+.slide-sidebar {
+  width: 212px;
+  height: 768px;
+  flex-shrink: 0;
+  background-color: var(--theme-sidebar-bg);
+  border-right: 1px solid var(--theme-sidebar-border);
+  padding: 32px 14px 24px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: var(--font-caption);
+  user-select: none;
+}
+
+.sidebar-course-code {
+  color: var(--theme-primary);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.sidebar-slide-id {
+  color: var(--theme-text-light);
+  font-size: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--theme-sidebar-border);
+  font-weight: 500;
+}
+
+.sidebar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-nav li {
+  color: #64748b;
+  font-size: 15.5px;
+  line-height: 1.38;
+  padding: 7px 10px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  cursor: default;
+}
+
+/* Clean Modern Active Topic Pill */
+.sidebar-nav li.active {
+  font-size: 16px !important;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.08);
+  border-left: 3px solid #2563eb;
+  padding-left: 7px;
+}
+
+/* Slide Content Area */
+.slide-body {
+  flex-grow: 1;
+  width: 812px;
+  height: 768px;
+  max-height: 768px;
+  box-sizing: border-box;
+  padding: 40px 48px 32px 48px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Titles and Headers */
+.slide-title {
+  color: var(--theme-primary);
+  font-size: var(--font-title);
+  font-weight: 800;
+  margin: 0 0 18px 0;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+
+.slide-subtitle {
+  color: var(--theme-text-muted);
+  font-size: var(--font-subtitle);
+  font-weight: 600;
+  margin: 0 0 14px 0;
+  line-height: 1.3;
+}
+
+/* Native HTML Lists & Prose */
+.slide-content {
+  font-size: var(--font-body);
+  line-height: var(--line-height-base);
+  color: var(--theme-text);
+  max-height: 650px;
+  box-sizing: border-box;
+}
+
+.slide-content p, p {
+  font-size: var(--font-body);
+  line-height: var(--line-height-base);
+  margin: 0 0 12px 0;
+  color: var(--theme-text);
+}
+
+.slide-content ul {
+  list-style: none;
+  margin: 0 0 14px 0;
+  padding: 0;
+}
+
+.slide-content ul > li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: var(--font-body);
+  line-height: var(--line-height-base);
+  color: var(--theme-text);
+}
+
+.slide-content ul > li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--theme-accent);
+}
+
+.slide-content ul ul {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.slide-content ul ul > li {
+  font-size: var(--font-nested);
+  padding-left: 20px;
+  margin-bottom: 8px;
+  color: var(--theme-text-muted);
+}
+
+.slide-content ul ul > li::before {
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background-color: #93c5fd;
+  top: 10px;
+}
+
+/* Modern Card / Callout Styles */
+.example-card, .concept-card, .walkthrough-card, .takeaway-card {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-surface-border);
+  border-left: 4px solid var(--theme-accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.example-card h4, .concept-card h4, .walkthrough-card h4, .takeaway-card h4 {
+  margin: 0 0 6px 0;
+  color: var(--theme-primary);
+  font-size: var(--font-body);
+  font-weight: 700;
+}
+
+.takeaway-card {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  border-left-color: #16a34a;
+}
+
+.takeaway-card h4 {
+  color: #15803d;
+}
+
+/* Modern Tables */
+.slide-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 14px 0;
+  font-size: var(--font-table);
+  border: 1px solid var(--theme-surface-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.slide-table th {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--theme-surface-border);
+  text-align: left;
+}
+
+.slide-table td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  background-color: #ffffff;
+}
+
+.slide-table tr:last-child td {
+  border-bottom: none;
+}
+
+.slide-table tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+/* Clean Modern Math Containers */
+.equation-box {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 12px 0;
+  text-align: center;
+  font-size: var(--font-body);
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Title Slide Modern Keynote Aesthetic */
+.title-slide-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 50% 30%, #f8fafc 0%, #ffffff 80%);
+}
+
+.title-slide-h1 {
+  color: var(--theme-primary);
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.title-slide-h2 {
+  color: var(--theme-text-muted);
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+.tip-of-the-week-box {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid var(--theme-accent);
+  padding: 18px 24px;
+  border-radius: 8px;
+  max-width: 660px;
+  margin: 18px auto 34px auto;
+  text-align: left;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.tip-title {
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.tip-text {
+  font-size: var(--font-body);
+  line-height: 1.55;
+  color: #1e3a8a;
+}
+
+.uts-logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Top Right Link */
+.deck-index-link {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: all 0.15s ease;
+}
+
+.deck-index-link:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+/* Strict No Footer */
+.slide-footer {
+  display: none !important;
+}
+
+/* Strict Zero-Blur Transitions */
+.reveal, .reveal .slides, .reveal .slides > section {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  image-rendering: -webkit-optimize-contrast;
+  transition: none !important;
+  animation: none !important;
+}
+
+.reveal .slides {
+  transform-style: flat !important;
+  will-change: auto !important;
+}
+
+.reveal .slides section {
+  transition: none !important;
+}
+
+.reveal .slides section.past,
+.reveal .slides section.future {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.reveal .slides section.present {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Absolute No-Slider / No-Scrollbar Rule */
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important;  /* IE and Edge */
+}
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+}
+
+.equation-box {
+  overflow: visible !important;
+}
+
+.slide-body {
+  overflow: visible !important;
+}

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第 2 讲：利用期货的套期保值策略</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="deck-index-link" href="index.html">← 返回讲义目录</a>
+<div class="reveal">
+<div class="slides">
+<section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l02-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 2 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">利用期货的套期保值策略</div>
+<div class="title-slide-h2">Hull 著，第 3 章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">本周核心要点</div>
+<div class="tip-text">
+                套期保值的根本目的是什么？<br/>
+<strong>降低风险！</strong> 套期保值并非为了获取超额利润，而是为了中和不利的价格变动风险。
+              </div>
+</div>
+<div class="uts-logo-text">
+<span style="color: #000; font-weight: 900;">✦</span> UTS商学院 (UTS Business School)
+            </div>
+</div>
+</div>
+</section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l02-s02"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li>探讨空头与多头套期保值策略 (Long and Short Hedges)</li>
+<li>界定基差风险 (Basis Risk)：
+                  <ul>
+<li>探讨影响基差风险的核心因素</li>
+<li>基差风险如何影响套期保值的有效性与最终成果？</li>
+</ul>
+</li>
+<li>计算并深入解读最小方差套期保值比率 (\(h^*\))</li>
+<li>确定套期保值中的最优合约数量 (\(N^*\))</li>
+<li>利用股指期货实现：
+                  <ul>
+<li>对冲股票投资组合的市场系统性风险</li>
+<li>灵活调整股票组合的 Beta 系数</li>
+</ul>
+</li>
+<li>阐述如何实施“远期滚动对冲” (Stack-and-Roll / 展期对冲)</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l02-s03"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">风险敞口</h2>
+<div class="slide-content">
+<ul>
+<li><strong>资产多头风险敞口 (Long Asset Exposure)：</strong>
+<ul>
+<li>已经拥有现货资产，或已签订协议将在未来生产该资产。</li>
+<li>计划在未来特定时间将其出售。</li>
+<li><strong>面临风险：</strong> 资产价格下跌风险 → 对冲策略：建立<strong>期货空头头寸 (Short Futures)</strong>。</li>
+</ul>
+</li>
+<li><strong>资产空头风险敞口 (Short Asset Exposure)：</strong>
+<ul>
+<li>在未来某一时间需要采购该资产。</li>
+<li><strong>面临风险：</strong> 资产价格上涨风险 → 对冲策略：建立<strong>期货多头头寸 (Long Futures)</strong>。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l02-s04"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">套期保值中的基差</h2>
+<div class="slide-content">
+<ul>
+<li>在套期保值环境下，<strong>基差 (Basis)</strong> 定义为：
+                  <div class="equation-box">
+                    \[ \text{基差} = b_t = S_t - F_t \]
+                  </div>
+</li>
+<li>其中 \(S_t\) 为被对冲资产的现货即期价格，\(F_t\) 为所使用的期货合约价格。</li>
+<li>若被对冲的资产与期货合约的标的资产完全一致，则在合约到期时刻 \(T\)：
+                  \[ b_T = S_T - F_T = 0 \]
+                </li>
+<li>在到期日之前，基差可正可负，并随时间动态波动。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l02-s05"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li class="active">多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">空头套期保值</h2>
+<div class="slide-content">
+<ul>
+<li><strong>空头套期保值 (Short Hedge)</strong> 是指在期货市场上建立期货空头（卖出）头寸。</li>
+<li>适用于套期保值者已经拥有某种资产、并预计在未来某个日期将其出售的情形。</li>
+<li>或者适用于当前尚未拥有该资产、但在未来将生产并销售该资产的企业。</li>
+<li><strong>对冲机制：</strong>
+<ul>
+<li>若现货价格下跌，现货出售端的亏损可被期货空头头寸的盈利所对冲弥补。</li>
+<li>若现货价格上涨，现货出售端的收益将被期货空头头寸的亏损所相互抵消。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l02-s06"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li class="active">多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 空头套期保值 (玉米生产商)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>3 月份：</strong> 某农场主预计将在 9 月份收获并销售 50,000 蒲式耳玉米。</li>
+<li>当前 CBOT 市场上 9 月到期的玉米期货价格为 <strong>$5.20 / 蒲式耳</strong>。</li>
+<li>每张合约规格 = 5,000 蒲式耳 → 农场主做空卖出 10 张 9 月玉米期货合约。</li>
+<li><strong>9 月份最终结果：</strong>
+<ul>
+<li>假定现货价格跌至 $4.80。到期期货价格收敛至 $4.80。</li>
+<li>在当地现货市场出售玉米现货的收入：\( 50,000 \times \$4.80 = \$240,000 \)。</li>
+<li>期货空头头寸获得的盈利：\( 50,000 \times (\$5.20 - \$4.80) = \$20,000 \)。</li>
+<li><strong>销售总净收益：</strong> \( \$240,000 + \$20,000 = \mathbf{\$260,000} \)（锁定 \( \$5.20/\text{蒲式耳} \) 的销售价格！）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l02-s07"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li class="active">多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">空头套期保值与基差</h2>
+<div class="slide-content">
+<ul>
+<li>假定某空头对冲策略在时刻 \(t_1\) 建立，并在时刻 \(t_2\) 平仓结束：
+                  <ul>
+<li>\(F_1\)：\(t_1\) 时刻建立对冲时的期货价格</li>
+<li>\(S_2\)：\(t_2\) 时刻出售现货资产时的即期价格</li>
+<li>\(F_2\)：\(t_2\) 时刻平仓期货头寸时的期货价格</li>
+<li>\(b_2 = S_2 - F_2\)：\(t_2\) 时刻平仓时的基差</li>
+</ul>
+</li>
+<li><strong>实际有效销售价格 (Effective Selling Price)：</strong>
+<div class="equation-box">
+                    \[ \text{实际有效销售价格} = S_2 + (F_1 - F_2) = F_1 + (S_2 - F_2) = F_1 + b_2 \]
+                  </div>
+</li>
+<li>在空头套期保值中，若基差<strong>走强 / 扩大 (Strengthens)</strong>（即 \(b_2\) 增大），套保者将因此获益。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l02-s08"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li class="active">多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">多头套期保值</h2>
+<div class="slide-content">
+<ul>
+<li><strong>多头套期保值 (Long Hedge)</strong> 是指在期货市场上建立期货多头（买入）头寸。</li>
+<li>适用于企业已知未来必须采购某种资产、并希望提前锁定采购成本的经营情境。</li>
+<li><strong>案例分析：</strong> 某电气制造厂商已知 5 月份需要采购 100,000 磅铜。1 月份时，5 月到期铜期货价格为 $3.20/磅。
+                  <ul>
+<li>该制造商买入 4 张 5 月铜期货合约（每张 25,000 磅）。</li>
+<li>5 月份时，在实体即期市场上以价格 \(S_2\) 买入铜现货，同时以价格 \(F_2\) 平仓期货多头。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l02-s09"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li class="active">多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">多头套期保值与基差</h2>
+<div class="slide-content">
+<ul>
+<li>对于在 \(t_1\) 建立、在 \(t_2\) 平仓的多头套期保值：
+                  <div class="equation-box">
+                    \[ \text{实际有效采购价格} = S_2 - (F_2 - F_1) = F_1 + (S_2 - F_2) = F_1 + b_2 \]
+                  </div>
+</li>
+<li>请注意，无论对于多头还是空头套期保值，其实际有效实现价格均满足统一公式：
+                  \[ \text{实际有效价格} = F_1 + b_2 \]
+                </li>
+<li><strong>核心特征对比：</strong>
+<ul>
+<li>在空头套保中，保值者希望卖出价格越高越好 → 基差<strong>走强</strong>（\(b_2\) 增大）有利于空头保值者。</li>
+<li>在多头套保中，保值者希望采购成本越低越好 → 基差<strong>走弱</strong>（\(b_2\) 减小）有利于多头保值者。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-after-source-slide="9" data-kind="enrichment" id="l02-s09-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li class="active">多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 10px">套保者平衡：商业诉求与基差结构分解</h3>
+<div class="example-card">
+<p><strong>现货生产商（农户） vs 现货采购商（麦片企业）：</strong></p>
+<ul>
+<li><strong>玉米种植户（空头套保者）：</strong> 秋收时供给集中爆发。当地天量供给压低现货价格。提前做空期货以锁定生存保障收益；若现货崩盘，期货利润足以弥补。</li>
+<li><strong>麦片制造企业（多头套保者）：</strong> 鉴于昂贵仓储成本，无法提前储存一整年用粮。通过做多期货锁定原料成本预算，防范农产品价格通胀冲击。</li>
+</ul>
+<p><strong>基差风险结构分解：</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 8px 0;">
+                \[ \text{实际有效价格} = F_1 + \underbrace{(S_2 - F_2)}_{\text{期限错配风险 (Timing Mismatch)}} + \underbrace{(S_2^* - S_2)}_{\text{标的资产错配风险 (Asset Mismatch)}} \]
+              </div>
+<p style="margin: 0;">当对冲平仓日期早于期货到期月份时产生期限错配（\(t_2 &lt; T\)）；当被对冲资产（如航油）与期货标的（取暖油）不同时产生资产错配。</p>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l02-s10"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li class="active">基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">基差风险</h2>
+<div class="slide-content">
+<ul>
+<li>套期保值策略能够极大地降低风险，但在现实中极少能够实现完全消除风险。这一残存的风险就是<strong>基差风险 (Basis Risk)</strong>。</li>
+<li>基差风险源于在 \(t_1\) 建立对冲时，未来的平仓基差 \(b_2\) 具有不确定性。</li>
+<li><strong>基差风险的产生来源：</strong>
+<ul>
+<li><strong>期限错配 (Maturity Mismatch)：</strong> 现货实际买卖日期与期货合约规定的交割月份不完全一致。</li>
+<li><strong>资产错配 (交叉对冲 Cross-Hedging)：</strong> 需要对冲的现货资产与期货合约的标的资产存在品质或属性差异。</li>
+<li><strong>地点错配 (Location Mismatch)：</strong> 现货交收地点与期货合约规定的交割地理区域不同。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l02-s11"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li class="active">基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">最小化基差风险 – 合约选择准则</h2>
+<div class="slide-content">
+<ul>
+<li><strong>交割月份的选择准则：</strong>
+<ul>
+<li>选择交割月份<em>尽可能接近、但必须晚于</em>套期保值结束日期的期货合约。</li>
+<li>尽量避免将期货合约持有至实际交割月份：进入交割月后交易流动性往往迅速枯竭，且容易因实物交割物流机制产生剧烈的价格异动。</li>
+</ul>
+</li>
+<li><strong>标的资产的选择准则：</strong>
+<ul>
+<li>优先选择其期货价格与被对冲现货资产价格相关系数最高的期货合约。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l02-s12"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li class="active">最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">最小方差套期保值比率</h2>
+<div class="slide-content">
+<ul>
+<li><strong>套期保值比率 (Hedge Ratio)</strong> \(h\) 是指持有的期货头寸规模与面临的现货风险敞口规模之比。</li>
+<li>为使被对冲组合资产价值的方差最小化：
+                  <div class="equation-box">
+                    \[ h^* = \rho \frac{\sigma_S}{\sigma_F} \]
+                  </div>
+</li>
+<li>公式参数说明：
+                  <ul>
+<li>\(\sigma_S\)：在对冲期间现货价格变动量 \(\Delta S\) 的标准差</li>
+<li>\(\sigma_F\)：在对冲期间期货价格变动量 \(\Delta F\) 的标准差</li>
+<li>\(\rho\)：\(\Delta S\) 与 \(\Delta F\) 之间的线性相关系数</li>
+</ul>
+</li>
+<li>\(h^*\) 在统计学上恰好等于以 \(\Delta S\) 对 \(\Delta F\) 进行普通最小二乘法 (OLS) 线性回归方程的最佳拟合斜率项。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l02-s13"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li class="active">最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">最优对冲合约数量</h2>
+<div class="slide-content">
+<ul>
+<li>变量设定：
+                  <ul>
+<li>\(Q_A\)：被对冲资产的头寸规模（物理单位计量）</li>
+<li>\(Q_F\)：单张期货合约所代表的标的资产规模（物理单位计量）</li>
+<li>\(h^*\)：最优最小方差套期保值比率</li>
+</ul>
+</li>
+<li><strong>最优合约数量计算公式：</strong>
+<div class="equation-box">
+                    \[ N^* = h^* \frac{Q_A}{Q_F} = \rho \frac{\sigma_S}{\sigma_F} \frac{Q_A}{Q_F} \]
+                  </div>
+</li>
+<li>若考虑每日逐日盯市结算的利率再投资效应（尾随对冲 Tailing the Hedge）：
+                  \[ N^* = h^* \frac{V_A}{V_F} \]
+                  其中 \(V_A = Q_A S\) 为现货资产市场总市值，\(V_F = Q_F F\) 为单张期货合约名义价值。
+                </li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l02-s14"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li class="active">最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 最优合约数量 (活牛/牛肉)</h2>
+<div class="slide-content">
+<ul>
+<li>某养殖商希望对冲即将出售的 <strong>18,000 千克</strong> 牛肉价格风险。</li>
+<li>每张活牛期货合约对应交割规模为 <strong>1,500 千克</strong>。</li>
+<li>根据历史统计数据测算：
+                  <ul>
+<li>\(\sigma_S = 0.04\) • \(\sigma_F = 0.05\) • \(\rho = 0.85\)</li>
+</ul>
+</li>
+<li><strong>数值计算过程：</strong>
+<div class="equation-box">
+                    \[ h^* = 0.85 \times \frac{0.04}{0.05} = 0.68 \]
+                    \[ N^* = 0.68 \times \frac{18,000}{1,500} = 0.68 \times 12 = \mathbf{8.16} \approx \mathbf{8 \text{ 张合约}} \]
+                  </div>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-after-source-slide="14" data-kind="enrichment" id="l02-s14-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li class="active">最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 10px">交叉对冲规模测算与尾随调整</h3>
+<div class="example-card">
+<p><strong>跨品种对冲案例（航油与取暖油期货）：</strong><br/>
+              某航空公司需采购 2,000,000 加仑航空煤油 (\(Q_A\))。取暖油单张期货合约规模 \(Q_F = 42,000\) 加仑。<br/>
+              已知统计参数：\(\sigma_S = 0.0263\)，\(\sigma_F = 0.0313\)，\(\rho = 0.928\)。</p>
+<div class="equation-box" style="padding: 6px 12px; margin: 6px 0;">
+                \[ h^* = \rho \frac{\sigma_S}{\sigma_F} = 0.928 \times \frac{0.0263}{0.0313} = \mathbf{0.7796} \]
+                \[ N^*_{\text{未尾随}} = 0.7796 \times \frac{2,000,000}{42,000} = 37.12 \approx \mathbf{37 \text{ 张合约}} \]
+              </div>
+<p><strong>尾随对冲调整 (Tailing the Hedge)：</strong> 由于期货每日结算而非到期一次性结算，每日现金流可按短期利率 \(r\) 滚动再投资。尾随调整将现货实物数量替换为现值规模 \(V_A / V_F\)，略微调低所需合约数量（例如从 37 张微调至 36 张）。</p>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l02-s15"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li class="active">股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用股指期货对冲股票投资组合</h2>
+<div class="slide-content">
+<ul>
+<li>非系统性风险（个股特有风险）可以通过构建充分多元化的投资组合加以分散消除。</li>
+<li>系统性风险（大盘市场风险）无法通过分散化投资消除，但可以借助股票指数期货完美对冲！</li>
+<li>资本资产定价模型 (CAPM) 刻画了股票资产组合收益率与市场基准收益率之间的关系：
+                  <div class="equation-box">
+                    \[ R_P - R_F = \beta (R_M - R_F) \]
+                  </div>
+</li>
+<li>为彻底消除市场系统性风险（将组合有效 \(\beta\) 降至 0）：
+                  <div class="equation-box">
+                    \[ N^* = \beta \frac{P}{F} = \beta \frac{V_P}{V_F} \]
+                  </div>
+                  其中 \(P\) 为当前股票组合的总市值，\(F\) 为单张股指期货合约名义价值。
+                </li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l02-s16"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li class="active">股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">标普500指数期货与 ASX SPI 200 指数期货</h2>
+<div class="slide-content">
+<table class="slide-table">
+<thead>
+<tr>
+<th>合约代码</th>
+<th>标的资产</th>
+<th>合约乘数</th>
+<th>单张合约名义价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CME S&amp;P 500</strong></td>
+<td>标普500指数</td>
+<td>每指数点 $250</td>
+<td>\( 250 \times \text{指数点位} \)</td>
+</tr>
+<tr>
+<td><strong>CME E-Mini S&amp;P 500</strong></td>
+<td>标普500指数</td>
+<td>每指数点 $50</td>
+<td>\( 50 \times \text{指数点位} \)</td>
+</tr>
+<tr>
+<td><strong>ASX SPI 200</strong></td>
+<td>标普/澳交所200指数</td>
+<td>每指数点 25 澳元 (A$25)</td>
+<td>\( 25 \times \text{指数点位} \)</td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 14px;">
+<li>所有主流股票指数期货合约均严格采用<strong>现金结算 (Cash-Settled)</strong>。</li>
+<li>无法进行实物交割：因为投资者无法在交割日按精确权重交割成百上千只成分股篮子股票。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l02-s17"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li class="active">股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 对冲股票投资组合</h2>
+<div class="slide-content">
+<ul>
+<li>某基金经理掌管一个总市值达 <strong>5000 万美元 ($50M)</strong> 的股票投资组合，组合 Beta 系数 \( \beta = 0.80 \)。</li>
+<li>对未来 4 个月内的宏观市场走势持悲观态度。</li>
+<li>当前股指点位 = 1,000 点；4 个月到期股指期货价格 = <strong>1,010 点</strong>。</li>
+<li>期货合约乘数 = $250 → 单张期货合约价值 \( F = 1,010 \times 250 = \mathbf{\$252,500} \)。</li>
+<li><strong>应卖出做空的最优期货合约数量：</strong>
+<div class="equation-box">
+                    \[ N^* = \beta \frac{P}{F} = 0.80 \times \frac{50,000,000}{252,500} = 158.41 \approx \mathbf{158 \text{ 张空头合约}} \]
+                  </div>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l02-s18"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li class="active">股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">股票组合对冲 – 绩效表现对比表</h2>
+<div class="slide-content">
+<p>检验 4 个月后在不同大盘指数点位下的对冲保护成效：</p>
+<table class="slide-table">
+<thead>
+<tr>
+<th>4个月后指数</th>
+<th>未对冲股票组合市值 ($)</th>
+<th>158张期货空头盈亏 ($)</th>
+<th>对冲后总资产价值 ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>900 (-10%)</td>
+<td>$46,000,000</td>
+<td>+ $4,345,000</td>
+<td><strong>$50,345,000</strong></td>
+</tr>
+<tr>
+<td>950 (-5%)</td>
+<td>$48,000,000</td>
+<td>+ $2,370,000</td>
+<td><strong>$50,370,000</strong></td>
+</tr>
+<tr>
+<td>1,000 (0%)</td>
+<td>$50,000,000</td>
+<td>+ $395,000</td>
+<td><strong>$50,395,000</strong></td>
+</tr>
+<tr>
+<td>1,050 (+5%)</td>
+<td>$52,000,000</td>
+<td>- $1,580,000</td>
+<td><strong>$50,420,000</strong></td>
+</tr>
+</tbody>
+</table>
+<p style="color: #1e3a8a">无论大盘如何波动，对冲后组合总市值几乎保持绝对稳定（稳定在约 5040 万美元 / ~$50.4M）！</p>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l02-s19"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li class="active">股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">实施期货对冲而非直接清仓股票的核心动因</h2>
+<div class="slide-content">
+<ul>
+<li><strong>为什么不直接清空股票现货持仓、转而买入无风险短期国债？</strong>
+<ul>
+<li><strong>保留选股超额阿尔法收益 (Preserve Alpha)：</strong> 基金经理坚信精选的个股具有超越基准的阿尔法收益能力，即使在大盘整体下挫时也能跑赢市场。</li>
+<li><strong>规避庞大的现货交易成本：</strong> 一次性大规模抛售 5000 万美元股票组合会面临巨大的券商佣金、买卖价差滑点以及严重的市场冲击成本 (Market Impact)。</li>
+<li><strong>避免提前触发巨额资本利得税：</strong> 卖出股票将立即兑现账面盈利并产生沉重的所得税负。</li>
+<li><strong>投资政策与契约约束：</strong> 养老基金和公募基金通常受到严格的契约限制，要求其持仓比例必须维持在极高的权益资产仓位。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l02-s20"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 20</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li class="active">股票组合对冲</li>
+<li>调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">完美对冲投资组合的期望收益率</h2>
+<div class="slide-content">
+<ul>
+<li>一个经过完全对冲消除系统性风险的股票投资组合，其期望收益率应当等于<strong>无风险利率</strong>：
+                  <div class="equation-box">
+                    \[ E(R_{\text{对冲}}) = R_F \]
+                  </div>
+</li>
+<li>投资者持仓在 4 个月后的预期总价值为：
+                  \[ \$50,000,000 \times (1 + R_F \times 4/12) \approx \$51,000,000 \]
+                </li>
+<li>如果该股票组合相对 CAPM 能够持续获得正的选股超额收益（\(\alpha &gt; 0\)），则对冲后的总回报率为：
+                  \[ R_F + \alpha \]
+                </li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l02-s21"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 21</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li class="active">调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">动态调整投资组合的 Beta 系数</h2>
+<div class="slide-content">
+<ul>
+<li>如果投资经理并不希望完全消除市场风险，而只是希望将当前组合的 Beta 值从 \(\beta\) 调整至目标水平 \(\beta^*\)：</li>
+<li><strong>所需交易的期货合约数量计算公式：</strong>
+<div class="equation-box">
+                    \[ N^* = (\beta - \beta^*) \frac{P}{F} \]
+                  </div>
+</li>
+<li><strong>操作决策规则：</strong>
+<ul>
+<li>若 \(\beta &gt; \beta^*\)（降低市场风险敞口）：做空卖出 \(N^*\) 张合约。</li>
+<li>若 \(\beta &lt; \beta^*\)（增加市场风险敞口）：做多买入 \(N^*\) 张合约。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l02-s22"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 22</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li class="active">调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 调整组合 Beta 敞口</h2>
+<div class="slide-content">
+<ul>
+<li>股票组合市值 \(P = 5000\text{万美元 (\$50M)}\)，当前 \(\beta = 0.80\)，单张期货合约价值 \(F = \$252,500\)。</li>
+<li><strong>情景 1：将组合 Beta 降至 \(\beta^* = 0.50\)：</strong>
+<div class="equation-box">
+                    \[ N^* = (0.80 - 0.50) \times \frac{50,000,000}{252,500} = 59.4 \approx \mathbf{做空 \; 59 \; 张合约} \]
+                  </div>
+</li>
+<li><strong>情景 2：将组合 Beta 提高至 \(\beta^* = 1.50\)：</strong>
+<div class="equation-box">
+                    \[ N^* = (0.80 - 1.50) \times \frac{50,000,000}{252,500} = -138.6 \approx \mathbf{做多 \; 139 \; 张合约} \]
+                  </div>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-after-source-slide="22" data-kind="enrichment" id="l02-s22-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li class="active">调整组合Beta</li>
+<li>滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 10px">股票组合对冲与调整 Beta 系数</h3>
+<div class="example-card">
+<p><strong>参数设定：</strong> 投资组合总值 \(P = 200\text{万美元 (\$2M)}\)，\(\beta = 1.31\)，6 个月到期指数期货合约乘数 250。<br/>
+              当前指数 = 3,500 点 • 理论期货价格 \(F_0 = 3,552.90\) • 单张合约名义价值 \(V_F = 3,552.90 \times 250 = \$888,225\)。</p>
+<ul style="margin: 6px 0;">
+<li><strong>(a) 完全消除市场风险敞口 (\(\beta^* = 0\))：</strong>
+                  \[ N^* = 1.31 \times \frac{2,000,000}{888,225} = 2.95 \approx \mathbf{做空 \; 3 \; 张期货合约} \]
+                </li>
+<li><strong>(b) 4 个月后的大盘变动结果（指数跌至 2,800，期货价格 = 2,814.04）：</strong>
+                  \[ \text{期货空头盈利} = 3 \times 250 \times (3,552.90 - 2,814.04) = +\$554,145 \]
+                  大盘资本收益率 = \((2,800 - 3,500)/3,500 = -20\%\)。预期股票组合跌幅 \(= 1.31 \times (-20\%) = -26.2\%\) → 现货组合亏损 \(= -\$524,000\)。<br/>
+                  净头寸受到充分保护！（期货空头收益充分弥补了股票现货端的大幅缩水）。
+                </li>
+<li><strong>(c) 将组合 Beta 降低至 \(\beta^* = 0.95\)：</strong>
+                  \[ N^* = (1.31 - 0.95) \times \frac{2,000,000}{888,225} = 0.36 \times 2.25 = 0.81 \approx \mathbf{做空 \; 1 \; 张期货合约} \]
+                </li>
+</ul>
+</div>
+</div>
+</div></section>
+<section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l02-s23"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 2 讲 - 23</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>风险敞口</li>
+<li>多头与空头对冲</li>
+<li>基差风险</li>
+<li>最小方差对冲比率</li>
+<li>最优合约数量</li>
+<li>股票组合对冲</li>
+<li>调整组合Beta</li>
+<li class="active">滚动对冲</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">滚动对冲策略 (逐期展期 Stack and Roll)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>面临难题：</strong> 套期保值者面临长周期的风险敞口（例如 2 年），但市场上流动性充裕的期货合约通常集中在较短期限（例如 3 到 6 个月）。</li>
+<li><strong>应对策略：</strong>
+<ul>
+<li>在近期活跃合约上建立初始对冲头寸。</li>
+<li>在临近合约到期日之前，对冲平仓原有合约，并在下一期活跃合约上建立新的对冲头寸（向前展期滚动）。</li>
+</ul>
+</li>
+<li><strong>展期基差风险 (Roll-over Basis Risk)：</strong>
+<ul>
+<li>保值者在每次合约展期平仓和新开仓时，都会承担新的基差波动风险。</li>
+<li>最著名的历史案例为 Metallgesellschaft (MG，1993年)：该公司在原油市场处于长期升水 (Contango) 结构下，对巨额长达10年的能源供货合同实施短期期货滚动对冲，展期损失导致数十亿美元灾难性亏损。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
+</body>
+</html>

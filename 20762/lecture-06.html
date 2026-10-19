@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第6讲：期权交易策略</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="deck-index-link" href="index.html">← 返回课程目录</a>
+<div class="reveal">
+<div class="slides">
+<!-- Slide 1 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l06-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 6 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">期权交易策略</div>
+<div class="title-slide-h2">John C. Hull 第11章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">每周提示</div>
+<div class="tip-text">
+                “牛市能赚钱，熊市能赚钱，唯有贪婪的猪会被宰割……”<br/>
+                — <em>华尔街名言 (Wall Street adage)</em>
+</div>
+</div>
+<div class="uts-logo-text">
+<span style="color: #000; font-weight: 900;">✦</span> UTS商学院
+            </div>
+</div>
+</div>
+
+</section>
+<!-- Slide 2 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l06-s02">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li><strong>构建对冲策略的损益图并探讨对冲策略：</strong>
+<ul>
+<li>备兑看涨期权 (Covered Call)</li>
+<li>保护性看跌期权 (Protective Put)</li>
+</ul>
+</li>
+<li><strong>构建差价策略的损益图并探讨差价策略：</strong>
+<ul>
+<li>牛市差价 (分别利用看涨期权和看跌期权)</li>
+<li>熊市差价 (分别利用看涨期权和看跌期权)</li>
+<li>蝶式差价 (分别利用看涨期权和看跌期权)</li>
+<li>日历差价 (Calendar spread)</li>
+</ul>
+</li>
+<li><strong>构建组合策略的损益图并探讨波动率交易：</strong>
+<ul>
+<li>跨式期权 • 宽跨式期权 • 条式组合 • 带式组合</li>
+</ul>
+</li>
+<li><strong>纯波动率策略对比：</strong>
+<ul>
+<li>做空波动率 vs 做多波动率</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 3 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l06-s03">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期权与标的资产的头寸组合</h2>
+<div class="slide-content">
+<ul>
+<li><strong>将期权与其标的资产进行组合：</strong>
+<ul>
+<li>期权头寸可以与标的股票的多头或空头头寸相结合，从而改变投资组合的风险-收益特征。</li>
+</ul>
+</li>
+<li><strong>主要经典策略：</strong>
+<ul>
+<li><strong>备兑看涨期权 (Covered Call)：</strong>
+<ul>
+<li>为持有标的资产的投资者提供一定的下行缓冲/保护。</li>
+<li>在平稳或温和上涨的市场环境中获取期权费权利金收益。</li>
+</ul>
+</li>
+<li><strong>保护性看跌期权 (Protective Put)：</strong>
+<ul>
+<li>提供明确且有保证的短期下行保护（充当投资组合保险）。</li>
+<li>若标的资产大幅飙升，仍能完全保留无限的上方盈利潜力。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 4 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l06-s04">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li class="active">备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">备兑看涨期权 (Covered Call)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>卖出备兑看涨期权 (Writing a covered call)：</strong>
+<ul>
+<li>持有资产多头并卖出看涨期权空头：\( S_0 - c \)</li>
+<li><strong>到期损益形态与卖出看跌期权同构：</strong><br/>
+                      由买卖权平价定理：\( c + K e^{-rT} = p + S_0 \)<br/>
+                      移项可得：
+                      <div class="equation-box" style="margin: 6px 0; padding: 6px 14px; display: inline-block;">
+                        \( S_0 - c = -p + K e^{-rT} \)
+                      </div>
+</li>
+</ul>
+</li>
+<li><strong>反向备兑看涨期权 (Reverse of writing a covered call)：</strong>
+<ul>
+<li>持有股票空头并买入看涨期权多头：\( -S_0 + c \)</li>
+<li><strong>到期损益形态与买入看跌期权同构：</strong>
+<div class="equation-box" style="margin: 6px 0; padding: 6px 14px; display: inline-block;">
+                        \( -S_0 + c = p - K e^{-rT} \)
+                      </div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 5 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l06-s05">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li class="active">备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 备兑看涨期权</h2>
+<div class="slide-content">
+<div style="margin-bottom: 8px">
+<strong>设定：</strong>以 \( S_0 = \$48 \) 买入股票，并卖出行权价 \( K = \$50 \)、期权费 \( c = \$1 \) 的看涨期权。
+              </div>
+<table class="slide-table" style="text-align: center; margin-bottom: 12px">
+<thead>
+<tr>
+<th>到期价格 \(S_T\)</th>
+<th>股票多头</th>
+<th>看涨期权空头 (\(K=50\))</th>
+<th>权利金合计</th>
+<th>净损益总计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>\( S_T &lt; 50 \)</strong></td>
+<td>\( S_T - 48 \)</td>
+<td>\( 0 \)</td>
+<td>\( +1 \)</td>
+<td><strong>\( S_T - 47 \)</strong></td>
+</tr>
+<tr>
+<td><strong>\( S_T \ge 50 \)</strong></td>
+<td>\( S_T - 48 \)</td>
+<td>\( 50 - S_T \)</td>
+<td>\( +1 \)</td>
+<td><strong style="color: #16a34a;">+3</strong></td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center; margin-top: 6px;">
+<img alt="Covered Call Payoff and Profit Diagram" src="assets/lecture-06/covered_call_diagram.png" style="max-height: 240px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 6 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l06-s06">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li class="active">备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">备兑看涨期权：策略属性</h2>
+<div class="slide-content">
+<ul>
+<li><strong>适用市场环境：</strong>市场走势平稳中性或温和看涨。</li>
+<li><strong>策略优势：</strong>
+<ul>
+<li>在买入股票的同时卖出看涨期权，可以降低股票的净购入成本。</li>
+<li>对已持有的股票卖出看涨期权，可带来持续的期权费权利金现金流；若股价下跌，该期权费可提供一定的下行缓冲垫。</li>
+<li>持有标的股票可以完全对冲股价暴涨带来的损失风险（避免了裸卖空看涨期权的无限风险）。</li>
+</ul>
+</li>
+<li><strong>盈亏平衡点：</strong>\( S_0 - c = \$48 - \$1 = \mathbf{\$47} \)。</li>
+<li><strong>策略特性：</strong>
+<ul>
+<li>在牛市行情中，<strong>虚值备兑看涨期权 (OTM)</strong> 具有最高的盈利潜力。</li>
+<li>在平稳行情或轻度熊市行情中，<strong>实值备兑看涨期权 (ITM)</strong> 能够提供最充裕的期权费安全垫。</li>
+</ul>
+</li>
+<li><strong>面临问题 / 权衡取舍：</strong>上方盈利潜力被严格封顶（上限为 \( K - S_0 + c = \$3 \)），而若股价大幅暴跌，依然面临显著的下行亏损风险（最大亏损可达 \( -S_0 + c = -\$47 \)）。</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 7 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l06-s07">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li class="active">保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">保护性看跌期权 (Protective Put)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>保护性看跌期权：</strong>
+<ul>
+<li>持有资产多头并买入看跌期权多头：\( S_0 + p \)</li>
+<li><strong>到期损益形态与买入看涨期权同构：</strong><br/>
+                      由买卖权平价定理：\( c + K e^{-rT} = p + S_0 \)<br/>
+                      移项可得：
+                      <div class="equation-box" style="margin: 6px 0; padding: 6px 14px; display: inline-block;">
+                        \( S_0 + p = c + K e^{-rT} \)
+                      </div>
+</li>
+</ul>
+</li>
+<li><strong>反向保护性看跌期权：</strong>
+<ul>
+<li>持有资产空头并卖出看跌期权空头：\( -S_0 - p \)</li>
+<li><strong>到期损益形态与卖出看涨期权同构：</strong>
+<div class="equation-box" style="margin: 6px 0; padding: 6px 14px; display: inline-block;">
+                        \( -S_0 - p = -c - K e^{-rT} \)
+                      </div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 8 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l06-s08">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li class="active">保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 保护性看跌期权</h2>
+<div class="slide-content">
+<div style="margin-bottom: 8px">
+<strong>设定：</strong>以 \( S_0 = \$48 \) 买入资产，并买入行权价 \( K = \$50 \)、期权费 \( p = \$3 \) 的看跌期权。
+              </div>
+<table class="slide-table" style="text-align: center; margin-bottom: 12px">
+<thead>
+<tr>
+<th>到期价格 \(S_T\)</th>
+<th>股票多头</th>
+<th>看跌期权多头 (\(K=50\))</th>
+<th>权利金合计</th>
+<th>净损益总计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>\( S_T &lt; 50 \)</strong></td>
+<td>\( S_T - 48 \)</td>
+<td>\( 50 - S_T \)</td>
+<td>\( -3 \)</td>
+<td><strong style="color: #dc2626;">−1</strong></td>
+</tr>
+<tr>
+<td><strong>\( S_T \ge 50 \)</strong></td>
+<td>\( S_T - 48 \)</td>
+<td>\( 0 \)</td>
+<td>\( -3 \)</td>
+<td><strong>\( S_T - 51 \)</strong></td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center; margin-top: 6px;">
+<img alt="Protective Put Payoff and Profit Diagram" src="assets/lecture-06/protective_put_diagram.png" style="max-height: 240px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 9 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l06-s09">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li class="active">保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">保护性看跌期权：策略属性</h2>
+<div class="slide-content">
+<ul>
+<li><strong>适用市场环境：</strong>对标的资产长期看涨，但对短期市场下行风险保持谨慎。</li>
+<li><strong>策略优势：投资组合保险 (Portfolio insurance)</strong>
+<ul>
+<li>严格锁定最大可能亏损：下行亏损被锁定为 \( S_0 + p - K = \$48 + \$3 - \$50 = \mathbf{\$1} \)。</li>
+<li>若股票价格大幅飙升，依然享有完全无限的上方盈利空间。</li>
+</ul>
+</li>
+<li><strong>盈亏平衡点：</strong>\( S_0 + p = \$48 + \$3 = \mathbf{\$51} \)。</li>
+<li><strong>策略特性：</strong>
+<ul>
+<li>虚值看跌期权 (OTM) 购买成本较低，但提供的下行保护不及实值看跌期权 (ITM)。</li>
+<li>一旦股票价格上涨突破盈亏平衡线，该策略即可实现盈利。</li>
+</ul>
+</li>
+<li><strong>面临问题：</strong>需要预先支付现金权利金。看跌期权费相当于保险费，在强劲牛市中会降低投资组合的整体收益率。</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- ENRICHMENT 6.A -->
+<section data-after-source-slide="9" data-kind="enrichment" id="l06-s09-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 拓展 1</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li class="active">保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">备兑看涨期权 vs 保护性看跌期权：不对称风险与收益特征</h3>
+<div class="example-card" style="padding: 8px 14px; margin-bottom: 8px;">
+<p style="margin: 0"><strong>核心策略差异：</strong>备兑看涨期权是一种<em>收益增强策略 (Income-generation)</em>，通过放弃上方收益潜力换取前期的现金期权费。而保护性看跌期权则是一种<em>资本保全策略 (Capital preservation)</em>，通过前期支付现金成本来彻底消除灾难性的尾部下行风险。</p>
+</div>
+<table class="slide-table" style="margin: 6px 0">
+<thead>
+<tr>
+<th>分析维度</th>
+<th>备兑看涨期权 (\(S_0 - c\))</th>
+<th>保护性看跌期权 (\(S_0 + p\))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>首要目标</strong></td>
+<td>获取权利金收益；在盘整市场中增强回报</td>
+<td>防范市场崩盘风险；保全资本</td>
+</tr>
+<tr>
+<td><strong>期初现金流</strong></td>
+<td><span style="color: #16a34a; font-weight: bold;">现金净流入 (+)</span> 来自卖出看涨期权</td>
+<td><span style="color: #dc2626; font-weight: bold;">现金净流出 (−)</span> 用于买入看跌期权</td>
+</tr>
+<tr>
+<td><strong>最大利润</strong></td>
+<td>封顶上限：\( K - S_0 + c \)</td>
+<td><span style="color: #16a34a; font-weight: bold;">无限盈利</span>：\( S_T - (S_0 + p) \)</td>
+</tr>
+<tr>
+<td><strong>最大亏损</strong></td>
+<td>实质性下行风险：\( S_0 - c \) (若股价跌至 $0)</td>
+<td><span style="color: #16a34a; font-weight: bold;">严格锁定上限</span>：\( S_0 + p - K \)</td>
+</tr>
+<tr>
+<td><strong>盈亏平衡点</strong></td>
+<td>下移至：\( S_0 - c \)</td>
+<td>上移至：\( S_0 + p \)</td>
+</tr>
+<tr>
+<td><strong>合成头寸等价性</strong></td>
+<td>经济实质等同于<strong>卖出看跌期权 (Short Put)</strong>：\( -p + K e^{-rT} \)</td>
+<td>经济实质等同于<strong>买入看涨期权 (Long Call)</strong>：\( c + K e^{-rT} \)</td>
+</tr>
+</tbody>
+</table>
+<div style="color: #475569; margin-top: 6px; line-height: 1.4">
+根据买卖权平价定理公式 \( S_0 - c = -p + K e^{-rT} \)，卖出备兑看涨期权的投资者所承担的经济风险剖面与单纯卖出看跌期权完全一致：有限的上方收益与几乎全部的下行暴跌风险。
+            </div>
+</div>
+</div>
+
+</section>
+<!-- Slide 10 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l06-s10">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li class="active">牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">差价策略 (Spreads)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong>差价策略是指在同一种标的资产上，同时持有两种或两种以上<em>同类型期权</em>（即两只或多只看涨期权，或两只或多只看跌期权）的组合头寸。</li>
+<li><strong>主要差价策略分类：</strong>
+<ul>
+<li><strong>牛市差价 (Bull spreads)：</strong>
+<ul>
+<li>利用看涨期权构建的牛市差价 (借方差价 Debit Spread)</li>
+<li>利用看跌期权构建的牛市差价 (贷方差价 Credit Spread)</li>
+</ul>
+</li>
+<li><strong>熊市差价 (Bear spreads)：</strong>
+<ul>
+<li>利用看涨期权构建的熊市差价 (贷方差价 Credit Spread)</li>
+<li>利用看跌期权构建的熊市差价 (借方差价 Debit Spread)</li>
+</ul>
+</li>
+<li><strong>蝶式差价 (Butterfly spreads)：</strong>
+<ul>
+<li>利用看涨期权构建的蝶式差价</li>
+<li>利用看跌期权构建的蝶式差价</li>
+</ul>
+</li>
+<li><strong>日历差价 (Calendar spreads)：</strong>
+<ul>
+<li>相同行权价，不同到期日</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 11 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l06-s11">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li class="active">牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用看涨期权的牛市差价策略</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li><strong>头寸构成：</strong>买入较低行权价 \( K_1 \) 的看涨期权，同时卖出较高行权价 \( K_2 \) 的看涨期权 (\( K_1 &lt; K_2 \))。</li>
+<li><strong>适用市场环境：</strong>温和看涨 / 中度乐观的市场预期。</li>
+<li><strong>策略优势：</strong>
+<ul>
+<li>同时锁定了最大下行风险与最大上涨盈利。</li>
+<li>期初建仓成本较低；相比直接买入看涨期权更为便宜，因为卖出高行权价看涨期权所得的权利金补贴了买入期权的支出。</li>
+</ul>
+</li>
+<li><strong>策略特性：</strong>
+<ul>
+<li>买入的看涨期权 (\(K_1\)) 通常处于实值 (ITM) 或平值 (ATM)（较为昂贵）。</li>
+<li>卖出的看涨期权 (\(K_2\)) 通常处于虚值 (OTM)（较为便宜）。</li>
+<li>当两只看涨期权均为虚值时，构成最进取型的牛市差价策略。</li>
+</ul>
+</li>
+<li><strong>面临问题：</strong>建仓需要净支付现金期权费（借方差价 Debit Spread）。</li>
+</ul>
+</div>
+<div style="flex: 0.9; text-align: center;">
+<img alt="Bull Spread using Calls Diagram" src="assets/lecture-06/bull_spread_calls_diagram.png" style="max-width: 100%; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 12 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l06-s12">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li class="active">牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用看跌期权的牛市差价策略</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: center;">
+<div style="flex: 1;">
+<ul>
+<li><strong>头寸构成：</strong>买入较低行权价 \( K_1 \) 的看跌期权，同时卖出较高行权价 \( K_2 \) 的看跌期权 (\( K_1 &lt; K_2 \))。</li>
+<li><strong>短期收益增强策略：</strong>
+<ul>
+<li>期初带来正向现金净流入（贷方差价 Credit Spread）。</li>
+<li>卖出较高行权价看跌期权收取的期权费，高于买入较低行权价看跌期权的支出 (\( p_2 &gt; p_1 \))。</li>
+</ul>
+</li>
+<li><strong>保证金要求：</strong>
+<ul>
+<li>由于包含较高行权价的看跌期权空头，交易所会要求缴纳保证金以确保履行履约担保义务。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="flex: 1; text-align: center;">
+<img alt="Bull Spread using Puts Diagram" src="assets/lecture-06/bull_spread_puts_diagram.png" style="max-width: 100%; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- ENRICHMENT 6.B -->
+<section data-after-source-slide="12" data-kind="enrichment" id="l06-s12-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 拓展 2</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li class="active">牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">牛市差价：看涨借方差价 vs 看跌贷方差价 (ETQ 12)</h3>
+<div style="margin-bottom: 6px; background: #eef2ff; border-left: 3px solid #4f46e5; padding: 4px 10px">
+<strong>ETQ 12 期权市场数据 (\(S_0 = \$30\))：</strong>看涨期权：\(K=25\) (\(c=\$5.31\))，\(K=35\) (\(c=\$1.43\)) • 看跌期权：\(K=25\) (\(p=\$0.84\))，\(K=35\) (\(p=\$5.99\))。
+            </div>
+<table class="slide-table" style="margin: 4px 0">
+<thead>
+<tr>
+<th>差价策略类型</th>
+<th>期权腿构成</th>
+<th>期初净现金流</th>
+<th>最大利润</th>
+<th>最大亏损</th>
+<th>盈亏平衡点 (\(S_T\))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>利用看涨期权的牛市差价</strong><br/>
+                    (借方差价 Debit Spread)
+                  </td>
+<td>
+                    买入看涨期权 \(K_1=25\) (\(-\$5.31\))<br/>
+                    卖出看涨期权 \(K_2=35\) (\(+\$1.43\))
+                  </td>
+<td style="font-weight: bold; color: #dc2626;">
+                    净借方支出：−$3.88<br/>
+                    (现金净流出)
+                  </td>
+<td style="font-weight: bold; color: #16a34a;">
+                    +$6.12<br/>
+                    \((35-25) - 3.88\)
+                  </td>
+<td style="font-weight: bold; color: #dc2626;">
+                    −$3.88<br/>
+                    (期初借方支出)
+                  </td>
+<td>
+<strong>\( 25 + 3.88 = \mathbf{\$28.88} \)</strong><br/>
+                    \(K_1 + 	ext{借方成本}\)
+                  </td>
+</tr>
+<tr>
+<td>
+<strong>利用看跌期权的牛市差价</strong><br/>
+                    (贷方差价 Credit Spread)
+                  </td>
+<td>
+                    买入看跌期权 \(K_1=25\) (\(-\$0.84\))<br/>
+                    卖出看跌期权 \(K_2=35\) (\(+\$5.99\))
+                  </td>
+<td style="font-weight: bold; color: #16a34a;">
+                    净贷方收入：+$5.15<br/>
+                    (现金净流入)
+                  </td>
+<td style="font-weight: bold; color: #16a34a;">
+                    +$5.15<br/>
+                    (保留全部权利金)
+                  </td>
+<td style="font-weight: bold; color: #dc2626;">
+                    −$4.85<br/>
+                    \((35-25) - 5.15\)
+                  </td>
+<td>
+<strong>\( 35 - 5.15 = \mathbf{\$29.85} \)</strong><br/>
+                    \(K_2 - 	ext{贷方收入}\)
+                  </td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 6px; line-height: 1.4">
+<li><strong>结构性差异：</strong>看涨期权牛市差价需要期初支付现金（无需占用保证金），而看跌期权牛市差价前期产生现金流入，但需要占用保证金以担保看跌期权空头的履约责任。</li>
+<li><strong>箱式差价联结 (Box Spread)：</strong>买入看涨牛市差价 + 买入看跌熊市差价构成了<em>箱式差价 (Box spread)</em>，其到期回报固定为 \( K_2 - K_1 = \$10 \)。若贴现后的组合成本偏离 $10，套利者将通过该无风险套利机会赚取差价。</li>
+</ul>
+</div>
+</div>
+
+</section>
+<!-- Slide 13 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l06-s13">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li class="active">牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用看跌期权的熊市差价策略</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li><strong>头寸构成：</strong>买入较高行权价 \( K_2 \) 的看跌期权，同时卖出较低行权价 \( K_1 \) 的看跌期权 (\( K_1 &lt; K_2 \))。</li>
+<li><strong>适用市场环境：</strong>温和看跌 / 中度悲观的市场预期。</li>
+<li><strong>策略优势：</strong>
+<ul>
+<li>同时锁定了最大下行收益与最大上行亏损。</li>
+<li>期初建仓成本较低；比直接买入看跌期权更便宜，因为卖出看跌期权的权利金抵消了部分买入成本。</li>
+</ul>
+</li>
+<li><strong>策略特性：</strong>
+<ul>
+<li>买入的看跌期权 (\(K_2\)) 通常处于实值 (ITM)（较为昂贵）。</li>
+<li>卖出的看跌期权 (\(K_1\)) 通常处于虚值 (OTM)（较为便宜）。</li>
+</ul>
+</li>
+<li><strong>面临问题：</strong>需要期初净支付权利金（借方差价 Debit Spread）。</li>
+</ul>
+</div>
+<div style="flex: 0.9; text-align: center;">
+<img alt="Bear Spread using Puts Diagram" src="assets/lecture-06/bear_spread_puts_diagram.png" style="max-width: 100%; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 14 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l06-s14">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li class="active">牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用看涨期权的熊市差价策略</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: center;">
+<div style="flex: 1;">
+<ul>
+<li><strong>头寸构成：</strong>买入较高行权价 \( K_2 \) 的看涨期权，同时卖出较低行权价 \( K_1 \) 的看涨期权 (\( K_1 &lt; K_2 \))。</li>
+<li><strong>短期收益增强策略：</strong>
+<ul>
+<li>期初带来正向现金净流入（贷方差价 Credit Spread）。</li>
+<li>卖出较低行权价看涨期权 (\(K_1\)) 收取的期权费，高于买入较高行权价看涨期权 (\(K_2\)) 的支出。</li>
+</ul>
+</li>
+<li><strong>保证金要求：</strong>
+<ul>
+<li>交易所要求缴纳保证金，以应对看涨期权空头腿在标的资产大幅上涨时可能面临的履约义务。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="flex: 1; text-align: center;">
+<img alt="Bear Spread using Calls Diagram" src="assets/lecture-06/bear_spread_calls_diagram.png" style="max-width: 100%; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 15 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l06-s15">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li class="active">蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用看涨期权的蝶式差价策略</h2>
+<div class="slide-content">
+<ul>
+<li><strong>构建方法：</strong>买入1份较低行权价 \( K_1 \) 的看涨期权，买入1份较高行权价 \( K_3 \) 的看涨期权，同时卖出2份中间行权价 \( K_2 \) 的看涨期权：
+                  <div class="equation-box" style="margin: 6px 0; padding: 4px 14px; display: inline-block;">
+                    \( K_2 = \frac{K_1 + K_3}{2} \)
+                  </div>
+</li>
+</ul>
+<div style="text-align: center; margin: 6px 0;">
+<img alt="Butterfly Spread using Calls Diagram" src="assets/lecture-06/butterfly_spread_diagram.png" style="max-height: 200px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+<ul>
+<li><strong>适用市场环境：</strong>平稳 / 低波动率预期；预计标的股票价格将在到期时维持在中间行权价 \( K_2 \) 附近。</li>
+<li><strong>优势与局限：</strong>建仓成本低且盈利目标明确；但需要期初支付净权利金。</li>
+<li><strong>反向蝶式差价 (Reverse Butterfly)：</strong>卖出 \(K_1\)、卖出 \(K_3\)、买入2份 \(K_2\) → 适合预期市场将发生剧烈波动的情形。</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 16 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l06-s16">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li class="active">蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例：利用看涨期权的蝶式差价策略</h2>
+<div class="slide-content">
+<div style="margin-bottom: 6px">
+<strong>设定：</strong>投资者预期未来6个月内某股票 (\(S_0 = \$61\)) 走势平稳。市场有三只6个月期看涨期权：<br/>
+                \( K_1 = \$55, c_1 = \$10 \) • \( K_2 = \$60, c_2 = \$7 \) • \( K_3 = \$65, c_3 = \$5 \)<br/>
+<strong>头寸构成：</strong>买入1份 Call (55)，卖出2份 Call (60)，买入1份 Call (65)。建仓成本：\( -10 + 2(7) - 5 = \mathbf{-\$1.00} \)。
+              </div>
+<table class="slide-table" style="text-align: center">
+<thead>
+<tr>
+<th>到期价格 \(S_T\)</th>
+<th>买入看涨 (55)</th>
+<th>卖出2份看涨 (60)</th>
+<th>买入看涨 (65)</th>
+<th>权利金合计</th>
+<th>净损益总计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>\( S_T &lt; 55 \)</strong></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>-1</td>
+<td style="color: #dc2626; font-weight: bold;">−1</td>
+</tr>
+<tr>
+<td><strong>\( 55 \le S_T &lt; 60 \)</strong></td>
+<td>\( S_T - 55 \)</td>
+<td>0</td>
+<td>0</td>
+<td>-1</td>
+<td><strong>\( S_T - 56 \)</strong></td>
+</tr>
+<tr>
+<td><strong>\( 60 \le S_T &lt; 65 \)</strong></td>
+<td>\( S_T - 55 \)</td>
+<td>\( 2(60 - S_T) \)</td>
+<td>0</td>
+<td>-1</td>
+<td><strong>\( 64 - S_T \)</strong></td>
+</tr>
+<tr>
+<td><strong>\( S_T \ge 65 \)</strong></td>
+<td>\( S_T - 55 \)</td>
+<td>\( 2(60 - S_T) \)</td>
+<td>\( S_T - 65 \)</td>
+<td>-1</td>
+<td style="color: #dc2626; font-weight: bold;">−1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 17 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l06-s17">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li class="active">蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 蝶式差价策略评估</h2>
+<div class="slide-content">
+<div style="text-align: center; margin-bottom: 8px;">
+<img alt="Butterfly Spread Profit Diagram with Peak at $60" src="assets/lecture-06/butterfly_example_chart.png" style="max-height: 250px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+<ul>
+<li><strong>盈亏平衡点：</strong>\( S_T = \mathbf{\$56} \) 与 \( S_T = \mathbf{\$64} \)。</li>
+<li><strong>最大利润：</strong>当 \( S_T = \$60 \)（中间行权价）时取得最大利润 \( \mathbf{+\$4.00} \)。</li>
+<li><strong>最大亏损：</strong>当 \( S_T \le 55 \) 或 \( S_T \ge 65 \) 时，亏损锁定为期初净权利金支出 \( \mathbf{-\$1.00} \)。</li>
+<li><strong>盈利价格区间：</strong>当 \( \$56 &lt; S_T &lt; \$64 \) 时该策略实现净盈利。</li>
+<li><strong>利用看跌期权的蝶式差价：</strong>买入看跌 \(K_1\)、卖出2份看跌 \(K_2\)、买入看跌 \(K_3\) 会产生完全一致的损益图。</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 18 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l06-s18">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li class="active">日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">日历差价策略 (Calendar Spread)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>核心概念：</strong>利用<em>相同行权价</em> \( K \) 但<em>不同到期日</em>的期权构建组合。</li>
+<li><strong>利用看涨期权的日历差价：</strong>
+<ul>
+<li>卖出近期看涨期权，同时买入远期看涨期权。</li>
+<li>利用了近期期权时间价值衰减速度快于远期期权（近期期权具有更高的 \(	heta\) 绝对值）的特性。</li>
+<li>若在近期期权到期时，股票价格接近行权价 \( K \)，近期期权将毫无价值地作废，而远期期权依然保留着可观的时间价值。</li>
+</ul>
+</li>
+<li><strong>利用看跌期权的日历差价：</strong>
+<ul>
+<li>卖出近期看跌期权，同时买入远期看跌期权。</li>
+</ul>
+</li>
+<li><strong>反向日历差价 (Reverse Calendar Spread)：</strong>
+<ul>
+<li>买入近期期权并卖出远期期权；当股票价格发生剧烈单向大幅突破时获利。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 19 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l06-s19">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li class="active">跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">组合策略 (Combinations)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong>组合策略是指将同一种标的资产上的<strong>看涨期权与看跌期权</strong>混合构建的交易策略。</li>
+<li><strong>主要类别：</strong>
+<ul>
+<li><strong>跨式期权 (Straddles)：</strong>相同的行权价与相同的到期日。</li>
+<li><strong>条式与带式组合 (Strips and Straps)：</strong>看涨期权与看跌期权比例不对称的组合。</li>
+<li><strong>宽跨式期权 (Strangles)：</strong>不同的行权价与相同的到期日。</li>
+</ul>
+</li>
+<li><strong>组合策略的本质 – 纯波动率交易：</strong>
+<ul>
+<li><strong>做多波动率策略 (Long volatility)：</strong>当标的资产在任一方向出现大幅价格跳跃变动时盈利（具有正的 Vega 值）。</li>
+<li><strong>做空波动率策略 (Short volatility)：</strong>当标的资产价格平稳盘整、窄幅震荡时盈利（具有正的 Theta 值，赚取时间价值衰减）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 20 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l06-s20">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 20</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li class="active">跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">跨式期权 (Straddles)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>底部跨式 / 买入跨式 (Bottom Straddle / Long Straddle)：</strong>
+<ul>
+<li>买入1份看涨期权和1份看跌期权，两者具有<em>相同行权价</em> \( K \) 与<em>相同到期日</em> \( T \)。</li>
+<li><strong>做多波动率策略：</strong>若价格向任意方向发生大幅跳跃，即可享受无限盈利潜力。</li>
+<li>最大可能亏损严格锁定为所支付的全部权利金合计 (\( c + p \))。</li>
+</ul>
+</li>
+<li><strong>顶部跨式 / 卖出跨式 (Top Straddle / Short Straddle)：</strong>
+<ul>
+<li>卖出1份看涨期权和1份看跌期权，两者具有相同的行权价 \( K \) 与到期日 \( T \)。</li>
+<li><strong>做空波动率策略：</strong>在低波动率、波澜不惊的市场中赚取期权权利金收入。</li>
+<li>风险极高：若股价向任一方向发生剧烈波动，都将面临无限亏损的敞口。</li>
+</ul>
+</li>
+</ul>
+<div style="text-align: center; margin-top: 6px;">
+<img alt="Straddle Payoff Diagram" src="assets/lecture-06/straddle_diagram.png" style="max-height: 200px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- ENRICHMENT 6.C -->
+<section data-after-source-slide="20" data-kind="enrichment" id="l06-s20-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 拓展 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li class="active">跨式期权</li>
+<li>条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">买入 vs 卖出跨式期权：波动率机制与双重盈亏平衡点</h3>
+<div class="example-card" style="padding: 10px 14px; margin-bottom: 8px;">
+<p style="margin: 0"><strong>CME 权威定义：</strong><em>“脚踏两只船 (Straddling the fence)”</em> — 同时押注双向。当交易者预期价格即将发生颠覆性突破但无法确定具体突破方向时（例如在财报公布前、重大监管审批揭晓或 CPI 通胀数据发布前），买入跨式期权是标准操作。</p>
+</div>
+<div style="display: flex; gap: 16px; margin-bottom: 10px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+<h5 style="margin: 0 0 6px 0; color: #1e3a8a">买入跨式期权 (买入看涨 + 买入看跌)</h5>
+<ul style="margin: 0; padding-left: 16px; line-height: 1.4">
+<li><strong>总成本：</strong>\( V_0 = c + p \)（最大亏损发生在 \( S_T = K \) 时）。</li>
+<li><strong>上方盈亏平衡点：</strong>\( S_{T,	ext{upper}} = K + (c + p) \)</li>
+<li><strong>下方盈亏平衡点：</strong>\( S_{T,	ext{lower}} = K - (c + p) \)</li>
+<li><strong>希腊字母特征：</strong>显著的正 Vega (\( \mathcal{V} &gt; 0 \)) 与正 Gamma (\( \Gamma &gt; 0 \))；承受负 Theta (\( \Theta &lt; 0 \)) 时间价值侵蚀。</li>
+</ul>
+</div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+<h5 style="margin: 0 0 6px 0; color: #1e3a8a">卖出跨式期权 (卖出看涨 + 卖出看跌)</h5>
+<ul style="margin: 0; padding-left: 16px; line-height: 1.4">
+<li><strong>最大利润：</strong>\( c + p \)（在市场收盘恰好等于行权价 \( K \) 时获得）。</li>
+<li><strong>盈亏平衡点：</strong>完全相同（\( K \pm (c + p) \)）。</li>
+<li><strong>风险特征：</strong>若标的股票向任意一侧发生大幅跳跃并穿透平衡点，亏损潜力无限。</li>
+<li><strong>希腊字母特征：</strong>正 Theta (\( \Theta &gt; 0 \)，赚取时间价值衰减) 与负 Vega (\( \mathcal{V} &lt; 0 \))。</li>
+</ul>
+</div>
+</div>
+<div style="color: #475569; background: #f1f5f9; padding: 6px 12px; border-radius: 4px">
+<strong>CME 实务案例：</strong>对于总权利金为 105 点的 E-mini 标普指数 2420 点跨式组合，精确的盈亏平衡点分别为 \( 2420 + 105 = \mathbf{2525} \) 与 \( 2420 - 105 = \mathbf{2315} \)。
+            </div>
+</div>
+</div>
+
+</section>
+<!-- Slide 21 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l06-s21">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 21</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li class="active">条式与带式组合</li>
+<li>宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">条式组合与带式组合 (Strips and Straps)</h2>
+<div class="slide-content">
+<div style="text-align: center; margin-bottom: 8px;">
+<img alt="Long Strip and Long Strap Payoff Diagrams" src="assets/lecture-06/strips_straps_diagram.png" style="max-height: 240px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+<ul>
+<li><strong>买入条式组合 (Long Strip)：</strong>
+<ul>
+<li>买入<strong>1份看涨期权和2份看跌期权</strong>，均具有相同的行权价 \( K \) 与到期日 \( T \)。</li>
+<li><em>适用市场预期：</em>预期波动率剧烈增大，且带有<strong>偏空头倾向</strong>（下行斜率的陡峭程度是上行斜率的两倍）。</li>
+</ul>
+</li>
+<li><strong>买入带式组合 (Long Strap)：</strong>
+<ul>
+<li>买入<strong>2份看涨期权和1份看跌期权</strong>，均具有相同的行权价 \( K \) 与到期日 \( T \)。</li>
+<li><em>适用市场预期：</em>预期波动率剧烈增大，且带有<strong>偏多头倾向</strong>（上行斜率的陡峭程度是下行斜率的两倍）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 22 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l06-s22">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 22</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li class="active">宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">宽跨式期权 (Strangles)</h2>
+<div class="slide-content">
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+<div style="flex: 1.1;">
+<ul>
+<li><strong>底部垂直组合 / 买入宽跨式 (Bottom Vertical Combination / Long Strangle)：</strong>
+<ul>
+<li>买入相同到期日但<em>不同行权价</em>的看涨期权与看跌期权：买入较低行权价 \( K_1 \) 的看跌期权，并买入较高行权价 \( K_2 \) 的看涨期权 (\( K_1 &lt; K_2 \))。</li>
+<li><strong>做多波动率策略：</strong>建仓成本比跨式期权更便宜，因为两只期权通常均为虚值期权 (OTM)。</li>
+<li>权衡取舍：股价必须发生比跨式期权更大幅度的偏离波动，策略方能开始实现盈利。</li>
+</ul>
+</li>
+<li><strong>顶部垂直组合 / 卖出宽跨式 (Top Vertical Combination / Short Strangle)：</strong>
+<ul>
+<li>卖出不同行权价 (\( K_1 &lt; K_2 \)) 且相同到期日的看涨期权与看跌期权。</li>
+<li>做空波动率策略；在 \( K_1 \) 与 \( K_2 \) 之间提供了一个更宽阔的安全无损盈利带。</li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="flex: 0.9; text-align: center;">
+<img alt="Strangle Payoff Diagram" src="assets/lecture-06/strangle_diagram.png" style="max-width: 100%; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- ENRICHMENT 6.D -->
+<section data-after-source-slide="22" data-kind="enrichment" id="l06-s22-v1">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 拓展 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li class="active">宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 6px">买入宽跨式：分段损益表与双重盈亏平衡点</h3>
+<div style="margin-bottom: 6px; background: #eef2ff; border-left: 3px solid #4f46e5; padding: 4px 10px">
+<strong>ETQ 11 头寸构建：</strong>股票 \( S_0 = \$30 \)。买入虚值看跌期权 \( K_1 = \$25 \) (\( p = \$0.84 \)) + 买入虚值看涨期权 \( K_2 = \$35 \) (\( c = \$1.43 \))。<br/>
+<strong>期初总成本（最大亏损）：</strong>\( 0.84 + 1.43 = \mathbf{\$2.27} \)。
+            </div>
+<table class="slide-table" style="margin: 4px 0; text-align: center">
+<thead>
+<tr>
+<th>到期价格 (\(S_T\))</th>
+<th>到期总回报</th>
+<th>期权费成本</th>
+<th>净损益</th>
+<th>策略表现 / 盈亏平衡</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>\( S_T \le 25 \)</strong> (大跌看空)</td>
+<td>\( 25 - S_T \)</td>
+<td>−$2.27</td>
+<td style="font-weight: bold;">\( \mathbf{22.73 - S_T} \)</td>
+<td>盈亏平衡点：\( S_T = \mathbf{\$22.73} \)</td>
+</tr>
+<tr>
+<td><strong>\( 25 &lt; S_T &lt; 35 \)</strong> (盘整无序)</td>
+<td>0</td>
+<td>−$2.27</td>
+<td style="font-weight: bold; color: #dc2626;">−$2.27 (最大亏损)</td>
+<td>两只期权均无价值归零作废</td>
+</tr>
+<tr>
+<td><strong>\( S_T \ge 35 \)</strong> (大涨看多)</td>
+<td>\( S_T - 35 \)</td>
+<td>−$2.27</td>
+<td style="font-weight: bold;">\( \mathbf{S_T - 37.27} \)</td>
+<td>盈亏平衡点：\( S_T = \mathbf{\$37.27} \)</td>
+</tr>
+</tbody>
+</table>
+<div style="color: #334155; margin-top: 6px">
+<strong>双重盈亏平衡点分析：</strong>
+<div style="display: flex; gap: 20px; margin-top: 4px;">
+<div style="flex: 1; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+<strong>下方平衡点：</strong>\( K_1 - 	ext{成本} = 25 - 2.27 = \mathbf{\$22.73} \) (−24.2% 变动)
+                </div>
+<div style="flex: 1; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+<strong>上方平衡点：</strong>\( K_2 + 	ext{成本} = 35 + 2.27 = \mathbf{\$37.27} \) (+24.2% 变动)
+                </div>
+</div>
+<p style="margin: 6px 0 0 0; color: #64748b">
+<em>与平值跨式期权 (\(K=30\)) 对比：</em>跨式组合总成本为 \( 3.16 + 2.78 = \$5.94 \)，其盈亏平衡点为 $24.06 与 $35.94。宽跨式虽然便宜得多（$2.27 vs $5.94），但需要标的资产走出更剧烈的价格波动才能扭亏为盈。
+              </p>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 23 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l06-s23">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 23</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li class="active">宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">做空波动率策略对比</h2>
+<div class="slide-subtitle">跨式、宽跨式、蝶式差价与鹰式差价</div>
+<div class="slide-content">
+<div style="text-align: center; margin-top: 10px;">
+<img alt="Comparison of Short Volatility Strategies Diagram" src="assets/lecture-06/short_volatility_comparison_diagram.png" style="max-height: 480px; width: auto; border: 1px solid #e2e8f0; border-radius: 4px;"/>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Slide 24 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="12" data-source-slide="24" id="l06-s24">
+<div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 6 讲 - 24</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>到期损益与净利润</li>
+<li>备兑看涨期权</li>
+<li>保护性看跌期权</li>
+<li>牛市与熊市差价</li>
+<li>蝶式差价</li>
+<li>日历差价</li>
+<li>跨式期权</li>
+<li>条式与带式组合</li>
+<li class="active">宽跨式与策略比较</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">做空波动率策略对比</h2>
+<div class="slide-content">
+<ul>
+<li><strong>跨式期权 (Straddle)：</strong>提供最高潜在回报，利润在行权价处（示例中为 $5.75）见顶，但在两侧均承担<em>无限亏损风险</em>。</li>
+<li><strong>宽跨式期权 (Strangle)：</strong>在两行权价之间（$5.50 至 $6.00）提供扁平的最大回报区间，但两侧同样面临<em>无限亏损风险</em>。</li>
+<li><strong>蝶式差价 (Butterfly)：</strong>具有类似跨式期权的尖峰回报形态；然而，由于买入了外侧虚值“翅膀”期权以锁定最大亏损，其最大利润有所削减。蝶式差价本质上是<em>对跨式期权进行了风险管理的改良版本</em>。</li>
+<li><strong>鹰式差价 (Condor)：</strong>呈现两侧风险被严格锁定的扁平最大收益区；其最大利润在四者中最小。鹰式差价本质上是<em>对宽跨式期权进行了风险管理的改良版本</em>。</li>
+<li><strong>资金实力与风险管理：</strong>
+<ul>
+<li><strong>蝶式差价</strong>对于资金规模较小、无法承受裸卖空跨式或宽跨式无限尾部风险的交易者而言，是非常卓越的交易策略。</li>
+<li>裸卖空跨式与宽跨式期权仅适合具备雄厚资本实力、能够从容承受剧烈不利波动的专业机构投资者。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
+</body>
+</html>

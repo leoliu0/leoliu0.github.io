@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20762 金融衍生品和风险管理 - 中文课件导航</title>
+  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
+  <style>
+    :root {
+      --primary: #2a338c;
+      --primary-dark: #1e266a;
+      --accent: #2563eb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .course-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    
+    h1 {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: 800;
+      margin: 0 0 12px 0;
+    }
+    
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 750px;
+      margin: 0 auto;
+    }
+    
+    .info-banner {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin-bottom: 32px;
+      font-size: 15px;
+      color: #1e40af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .info-banner strong {
+      color: #1e3a8a;
+    }
+
+    .lang-switch {
+      background: #ffffff;
+      border: 1px solid #93c5fd;
+      color: #1d4ed8;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .lang-switch:hover {
+      background: #eff6ff;
+    }
+    
+    .lecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    
+    .lecture-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .lecture-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(42, 51, 140, 0.08);
+      border-color: #93c5fd;
+    }
+    
+    .card-top {
+      margin-bottom: 16px;
+    }
+    
+    .card-lec-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: #6366f1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 10px 0;
+      line-height: 1.35;
+    }
+    
+    .card-hull {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    
+    .card-bottom {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    
+    .pill-count {
+      background: #f1f5f9;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #334155;
+    }
+    
+    .pill-enrichment {
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    .keyboard-guide {
+      margin-top: 40px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      font-size: 14px;
+    }
+    
+    .keyboard-guide h4 {
+      margin: 0 0 10px 0;
+      color: var(--primary);
+    }
+    
+    .key-tag {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="course-badge">悉尼科技大学商学院 &bull; 金融系</div>
+      <h1>20762 金融衍生品和风险管理 (Derivatives and Risk Management)</h1>
+      <p class="subtitle">第1至第10讲完整中文HTML演示课件。依据官方讲义忠实制作，完整呈现所有理论推导、市场机制与习题应用解析。</p>
+    </header>
+    
+    <div class="info-banner">
+      <div><strong>全功能离线课件：</strong> 课件、中文排版、MathJax数学公式渲染完全自包含，无需网络连接即可完整浏览与演示。</div>
+    </div>
+    
+    <div class="lecture-grid">
+      <!-- 第1讲 -->
+      <a href="lecture-01.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 01 讲</div>
+          <h2 class="card-title">衍生品市场导论</h2>
+          <div class="card-hull">John C. Hull (第9版) 第1章与第2章</div>
+          <div class="card-desc">衍生工具本质、场内交易所与OTC场外市场、远期合约机制、期货合约规范、每日逐日盯市结算表、保证金账户运作、远期曲线形态、套期保值、投机杠杆与现货-期货套利。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">32 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第2讲 -->
+      <a href="lecture-02.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 02 讲</div>
+          <h2 class="card-title">利用期货的套期保值策略</h2>
+          <div class="card-hull">John C. Hull (第9版) 第3章</div>
+          <div class="card-desc">多头与空头套期保值、基差风险分解公式、最小方差套期保值比率 (h*)、最优合约数计算 (N*)、尾随调整、利用股指期货与CAPM对冲股票组合市场风险、调整投资组合Beta系数以及滚动对冲策略。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">26 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第3讲 -->
+      <a href="lecture-03.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 03 讲</div>
+          <h2 class="card-title">远期与期货价格的确定</h2>
+          <div class="card-hull">John C. Hull (第9版) 第5章</div>
+          <div class="card-desc">投资性资产与消费性资产对比、卖空机制、无收益资产定价、已知现金收益与已知红利率资产定价、存续期远期合约估值、股指期货套利、外汇抛补利率平价、持有成本模型与便利收益。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">27 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第4讲 -->
+      <a href="lecture-04.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 04 讲</div>
+          <h2 class="card-title">互换 (Swaps)</h2>
+          <div class="card-hull">John C. Hull (第9版) 第7章</div>
+          <div class="card-desc">标准利率互换机制、资产与负债结构转换、金融中介做市商角色、比较优势理论设计、互换的债券组合估值法与远期利率协议法、隔夜指数互换 (OIS)、货币互换现金流与违约信用风险。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">26 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第5讲 -->
+      <a href="lecture-05.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 05 讲</div>
+          <h2 class="card-title">期权市场机制与股票期权性质</h2>
+          <div class="card-hull">John C. Hull (第9版) 第9章与第10章</div>
+          <div class="card-desc">期权定义与头寸、到期损益与净利润、实值/平值/虚值、内在价值与时间价值衰减、期权价格六大决定因素、欧美式期权上下限范围、买卖权平价定理 (Put-Call Parity) 及套利、美式期权提前行权边界。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">28 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第6讲 -->
+      <a href="lecture-06.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 06 讲</div>
+          <h2 class="card-title">期权交易策略</h2>
+          <div class="card-hull">John C. Hull (第9版) 第11章</div>
+          <div class="card-desc">备兑看涨期权 (Covered Call) 与保护性看跌期权 (Protective Put)、牛市差价策略 (看涨借方差价与看跌贷方差价)、熊市差价策略、蝶式差价、日历差价、跨式期权 (Straddle)、宽跨式期权 (Strangle) 及波动率策略对比。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">28 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第7讲 -->
+      <a href="lecture-07.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 07 讲</div>
+          <h2 class="card-title">二叉树期权定价模型导论</h2>
+          <div class="card-hull">John C. Hull (第9版) 第12章</div>
+          <div class="card-desc">单期二叉树定价、无套利复制组合与Delta比率、风险中性定价原理与概率计算、CRR波动率校准公式 (u与d)、多期二叉树倒推倒序折现、美式期权提前行权节点检验、连续红利收益率调整。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">22 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第8讲 -->
+      <a href="lecture-08.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 08 讲</div>
+          <h2 class="card-title">Black-Scholes-Merton 模型</h2>
+          <div class="card-hull">John C. Hull (第9版) 第13章</div>
+          <div class="card-desc">股票价格对数正态分布假设、几何布朗运动原理、预期收益率与收益波动率、历史数据波动率估算、BSM看涨与看跌期权解析公式推导、d1与d2直观经济含义、标准正态分布累积函数N(x)、隐含波动率与离散红利布莱克近似。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">18 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第9讲 -->
+      <a href="lecture-09.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 09 讲</div>
+          <h2 class="card-title">股指、外汇与期货期权</h2>
+          <div class="card-hull">John C. Hull (第9版) 第15章与第16章</div>
+          <div class="card-desc">连续红利率资产期权性质、默顿 (Merton 1973) 扩展BSM公式、股指期权定价与投资组合保险 (Portfolio Insurance) 规模确定及Beta调整、加曼-科尔哈根 (Garman-Kohlhagen) 外汇期权、期货期权合约特征及布莱克 (Black 1976) 期货期权定价公式。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">23 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+      
+      <!-- 第10讲 -->
+      <a href="lecture-10.html" class="lecture-card">
+        <div class="card-top">
+          <div class="card-lec-num">第 10 讲</div>
+          <h2 class="card-title">期权头寸对冲：希腊字母 (Greek Letters)</h2>
+          <div class="card-hull">John C. Hull (第9版) 第17章</div>
+          <div class="card-desc">Delta、Gamma、Vega、Theta与Rho风险敏感度计算与经济内涵、期权组合风险综合管理、利用标的现货与期货实现Delta中性与Gamma中性、Vega中性双期权对冲系统、动态Delta对冲与静态对冲比较及止损策略。</div>
+        </div>
+        <div class="card-bottom">
+          <span class="pill-count">30 张完整幻灯片</span>
+          <span class="pill-enrichment">包含实践案例解析</span>
+        </div>
+      </a>
+    </div>
+    
+    <div class="keyboard-guide">
+      <h4>幻灯片演示键盘快捷键</h4>
+      <p>在任意课件页面中：
+        <span class="key-tag">&rarr;</span> 或 <span class="key-tag">空格键</span>：下一张幻灯片 &bull;
+        <span class="key-tag">&larr;</span>：上一张幻灯片 &bull;
+        <span class="key-tag">O</span> 或 <span class="key-tag">Esc</span>：幻灯片网格总览模式 &bull;
+        <span class="key-tag">F</span>：进入全屏播放模式 &bull;
+        如需导出PDF，在网址后添加 <span class="key-tag">?print-pdf</span> 并在Chrome中按 <span class="key-tag">Ctrl+P</span> 打印（选择横向、无边距、勾选背景图形）。
+      </p>
+    </div>
+  </div>
+</body>
+</html>

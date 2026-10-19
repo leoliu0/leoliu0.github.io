@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20762 第9讲：股指、外汇与期货期权</title>
+  <link rel="stylesheet" href="vendor/reveal/dist/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="assets/slides.css">
+</head>
+<body>
+  <a href="index.html" class="deck-index-link">&larr; 返回课程主页</a>
+  <div class="reveal">
+    <div class="slides">
+<section id="l09-s01" data-kind="original" data-source-slide="1" data-pdf-page="1" data-pdf-half="top">
+  <div class="slide-container">
+    <div class="title-slide-container" style="width: 100%;">
+      <div class="title-slide-h1">第 9 讲</div>
+      <div class="title-slide-h1" style="margin-bottom: 20px">股指、外汇与期货期权</div>
+      <div class="title-slide-h2">Hull，第 15 章与第 16 章</div>
+      <div class="tip-of-the-week-box">
+        <div class="tip-title">每周经典文献</div>
+        <div class="tip-text">
+          衍生品定价的核心原则在于：在不存在套利机会的市场中，任何完全对冲的投资组合必须获得无风险利率。
+        </div>
+      </div>
+      <div class="uts-logo-text"><span style="color: #000; font-weight: 900;">&#10022;</span> UTS 商学院</div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s02" data-kind="original" data-source-slide="2" data-pdf-page="1" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 2</div>
+            <ul class="sidebar-nav">
+              <li class="active">学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">学习目标</h2>
+      <div class="slide-content">
+        <ul>
+          <li><strong>支付连续红利收益率资产的期权：</strong>
+            <ul>
+              <li>推导并计算期权价格的理论上下限</li>
+              <li>调整买卖权平价关系（Put-Call Parity）</li>
+              <li>调整二叉树模型以引入连续红利收益率（参见第8讲）</li>
+              <li>将 Black-Scholes 定价框架扩展至支付红利的资产期权</li>
+            </ul>
+          </li>
+          <li><strong>现实市场实例与实务应用：</strong>
+            <ul>
+              <li><strong>股票指数期权</strong>（例如标普 500、标普 100 指数期权）&bull; 投资组合保险策略</li>
+              <li><strong>外汇期权</strong> &bull; Garman-Kohlhagen 定价模型与外国利率</li>
+              <li><strong>期货期权</strong> &bull; Black (1976) 期货期权估值模型</li>
+              <li>深入理解市场为何优先交易期货期权而非标的现货资产期权</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s03" data-kind="original" data-source-slide="3" data-pdf-page="2" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 3</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li class="active">连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title" >支付连续复利红利收益率资产的欧式期权</h2>
+      <div class="slide-content">
+        <p style="margin-bottom: 12px; color: #374151">
+          考虑以当前价值为 \(S_0\)、支付连续复利红利率为 \(q\) 的资产为标的，执行价格为 \(K\)、到期期限为 \(T\) 的欧式看涨与看跌期权。
+        </p>
+        <ul>
+          <li>按年率 \(q\) 支付连续红利会导致该资产的预期资本收益率比不支付红利的情况减少 \(q\)。</li>
+          <li>在以下两种情况下，时刻 \(T\) 资产价格的概率分布完全一致：
+            <ul>
+              <li>资产当前价格为 \(S_0\)，并在存续期内支付连续红利率 \(q\)</li>
+              <li>资产当前价格设定为 \(S_0 e^{-qT}\)，且不提供任何红利收益</li>
+            </ul>
+          </li>
+          <li>我们可以通过将标的资产价格下调至 \(S_0 e^{-qT}\)，随后假设其不支付红利，以此直接对欧式期权进行估值。</li>
+          <li><strong>基本转换法则：</strong> 在所有 Black-Scholes 定价公式和买卖权平价关系中，直接将 \(S_0\) 替换为 \(S_0 e^{-qT}\)。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s04" data-kind="original" data-source-slide="4" data-pdf-page="2" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 4</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li class="active">价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">价格上下限与买卖权平价定理</h2>
+      <div class="slide-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px;">
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px;">
+            <h4 style="margin: 0 0 8px 0; color: #1e3a8a">看涨期权价格上下限</h4>
+            <p style="margin: 6px 0"><strong>理论下限：</strong><br>\(c \ge \max(S_0 e^{-qT} - K e^{-rT}, 0)\)</p>
+            <p style="margin: 6px 0"><strong>理论上限：</strong><br>\(c \le S_0 e^{-qT}\)</p>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px;">
+            <h4 style="margin: 0 0 8px 0; color: #1e3a8a">看跌期权价格上下限</h4>
+            <p style="margin: 6px 0"><strong>理论下限：</strong><br>\(p \ge \max(K e^{-rT} - S_0 e^{-qT}, 0)\)</p>
+            <p style="margin: 6px 0"><strong>理论上限：</strong><br>\(p \le K e^{-rT}\)</p>
+          </div>
+        </div>
+        <div class="equation-box" style="margin: 10px 0; padding: 12px 16px;">
+          <h4 style="margin: 0 0 6px 0; color: #1e3a8a">连续红利收益率下的买卖权平价定理</h4>
+          \[ c + K e^{-rT} = p + S_0 e^{-qT} \]
+        </div>
+        <p style="color: #4b5563; margin-top: 8px">
+          <em>回顾：</em> 对于支付现值为 \(D\) 的离散红利股票，平价关系式为 \(c + K e^{-rT} = p + S_0 - D\)。在此处，连续红利率将标的现货价格折现了 \(e^{-qT}\)。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s05" data-kind="original" data-source-slide="5" data-pdf-page="3" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 5</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li class="active">价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">二叉树模型：连续红利收益率</h2>
+      <div class="slide-content">
+        <ul>
+          <li>令 \(p\) 为风险中性世界中的上涨概率。</li>
+          <li>在“风险中性”世界中：
+            <ul>
+              <li>所有资产的总预期收益率均为无风险利率 \(r\)。</li>
+              <li>支付连续红利率 \(q\) 的股票，其预期价格增长率（资本利得）为 \(r - q\)。因此：</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="equation-box" style="padding: 8px 14px; margin: 8px 0">
+          \[ S_0 = e^{-(r-q)\Delta t} E[S_{\Delta t}] = e^{-(r-q)\Delta t} [p S_u + (1-p) S_d] \quad (1) \]
+          \[ f_0 = e^{-r\Delta t} E[f_{\Delta t}] = e^{-r\Delta t} [p f_u + (1-p) f_d] \quad (2) \]
+        </div>
+        <ul>
+          <li>由式 (1)，两端除以 \(S_0\) 可得 \(e^{(r-q)\Delta t} = p u + (1-p) d\)。求解 \(p\) 得：
+            <div class="equation-box" style="display: inline-block; padding: 4px 18px; margin: 4px 0;">
+              \[ p = \frac{e^{(r-q)\Delta t} - d}{u - d} \]
+            </div>
+          </li>
+          <li>由式 (2)，每个树节点处的期权价值均按无风险利率 \(r\) 折现：
+            \[ f_0 = e^{-r\Delta t} [p f_u + (1-p) f_d] \]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s06" data-kind="original" data-source-slide="6" data-pdf-page="3" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 6</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li class="active">Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">Black-Scholes 定价公式（默顿扩展 / Merton Extension）</h2>
+      <div class="slide-content">
+        <ul>
+          <li>欧式看涨期权价格为：
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ c = S_0 e^{-qT} N(d_1) - K e^{-rT} N(d_2) \]
+            </div>
+          </li>
+          <li>欧式看跌期权价格为：
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ p = K e^{-rT} N(-d_2) - S_0 e^{-qT} N(-d_1) \]
+            </div>
+          </li>
+        </ul>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 18px; margin-top: 10px;">
+          <p style="margin: 0;  color: #1e293b">其中：</p>
+          \[ d_1 = \frac{\ln(S_0 / K) + (r - q + \frac{1}{2}\sigma^2) T}{\sigma \sqrt{T}} \]
+          \[ d_2 = \frac{\ln(S_0 / K) + (r - q - \frac{1}{2}\sigma^2) T}{\sigma \sqrt{T}} = d_1 - \sigma \sqrt{T} \]
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s07" data-kind="original" data-source-slide="7" data-pdf-page="4" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 7</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li class="active">股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">股指期权 &ndash; 定价原理</h2>
+      <div class="slide-content">
+        <ul>
+          <li>股票指数可视为提供连续复利红利率 \(q\) 的金融资产（平均反映其所有成分股的红利收益）。</li>
+          <li><strong>二叉树模型：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ f_0 = e^{-r\Delta t} [p f_u + (1-p) f_d], \quad \text{其中 } p = \frac{e^{(r-q)\Delta t} - d}{u - d} \]
+            </div>
+            其中 \(\Delta t\) 为每个时间步长的长度。
+          </li>
+          <li><strong>Black-Scholes 公式：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ c = S_0 e^{-qT} N(d_1) - K e^{-rT} N(d_2), \quad p = K e^{-rT} N(-d_2) - S_0 e^{-qT} N(-d_1) \]
+            </div>
+            其中：
+            \[ d_1 = \frac{\ln(S_0 / K) + (r - q + \frac{1}{2}\sigma^2) T}{\sigma \sqrt{T}}, \quad d_2 = d_1 - \sigma \sqrt{T} \]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s08" data-kind="original" data-source-slide="8" data-pdf-page="4" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 8</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li class="active">股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">股指期权 &ndash; 基于远期价格定价</h2>
+      <div class="slide-content">
+        <ul>
+          <li>期权可通过标的指数期限为 \(T\)（到期时间与期权完全相同）的远期价格 \(F_0\) 进行定价：
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ F_0 = S_0 e^{(r-q)T} \implies F_0 e^{-rT} = S_0 e^{-qT} \]
+            </div>
+          </li>
+          <li><strong>以远期价格表示的 Black-Scholes 公式：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ c = F_0 e^{-rT} N(d_1) - K e^{-rT} N(d_2) = e^{-rT} [F_0 N(d_1) - K N(d_2)] \]
+              \[ p = K e^{-rT} N(-d_2) - F_0 e^{-rT} N(-d_1) = e^{-rT} [K N(-d_2) - F_0 N(-d_1)] \]
+            </div>
+            其中：
+            \[ d_1 = \frac{\ln(F_0 / K) + \frac{1}{2}\sigma^2 T}{\sigma \sqrt{T}}, \quad d_2 = \frac{\ln(F_0 / K) - \frac{1}{2}\sigma^2 T}{\sigma \sqrt{T}} = d_1 - \sigma \sqrt{T} \]
+          </li>
+          <li><strong>核心优势：</strong> 指数的红利收益率 \(q\) 完全不出现在这些方程中，因此无需对红利率进行任何估算！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s09" data-kind="original" data-source-slide="9" data-pdf-page="5" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 9</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li class="active">股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title" style="margin-bottom: 12px">股指期权 &ndash; 合约规格</h2>
+      <div class="slide-subtitle" style="margin-bottom: 8px">标普 500&trade; 指数期权（CBOE 交易代码：SPX）</div>
+      <div class="slide-content" >
+        <table class="slide-table" style="margin: 4px 0">
+          <tr>
+            <th style="width: 25%;">合约参数</th>
+            <th>规格详情</th>
+          </tr>
+          <tr>
+            <td><strong>标的指数</strong></td>
+            <td>标普 500 指数 &ndash; 涵盖 500 家美国头部蓝筹股的市值加权指数。</td>
+          </tr>
+          <tr>
+            <td><strong>合约乘数</strong></td>
+            <td><strong>$100</strong> / 指数点（例如指数处于 1,400 点时 &rarr; 合约名义价值为 $140,000）。</td>
+          </tr>
+          <tr>
+            <td><strong>权利金报价</strong></td>
+            <td>以小数形式报出。最小变动价位：低于 3.00 为 0.05（$5.00），3.00 及以上为 0.10（$10.00）。</td>
+          </tr>
+          <tr>
+            <td><strong>执行价格间距</strong></td>
+            <td>5 点（远月到期合约为 25 点间距）。</td>
+          </tr>
+          <tr>
+            <td><strong>到期月份</strong></td>
+            <td>三个近月连续月份，加上 3 月季度循环（3月、6月、9月、12月）中的三个后续月份。</td>
+          </tr>
+          <tr>
+            <td><strong>行权方式</strong></td>
+            <td><strong>欧式</strong> &ndash; SPX 期权通常仅在到期日前最后一个营业日方可行权。</td>
+          </tr>
+          <tr>
+            <td><strong>结算方式</strong></td>
+            <td><strong>现金结算</strong>，基于最后一个营业日（周五）的开盘特别结算价（SET）确定，现金于下一营业日划转。</td>
+          </tr>
+          <tr>
+            <td><strong>保证金</strong></td>
+            <td>多头全额支付权利金。未对冲的期权空头必须存入并维持标准的投资组合保证金。</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s10" data-kind="original" data-source-slide="10" data-pdf-page="5" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 10</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li class="active">股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title" style="margin-bottom: 8px">股指期权 &ndash; 市场行情报价</h2>
+      <div class="slide-subtitle" style="margin-bottom: 8px">
+        2005年12月1日；标普 100 指数期权（OEX）；标的指数点位 <strong>580.22</strong><br>
+        <span style="color: #6b7280">（数据来源：www.marketdataexpress.com &bull; 2006年1月到期）</span>
+      </div>
+      <div class="slide-content">
+        <table class="slide-table" style="text-align: center; margin-top: 4px">
+          <thead>
+            <tr style="background: #e2e8f0;">
+              <th colspan="3" style="text-align: center; background: #dbeafe; color: #1e40af;">看涨期权 CALLS（2006年1月）</th>
+              <th rowspan="2" style="text-align: center; background: #1e293b; color: #ffffff; vertical-align: middle;">执行价 STRIKE</th>
+              <th colspan="3" style="text-align: center; background: #fee2e2; color: #991b1b;">看跌期权 PUTS（2006年1月）</th>
+            </tr>
+            <tr style="background: #f1f5f9;">
+              <th>最新价</th><th>成交量</th><th>未平仓量</th>
+              <th>最新价</th><th>成交量</th><th>未平仓量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>25.70</td><td>20</td><td>832</td><td style="font-weight: bold; background: #f8fafc;">560</td><td>2.10</td><td>11</td><td>352</td></tr>
+            <tr><td>20.90</td><td>56</td><td>582</td><td style="font-weight: bold; background: #f8fafc;">565</td><td>3.50</td><td>32</td><td>1,511</td></tr>
+            <tr><td>18.30</td><td>40</td><td>1,285</td><td style="font-weight: bold; background: #f8fafc;">570</td><td>4.80</td><td>38</td><td>5,748</td></tr>
+            <tr><td>12.50</td><td>13</td><td>740</td><td style="font-weight: bold; background: #f8fafc;">575</td><td>7.10</td><td>52</td><td>5,571</td></tr>
+            <tr style="background: #fef9c3; font-weight: bold;"><td style="color: #1e40af;">7.00</td><td>18</td><td>737</td><td style="background: #fef08a; color: #854d0e;">580 (平值ATM)</td><td style="color: #991b1b;">9.90</td><td>35</td><td>6,308</td></tr>
+            <tr><td>4.70</td><td>45</td><td>856</td><td style="font-weight: bold; background: #f8fafc;">585</td><td>14.00</td><td>8</td><td>1,001</td></tr>
+            <tr><td>1.75</td><td>1,040</td><td>4,855</td><td style="font-weight: bold; background: #f8fafc;">590</td><td>22.10</td><td>0</td><td>25</td></tr>
+            <tr><td>0.75</td><td>1,005</td><td>1,665</td><td style="font-weight: bold; background: #f8fafc;">595</td><td>26.80</td><td>0</td><td>10</td></tr>
+            <tr><td>0.45</td><td>17</td><td>160</td><td style="font-weight: bold; background: #f8fafc;">600</td><td>31.00</td><td>0</td><td>0</td></tr>
+          </tbody>
+        </table>
+        <p style="color: #4b5563; margin-top: 6px">
+          <em>市场观察：</em> 当标的指数为 580.22 时，\(K < 580\) 的看涨期权处于实值（ITM），权利金较高；\(K > 580\) 的看跌期权处于实值。平值 580 看涨期权价格为 7.00，平值 580 看跌期权价格为 9.90。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s11" data-kind="original" data-source-slide="11" data-pdf-page="6" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 11</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li class="active">投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">利用股指期权构建投资组合保险</h2>
+      <div class="slide-content">
+        <p style="color: #374151; margin-bottom: 12px">
+          投资组合保险策略的核心在于构建<strong>保护性看跌期权（Protective Put）</strong> &ndash; 建立股票投资组合多头的同时，买入股指看跌期权作为下行保险。
+        </p>
+        <ul>
+          <li>每张股指期权合约覆盖的名义价值为 \(\$100 \times S_0\)，其中 \(S_0\) 为当前指数点位。</li>
+          <li>价值为 \(P\)、贝塔系数为 \(\beta\) 的股票组合，可通过买入 \(N\) 张看跌期权进行完全保险：
+            <div class="equation-box" style="display: inline-block; padding: 6px 20px; margin: 6px 0;">
+              \[ N = \beta \frac{P}{100 \times S_0} \]
+            </div>
+          </li>
+          <li>看跌期权的执行价格 \(K\) 可按需选定，用以锁定投资者所要求的最低组合保底价值（<strong>floor</strong>）。</li>
+          <li>保险成本即为购买这些看跌期权所支付的权利金。</li>
+          <li><strong>相比静态套期保值 / 远期抛售的显著优势：</strong>
+            <ul>
+              <li>期权多头代表权利而非义务 &ndash; 在防范下行风险的同时，完整保留组合的上行获利潜力！</li>
+              <li>投资者可自由选择任意执行价格 \(K\)，灵活定制免赔额度与期权成本。</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s12" data-kind="original" data-source-slide="12" data-pdf-page="6" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 12</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li class="active">投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">案例 1 &ndash; 投资组合保险 (\(\beta = 1\))</h2>
+      <div class="slide-content">
+        <p style="margin-bottom: 8px">
+          某 \(\beta = 1\) 的股票组合价值为 <strong>$500,000</strong>。标的指数点位为 <strong>1,000</strong>，且组合与指数的红利率完全相同。如何通过交易在未来 3 个月内防范组合价值跌破 <strong>$450,000</strong>？
+        </p>
+        <ul >
+          <li><strong>所需期权合约张数：</strong>
+            \[ N = 1 \times \frac{\$500,000}{100 \times 1,000} = \mathbf{5 \text{ 张看跌期权合约}} \]
+          </li>
+          <li><strong>执行价格计算：</strong> 要求的保底价值为 $450,000 &rarr; 允许的最大回撤幅度为 10%。
+            \[ K = 0.90 \times S_0 = 0.90 \times 1,000 = \mathbf{900} \]
+            <em>操作策略：</em> <strong>买入 5 张执行价格为 900、期限为 3 个月的股指看跌期权合约。</strong>
+          </li>
+          <li><strong>假设指数到期下跌至 \(S_T = 880\)（跌幅 &minus;12%）：</strong>
+            <ul>
+              <li>到期现货股票组合价值：\((1 - 0.12) \times \$500,000 = \$440,000\)</li>
+              <li>每张期权合约的到期收益：\(\max(900 - 880, 0) = 20\) 个指数点</li>
+              <li>期权总收益：\(20 \times 5 \times \$100 = \$10,000\)</li>
+              <li><strong>被保险组合总价值：</strong> \(\$440,000 + \$10,000 = \mathbf{\$450,000}\)（精准达成保底目标！）。</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s13" data-kind="original" data-source-slide="13" data-pdf-page="7" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 13</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li class="active">投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">案例 2 &ndash; 投资组合保险 (\(\beta = 2\))</h2>
+      <div class="slide-content">
+        <p style="margin-bottom: 6px">
+          某 \(\beta = 2\) 的股票组合价值为 <strong>$500,000</strong>。标的指数点位为 <strong>1,000</strong>，两者的年化红利率均为 <strong>4%</strong>，年化无风险利率为 <strong>12%</strong>。防范组合在 3 个月内跌破 <strong>$450,000</strong>。
+        </p>
+        <ul >
+          <li><strong>合约张数：</strong>
+            \[ N = \beta \frac{P}{100 \times S_0} = 2 \times \frac{\$500,000}{100 \times 1,000} = \mathbf{10 \text{ 张看跌期权合约}} \]
+          </li>
+          <li><strong>运用 CAPM 计算执行价格：</strong>
+            <ul>
+              <li>3个月折算利率与红利率：\(r = 12\% / 4 = 3\%\)；红利率 \(q = 4\% / 4 = 1\%\)。</li>
+              <li>包含红利在内的投资组合预期总收益率：
+                \[ E(R_p) = \frac{-\$50,000}{\$500,000} + 1\% = -10\% + 1\% = -9\% \]
+              </li>
+              <li>根据 CAPM 模型：\(E(R_p) = r + \beta (r_m - r) \implies -9\% = 3\% + 2(r_m - 3\%) \implies r_m = -3\%\)</li>
+              <li>市场预期资本收益率（扣除红利后的指数点位变动）：\(r_m - q = -3\% - 1\% = -4\%\)</li>
+              <li>对应执行价格：\(K = (1 - 0.04) \times S_0 = 0.96 \times 1,000 = \mathbf{960}\)</li>
+            </ul>
+          </li>
+          <li><strong>交易策略：</strong> 买入 10 张执行价格为 960、期限为 3 个月的股指看跌期权合约。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s14" data-kind="original" data-source-slide="14" data-pdf-page="7" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 14</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li class="active">投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">案例 2 &ndash; 投资组合保险效果检验</h2>
+      <div class="slide-content">
+        <p style="margin-bottom: 8px"><strong>假设 \(S_T = 880\)（标的指数下跌 120 点，跌幅为 &minus;12%）：</strong></p>
+        <ul >
+          <li>指数在 3 个月内包含红利的总收益率：
+            \[ \frac{880 - 1,000}{1,000} + 1\% = -12\% + 1\% = -11\% \]
+          </li>
+          <li>CAPM 模型预期的股票投资组合总收益率：
+            \[ E(R_p) = r + \beta (r_m - r) = 3\% + 2(-11\% - 3\%) = -25\% \]
+          </li>
+          <li>预期投资组合资本收益率（扣除 1% 红利）：
+            \[ -25\% - 1\% = -26\% \]
+          </li>
+          <li>到期时现货股票组合价值：\((1 - 0.26) \times \$500,000 = \mathbf{\$370,000}\)</li>
+          <li>每张期权合约的行权收益：\(\max(960 - 880, 0) = 80\) 个指数点</li>
+          <li>看跌期权总收益：\(80 \times 10 \times \$100 = \mathbf{\$80,000}\)</li>
+          <li><strong>被保险组合总价值：</strong> \(\$370,000 + \$80,000 = \mathbf{\$450,000}\)（精准守住预设保底底线！）。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s14-v1"  data-kind="enrichment" data-after-source-slide="14">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - v1</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li class="active">投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h3 class="slide-title" style="margin-bottom: 8px">投资组合保险：合约取整、贝塔调整与实战深度解析</h3>
+      <div class="example-card" style="padding: 12px 16px">
+        <p style="margin: 0 0 6px 0;"><strong>参数设定：</strong> 投资组合价值 \(P = \$4\text{M}\)（400万美元），标普 500 指数 \(S_0 = 1,400\)，6 个月保底价值目标 \(= \$3.6\text{M}\)（360万美元），合约乘数 \(= \$100\)。年化红利率 \(q = 4\%\)。</p>
+        <ul style="margin: 4px 0 8px 0; padding-left: 20px;">
+          <li><strong>(a) 基准情形（\(\beta = 1\)）：</strong>
+            看跌期权张数：\(N = \frac{\$4,000,000}{100 \times 1,400} = 28.57 \rightarrow \mathbf{29 \text{ 张合约}}\)。<br>
+            允许的最大资本跌幅 \(= \frac{\$3.6\text{M} - \$4\text{M}}{\$4\text{M}} = -10\%\)。执行价格 \(K = 0.90 \times 1,400 = \mathbf{1260}\)。<strong>买入 29 张 6 个月到期、\(K=1260\) 的看跌期权。</strong>
+          </li>
+          <li><strong>(b) 当指数下跌至 \(S_T = 1,200\)（跌幅 &minus;14.29%）时：</strong>
+            现货股票亏损：\(-14.286\% \times \$4\text{M} = -\$571,429 \rightarrow P_{\text{equity}} = \$3,428,571\)。<br>
+            看跌期权收益：\(29 \times (1260 - 1200) \times \$100 = 29 \times \$6,000 = +\$174,000\)。<br>
+            <strong>组合总价值：</strong> \(\$3,428,571 + \$174,000 = \mathbf{\$3,602,571}\)（由于合约张数向上取整至 29 张，略微超过 360万美元 底线）。
+          </li>
+          <li><strong>(c) 非单位贝塔调整（\(\beta = 1.2\)，年化连续无风险利率 \(r = 8\%\)）：</strong>
+            \[ N^* = 1.2 \times \frac{\$4,000,000}{140,000} = 34.28 \rightarrow \mathbf{34 \text{ 张合约}} \]
+            看跌期权依据<strong>现货价格变动</strong>行权，而 CAPM 决定的是<strong>总收益率</strong>！<br>
+            组合目标总收益率：\(E(R_p) = -10\% + 2\% \text{ (红利)} = -8\%\)。6 个月无风险利率 \(r = 4\%\)：<br>
+            \(-8\% - 4\% = 1.2(R_m - 4\%) \implies R_m = -6\%\)（市场总收益率）&rarr; 资本价格跌幅 \(= -6\% - 2\% = -8\%\)。<br>
+            所需执行价格：\(K = 1,400 \times (1 - 0.08) = 1,288\)。按交易所 5 点间隔取整可得 \(\mathbf{K = 1290}\)。<br>
+            <strong>更高的 \(\beta\) 不仅需要更多合约张数（34张 vs 29张），而且需要更高的执行价格（1290 vs 1260）！</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s15" data-kind="original" data-source-slide="15" data-pdf-page="8" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 15</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li class="active">外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">外汇期权 &ndash; 定价原理（Garman-Kohlhagen 模型）</h2>
+      <div class="slide-content">
+        <ul>
+          <li>外国货币可视为提供连续红利率为 \(r_f\)（外国无风险利率）的金融资产。
+            <ul>
+              <li>直接使用连续红利股票的期权定价公式，其中 \(S_0\) 为即期汇率（每单位外币折合的本币金额），红利率设定为 \(q = r_f\)。</li>
+            </ul>
+          </li>
+          <li><strong>买卖权平价定理：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ c + K e^{-rT} = p + S_0 e^{-r_f T} \]
+            </div>
+          </li>
+          <li><strong>二叉树模型：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ f_0 = e^{-r\Delta t} [p f_u + (1-p) f_d], \quad \text{其中 } p = \frac{e^{(r - r_f)\Delta t} - d}{u - d} \]
+            </div>
+          </li>
+          <li><strong>Black-Scholes 公式（Garman-Kohlhagen 1983）：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ c = S_0 e^{-r_f T} N(d_1) - K e^{-rT} N(d_2), \quad p = K e^{-rT} N(-d_2) - S_0 e^{-r_f T} N(-d_1) \]
+            </div>
+            其中：
+            \[ d_1 = \frac{\ln(S_0 / K) + (r - r_f + \frac{1}{2}\sigma^2) T}{\sigma \sqrt{T}}, \quad d_2 = d_1 - \sigma \sqrt{T} \]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s15-v1"  data-kind="enrichment" data-after-source-slide="15">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - v1</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li class="active">外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h3 class="slide-title" style="margin-bottom: 8px">Garman-Kohlhagen 外汇平价与利差效应深入解析</h3>
+      <div class="example-card" style="padding: 12px 18px">
+        <p style="margin: 0 0 8px 0;">
+          <strong>习题分析：</strong> 某 4 个月到期的欧式欧元看涨期权执行价格 \(K = 1.300\)，期权价格 \(c = \$0.038\)。即期汇率 \(S_0 = 1.2698\) USD/EUR。美国无风险利率 \(r = 4\%\)，欧洲无风险利率 \(r_f = 6\%\)（均为连续复利年率）。计算等价欧式看跌期权的价格 \(p\)。
+        </p>
+        <div class="equation-box" style="padding: 8px 14px; margin: 8px 0;">
+          \[ c + K e^{-rT} = p + S_0 e^{-r_f T} \implies p = c + K e^{-rT} - S_0 e^{-r_f T} \]
+        </div>
+        <ul style="margin: 6px 0; padding-left: 20px;">
+          <li>到期期限：\(T = 4/12 = 1/3 \text{ 年}\)。</li>
+          <li>折现执行价格（国内利率 \(r = 4\%\)）：
+            \[ K e^{-rT} = 1.300 \times e^{-0.04 \times (1/3)} = 1.300 \times 0.986755 = \mathbf{\$1.28278} \]
+          </li>
+          <li>折现即期汇率（国外利率 \(r_f = 6\%\)）：
+            \[ S_0 e^{-r_f T} = 1.2698 \times e^{-0.06 \times (1/3)} = 1.2698 \times 0.980199 = \mathbf{\$1.24466} \]
+          </li>
+          <li>看跌期权价格：
+            \[ p = 0.038 + 1.28278 - 1.24466 = \mathbf{\$0.07612} \approx \mathbf{\$0.0762} \text{（7.62 美分）} \]
+          </li>
+        </ul>
+        <p style="margin: 6px 0 0 0; color: #1e3a8a; font-weight: 500;">
+          由于 \(r_f (6\%) > r (4\%)\)，持有欧元获得的利息显著高于持有美元。远期汇率 \(F_0 = S_0 e^{(r - r_f)T} = 1.2614\) 处于远期贴水状态（\(F_0 < S_0\)），这使得看跌期权相比看涨期权明显更昂贵（$0.0762 对比 $0.038）。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s16" data-kind="original" data-source-slide="16" data-pdf-page="8" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 16</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li class="active">外汇期权</li>
+              <li>期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title" style="margin-bottom: 10px">外汇期权 &ndash; 合约规格</h2>
+      <div class="slide-subtitle" style="margin-bottom: 8px">费城股票交易所 (PHLX) 澳大利亚元期权产品规格（代码：XDA）</div>
+      <div class="slide-content">
+        <table class="slide-table" style="margin: 4px 0">
+          <tr>
+            <th style="width: 25%;">合约参数</th>
+            <th>PHLX 交易规格详情</th>
+          </tr>
+          <tr>
+            <td><strong>标的资产</strong></td>
+            <td>澳大利亚元（AUD）。期权权利金以美元（USD）报出并收取。</td>
+          </tr>
+          <tr>
+            <td><strong>合约乘数</strong></td>
+            <td><strong>10,000 澳大利亚元</strong></td>
+          </tr>
+          <tr>
+            <td><strong>交易代码</strong></td>
+            <td>主代码：<strong>XDA</strong> &bull; 替代代码：<strong>AZD</strong> &bull; 半点执行价代码：<strong>AND</strong> / <strong>DOA</strong> &bull; 结算代码：<strong>ADW</strong></td>
+          </tr>
+          <tr>
+            <td><strong>行权方式</strong></td>
+            <td><strong>欧式</strong> &ndash; 仅在到期日前最后一个交易日方可行权。</td>
+          </tr>
+          <tr>
+            <td><strong>到期循环</strong></td>
+            <td>3 月季度循环月加上两个近月连续月份（共六个活跃到期月份）。</td>
+          </tr>
+          <tr>
+            <td><strong>结算价值</strong></td>
+            <td>以到期月份第三个周五中午 12:00 的即期汇率（代码 ADW）为基准进行美元现金结算。</td>
+          </tr>
+          <tr>
+            <td><strong>点值与最小变动</strong></td>
+            <td>每点 = $100（即 0.01 &times; 10,000 AUD）。报价 2.13 对应权利金 $213。最小变动价位 0.01 = $1.00。</td>
+          </tr>
+          <tr>
+            <td><strong>执行价格间距</strong></td>
+            <td>通常按半美分（0.005）设定（例如 $0.750、$0.755、$0.760）。</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s17" data-kind="original" data-source-slide="17" data-pdf-page="9" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 17</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li class="active">期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">期货期权 &ndash; 收益结构</h2>
+      <div class="slide-content">
+        <ul>
+          <li><strong>期货看涨期权：</strong> 赋予持有者在约定到期日或之前以执行价格 \(K\) 建立期货合约多头的权利。
+            <ul>
+              <li>行权时，持有者获得<strong>一份标的期货合约的多头头寸</strong>，并</li>
+              <li>获得一笔等于最新期货结算价 \(F^*\) 超过执行价格部分额度的现金：\(\max(F^* - K, 0)\)。</li>
+            </ul>
+          </li>
+          <li><strong>期货看跌期权：</strong> 赋予持有者在约定到期日或之前以执行价格 \(K\) 建立期货合约空头的权利。
+            <ul>
+              <li>行权时，持有者获得<strong>一份标的期货合约的空头头寸</strong>，并</li>
+              <li>获得一笔等于执行价格超过最新期货结算价部分额度的现金：\(\max(K - F^*, 0)\)。</li>
+            </ul>
+          </li>
+          <li><strong>若行权后获得的期货头寸立即平仓：</strong>
+            <div class="equation-box" style="padding: 6px 14px; margin: 6px 0;">
+              \[ \text{看涨期权收益} = \max(F_T - K, 0), \quad \text{看跌期权收益} = \max(K - F_T, 0) \]
+            </div>
+            其中 \(F_T\) 为行权时刻的期货市场价格。
+          </li>
+          <li>期权的到期日通常设定在标的期货合约交割日当天或交割日前数个交易日。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s18" data-kind="original" data-source-slide="18" data-pdf-page="9" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 18</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li class="active">期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">期货期权 &ndash; 定价（Black 模型）</h2>
+      <div class="slide-content">
+        <ul>
+          <li>在风险中性世界中，期货合约的预期漂移率为<strong>零</strong>：
+            <ul>
+              <li>进入期货合约的初始成本为零；零成本投资的期望利润必须为零。</li>
+              <li>直接使用连续红利收益率定价公式，代入 \(S_0 = F_0\) 以及 \(q = r\)。</li>
+            </ul>
+          </li>
+          <li><strong>买卖权平价定理：</strong>
+            <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+              \[ c + K e^{-rT} = p + F_0 e^{-rT} \]
+            </div>
+          </li>
+          <li><strong>期货二叉树模型：</strong>
+            \[ f_0 = e^{-r\Delta t} [p f_u + (1-p) f_d], \quad \text{其中 } p = \frac{e^{(r-r)\Delta t} - d}{u - d} = \frac{1 - d}{u - d} \]
+          </li>
+          <li><strong>Black (1976) 期货期权定价模型：</strong>
+            <div class="equation-box" style="padding: 4px 14px; margin: 4px 0;">
+              \[ c = e^{-rT} [F_0 N(d_1) - K N(d_2)], \quad p = e^{-rT} [K N(-d_2) - F_0 N(-d_1)] \]
+            </div>
+            其中：
+            \[ d_1 = \frac{\ln(F_0 / K) + \frac{1}{2}\sigma^2 T}{\sigma \sqrt{T}}, \quad d_2 = d_1 - \sigma \sqrt{T} \]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s18-v1"  data-kind="enrichment" data-after-source-slide="18">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - v1</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li class="active">期货期权</li>
+              <li>Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h3 class="slide-title" style="margin-bottom: 6px">美式期货看跌期权：两步二叉树与提前行权检验</h3>
+      <div class="example-card" style="padding: 10px 16px">
+        <p style="margin: 0 0 4px 0;">
+          <strong>参数设定：</strong> 期货价格 \(F_0 = \$78\)，\(\sigma = 18\%\)，\(r = 4\%\)，期限 \(T = 4 \text{ 个月}\)（两步树 &rarr; \(\Delta t = 2/12 = 0.1667\)），执行价格 \(K = \$80\)。
+        </p>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; margin: 6px 0;">
+          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+            <strong>单步参数：</strong><br>
+            \(u = e^{0.18 \sqrt{0.1667}} = \mathbf{1.07625}, \quad d = 1/u = \mathbf{0.92915}\)<br>
+            \(p = \frac{1 - d}{u - d} = \frac{1 - 0.92915}{1.07625 - 0.92915} = \mathbf{0.48164}\)<br>
+            折现因子 \(e^{-r\Delta t} = e^{-0.04 \times (1/6)} = \mathbf{0.99336}\)
+          </div>
+          <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+            <strong>期货价格树：</strong><br>
+            \(F_0 = 78.00\)<br>
+            第 1 步：\(F_u = 83.95, \quad F_d = 72.47\)<br>
+            第 2 步：\(F_{uu} = 90.35, \quad F_{ud} = 78.00, \quad F_{dd} = 67.34\)
+          </div>
+        </div>
+        <p style="margin: 4px 0 2px 0;"><strong>第 2 步行权收益（\(K = 80\)）：</strong> \(P_{uu} = 0, \quad P_{ud} = 80 - 78 = \$2.00, \quad P_{dd} = 80 - 67.34 = \$12.66\)。</p>
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px; margin-top: 4px;">
+          <strong>第 1 步倒推估值与美式提前行权检验：</strong>
+          <ul style="margin: 2px 0 0 0; padding-left: 18px;">
+            <li><strong>上涨节点（\(F_u = 83.95\)）：</strong> 继续持有价值 \(= 0.99336(0.51836 \times 2) = \mathbf{\$1.03}\)。提前行权收益 \(= \max(80 - 83.95, 0) = 0\)。&rarr; <em>不提前行权（\(P_u = \$1.03\)）。</em></li>
+            <li><strong>下跌节点（\(F_d = 72.47\)）：</strong> 继续持有价值 \(= 0.99336(0.4816 \times 2 + 0.5184 \times 12.66) = \mathbf{\$7.48}\)。提前行权收益 \(= 80 - 72.47 = \mathbf{\$7.53}\)。<br>
+              <strong style="color: #b91c1c;">&rarr; 提前行权是最优策略！</strong>（行权收益 \(P_d = \mathbf{\$7.53}\) 高于继续持有的 $7.48）。
+            </li>
+            <li><strong>初始根节点（\(t=0\)）：</strong> 继续持有价值 \(= 0.99336(0.4816 \times 1.03 + 0.5184 \times 7.53) = \mathbf{\$4.37}\)。立即行权收益 \(= \$2.00\)。&rarr; <strong>期权价格 = $4.37</strong>。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s19" data-kind="original" data-source-slide="19" data-pdf-page="10" data-pdf-half="top">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 19</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li class="active">Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title" style="margin-bottom: 8px">股指期货期权 &ndash; 合约规格</h2>
+      <div class="slide-subtitle" style="margin-bottom: 8px">澳大利亚证券交易所 (ASX) SPI 200&reg; 指数期货期权（商品代码：AP）</div>
+      <div class="slide-content">
+        <table class="slide-table" style="margin: 4px 0">
+          <tr>
+            <th style="width: 25%;">合约参数</th>
+            <th>ASX 市场规格详情</th>
+          </tr>
+          <tr>
+            <td><strong>合约乘数</strong></td>
+            <td><strong>A$25 / 指数点</strong>（例如在 6,000 点时名义价值为 A$150,000）。</td>
+          </tr>
+          <tr>
+            <td><strong>合约月份</strong></td>
+            <td>与标的期货合约相同历月到期。涵盖未来四个季月（3月、6月、9月、12月）。</td>
+          </tr>
+          <tr>
+            <td><strong>最小价格变动</strong></td>
+            <td><strong>0.5 个指数点</strong>（A$12.50）。</td>
+          </tr>
+          <tr>
+            <td><strong>执行价格间距</strong></td>
+            <td>按 <strong>25 个指数点</strong> 设定。随期货价格波动自动加挂新行权价。</td>
+          </tr>
+          <tr>
+            <td><strong>最后交易日</strong></td>
+            <td>标的期货合约的最后交易日（当日中午 12:00 停止交易）。</td>
+          </tr>
+          <tr>
+            <td><strong>结算方式</strong></td>
+            <td>按标的期货合约的现金结算价格进行结算。</td>
+          </tr>
+          <tr>
+            <td><strong>交易时间</strong></td>
+            <td>下午 5:10 &ndash; 上午 7:00 / 8:00（夜盘）以及上午 9:50 &ndash; 下午 4:30（日盘）。</td>
+          </tr>
+          <tr>
+            <td><strong>行权方式</strong></td>
+            <td><strong>美式</strong> &ndash; 截至最后交易日（含）的任何营业日均可行权。实值期权自动行权转入标的期货合约头寸。</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="l09-s20" data-kind="original" data-source-slide="20" data-pdf-page="10" data-pdf-half="bottom">
+  <div class="slide-container">
+    <aside class="slide-sidebar">
+            <div class="sidebar-course-code">20762 DRM</div>
+            <div class="sidebar-slide-id">第 9 讲 - 20</div>
+            <ul class="sidebar-nav">
+              <li>学习目标</li>
+              <li>连续红利收益率资产</li>
+              <li>价格上下限与平价</li>
+              <li>Black-Scholes模型扩展</li>
+              <li>股指期权</li>
+              <li>投资组合保险</li>
+              <li>外汇期权</li>
+              <li>期货期权</li>
+              <li class="active">Black (1976) 模型</li>
+            </ul>
+          </aside>
+    <div class="slide-body">
+      <h2 class="slide-title">期货期权与现货期权的比较分析</h2>
+      <div class="slide-content">
+        <ul>
+          <li><strong>相比现货期权，期货期权的潜在竞争优势：</strong>
+            <ul>
+              <li>期货合约通常比标的物理现货资产具有更高的流动性，交易更为便捷（例如国债现货存在最便宜可交割券与应计利息的复杂性）。</li>
+              <li>行权无需立即进行实物现货交割；进入期货合约推迟了现金流出，保留了货币时间价值。</li>
+              <li>标的物理资产可能难以直接交易或做空（例如大宗农产品、缺乏现货流动性的指数）。</li>
+              <li>期货期权通常享有更低的交易手续费、更窄的买卖价差与交易所统一清算担保。</li>
+            </ul>
+          </li>
+          <li><strong>美式期权估值对比分析：</strong>
+            <ul>
+              <li><strong>正常市场（期货升水 / Contango，\(F_0 > S_0\)）：</strong> 期货美式看涨期权价值<em>高于</em>现货美式看涨期权；期货美式看跌期权价值<em>低于</em>现货美式看跌期权。</li>
+              <li><strong>反向市场（期货贴水 / Backwardation，\(F_0 < S_0\)）：</strong> 结论完全相反 &ndash; 期货看跌期权价值更高，期货看涨期权价值更低。</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+  </div>
+  <script src="vendor/reveal/dist/reveal.js"></script>
+  <script src="vendor/reveal/plugin/math/math.js"></script>
+  <script src="vendor/mathjax/tex-svg.js" id="MathJax-script" async></script>
+  <script src="assets/deck.js"></script>
+</body>
+</html>

@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第 1 讲：金融衍生品市场导论</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="deck-index-link" href="index.html">← 返回讲义目录</a>
+<div class="reveal">
+<div class="slides">
+<!-- Slide 1 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l01-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 1 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 20px">金融衍生品市场导论</div>
+<div class="title-slide-h2">Hull 著，第 1 &amp; 2 章</div>
+<div class="tip-of-the-week-box">
+<div class="tip-title">本周核心要点</div>
+<div class="tip-text">
+                • 远期合约属于场外交易 (OTC) 合约<br/>
+                • 期货合约每日进行结算 – 逐日盯市 (Mark to Market)<br/>
+                • 期权买方需要支付期权费 / 权利金 (Premium)
+              </div>
+</div>
+<div class="uts-logo-text">
+<span style="color: #000; font-weight: 900;">✦</span> UTS商学院 (UTS Business School)
+            </div>
+</div>
+</div>
+</section>
+<!-- Slide 2 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l01-s02"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li>阐述远期合约、期货合约以及期权合约的基本特征</li>
+<li>概述场内交易所市场与场外交易 (OTC) 市场</li>
+<li>探讨期货市场机制
+                  <ul>
+<li>解释每日逐日盯市 (Marking-to-Market) 结算流程</li>
+<li>结合保证金账户交易细则讨论保证金运作机制</li>
+<li>定义并对比正常市场与反向市场 – 升水 (Contango) 与贴水 (Backwardation)</li>
+</ul>
+</li>
+<li>解释衍生品市场参与者的经济活动：
+                  <ul>
+<li>套期保值者 (Hedgers) • 投机者 (Speculators) • 套利者 (Arbitrageurs)</li>
+</ul>
+</li>
+<li>分析基础套利机会与定价边界</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 3 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l01-s03"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 3</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">前置基础知识</h2>
+<div class="slide-content">
+<ul>
+<li><strong>25556 金融证券 (FS) – 第 10 讲：金融期货</strong>
+<ul>
+<li>远期合约 vs 期货合约的对比</li>
+<li>远期合约的到期损益结构 (Payoffs)</li>
+<li>期货合约的核心特征：标准化、保证金制度、结算所清算、实物交割 vs 现金结算</li>
+<li>利用期货进行套期保值：空头对冲 vs 多头对冲</li>
+</ul>
+</li>
+</ul>
+<div class="equation-box" style="text-align: left; margin-top: 35px">
+<strong>课程衔接：</strong>在本课程中，我们将在该基础之上严格展开深入分析，推导严密的持有成本方程 (Cost of Carry)、便利收益率 (Convenience Yield)、看涨-看跌期权平价套利边界以及实证最优对冲比率。
+              </div>
+</div>
+</div>
+</div></section>
+<!-- Slide 4 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l01-s04"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">衍生品的本质</h2>
+<div class="slide-content">
+<ul>
+<li>衍生品 (Derivative) 是一种金融工具，其价值取决于（或衍生自）其他更为基础的标的资产 (Underlying Assets) 的价值。</li>
+<li>四大基础衍生工具模块：
+                  <ul>
+<li><strong>期货合约 (Futures Contracts)：</strong> 在交易所集中交易的标准化协议，约定在未来特定日期以特定价格买入或卖出标的资产。</li>
+<li><strong>远期合约 (Forward Contracts)：</strong> 在场外市场 (OTC) 私下达成的双边定制协议，约定在未来买入或卖出标的资产。</li>
+<li><strong>互换合约 (Swaps)：</strong> 双方私下达成的协议，约定在未来多个日期之间周期性互换现金流。</li>
+<li><strong>期权合约 (Options)：</strong> 赋予买方在未来特定日期或之前以约定价格买入（看涨期权）或卖出（看跌期权）标的资产的权利（而非义务）的合约。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 5 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l01-s05"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">标的资产</h2>
+<div class="slide-content">
+<ul>
+<li><strong>金融证券 (Financial Securities)：</strong>
+<ul>
+<li>股票资产（单一公司股票、股票指数如 ASX 200、S&amp;P 500）</li>
+<li>外汇货币（澳元/美元 AUD/USD、欧元/美元 EUR/USD、英镑/美元 GBP/USD、日元/美元 JPY/USD）</li>
+<li>利率与债务工具（国债 Treasury bonds、银行承兑票据 Bank bills、SOFR、BBSW）</li>
+</ul>
+</li>
+<li><strong>大宗商品 (Commodities)：</strong>
+<ul>
+<li>农产品（小麦、玉米、活牛/牛肉、大豆、糖）</li>
+<li>金属（黄金、白银、铜、铂金）</li>
+<li>能源产品（原油、天然气、电力）</li>
+</ul>
+</li>
+<li><strong>其他标的资产 (Other Underlyings)：</strong>
+<ul>
+<li>信用事件（信用违约互换 CDS）、天气指数、市场波动率指数 (VIX)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 6 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l01-s06"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li class="active">衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">衍生品交易所</h2>
+<div class="slide-content">
+<table class="slide-table">
+<thead>
+<tr>
+<th>交易期货的交易所</th>
+<th>交易期权的交易所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>芝加哥期货交易所 (CBOT, 始建于 1848/1865)</td>
+<td>芝加哥期权交易所 (CBOE, 始建于 1973)</td>
+</tr>
+<tr>
+<td>芝加哥商业交易所 (CME, 始建于 1898)</td>
+<td>美国证券交易所 (AMEX) / NYSE Arca</td>
+</tr>
+<tr>
+<td>悉尼期货交易所 (SFE, 始建于 1960 / 2006并入ASX)</td>
+<td>澳大利亚证券交易所 (ASX Options, 始建于 1976)</td>
+</tr>
+<tr>
+<td>洲际交易所 (ICE) / 欧洲期货交易所 (Eurex)</td>
+<td>欧洲期货交易所 (Eurex，法兰克福 / 苏黎世)</td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 14px;">
+<li>历史上曾在实体交易大厅通过公开喊价 (Open Outcry) 进行交易。</li>
+<li>现代交易几乎已实现 100% 电子化（如 CME Globex、ASX Trade24）。</li>
+<li>交易所交易合约具有严格标准化特征，并通过中央结算所作为共同对手方进行集中清算。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 7 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l01-s07"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li class="active">衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">场外交易 (OTC) 市场</h2>
+<div class="slide-content">
+<ul>
+<li>场外交易市场是场内公开组织化交易所的重要替代与补充。</li>
+<li>由金融机构、基金管理公司和大型企业财务主管通过电话和计算机网络全球互联构成的交易网络。</li>
+<li>交易由商业双方直接进行私下协商签署（双边合约 Bilateral Contracts）。</li>
+<li>合约条款可严格根据客户的风险管理需求量身定制（如特定的名义本金、到期日、交割规格等）。</li>
+<li>面临交易对手信用风险（违约风险）– 主要由国际掉期与衍生工具协会 (ISDA) 主协议进行规范。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 8 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l01-s08"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li class="active">衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">场外衍生品与场内衍生品市场规模</h2>
+<div class="slide-content">
+<ul>
+<li><strong>名义本金 (Notional Principal)：</strong> 用于计算衍生品应付现金流的参考基准资金总额。</li>
+<li><strong>总市场价值 (Gross Market Value)：</strong> 按当前市场利率替换所有未平仓合约所需的成本（衡量实际面临的市场信用敞口与风险规模）。</li>
+</ul>
+<table class="slide-table" style="margin-top: 18px">
+<thead>
+<tr>
+<th>市场板块 (国际清算银行 BIS 调研数据)</th>
+<th>名义本金 (万亿美元)</th>
+<th>总市场价值 (万亿美元)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>场外交易市场 (OTC)</strong></td>
+<td>约 600 – 700 万亿美元</td>
+<td>约 15 – 20 万亿美元</td>
+</tr>
+<tr>
+<td><strong>交易所内交易 (ETD)</strong></td>
+<td>约 80 – 100 万亿美元</td>
+<td>约 3 – 5 万亿美元</td>
+</tr>
+</tbody>
+</table>
+<ul style="margin-top: 12px;">
+<li>全球范围内，利率衍生品合约占场外市场全部名义本金总规模的 75% 以上。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 9 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l01-s09"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li class="active">远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期合约</h2>
+<div class="slide-content">
+<ul>
+<li>远期合约是一种在场外市场 (OTC) 达成的协议，约定在未来特定时刻 \(T\) 按预先商定的交割价格 \(K\) 买入或卖出某种资产。</li>
+<li>交易一方持有<strong>多头头寸 (Long Position)</strong>（同意在时刻 \(T\) 以价格 \(K\) 买入资产）。</li>
+<li>另一方持有<strong>空头头寸 (Short Position)</strong>（同意在时刻 \(T\) 以价格 \(K\) 卖出资产）。</li>
+<li>在到期时刻 \(T\) 的损益公式（其中 \(S_T\) 为到期标的资产即期价格）：
+                  <div class="equation-box">
+                    \[ \text{多头到期损益} = S_T - K \]
+                    \[ \text{空头到期损益} = K - S_T \]
+                  </div>
+</li>
+<li>订立远期合约在初始时刻不需要任何前期现金流支出（初始价值 \(f_0 = 0\)）。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 10 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l01-s10"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期货合约</h2>
+<div class="slide-content">
+<ul>
+<li>期货合约是一种在未来特定时间 \(T\) 按特定价格（期货价格 \(F_t\)）买入或卖出某种资产的协议。</li>
+<li>与远期合约不同，期货合约在有组织的公开交易所内集中竞价交易：
+                  <ul>
+<li><strong>标准化规格：</strong> 标的资产质量等级、合约乘数/规模、交割地点、交割月份均由交易所统一标准化设定。</li>
+<li><strong>结算所 (Clearinghouse)：</strong> 通过合约更替机制 (Novation) 保证双方履约（成为每一位买方的卖方，以及每一位卖方的买方）。</li>
+<li><strong>保证金制度 (Margin Requirements)：</strong> 实行每日无负债结算（逐日盯市 Marking-to-Market），有效化解违约信用风险。</li>
+</ul>
+</li>
+<li>绝大多数期货合约在到期日之前都会通过对冲平仓 (Closed Out) 结束，极少数最终走向实物交割。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 1.A -->
+<section data-after-source-slide="10" data-kind="enrichment" id="l01-s10-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 12px">核心机制差异：远期合约 vs 期货合约</h3>
+<table class="slide-table" style="margin-bottom: 12px">
+<thead>
+<tr>
+<th>比较维度</th>
+<th>远期合约 (Forward Contract)</th>
+<th>期货合约 (Futures Contract)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>交易场所</strong></td>
+<td>场外交易市场 OTC (私下双边协商)</td>
+<td>规范化交易所 (如 CME、ASX、ICE)</td>
+</tr>
+<tr>
+<td><strong>合约条款</strong></td>
+<td>根据用户个性化需求量身定制</td>
+<td>高度标准化 (规模、交割品、日期)</td>
+</tr>
+<tr>
+<td><strong>结算方式</strong></td>
+<td>到期日 \(T\) 一次性结算</td>
+<td>每日结算 (逐日盯市 Mark to Market)</td>
+</tr>
+<tr>
+<td><strong>信用风险</strong></td>
+<td>存在显著的交易对手违约风险</td>
+<td>由结算所清算担保，基本被消除</td>
+</tr>
+<tr>
+<td><strong>提前平仓</strong></td>
+<td>较为困难；需征得原对手方同意</td>
+<td>在流动性充裕的市场上随时对冲平仓</td>
+</tr>
+</tbody>
+</table>
+<div class="example-card">
+<p><strong>核心机制总结：</strong> 期货利用结算所保证金制度替代了个体交易对手信用风险。由于每日损益都在当日现金结算结清，违约敞口无法像双边远期协议那样跨越数月累积扩大。</p>
+</div>
+</div>
+</div></section>
+<!-- Slide 11 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l01-s11"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期货价格的收敛与演变</h2>
+<div class="slide-content">
+<ul>
+<li>随着时间推移，市场参与者持续对在到期时刻 \(T\) 买卖资产的期货合约进行撮合交易。</li>
+<li>期货价格 \(F_t\) 根据标的供求、即期现货价格、利率以及仓储成本/股息收益的变化持续动态更新。</li>
+<li><strong>到期价格收敛性 (Price Convergence at Maturity)：</strong>
+<ul>
+<li>当合约临近交割月份（\(t \to T\)）时，期货价格必然向现货即期价格收敛：
+                      <div class="equation-box">
+                        \[ F_T = S_T \]
+                      </div>
+</li>
+<li>若 \(F_T &gt; S_T\)：套利者可买入现货、做空卖出期货，并立即进行交割，锁定确定性无风险利润 \(F_T - S_T\)。</li>
+<li>若 \(F_T &lt; S_T\)：持有现货的套利者可卖空现货、买入多头期货，并接受交割，获取无风险利润。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 12 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l01-s12"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">保证金制度与要求</h2>
+<div class="slide-content">
+<ul>
+<li>保证金 (Margin) 是投资者存入其经纪人账户的现金或高流动性有价证券：
+                  <ul>
+<li>其本质是履约担保抵押金 (Performance Bond)，而非贷款或购货首付款。</li>
+<li>用于保护经纪商和结算所免受投资者潜在违约损失。</li>
+</ul>
+</li>
+<li><strong>初始保证金 (Initial Margin)：</strong> 建立期货头寸开仓时必须存入保证金账户的最低资金金额。</li>
+<li><strong>维持保证金 (Maintenance Margin)：</strong> 保证金账户所允许跌落的最低余额下限，低于该水平将触发追加保证金通知（通常约为初始保证金的 75% 至 80%）。</li>
+<li><strong>变动保证金 / 追加保证金通知 (Variation Margin / Margin Call)：</strong> 若账户余额跌破维持保证金水平，投资者将收到通知，必须存入资金将余额恢复至<strong>初始保证金</strong>水平。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 13 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l01-s13"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 保证金账户运作</h2>
+<div class="slide-content">
+<ul>
+<li><strong>交易背景：</strong> 6月5日，某投资者买入多头 2 张 12月到期黄金期货合约（每张合约 100 盎司 = 合计 200 盎司）。</li>
+<li>开仓期货价格：$1,450 / 盎司。</li>
+<li>初始保证金：每张合约 $6,000（合计 $12,000）。</li>
+<li>维持保证金：每张合约 $4,500（合计 $9,000）。</li>
+<li>在每个交易日结束时，合约根据当日结算价进行逐日盯市：
+                  <ul>
+<li>每日盈亏 = \( 200 \times (F_t - F_{t-1}) \)</li>
+<li>保证金账户结余 = \( \text{上日余额} + \text{当日盈亏} + \text{追加变动保证金} \)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 14 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l01-s14"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">保证金运作机制 – 每日结算流水账</h2>
+<table class="slide-table">
+<thead>
+<tr>
+<th>日期</th>
+<th>期货价格 ($)</th>
+<th>当日盈亏 ($)</th>
+<th>累计盈亏 ($)</th>
+<th>账户结余 ($)</th>
+<th>追加保证金 ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5-Jun</td>
+<td>1,450.00</td>
+<td>—</td>
+<td>—</td>
+<td>12,000</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5-Jun (收盘)</td>
+<td>1,441.00</td>
+<td>-1,800</td>
+<td>-1,800</td>
+<td>10,200</td>
+<td>—</td>
+</tr>
+<tr>
+<td>6-Jun</td>
+<td>1,438.30</td>
+<td>-540</td>
+<td>-2,340</td>
+<td>9,660</td>
+<td>—</td>
+</tr>
+<tr>
+<td>7-Jun</td>
+<td>1,436.20</td>
+<td>-420</td>
+<td>-2,760</td>
+<td>9,240</td>
+<td>—</td>
+</tr>
+<tr>
+<td>8-Jun</td>
+<td>1,429.90</td>
+<td>-1,260</td>
+<td>-4,020</td>
+<td>7,980 (&lt;9,000)</td>
+<td>4,020</td>
+</tr>
+<tr>
+<td>11-Jun</td>
+<td>1,435.00</td>
+<td>+1,020</td>
+<td>-3,000</td>
+<td>13,020</td>
+<td>—</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>19-Jun</td>
+<td>1,423.80</td>
+<td>-760</td>
+<td>-5,240</td>
+<td>7,800 (&lt;9,000)</td>
+<td>4,200</td>
+</tr>
+</tbody>
+</table>
+<div style="color: #1e3a8a; margin-top: 6px">
+<strong>核心准则：</strong> 当保证金账户余额跌破 $9,000 维持保证金下限时，追加资金必须将账户完全补足恢复至 <em>$12,000 初始保证金</em> 设定水平，而绝非仅仅补足到 $9,000！
+            </div>
+</div>
+</div></section>
+<!-- ENRICHMENT 1.B -->
+<section data-after-source-slide="14" data-kind="enrichment" id="l01-s14-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 12px">E-Mini 标普500 追加保证金逐步计算案例</h3>
+<div class="example-card">
+<p><strong>参数设定：</strong> 交易者 A 以 2,800 点买入多头 1 张 E-Mini S&amp;P 500 期货合约。合约乘数 = $50/指数点。名义价值 = \( 2,800 \times \$50 = \$140,000 \)。<br/>
+              初始保证金 = <strong>$5,500</strong> • 维持保证金 = <strong>$5,000</strong> • 账户初始资金 = $5,500。</p>
+<ul style="margin: 8px 0;">
+<li><strong>第 1 天：</strong> 指数下跌 5 点。当日损失 = \( 5 \times \$50 = \$250 \)。账户余额降至 \( \$5,500 - \$250 = \$5,250 \)（高于 $5,000 维持线 → 无需追加保证金）。</li>
+<li><strong>第 2 天：</strong> 指数继续下跌 10 点。新增损失 = \( 10 \times \$50 = \$500 \)。账户余额降至：
+                  <div class="equation-box" style="margin: 6px 0; padding: 6px;">
+                    \[ \text{账户余额} = \$5,250 - \$500 = \$4,750 &lt; \$5,000 \quad \Longrightarrow \quad \text{\bf 触发追加保证金通知 (Margin Call)!} \]
+                  </div>
+</li>
+<li><strong>应追加变动保证金额度：</strong>
+<div class="equation-box" style="margin: 6px 0; padding: 6px;">
+                    \[ \text{追加保证金} = \$5,500 - \$4,750 = \mathbf{\$750} \]
+                  </div>
+</li>
+</ul>
+<p style="margin: 0; color: #b91c1c;"><strong>重要区分：</strong> 投资者必须注入 $750 将账户余额恢复至 <em>初始保证金</em> $5,500，而绝不能只追加 $250 恢复到维持保证金！</p>
+</div>
+</div>
+</div></section>
+<!-- Slide 15 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l01-s15"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期货价格形态 – 远期曲线</h2>
+<div class="slide-content">
+<ul>
+<li>远期曲线反映了在特定交易日所观察到的、具有不同交割月份的各期限期货合约价格分布走势。</li>
+<li>案例：COMEX 黄金期货报价（来源：Hull 表 2.2）：
+                  <table class="slide-table" style="margin-top: 14px">
+<thead>
+<tr>
+<th>交割月份</th>
+<th>期货价格 ($/盎司)</th>
+<th>形态特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2月</td>
+<td>1,450.20</td>
+<td>现货 / 近月合约</td>
+</tr>
+<tr>
+<td>4月</td>
+<td>1,452.80</td>
+<td>向上倾斜 (\(F_{\text{Apr}} &gt; F_{\text{Feb}}\))</td>
+</tr>
+<tr>
+<td>6月</td>
+<td>1,455.70</td>
+<td>向上倾斜</td>
+</tr>
+<tr>
+<td>8月</td>
+<td>1,458.90</td>
+<td>向上倾斜</td>
+</tr>
+<tr>
+<td>12月</td>
+<td>1,465.10</td>
+<td><strong>升水 / 正向市场 (Contango)</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>由于持有黄金需要占用资金融资并支付仓储与保险成本，黄金期货价格通常随到期期限递增。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 16 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l01-s16"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期货价格形态 – 轻质原油</h2>
+<div class="slide-content">
+<ul>
+<li>与黄金等投资品不同，原油等消费性商品经常呈现向下倾斜的价格曲线形态：
+                  <table class="slide-table" style="margin: 10px 0">
+<thead>
+<tr>
+<th>交割月份</th>
+<th>期货价格 ($/桶)</th>
+<th>市场状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1月</td>
+<td>85.20</td>
+<td>现货 / 临近月份</td>
+</tr>
+<tr>
+<td>3月</td>
+<td>84.10</td>
+<td>向下倾斜</td>
+</tr>
+<tr>
+<td>7月</td>
+<td>82.40</td>
+<td><strong>贴水 / 反向市场 (Backwardation)</strong></td>
+</tr>
+<tr>
+<td>12月</td>
+<td>80.50</td>
+<td>\(F_t &lt; S_t\)</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><strong>标准定义：</strong>
+<ul>
+<li><strong>期货升水 (Contango / 正向市场)：</strong> 期货价格高于现货价格（\(F &gt; S\)），曲线向上倾斜。</li>
+<li><strong>期货贴水 (Backwardation / 反向市场)：</strong> 期货价格低于现货价格（\(F &lt; S\)），曲线向下倾斜。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 1.C -->
+<section data-after-source-slide="16" data-kind="enrichment" id="l01-s16-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li class="active">期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 10px">黄金远期曲线解读与市场预期</h3>
+<div class="example-card">
+<p><strong>案例设定：</strong> COMEX 黄金期货行情（2009年2月2日）：2月 $907.00，4月 $909.50，6月 $912.40，8月 $915.20，10月 $918.00，12月 $921.10。</p>
+<ul>
+<li><strong>(a) 远期曲线定义：</strong> 指在某一特定时点上，将同一标的资产在不同连续未来交割月份的期货或远期价格绘制而成的函数曲线。</li>
+<li><strong>(b) 价格形态分析：</strong>
+<ul>
+<li>该曲线严格单调递增 (\(F_{\text{Feb}} &lt; F_{\text{Apr}} &lt; \dots &lt; F_{\text{Dec}}\)) → <strong>升水市场 (Contango)</strong>。</li>
+<li>对于黄金等纯投资性资产，曲线上升斜率主要反映了其<em>持有成本 (Cost of Carry)</em> (\(r + u\))：即用于购买并持有黄金的融资利息成本加上金库仓储与保险费用。</li>
+<li><strong>市场预期防范陷阱：</strong> 升水市场并<em>不直接等同于</em>市场预期未来即期价格一定会按此斜率上升。在现代资产定价理论中：
+                      \[ F_0 = E(S_T)e^{(r - k)T} \]
+                      其中 \(k\) 为投资者对标的资产要求的风险调整期望收益率。
+                    </li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 17 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l01-s17"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li class="active">期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期权合约导论</h2>
+<div class="slide-content">
+<ul>
+<li>期权 (Option) 是一种赋予买方在约定日期或之前按照预定价格买入或卖出标的资产的<strong>权利</strong>（而非义务）的合约。</li>
+<li>两大基础期权类型：
+                  <ul>
+<li><strong>看涨期权 (Call Option)：</strong> 赋予买方<em>买入</em>标的资产的权利。</li>
+<li><strong>看跌期权 (Put Option)：</strong> 赋予买方<em>卖出</em>标的资产的权利。</li>
+</ul>
+</li>
+<li>两种核心行权风格：
+                  <ul>
+<li><strong>欧式期权 (European Option)：</strong> <em>仅能在到期日当天</em>行使行权权利。</li>
+<li><strong>美式期权 (American Option)：</strong> 可以在到期日及之前的<em>任何交易时间</em>行使权利。</li>
+</ul>
+</li>
+<li>期权买方向期权卖方（立权人 Writer）支付一笔前期不可退还的<strong>期权费 / 权利金 (Premium)</strong>。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 18 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l01-s18"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li class="active">衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">金融衍生品的核心用途</h2>
+<div class="slide-content">
+<ul>
+<li><strong>套期保值 (Hedging)：</strong>
+<ul>
+<li>针对已经拥有或计划在未来买卖的资产，防范其价格发生不利变动的风险。</li>
+<li>核心目标：降低或锁定风险敞口，锁定未来的买卖价格或资产价值。</li>
+</ul>
+</li>
+<li><strong>投机策略 (Speculation)：</strong>
+<ul>
+<li>无需实际持有标的现货资产，仅根据对未来价格涨跌方向的预期建立仓位博取利润。</li>
+<li>核心目标：利用高财务杠杆放大投资收益率。</li>
+</ul>
+</li>
+<li><strong>套利机制 (Arbitrage)：</strong>
+<ul>
+<li>在两个或多个相关市场上同时建立相互对冲的头寸，在无需净现金投资的前提下锁定无风险利润。</li>
+<li>核心作用：消除市场定价偏差，促使市场价格回归理论均衡水平。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 19 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l01-s19"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li class="active">套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 利用远期合约进行套期保值</h2>
+<div class="slide-content">
+<ul>
+<li>某美国公司预计将在 3 个月后向英国进口商支付 1,000 万英镑 (£10M)。</li>
+<li>当前市场上 3 个月远期汇率为：<strong>1.4415 美元/英镑 (USD/GBP)</strong>。</li>
+<li>该公司买入一份多头远期合约，锁定在 3 个月后以 1.4415 的汇率购买 £10M。</li>
+<li><strong>3 个月后的对冲结果：</strong>
+<ul>
+<li>无论届时即期汇率如何变动，该公司均需支付 \( 10,000,000 \times 1.4415 = \mathbf{\$14,415,000} \) 美元。</li>
+<li>若即期汇率飙升至 1.5000：该公司免于支付 1,500 万美元（节省了 58.5 万美元）。</li>
+<li>若即期汇率下跌至 1.4000：该公司仍有履约义务支付 1,441.5 万美元（无法享受英镑贬值带来的有利好处）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 20 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l01-s20"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 20</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li class="active">套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 利用期权进行套期保值</h2>
+<div class="slide-content">
+<ul>
+<li>某投资者持有 1,000 股微软 (Microsoft) 股票，当前股价为每股 $28（持仓总价值 $28,000）。</li>
+<li>投资者担忧未来 2 个月内市场可能发生大幅下跌。</li>
+<li>买入 10 张 2 个月期看跌期权合约（每张对应 100 股 = 合计 1,000 股），执行价格 \( K = \$27.50 \)，期权费 \( p = \$1.00 \)。前期权利金支出 = \( 1,000 \times \$1 = \$1,000 \)。</li>
+<li><strong>2 个月后的到期损益：</strong>
+<ul>
+<li>若股价重挫至 $20：行使看跌期权 → 以 $27.50 价格卖出 1,000 股。净回笼资金 = \( \$27,500 - \$1,000 = \mathbf{\$26,500} \)。下行风险被牢牢锁定！</li>
+<li>若股价上涨至 $35：放弃行权，任由看跌期权作废。在市场上以 $35 价格抛售股票获得 $35,000。净收益 = \( \$35,000 - \$1,000 = \mathbf{\$34,000} \)。充分享受了股价上涨收益！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 21 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l01-s21"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 21</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li class="active">套期保值</li>
+<li>投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期对冲与期权对冲对比</h2>
+<div class="slide-content">
+<table class="slide-table">
+<thead>
+<tr>
+<th>比较特征</th>
+<th>远期合约 (Forwards)</th>
+<th>期权合约 (Options)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>前期成本</strong></td>
+<td>初始零现金支付</td>
+<td>需立即支付期权费 (权利金)</td>
+</tr>
+<tr>
+<td><strong>对冲性质</strong></td>
+<td>锁定完全固定的未来价格/汇率</td>
+<td>提供价格保险 (设定下限底线或上限顶线)</td>
+</tr>
+<tr>
+<td><strong>防范下行风险</strong></td>
+<td>是 (有效锁定风险)</td>
+<td>是 (有效对冲不利变动)</td>
+</tr>
+<tr>
+<td><strong>分享上行收益</strong></td>
+<td>否 (上行潜在收益被完全消除)</td>
+<td>是 (保留上涨收益，仅扣除期权费)</td>
+</tr>
+<tr>
+<td><strong>义务与权利</strong></td>
+<td>对交易双方均构成强制性约束</td>
+<td>买方享有选择权利，卖方承担被动履约义务</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></section>
+<!-- Slide 22 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l01-s22"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 22</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li class="active">投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用期货进行投机交易</h2>
+<div class="slide-content">
+<ul>
+<li>某美国投机者预期英镑 (£) 将在未来 2 个月内对美元升值。</li>
+<li><strong>方案 1：在即期现货市场买入英镑</strong>
+<ul>
+<li>按即期汇率 1.4400 USD/GBP 买入 £250,000。需投入全部自有本金 <strong>$360,000</strong>。</li>
+</ul>
+</li>
+<li><strong>方案 2：建立期货多头头寸</strong>
+<ul>
+<li>CME 英镑期货合约规格为 £62,500。在期货价格 1.4410 时买入 4 张合约（= £250,000）。</li>
+<li>初始保证金要求为每张合约 $5,000 = 仅需投入 <strong>$20,000</strong> 现金保证金。</li>
+</ul>
+</li>
+<li>若汇率上涨至 1.5000：
+                  <ul>
+<li>即期现货收益 = \( 250,000 \times (1.5000 - 1.4400) = \$15,000 \) → 投资收益率 = \( 15,000 / 360,000 = \mathbf{4.17\%} \)。</li>
+<li>期货多头收益 = \( 250,000 \times (1.5000 - 1.4410) = \$14,750 \) → 保证金资本回报率 = \( 14,750 / 20,000 = \mathbf{73.75\%} \)（杠杆放大效应显著！）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 23 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l01-s23"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 23</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li class="active">投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">利用期权进行投机交易</h2>
+<div class="slide-content">
+<ul>
+<li>某投资者拥有 $2,000 投资预算，预期亚马逊 (Amazon.com) 股价在未来 2 个月内将大幅上涨。</li>
+<li>当前股价：\( S_0 = \$20 \)。2 个月期、执行价格 \( K = \$22.50 \) 的看涨期权交易价格为 \( c = \$1.00 \)。</li>
+<li><strong>策略 A：买入股票现货</strong> → 以 $2,000 资金买入 100 股。</li>
+<li><strong>策略 B：买入看涨期权</strong> → 以 $2,000 资金买入 2,000 份看涨期权（20 张合约）。</li>
+<li><strong>2 个月后的不同市场情景对比：</strong>
+<table class="slide-table" style="margin-top: 10px">
+<thead>
+<tr>
+<th>到期股票价格</th>
+<th>策略 A (买入 100 股股票)</th>
+<th>策略 B (买入 2,000 份看涨期权)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>下跌至 $15</strong></td>
+<td>持仓市值 $1,500 (亏损：-$500 / -25%)</td>
+<td>期权价值 $0 (全额亏损：-$2,000 / -100%)</td>
+</tr>
+<tr>
+<td><strong>上涨至 $27</strong></td>
+<td>持仓市值 $2,700 (盈利：+$700 / +35%)</td>
+<td>期权价值 \( 2,000 \times \$4.50 = \$9,000 \) (盈利：+$7,000 / +350%)</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 24 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="12" data-source-slide="24" id="l01-s24"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 24</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li class="active">投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期货投机与期权投机对比</h2>
+<div class="slide-content">
+<ul>
+<li><strong>期货投机特征：</strong>
+<ul>
+<li>前期资本投入极小（仅需缴纳履约保证金）。</li>
+<li>线性损益结构：潜在收益无上限，但潜在亏损同样无底线，且可能远远超过最初存入的保证金本金。</li>
+</ul>
+</li>
+<li><strong>期权投机特征：</strong>
+<ul>
+<li>前期最大损失严格限定于已支付的期权费权利金。</li>
+<li>非线性损益结构：下行亏损最大仅为 100% 权利金，而上行杠杆在股价大幅突破时可爆发数倍爆发性回报（&gt;300%）。</li>
+<li>但前提是股价必须大幅超越执行价格，足以抵消购买期权所支付的时间价值。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 1.D -->
+<section data-after-source-slide="24" data-kind="enrichment" id="l01-s24-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li class="active">投机策略</li>
+<li>套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 10px">股票与看涨期权收益平衡点分析</h3>
+<div class="example-card">
+<p><strong>案例设定：</strong> ABC 有限公司股票当前价格 \( S_0 = \$94 \)。3 个月期、执行价 \( K = \$95 \) 的看涨期权价格 \( c = \$4.70 \)。总投资预算 = <strong>$9,400</strong>。<br/>
+              • 策略 1：投入 $9,400 购买 100 股股票。<br/>
+              • 策略 2：投入 $9,400 购买 2,000 份看涨期权（20 张合约，\( 2,000 \times \$4.70 = \$9,400 \)）。</p>
+<p><strong>期权策略收益超越买入股票策略的盈亏平衡点股价：</strong></p>
+<div class="equation-box" style="padding: 8px 12px; margin: 8px 0;">
+                \[ \text{期权策略净利润} &gt; \text{股票策略净利润} \]
+                \[ 2,000 \times \max(S_T - 95, 0) - 9,400 &gt; 100 \times (S_T - 94) \]
+                \[ 2,000(S_T - 95) - 9,400 = 100(S_T - 94) \quad \Longrightarrow \quad 1,900 S_T = 190,000 \quad \Longrightarrow \quad \mathbf{S_T = \$100.00} \]
+              </div>
+<ul style="margin: 6px 0;">
+<li>若 \( S_T \le \$95.00 \)：期权到期毫无价值作废（亏损 100% = -$9,400）。而股票仅损失 \( 100 \times (94 - S_T) \)。</li>
+<li>若 \( \$95.00 &lt; S_T &lt; \$100.00 \)：期权获得部分行权收益，但股票投资的收益率仍然更高。</li>
+<li>若 \( S_T &gt; \mathbf{\$100.00} \)：得益于 20:1 的高财务杠杆，看涨期权策略将带来远超股票的超额爆发性回报！</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 25 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="13" data-source-slide="25" id="l01-s25"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 25</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li class="active">套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 黄金期货套利 (期货价格被高估)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>基本假设：</strong> 黄金即期现货价格 \( S = \$1,390 \)/盎司，1年期无风险利率 \( r = 5\% \) p.a.（单利计息）。仓储成本为 0。</li>
+<li>市场上 1 年期黄金期货报价：\( F_{\\text{mkt}} = \mathbf{\$1,470} \)。</li>
+<li>理论无套利期货价格：\( F_{\\text{theor}} = \$1,390 \times (1 + 0.05) = \mathbf{\$1,459.50} \)。</li>
+<li>由于 \( F_{\\text{mkt}} &gt; F_{\\text{theor}} \)，黄金期货价格被<strong>严重高估</strong>！</li>
+<li><strong>正向现金持有套利策略 (Cash-and-Carry Arbitrage)：</strong>
+<table class="slide-table" style="margin-top: 10px">
+<thead>
+<tr>
+<th>今日交易操作 (\(t = 0\))</th>
+<th>到期交割操作 (\(T = 1\))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>以 5% 年利率借入 $1,390，期限 1 年</td>
+<td>偿还贷款本息：\( \$1,390 \times 1.05 = -\$1,459.50 \)</td>
+</tr>
+<tr>
+<td>按 $1,390 价格买入 1 盎司黄金现货</td>
+<td>按期货合约履行交割，交付 1 盎司黄金</td>
+</tr>
+<tr>
+<td>以 $1,470 价格卖出空头 1 年期黄金期货</td>
+<td>收取约定的期货交割货款：\( +\$1,470.00 \)</td>
+</tr>
+<tr>
+<td><strong>今日净现金流 = $0</strong></td>
+<td><strong>到期锁定无风险净利润 = +$10.50 / 盎司</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 26 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="13" data-source-slide="26" id="l01-s26"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 26</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li class="active">套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 黄金期货套利 (期货价格被低估)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>基本假设：</strong> \( S = \$1,390 \)/盎司，\( r = 5\% \) p.a.，理论价格 \( F_{\\text{theor}} = \$1,459.50 \)。</li>
+<li>市场上 1 年期黄金期货报价：\( F_{\\text{mkt}} = \mathbf{\$1,420} \)。</li>
+<li>由于 \( F_{\\text{mkt}} &lt; F_{\\text{theor}} \)，黄金期货价格被<strong>严重低估</strong>！</li>
+<li><strong>反向现货-期货套利策略 (Reverse Cash-and-Carry Arbitrage)：</strong>
+<table class="slide-table" style="margin-top: 10px">
+<thead>
+<tr>
+<th>今日交易操作 (\(t = 0\))</th>
+<th>到期交割操作 (\(T = 1\))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>借入并卖空 1 盎司黄金现货，获得 $1,390</td>
+<td>在期货合约项下接受交割，归还所借入的黄金</td>
+</tr>
+<tr>
+<td>将卖空所得 $1,390 按 5% 年利率借出/存入银行 1 年</td>
+<td>收回投资本息款项：\( \$1,390 \times 1.05 = +\$1,459.50 \)</td>
+</tr>
+<tr>
+<td>以 $1,420 价格买入多头 1 年期黄金期货</td>
+<td>支付期货交割款：\( -\$1,420.00 \)</td>
+</tr>
+<tr>
+<td><strong>今日净现金流 = $0</strong></td>
+<td><strong>到期锁定无风险净利润 = +$39.50 / 盎司</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 27 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="14" data-source-slide="27" id="l01-s27"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 27</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li class="active">套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">黄金的理论期货价格</h2>
+<div class="slide-content">
+<ul>
+<li><strong>期货价格的理论均衡水平应当是多少？</strong></li>
+<li>若黄金即期价格为 \( S \)，期限为 \( T \) 年的期货价格为 \( F \)，在无套利均衡状态下：
+                  <div class="equation-box">
+                    \[ F = S(1 + r)^T \]
+                  </div>
+                  其中 \( r \) 为本币 1 年期年化利率。
+                </li>
+<li>若采用连续复利形式（Hull 标准金融记号）：
+                  <div class="equation-box">
+                    \[ F_0 = S_0 e^{rT} \]
+                  </div>
+</li>
+<li>若 \( F &gt; S e^{rT} \)：套利者借款买入现货并做空期货（正向现货-期货套利 Cash-and-Carry）。</li>
+<li>若 \( F &lt; S e^{rT} \)：套利者卖空现货、贷出资金并做多期货（反向现货-期货套利 Reverse Cash-and-Carry）。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 28 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="14" data-source-slide="28" id="l01-s28"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 1 讲 - 28</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>衍生品本质</li>
+<li>衍生品市场</li>
+<li>远期合约</li>
+<li>期货合约</li>
+<li>期权导论</li>
+<li>衍生品用途</li>
+<li>套期保值</li>
+<li>投机策略</li>
+<li class="active">套利机制</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 原油期货套利 (消费性资产)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>参数设定：</strong> 原油即期现货价格 \( S = \$85 \)，利率 \( r = 5\% \) p.a.，年化仓储成本 \( u = 2\% \) p.a.。</li>
+<li><strong>情景 1：1 年期期货市场报价 \( F = \$93 \)：</strong>
+<ul>
+<li>持有成本决定的理论价格上限：\( F_{\\text{max}} = 85 \times (1 + 0.05 + 0.02) = \mathbf{\$90.95} \)。</li>
+<li>由于 \( \$93 &gt; \$90.95 \)，正向现货-期货套利<strong>完全可行</strong>（借款、买入原油、储存储备、做空期货 → 锁定确定性无风险利润）。</li>
+</ul>
+</li>
+<li><strong>情景 2：1 年期期货市场报价 \( F = \$82 \)：</strong>
+<ul>
+<li>此时是否存在无风险套利机会？<strong>不存在！</strong></li>
+<li>反向现货-期货套利失效：因为普通市场参与者极难在现货市场直接借入并卖空实物原油；而商业库存持有者由于需要维持生产运营的便利收益 (Convenience Yield)，也不愿清空出售现货库存。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
+</body>
+</html>

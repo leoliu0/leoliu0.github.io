@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>20762 第 3 讲：远期与期货价格的确定</title>
+<link href="vendor/reveal/dist/reset.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/reveal.css" rel="stylesheet"/>
+<link href="vendor/reveal/dist/theme/white.css" id="theme" rel="stylesheet"/>
+<link href="assets/slides.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="deck-index-link" href="index.html">← 返回讲义目录</a>
+<div class="reveal">
+<div class="slides">
+<!-- Slide 1 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="1" data-source-slide="1" id="l03-s01">
+<div class="slide-container">
+<div class="title-slide-container" style="width: 100%;">
+<div class="title-slide-h1">第 3 讲</div>
+<div class="title-slide-h1" style="margin-bottom: 16px">远期与期货价格的确定</div>
+<div class="title-slide-h2">Hull 著，第 5 章</div>
+<div class="tip-of-the-week-box" style="margin: 16px auto 30px auto; max-width: 680px;">
+<div class="tip-title">本周核心要点</div>
+<div class="tip-text" style="font-size: 14px; line-height: 1.5;">
+                投资性资产与消费性资产的区别？<br/>
+                • <strong>投资性资产：</strong> 套利机制决定其<strong>精确价格</strong>！<br/>
+                • <strong>消费性资产：</strong> 套利机制仅能确定其<strong>价格上限</strong>！
+              </div>
+</div>
+<div class="uts-logo-text">
+<span style="color: #000; font-weight: 900;">✦</span> UTS商学院 (UTS Business School)
+            </div>
+</div>
+</div>
+</section>
+<!-- Slide 2 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="1" data-source-slide="2" id="l03-s02"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 2</div>
+<ul class="sidebar-nav">
+<li class="active">学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">学习目标</h2>
+<div class="slide-content">
+<ul>
+<li>比较消费性资产与投资性资产的本质区别</li>
+<li>探讨卖空机制 (Short Selling) 及其市场作用</li>
+<li>解释正向现货-期货套利 (Cash-and-Carry) 与反向套利 (Reverse Cash-and-Carry)</li>
+<li>运用无套利均衡原理推导以下标的资产的远期价格公式及存续期远期合约价值：
+                  <ul>
+<li>无收益资产 (No Income)</li>
+<li>支付已知现金收益的资产 (Known Cash Income)</li>
+<li>提供已知红利收益率的资产 (Known Dividend Yield)</li>
+</ul>
+</li>
+<li>对比远期价格与期货价格的理论差异</li>
+<li>推导不同大类期货资产的定价模型：
+                  <ul>
+<li>外汇期货 • 股票指数期货 • 股指套利 • 大宗商品期货</li>
+</ul>
+</li>
+<li>界定并探讨持有成本 (Cost of Carry) 与便利收益 (Convenience Yield)</li>
+<li>分析期货价格与未来即期价格期望值之间的关系</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 3 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="2" data-source-slide="3" id="l03-s03"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 3</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li class="active">投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">投资性资产与消费性资产</h2>
+<div class="slide-content">
+<ul>
+<li><strong>投资性资产 (Investment Assets)：</strong> 由大量投资者完全出于投资目的而持有的资产。
+                  <ul>
+<li>典型代表：股票、债券、黄金、白银。</li>
+</ul>
+</li>
+<li><strong>消费性资产 (Consumption Assets)：</strong> 主要用于工业生产制造原料或日常消费而持有的商品。
+                  <ul>
+<li>典型代表：农产品（玉米、小麦）、铜、原油等大宗工业品。</li>
+</ul>
+</li>
+<li><strong>资产定价的核心区别：</strong>
+<ul>
+<li>运用无套利证明可以推导确定<strong>投资性资产</strong>的<strong>精确远期与期货价格</strong>。</li>
+<li>套利机制仅能为<strong>消费性资产</strong>确定一个<strong>理论价格上限</strong>（反向套利受阻）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 4 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="2" data-source-slide="4" id="l03-s04"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 4</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li class="active">卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">卖空机制 (Short Selling)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>卖空</strong>是指投资者卖出自己当前并不拥有的证券资产：
+                  <ul>
+<li>你的经纪人从其他客户账户中借入该证券，并在即期现货市场上正常抛售。</li>
+<li>在未来某一时间，你必须从市场上买回该证券（买入平仓 Short Covering），以归还给最初出借股票的客户账户。</li>
+<li>你必须向出借方足额补偿在借出期间所派发的一切股息红利及其他资本分红。</li>
+<li>你必须在经纪商处维持充足的保证金账户以防范违约风险。</li>
+</ul>
+</li>
+<li><strong>为何进行卖空？</strong>
+<ul>
+<li><strong>投机策略：</strong> 预期标的资产价格未来将下跌，从中博取跌幅利润。</li>
+<li><strong>套利交易：</strong> 当期货价格相对现货被严重低估时，执行反向现货-期货套利 (Reverse Cash-and-Carry)。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 5 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="3" data-source-slide="5" id="l03-s05"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 5</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li class="active">卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 利用卖空进行投机交易</h2>
+<div class="slide-content">
+<ul>
+<li><strong>交易情境设定：</strong>
+<ul>
+<li><strong>4月份：</strong> 某投资者以 $120 卖空 500 股 IBM 股票。<br/>
+                    → 投资者的经纪商借入 500 股并在即期现货市场上以 $120 售出。</li>
+<li><strong>5月份：</strong> IBM 公司派发每股 $1 的现金红利。</li>
+<li><strong>7月份：</strong> 投资者在市场上以每股 $100 买回股票并进行平仓。<br/>
+                    → 经纪商以 $100 价格买入 500 股并归还原出借人。</li>
+</ul>
+</li>
+<li><strong>现金流最终核算：</strong>
+<ul>
+<li>4月份卖空获得现金收入：\( 500 \times \$120 = +\$60,000 \)。</li>
+<li>5月份代为支付股利红利：\( 500 \times \$1 = -\$500 \)。</li>
+<li>7月份买回股票平仓支出：\( 500 \times \$100 = -\$50,000 \)。</li>
+<li><strong>锁定投机净利润：</strong> \( \$60,000 - \$500 - \$50,000 = \mathbf{+\$9,500} \)。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 6 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="3" data-source-slide="6" id="l03-s06"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 6</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li class="active">远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期定价与符号记法</h2>
+<div class="slide-content">
+<ul>
+<li>\( S_0 \)：资产在时刻 \( t = 0 \) 的即期现货价格。</li>
+<li>\( S_t \)：资产在时刻 \( t \) 的即期现货价格。</li>
+<li>\( F_0 \)：在时刻 \( t = 0 \) 商定的远期价格：
+                  <ul>
+<li>指在 \( t=0 \) 签订的、在到期日 \( T \) 进行交割的远期合约中所约定的交割价格。</li>
+</ul>
+</li>
+<li>\( F_t \)：在时刻 \( t \) 市场上新签署的远期价格：
+                  <ul>
+<li>指在时刻 \( t \) 市场上达成的新远期合约中约定的到期 \( T \) 的交割价格。</li>
+</ul>
+</li>
+<li>\( f_0 \)：远期合约在初始时刻 (\( t = 0 \)) 的合约价值。恒有 \( f_0 = 0 \)。</li>
+<li>\( f_t \)：最初在 \( t=0 \) 签订、在 \( T \) 交割的远期合约在存续期时刻 \( t \) 的合约市场价值。
+                  <ul>
+<li><em>核心区别：</em> \( F_t \) 是新合约的价格，而 \( f_t \) 是存续期老合约本身的净现值！</li>
+</ul>
+</li>
+<li>\( r \)：具有到期期限 \( T \) 的年化无风险利率（采用连续复利形式）。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 7 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="4" data-source-slide="7" id="l03-s07"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 7</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li class="active">远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期价格 – 无收益投资性资产</h2>
+<div class="slide-content">
+<p style="margin-bottom: 10px">设市场实际远期报价为 \( F^* \)。与理论无套利远期价格对比：</p>
+<ul>
+<li><strong>若 \( F^* &gt; S_0 e^{rT} \)（远期价格被高估）：</strong>
+<ul>
+<li>套利者执行<strong>正向现货-期货套利 (Cash-and-Carry Arbitrage)</strong>：
+                    按利率 \( r \) 借入 \( S_0 \)，以 \( S_0 \) 买入现货资产，并按 \( F^* \) 签订远期卖出合约。
+                    在到期时刻 \( T \)，交付资产收取 \( F^* \)，偿还贷款本息 \( S_0 e^{rT} \)。
+                    锁定确定性无风险净利润 = \( F^* - S_0 e^{rT} &gt; 0 \)。</li>
+</ul>
+</li>
+<li><strong>若 \( F^* &lt; S_0 e^{rT} \)（远期价格被低估）：</strong>
+<ul>
+<li>套利者执行<strong>反向现货-期货套利 (Reverse Cash-and-Carry Arbitrage)</strong>：
+                    卖空现货资产获得 \( S_0 \)，将款项按 \( r \) 贷出/存入银行，并按 \( F^* \) 买入远期多头。
+                    在到期日收取投资本息 \( S_0 e^{rT} \)，支付 \( F^* \) 接受远期交割并归还借股。
+                    锁定确定性无风险净利润 = \( S_0 e^{rT} - F^* &gt; 0 \)。</li>
+</ul>
+</li>
+<li><strong>理论无套利远期价格公式：</strong>
+<div class="equation-box">
+                    \[ F_0 = S_0 e^{rT} \]
+                  </div>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 8 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="4" data-source-slide="8" id="l03-s08"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 8</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li class="active">已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期价格 – 支付已知现金收益的资产</h2>
+<div class="slide-content">
+<p style="margin-bottom: 10px">假定 \( I \) 为合约存续期内将收到的所有已知现金收益的<strong>现值 (Present Value)</strong>：</p>
+<ul>
+<li><strong>若 \( F^* &gt; (S_0 - I) e^{rT} \)（远期价格被高估）：</strong>
+<ul>
+<li>套利者借入资金 \( S_0 \) 买入现货资产，并做空卖出远期合约。</li>
+<li>存续期内收到的红利按利率 \( r \) 滚动投资，到期用于冲抵偿还贷款本息。</li>
+</ul>
+</li>
+<li><strong>若 \( F^* &lt; (S_0 - I) e^{rT} \)（远期价格被低估）：</strong>
+<ul>
+<li>套利者以 \( S_0 \) 卖空现货资产，将 \( (S_0 - I) \) 的资金按 \( r \) 贷出，并做多买入远期合约。</li>
+<li>借股期间需代为垫付的红利由留存备付资金 \( I \) 及其利息精准支付。</li>
+</ul>
+</li>
+<li><strong>理论无套利定价公式：</strong>
+<div class="equation-box">
+                    \[ F_0 = (S_0 - I) e^{rT} \]
+                  </div>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 9 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="5" data-source-slide="9" id="l03-s09"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 9</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li class="active">已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 支付红利股票的套利机会</h2>
+<div class="slide-content">
+<ul>
+<li><strong>市场基础数据：</strong>
+<ul>
+<li>股票即期现货价格：\( S_0 = \$50 \)。</li>
+<li>10 个月远期市场报价：\( F^* = \$52 \)。</li>
+<li>连续复利年化无风险利率：所有期限均为 \( r = 8\% \) p.a.。</li>
+<li>预期现金红利：在 3 个月、6 个月及 9 个月后各派发每股 \( \$0.75 \)。</li>
+</ul>
+</li>
+<li><strong>是否存在无套利机会？</strong>
+<ul>
+<li><strong>步骤 1：计算红利现金流现值 (\(I\))：</strong>
+                      \[ I = 0.75 e^{-0.08 \times 3/12} + 0.75 e^{-0.08 \times 6/12} + 0.75 e^{-0.08 \times 9/12} \]
+                      \[ I = 0.75 (0.98020 + 0.96079 + 0.94176) = 0.75 \times 2.88275 = \mathbf{\$2.162} \]
+                    </li>
+<li><strong>步骤 2：计算理论无套利远期价格 (\(F_0\))：</strong>
+                      \[ F_0 = (50 - 2.162) e^{0.08 \times 10/12} = 47.838 \times 1.06894 = \mathbf{\$51.14} \]
+                    </li>
+<li><strong>判定：</strong> 由于市场报价 \( F^* = \$52 &gt; \$51.14 \)，远期价格被高估 → 执行正向现货-期货套利！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 10 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="5" data-source-slide="10" id="l03-s10"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 10</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li class="active">已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 支付红利股票套利执行详解 (续)</h2>
+<div class="slide-content">
+<h4 style="color: #2a338c; margin: 0 0 10px 0;">正向现货-期货套利交易全流程 (Cash-and-Carry Arbitrage Walkthrough)</h4>
+<ul>
+<li><strong>当前时刻 (\(t = 0\))：</strong>
+<ul>
+<li>按 8% 年利率借入 \( \$50 \) 购买 1 股现货股票。</li>
+<li>签订一份 10 个月期远期空头合约，锁定在 10 个月后以 \( \$52 \) 卖出该股票。</li>
+</ul>
+</li>
+<li><strong>在第 3、6、9 个月时刻：</strong>
+<ul>
+<li>每次收到 \( \$0.75 \) 股息红利，立即按 8% 年利率进行再投资，直至第 10 个月。</li>
+</ul>
+</li>
+<li><strong>在第 10 个月到期时刻：</strong>
+<ul>
+<li>偿还初始贷款本息：\( \$50 e^{0.08 \times 10/12} = \mathbf{\$53.45} \)。</li>
+<li>交付股票履行远期合约，收取合同货款：\( \mathbf{+\$52.00} \)。</li>
+<li>收取 3 笔股息再投资的终值本利和：
+                      \[ 0.75 e^{0.08 \times 7/12} + 0.75 e^{0.08 \times 4/12} + 0.75 e^{0.08 \times 1/12} = 0.7858 + 0.7703 + 0.7550 = \mathbf{+\$2.31} \]
+                    </li>
+<li><strong>锁定无风险净利润：</strong> \( \$52.00 + \$2.31 - \$53.45 = \mathbf{+\$0.86} \)（恰好等于 \( (\$52.00 - \$51.14)e^{0.08 \times 10/12} \)）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 11 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="6" data-source-slide="11" id="l03-s11"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 11</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li class="active">已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期价格 – 提供已知红利率的资产</h2>
+<div class="slide-content">
+<p style="margin-bottom: 10px">假定 \( q \) 为标的资产在合约存续期内的年化连续分红收益率 (Continuous Dividend Yield)：</p>
+<div class="equation-box" style="margin: 12px 0;">
+                \[ F_0 = S_0 e^{(r - q)T} \quad \text{在时刻 } t \text{ 满足：} \quad F_t = S_t e^{(r - q)(T - t)} \]
+              </div>
+<ul>
+<li><strong>典型应用 – 股票指数：</strong>
+<ul>
+<li>股票指数代表由大量成分股构成的投资组合，全年持续派发股利红利。</li>
+<li>这部分密集派发的现金股利可极为精确地近似建模为连续红利率 \( q \)。</li>
+</ul>
+</li>
+<li><strong>指数期货定价的核心前提条件：</strong>
+<ul>
+<li>该公式有效成立的关键在于：该股票指数<strong>必须代表一项投资性资产</strong>。</li>
+<li>换言之，指数的涨跌变动必须完全能够通过在现货市场上实际复制并持有相应股票篮子资产来实现！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 12 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="6" data-source-slide="12" id="l03-s12"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 12</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li class="active">远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期合约的存续期价值评估</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px">考虑一份在时刻 \( 0 \) 订立、约定交割价格为 \( F_0 \)、到期日为 \( T \) 的远期合约：</p>
+<ul>
+<li>在存续期时刻 \( t \)，<strong>多头远期合约的市场价值</strong>为：
+                  \[ f_t = (F_t - F_0) e^{-r(T - t)} \]
+                </li>
+<li>在存续期时刻 \( t \)，<strong>空头远期合约的市场价值</strong>为：
+                  \[ f_t = (F_0 - F_t) e^{-r(T - t)} \]
+                </li>
+<li>其实质反映了在时刻 \( t \) 提前对冲平仓该合约所能锁定的未来盈亏的<strong>贴现现值</strong>。</li>
+<li><strong>在合约成立初始时刻 (\(t = 0\))：</strong> \( f_0 = 0 \)，因为初始交割价格恰好设定为理论远期价格 \( F_0 \)。</li>
+<li><strong>经典计算算例：</strong> \( S_0 = \$400 \)，\( T = 6 \) 个月 (0.5年)，\( r = 10\% \)，初始远期价格 \( F_0 = 400 e^{0.10 \times 0.5} = \$420.51 \)。
+                4 个月后（剩余 2 个月），现货价格升至 \( S_t = \$415 \)，此时新远期价格 \( F_t = 415 e^{0.10 \times (2/12)} = \$421.97 \)。<br/>
+                多头远期合约当前价值：\( f_t = (421.97 - 420.51) e^{-0.10 \times (2/12)} = \mathbf{\$1.44} \)。</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 3.1 -->
+<section data-after-source-slide="12" data-kind="enrichment" id="l03-s12-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li class="active">远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">剩余股息条件下的远期价格与合约价值评估</h3>
+<div class="example-card" style="padding: 10px 16px; margin-bottom: 8px;">
+<p style="margin: 0; font-size: 19px;"><strong>案例设定：</strong> 6 个月期股票远期合约，\( S_0 = \$54.60 \)，\( r = 8\% \) p.a.（连续复利）。在第 2 个月与第 5 个月各派发 \( \$1.50 \) 现金股利。</p>
+</div>
+<div class="slide-content">
+<table class="slide-table" style="margin: 8px 0; font-size: 18.5px; width: 100%;">
+<thead>
+<tr>
+<th style="width: 26%;">评估阶段</th>
+<th style="width: 48%;">核心公式与推导计算</th>
+<th style="width: 26%;">计算结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="vertical-align: top; padding: 12px 14px;"><strong>(a) 初始时刻 \( t=0 \)</strong></td>
+<td style="padding: 12px 14px; line-height: 1.55;">
+  \( I_0 = 1.50 e^{-0.08 \times (2/12)} + 1.50 e^{-0.08 \times (5/12)} = \mathbf{\$2.93} \)<br/>
+  \( F_0 = (54.60 - 2.93) e^{0.08 \times 0.5} = \mathbf{\$53.78} \)
+</td>
+<td style="vertical-align: top; padding: 12px 14px; line-height: 1.55;">
+  理论交割价<br/>\( F_0 = \mathbf{\$53.78} \)<br/>
+  合约价值 \( f_0 = \mathbf{\$0.00} \)
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; padding: 12px 14px;"><strong>(b) 存续期 \( t=3 \) 个月<br/>(\(S_t=\$58.20\))</strong></td>
+<td style="padding: 12px 14px; line-height: 1.55;">
+  仅剩第 5 个月股息: \( I_t = 1.50 e^{-0.08 \times (2/12)} = \mathbf{\$1.48} \)<br/>
+  新远期价: \( F_t = (58.20 - 1.48) e^{0.08 \times 0.25} = \mathbf{\$57.87} \)<br/>
+  多头净值: \( f_t = (57.87 - 53.78) e^{-0.08 \times 0.25} = \mathbf{\$4.01} \)
+</td>
+<td style="vertical-align: top; padding: 12px 14px; line-height: 1.55;">
+  新远期价<br/>\( F_t = \mathbf{\$57.87} \)<br/>
+  合约净值 \( f_t = \mathbf{+\$4.01} \)
+</td>
+</tr>
+</tbody>
+</table>
+<p style="color: #1e3a8a; margin: 8px 0 0 0; font-size: 19px;">
+<strong>核心结论：</strong> 已经派发过的历史股息不进入后续估值；仅未来剩余尚未发放的股息红利现值才对新远期价格及存续期合约价值产生影响！
+</p>
+</div>
+</div>
+</div></section>
+<!-- Slide 13 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="7" data-source-slide="13" id="l03-s13"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 13</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li class="active">远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">远期价格与期货价格的比较</h2>
+<div class="slide-content">
+<ul>
+<li><strong>当利率恒定或完全可预测时：</strong>
+<ul>
+<li>若市场利率保持常数，或者是时间的确定性已知函数，远期价格与期货价格在<strong>理论上完全等价一致</strong>：\( F_0 = \text{期货}_0 \)。</li>
+</ul>
+</li>
+<li><strong>当利率随机不确定且存在每日逐日盯市结算时：</strong>
+<ul>
+<li><strong>标的资产价格与利率呈正相关：</strong>
+                    当标的资产价格 \( S \) 上涨时，期货多头持有者立即收到每日现金结算盈利，该现金流可在更高的利率环境下再投资。因此，<strong>期货价格 &gt; 远期价格</strong>。</li>
+<li><strong>标的资产价格与利率呈负相关：</strong> 远期价格 &gt; 期货价格。</li>
+<li>但在实际绝大多数市场合约中，二者的理论差异微乎其微，在实际交易分析中通常视为等同。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 14 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="7" data-source-slide="14" id="l03-s14"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 14</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li class="active">股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">股指期货与股指套利 (Index Arbitrage)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>当 \( F^* &gt; S_0 e^{(r - q)T} \)（期货价格被高估）：</strong>
+<ul>
+<li>套利者买入现货指数成分股一篮子股票，同时建立股指期货空头头寸（正向现货-期货套利）。</li>
+<li>通常由具有极低交易成本的专业做市机构或持有大量短期货币市场资金的企业执行。</li>
+</ul>
+</li>
+<li><strong>当 \( F^* &lt; S_0 e^{(r - q)T} \)（期货价格被低估）：</strong>
+<ul>
+<li>套利者建立股指期货多头头寸，同时在现货市场卖出（或借股卖空）标的成分股股票（反向现货-期货套利）。</li>
+<li>常由大型养老基金执行（直接售出现货股票换取现金存入银行，同时做多期货替代股票敞口）。</li>
+</ul>
+</li>
+<li><strong>程序化交易与无套利区间：</strong>
+<ul>
+<li>当期货偏离理论价格超出交易成本上限时，计算机程序化交易系统将自动触发批量套利交易。</li>
+<li>买卖价差、交易佣金以及成分股非同步交易 (Non-synchronous Trading) 共同构成了一定的<strong>无套利交易区间 (Arbitrage Free Band)</strong>。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 3.2 -->
+<section data-after-source-slide="14" data-kind="enrichment" id="l03-s14-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li class="active">股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">反向现货-期货套利交易明细表</h3>
+<div class="example-card" style="padding: 8px 14px; margin-bottom: 6px;">
+<p style="margin: 0"><strong>案例设定：</strong> 标普200指数 \( S_0 = 400 \)，\( r = 10\% \)，红利收益率 \( q = 4\% \)（连续复利）。4 个月期期货市场报价 \( F^* = 405 \)（\( T = 4/12 = 1/3 \)）。<br/>
+<strong>理论公允价格：</strong> \( F_0 = 400 e^{(0.10 - 0.04) \times (1/3)} = 400 e^{0.02} = \mathbf{408.08} \)。<br/>
+              由于市场报价 \( F^* = 405 &lt; 408.08 \)，期货被<strong>严重低估</strong> → 执行<strong>反向现货-期货套利 (Reverse Cash-and-Carry)</strong>。</p>
+</div>
+<div class="slide-content">
+<table class="slide-table" style="margin: 4px 0">
+<thead>
+<tr>
+<th>交易分支 / 操作行为</th>
+<th>\( t = 0 \) 初始现金流</th>
+<th>\( T = 1/3 \) 到期现金流</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>卖空 1 篮子指数股票并以 \( q = 4\% \) 代垫红利</td>
+<td>\( +\$400.00 \)</td>
+<td>需归还借股股票现货</td>
+</tr>
+<tr>
+<td>将卖空所得 \( \$400 \) 按 \( r = 10\% \) 存入银行</td>
+<td>\( -\$400.00 \)</td>
+<td>本利和：\( +\$400 e^{(0.10 - 0.04) \times (1/3)} = +\$408.08 \)</td>
+</tr>
+<tr>
+<td>买入 1 份 4 个月期指数期货合约</td>
+<td>\( \$0.00 \)</td>
+<td>支付期货结算交割款：\( -\$405.00 \)</td>
+</tr>
+<tr style="background: #eef2ff; font-weight: bold;">
+<td><strong>综合投资组合净收益</strong></td>
+<td><strong>净现金流 = $0.00</strong></td>
+<td><strong>锁定无风险净利润 = +$3.08 / 指数点</strong></td>
+</tr>
+</tbody>
+</table>
+<p style="color: #1e3a8a; margin: 4px 0 0 0">
+<strong>核心结论：</strong> 借股卖空现货并买入被低估的期货合约，在初始时刻无净资金流出的前提下锁定了确定性的到期无风险净套利收益！
+              </p>
+</div>
+</div>
+</div></section>
+<!-- Slide 15 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="8" data-source-slide="15" id="l03-s15"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 15</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li class="active">股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">外汇期货与外汇远期</h2>
+<div class="slide-content">
+<ul>
+<li><strong>符号记法说明：</strong>
+<ul>
+<li>\( S_0 \)：即期汇率 – 购买 1 单位外币所需的本币价格（直接标价法）。</li>
+<li>\( F_0 \)：远期汇率 – 在未来购买 1 单位外币预先锁定的本币价格。</li>
+<li>\( r \)：本币本国无风险年化利率。</li>
+<li>\( r_f \)：外币外国无风险年化利率。</li>
+</ul>
+</li>
+<li><strong>外币作为支付连续收益的资产：</strong>
+<ul>
+<li>持有外币可在外国存入银行并持续获得外币利息收入，利率为 \( r_f \)。</li>
+<li>因此，外币等价于提供连续分红收益率 \( q = r_f \) 的投资性资产：</li>
+</ul>
+<div class="equation-box" style="margin: 10px 0;">
+                    \[ F_0 = S_0 e^{(r - r_f)T} \]
+                  </div>
+</li>
+<li>该经典恒等式即为国际金融学著名的<strong>抛补利率平价定理 (Covered Interest Parity, CIP)</strong>！</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 16 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="8" data-source-slide="16" id="l03-s16"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 16</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li class="active">股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">抛补利率平价成立的经济机制</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px">从时间 \( 0 \) 到时间 \( T \) 持有资金的两种等价投资路径：</p>
+<div style="display: flex; justify-content: space-around; align-items: center; margin: 12px 0;">
+<!-- Left Column: Foreign Currency Path -->
+<div style="background: #eef2ff; border: 2px solid #4338ca; border-radius: 8px; padding: 12px 16px; width: 260px; text-align: center;">
+<div style="font-weight: bold; color: #1e1b4b; margin-bottom: 6px;">路径 1：外币投资路径</div>
+<div>\( t=0 \) 时拥有 <strong>1,000 单位外币</strong></div>
+<div style="color: #4338ca;  margin: 8px 0">↓ <em>按外国利率 \( r_f \) 投资</em></div>
+<div>在 \( T \) 时刻本利和增至 <strong>\( 1,000 e^{r_f T} \)</strong> 外币</div>
+<div style="color: #4338ca; margin: 8px 0">↓ <em>通过远期锁汇按 \( F_0 \) 结汇</em></div>
+<div style="background: #e0e7ff; border-radius: 4px; padding: 6px; font-weight: bold; color: #1e1b4b;">
+                    最终获得本币：<br/>\( 1,000 e^{r_f T} F_0 \)
+                  </div>
+</div>
+<div style="font-size: 28px; font-weight: bold; color: #4338ca;">=</div>
+<!-- Right Column: Domestic Currency Path -->
+<div style="background: #f0fdf4; border: 2px solid #15803d; border-radius: 8px; padding: 12px 16px; width: 260px; text-align: center;">
+<div style="font-weight: bold; color: #14532d; margin-bottom: 6px;">路径 2：即期结汇并按本币投资</div>
+<div>\( t=0 \) 时按即期汇率 \( S_0 \) 兑换为本币：<strong>\( 1,000 S_0 \) 本币</strong></div>
+<div style="color: #15803d; margin: 8px 0">↓ <em>按本币利率 \( r \) 投资</em></div>
+<div>在 \( T \) 时刻本利和增至：</div>
+<div style="margin: 8px 0"> </div>
+<div style="background: #dcfce7; border-radius: 4px; padding: 6px; font-weight: bold; color: #14532d;">
+                    最终获得本币：<br/>\( 1,000 S_0 e^{rT} \)
+                  </div>
+</div>
+</div>
+<div class="equation-box" style="margin-top: 10px;">
+                \[ 1,000 e^{r_f T} F_0 = 1,000 S_0 e^{rT} \quad \Longrightarrow \quad \mathbf{F_0 = S_0 e^{(r - r_f)T}} \]
+              </div>
+</div>
+</div>
+</div></section>
+<!-- Slide 17 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="9" data-source-slide="17" id="l03-s17"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 17</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li class="active">股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">外汇市场套利机制</h2>
+<div class="slide-content">
+<ul>
+<li><strong>若 \( F^* &gt; S_0 e^{(r - r_f)T} \)（远期汇率被高估）：</strong>
+<ul>
+<li>按外国利率 \( r_f \) 借入外币。</li>
+<li>在即期现货市场上按汇率 \( S_0 \) 将外币兑换为本币。</li>
+<li>将兑换得到的本币按本国利率 \( r \) 存入银行进行投资。</li>
+<li>订立一份远期多头合约，约定在时刻 \( T \) 按 \( F^* \) 买入外币以偿还外币借款本息。</li>
+<li><em>在时刻 \( T \) 锁定确定性本币无风险套利净收益。</em></li>
+</ul>
+</li>
+<li><strong>若 \( F^* &lt; S_0 e^{(r - r_f)T} \)（远期汇率被低估）：</strong>
+<ul>
+<li>按本国利率 \( r \) 借入本币。</li>
+<li>在即期现货市场上按汇率 \( S_0 \) 将本币兑换为外币。</li>
+<li>将外币按外国利率 \( r_f \) 投资于外国货币市场。</li>
+<li>订立一份远期空头合约，约定在时刻 \( T \) 按 \( F^* \) 卖出外币本利和换回本币，以偿还本币贷款。</li>
+<li><em>在时刻 \( T \) 同样锁定确定性无风险套利利润。</em></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 18 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="9" data-source-slide="18" id="l03-s18"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 18</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li class="active">大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">大宗商品期货与远期</h2>
+<div class="slide-content">
+<ul>
+<li><strong>投资性商品 (如黄金、白银)：</strong>
+<ul>
+<li>完全出于投资目的持有；其仓储保险成本可等价视为负收益 (Negative Income)。</li>
+<li>若仓储成本与商品价值成正比例（年化比率为 \( u \)）：
+                      \[ F_0 = S_0 e^{(r + u)T} \]
+                    </li>
+<li>若仓储成本为固定金额，其贴现现值为 \( U \)：
+                      \[ F_0 = (S_0 + U) e^{rT} \]
+                    </li>
+</ul>
+</li>
+<li><strong>消费性商品 (如原油、铜、农产品)：</strong>
+<ul>
+<li>若 \( F^* &gt; (S_0 + U)e^{rT} \)，正向现货-期货套利成立并发挥约束作用（借款、买入现货商品、储存并做空期货）。</li>
+<li>若 \( F^* &lt; (S_0 + U)e^{rT} \)，反向现货-期货套利<strong>受阻失效</strong>，因为：
+                      <ul>
+<li>普通投资者无法借入并卖空实物大宗商品。</li>
+<li>现货库存持有者视其实物库存为生产平稳运行的必要保障（享受便利收益 Convenience Yield），不愿出清现货。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 19 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="10" data-source-slide="19" id="l03-s19"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 19</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li class="active">大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 消费性商品套利分析 (原油)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>市场基础数据：</strong>
+<ul>
+<li>原油即期现货价格：\( S_0 = \$70 \) / 桶。</li>
+<li>1 年期原油期货市场报价：\( F^* = \$75.80 \)。</li>
+<li>连续复利年化无风险利率：所有期限均为 \( r = 5\% \) p.a.。</li>
+<li>原油仓储成本：每桶每年 \( \$1.40 \)，按季度在季初预先支付（每季度初支付 \( \$0.35 \)，即在第 0、3、6、9 个月支付）。</li>
+</ul>
+</li>
+<li><strong>是否存在无风险套利机会？</strong>
+<ul>
+<li><strong>步骤 1：计算仓储成本的现值 (\(U\))：</strong>
+                      \[ U = 0.35 + 0.35 e^{-0.05 \times 3/12} + 0.35 e^{-0.05 \times 6/12} + 0.35 e^{-0.05 \times 9/12} \]
+                      \[ U = 0.35 \times (1 + 0.98758 + 0.97531 + 0.96319) = 0.35 \times 3.92608 = \mathbf{\$1.374} \]
+                    </li>
+<li><strong>步骤 2：计算包含仓储成本的理论期货价格上限：</strong>
+                      \[ F_{\text{上限}} = (S_0 + U) e^{rT} = (70 + 1.374) e^{0.05 \times 1} = 71.374 \times 1.05127 = \mathbf{\$75.03} \]
+                    </li>
+<li><strong>判定结论：</strong> 市场实际期货价格 \( F^* = \$75.80 &gt; \$75.03 \)，期货价格被高估！正向现货-期货套利完全可行！</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 20 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="10" data-source-slide="20" id="l03-s20"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 20</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li class="active">大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">案例分析 – 原油套利执行流程详解 (续)</h2>
+<div class="slide-content">
+<h4 style="color: #2a338c; margin: 0 0 10px 0;">正向现货-期货套利执行流程 (Cash-and-Carry Arbitrage Execution)</h4>
+<ul>
+<li><strong>当前时刻 (\(t = 0\))：</strong>
+<ul>
+<li>按 5% 年利率借入 \( \$(70 + 1.374) = \$71.374 \)。</li>
+<li>以即期价格 \( \$70 \) 买入 1 桶原油现货，并支付首季度仓储费 \( \$0.35 \)。</li>
+<li>签订一份 1 年期期货空头合约，锁定在 1 年后以 \( \$75.80 \) 卖出该桶原油。</li>
+</ul>
+</li>
+<li><strong>在第 3、6、9 个月时刻：</strong>
+<ul>
+<li>从最初借入的仓储备付储备金中按期支付每季度 \( \$0.35 \) 的仓储费用（未用备付资金 \( \$1.374 - \$0.35 = \$1.024 \) 按年利率 5% 产生利息贴现）。</li>
+</ul>
+</li>
+<li><strong>在 1 年后到期时刻：</strong>
+<ul>
+<li>偿还贷款本息：\( \$71.374 e^{0.05 \times 1} = \mathbf{\$75.03} \)。</li>
+<li>履行期货合约交付原油，收取期货货款：\( \mathbf{+\$75.80} \)。</li>
+<li><strong>锁定无风险净套利利润：</strong> \( \$75.80 - \$75.03 = \mathbf{+\$0.77} \) / 桶。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 21 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="11" data-source-slide="21" id="l03-s21"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 21</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li class="active">持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">持有成本模型 (Cost of Carry)</h2>
+<div class="slide-content">
+<p style="margin-bottom: 8px"><strong>持有成本 (Cost of Carry)</strong> \( c \) 综合概括了资产持有过程中的资金融资成本、仓储保险成本以及所产生的收益流：</p>
+<div class="equation-box" style="margin: 8px 0; padding: 10px;">
+                \[ c = \text{资金融资利息} + \text{仓储保险费用} - \text{持有期资产收益} \]
+              </div>
+<ul>
+<li>对于无收益股票：\( c = r \)。</li>
+<li>对于提供红利率 \( q \) 的股票指数：\( c = r - q \)。</li>
+<li>对于具有外国利率 \( r_f \) 的外汇货币：\( c = r - r_f \)。</li>
+<li>对于具有比例仓储成本 \( u \) 的大宗商品：\( c = r + u \)。</li>
+<li><strong>对于纯投资性资产：</strong> 期货定价公式可统一表达为：
+                  <div class="equation-box" style="margin: 8px 0; padding: 6px;">
+                    \[ F_0 = S_0 e^{cT} \]
+                  </div>
+<ul>
+<li>当 \( c &gt; 0 \) 时，期货相对于现货产生升水：\( F_0 &gt; S_0 \) – <strong>升水市场 (Contango)</strong>。</li>
+<li>当 \( c &lt; 0 \) 时，期货相对于现货产生贴水：\( F_0 &lt; S_0 \) – <strong>贴水市场 (Backwardation)</strong>。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- Slide 22 -->
+<section data-kind="original" data-pdf-half="bottom" data-pdf-page="11" data-source-slide="22" id="l03-s22"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 22</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li class="active">持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">便利收益 (Convenience Yield)</h2>
+<div class="slide-content">
+<ul>
+<li><strong>定义：</strong> 便利收益率 \( y \) 衡量了持有实体大宗商品现货相对于单纯持有纸面期货合约所带来的隐含经济利益与运营便利：
+                  <div class="equation-box" style="margin: 8px 0; padding: 8px;">
+                    \[ F_0 e^{yT} = S_0 e^{cT} \implies \mathbf{F_0 = S_0 e^{(c - y)T}} = S_0 e^{(r + u - y)T} \]
+                    \[ \text{或采用金额仓储成本：} \quad F_0 = (S_0 + U) e^{(r - y)T} \]
+                  </div>
+</li>
+<li><strong>企业为何必须保有实体库存？</strong>
+<ul>
+<li>在供应链遭遇意外中断或延误时，确保生产流水线不致停工。</li>
+<li>能够随时敏锐捕捉当地突发性的临时供给短缺溢价或应对客户爆发性需求。</li>
+</ul>
+</li>
+<li><strong>市场预期与远期曲线走势形态：</strong>
+<ul>
+<li>若<strong>库存充裕</strong>，现货持有便利性极低 (\( y \approx 0 \)) → 持有成本主导市场 → 曲线向上倾斜（<strong>升水 Contango</strong>）。</li>
+<li>若<strong>现货极度紧缺</strong>，便利收益极高 (\( y &gt; r + u \)) → 曲线向下倾斜（<strong>贴水 Backwardation</strong>）。</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 3.3 -->
+<section data-after-source-slide="22" data-kind="enrichment" id="l03-s22-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li class="active">持有成本与便利收益</li>
+<li>远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">便利收益率、仓储成本与 1955 年洋葱逼仓案</h3>
+<div style="display: flex; gap: 16px; margin-top: 4px;">
+<!-- Column 1: Cost of Carry -->
+<div class="example-card" style="flex: 1; padding: 10px 14px; margin-bottom: 0;">
+<h4 style="margin-bottom: 6px; color: #1e40af">统一持有成本定价模型</h4>
+<p style="line-height: 1.4; margin: 0 0 6px 0">
+                  \[ F_0 = S_0 e^{(r + u - y)T} \]
+                </p>
+<ul style="line-height: 1.4; padding-left: 14px; margin: 0">
+<li><strong>\( r \) (融资成本)：</strong> 推高远期价格 – 资金占用在库存中的利息成本。</li>
+<li><strong>\( u \) (仓储与变质成本)：</strong> 推高远期价格 – 粮仓、油罐与冷链仓储费用。</li>
+<li><strong>\( y \) (便利收益率)：</strong> 降低远期价格 – 实物现货应对生产停工断供的保供价值。</li>
+</ul>
+</div>
+<!-- Column 2: 1955 Onion Corner Case -->
+<div class="example-card" style="flex: 1; padding: 10px 14px; margin-bottom: 0;">
+<h4 style="margin-bottom: 6px; color: #b91c1c">1955 年洋葱逼仓历史大案</h4>
+<p style="line-height: 1.4; margin: 0 0 6px 0">
+                  文森特·科苏加 (Vincent Kosuga) 与山姆·西格尔 (Sam Siegel) 囤积垄断了芝加哥 98% 的洋葱库存。
+                </p>
+<ul style="line-height: 1.4; padding-left: 14px; margin: 0">
+<li>洋葱极易腐烂变质 (\( u \to \infty \)) 且仓储容量极为有限。</li>
+<li>当他们向市场狂甩洋葱时，现货价格从每袋 $2.75 崩盘至仅仅 10 美分（袋子本身的成本都高达 20 美分！）。</li>
+<li>促使美国国会通过《洋葱期货法案》(1958)，至今洋葱仍是全美唯一被法律明令禁止交易期货的商品！</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section>
+<!-- Slide 23 -->
+<section data-kind="original" data-pdf-half="top" data-pdf-page="12" data-source-slide="23" id="l03-s23"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 23</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li class="active">远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h2 class="slide-title">期货价格与未来即期价格期望值</h2>
+<div class="slide-content">
+<ul>
+<li><strong>市场当下状态（今日观察到的远期曲线形态）：</strong>
+<ul>
+<li><strong>升水 (Contango)：</strong> 期货价格高于当前现货即期价格（\( F_0 &gt; S_0 \)）。</li>
+<li><strong>贴水 (Backwardation)：</strong> 期货价格低于当前现货即期价格（\( F_0 &lt; S_0 \)）。</li>
+</ul>
+</li>
+<li><strong>市场预期理论（期货价格与未来到期期望即期价格 \( E[S_T] \) 的关系）：</strong>
+<ul>
+<li><strong>正常升水 / 正向市场 (Normal Contango，\( F_0 &gt; E[S_T] \))：</strong>
+<ul>
+<li>凯恩斯与希克斯 (Keynes-Hicks) 理论：套期保值者净持有多头头寸（买方为锁定成本愿意承担平均对冲亏损）。</li>
+<li>投机者持有空头头寸，获取正的期望风险溢价回报。</li>
+</ul>
+</li>
+<li><strong>正常贴水 / 现货溢价 (Normal Backwardation，\( F_0 &lt; E[S_T] \))：</strong>
+<ul>
+<li>商品生产者（如农户）净持有期货空头以锁定售价；投机者做多承担风险，期货价格必须贴水以提供风险补偿。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></section>
+<!-- ENRICHMENT 3.4 -->
+<section data-after-source-slide="23" data-kind="enrichment" id="l03-s23-v1"><div class="slide-container">
+<aside class="slide-sidebar">
+<div class="sidebar-course-code">20762 DRM</div>
+<div class="sidebar-slide-id">第 3 讲 - 拓展</div>
+<ul class="sidebar-nav">
+<li>学习目标</li>
+<li>投资与消费资产</li>
+<li>卖空机制</li>
+<li>远期定价</li>
+<li>已知收益与红利率</li>
+<li>远期合约估值</li>
+<li>股指与外汇期货</li>
+<li>大宗商品期货</li>
+<li>持有成本与便利收益</li>
+<li class="active">远期曲线与市场预期</li>
+</ul>
+</aside>
+<div class="slide-body">
+<h3 class="slide-title" style="margin-bottom: 8px">升水与贴水形态 vs 市场预期理论对比</h3>
+<div class="slide-content">
+<table class="slide-table" style="margin: 8px 0">
+<thead>
+<tr>
+<th>核心概念</th>
+<th>市场观察形态 (现货价格 vs 期货价格)</th>
+<th>预期假说理论 (期货价格 vs \( E[S_T] \))</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>升水 (Contango)</strong></td>
+<td>
+<strong>向上倾斜曲线：</strong> \( F_0 &gt; S_0 \)<br/>
+                      期货价格较当前现货存在溢价。<br/>
+<em>驱动动因：</em> 资金融资利息、仓储成本及充裕的现货库存（便利收益 \( y \) 极低）。
+                    </td>
+<td>
+<strong>正常升水 (Normal Contango)：</strong> \( F_0 &gt; E[S_T] \)<br/>
+                      期货价格高于未来预期即期价格。<br/>
+                      投机者作为空头提供风险承担并获取期望正收益。
+                    </td>
+</tr>
+<tr>
+<td><strong>贴水 (Backwardation)</strong></td>
+<td>
+<strong>向下倾斜曲线：</strong> \( F_0 &lt; S_0 \)<br/>
+                      期货价格低于当前现货价格。<br/>
+<em>驱动动因：</em> 现货极度紧缺或现货持有便利收益极高 (\( y &gt; r + u \))。
+                    </td>
+<td>
+<strong>正常贴水 (Normal Backwardation)：</strong> \( F_0 &lt; E[S_T] \)<br/>
+                      期货价格低于未来预期即期价格。<br/>
+                      凯恩斯理论：投机者作为多头承担现货跌价风险并赚取预期风险溢价补偿。
+                    </td>
+</tr>
+</tbody>
+</table>
+<p style="color: #1e3a8a; margin: 4px 0 0 0">
+<strong>核心区别：</strong> 升水/贴水描述的是今日可直接观察到的现货与期货的静态价差形态；而正常升水/正常贴水描述的是期货价格相对于未来未知的期望即期价格的理论风险溢价关系！
+              </p>
+</div>
+</div>
+</div></section>
+</div>
+</div>
+<script src="vendor/reveal/dist/reveal.js"></script>
+<script src="vendor/reveal/plugin/math/math.js"></script>
+<script async="" id="MathJax-script" src="vendor/mathjax/tex-svg.js"></script>
+<script src="assets/deck.js"></script>
+</body>
+</html>
