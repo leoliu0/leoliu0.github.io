@@ -447,3 +447,5 @@ body {
 .slide-body {
   overflow: visible !important;
 }
+
+.reveal .controls { bottom: calc(var(--r-controls-spacing) + 30px); }
