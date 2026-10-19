@@ -157,6 +157,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("resize", autoFitAllSlides);
 
+    // Site build: point the "阅读模式" link (.deck-read-link) at the current slide, in the
+    // language being viewed (vertical index 1 is the English twin).
+    function syncReadLink() {
+      const link = document.querySelector(".deck-read-link");
+      if (!link) return;
+      const i = Reveal.getIndices();
+      link.href = link.dataset.base + (i.v ? "?lang=en" : "") + "#p" + (i.h + 1);
+    }
+    Reveal.on("ready", syncReadLink);
+    Reveal.on("slidechanged", syncReadLink);
+
     // Pinch-zoom enlarges the page around a visible window (the visual viewport); keep the
     // arrows and the page number in that window's bottom-right corner at their normal
     // on-screen size and position.

@@ -492,3 +492,5 @@ body {
 }
 
 .reveal .controls { bottom: calc(var(--r-controls-spacing) + 30px); }
+.deck-links { position: absolute; top: 14px; right: 20px; z-index: 10; display: flex; gap: 8px; }
+.deck-links .deck-index-link { position: static; }

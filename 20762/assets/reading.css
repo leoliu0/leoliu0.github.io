@@ -1,0 +1,325 @@
+/* Reading view (lecture-NN-read.html, built by build_site_20762.py): every slide of a
+   lecture reflowed into one scrolling page that fills a phone's width. Loaded after
+   slides.css, whose card/table/list styles it reuses; the rules below undo the fixed
+   1024x768 slide layout and shrink the type scale. */
+
+body.reading {
+  --font-title: 21px;
+  --font-subtitle: 16px;
+  --font-body: 16px;
+  --font-nested: 15px;
+  --font-table: 13px;
+  --font-caption: 12px;
+  --line-height-base: 1.6;
+  margin: 0;
+  padding: 0;
+  background: #f1f5f9;
+  color: var(--theme-text);
+  font-family: var(--font-stack);
+  font-size: var(--font-body);
+  line-height: var(--line-height-base);
+  -webkit-text-size-adjust: 100%;
+  /* the page never pans sideways; wide tables and formulas scroll inside their own box */
+  overflow-x: clip;
+}
+
+/* Top bar */
+.read-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--theme-surface-border);
+  font-size: 14px;
+}
+
+.read-bar a {
+  color: var(--theme-accent);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.read-bar-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--theme-primary);
+}
+
+.read-lang {
+  display: inline-flex;
+  flex: none;
+  border: 1px solid var(--theme-surface-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.read-lang button {
+  font: inherit;
+  font-size: 13px;
+  padding: 3px 8px;
+  border: 0;
+  background: #ffffff;
+  color: var(--theme-text-muted);
+  cursor: pointer;
+}
+
+.read-lang button[aria-pressed="true"] {
+  background: var(--theme-accent);
+  color: #ffffff;
+}
+
+/* Language switch: lang-zh, lang-en or lang-both on <body> */
+body.lang-zh .read-en,
+body.lang-en .read-zh {
+  display: none !important;
+}
+
+body.lang-both .read-slide .read-en {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--theme-surface-border);
+}
+
+body.lang-both .read-toc .read-en::before {
+  content: " · ";
+}
+
+body.lang-both .read-toc .read-en {
+  color: var(--theme-text-muted);
+}
+
+/* Page */
+.read-main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 6px 0 48px 0;
+}
+
+body.lang-both .read-bar .read-en,
+body.lang-both .read-toc summary .read-en {
+  display: none;
+}
+
+.read-toc,
+.read-slide {
+  background: #ffffff;
+  border-top: 1px solid var(--theme-surface-border);
+  border-bottom: 1px solid var(--theme-surface-border);
+  margin: 10px 0;
+  padding: 12px 14px;
+}
+
+.read-toc summary {
+  font-weight: 700;
+  color: var(--theme-primary);
+  cursor: pointer;
+}
+
+.read-toc ol {
+  margin: 8px 0 0 0;
+  padding-left: 1.6em;
+}
+
+.read-toc li {
+  margin: 4px 0;
+}
+
+.read-toc a {
+  color: var(--theme-text);
+  text-decoration: none;
+}
+
+.read-slide {
+  scroll-margin-top: 48px;
+}
+
+.read-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--theme-text-light);
+}
+
+.read-meta a {
+  color: var(--theme-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 720px) {
+  .read-toc,
+  .read-slide {
+    margin: 14px 12px;
+    padding: 18px 24px;
+    border: 1px solid var(--theme-surface-border);
+    border-radius: 10px;
+  }
+}
+
+/* Undo the fixed slide layout inside each reflowed slide */
+.read-body .slide-content {
+  max-height: none;
+}
+
+.read-body .slide-title {
+  margin-bottom: 10px;
+}
+
+.read-body .title-slide-container {
+  height: auto;
+  padding: 6px 0;
+  background: none;
+}
+
+.read-body .title-slide-h1 {
+  font-size: 24px;
+}
+
+.read-body .title-slide-h2 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.read-body .tip-of-the-week-box {
+  margin: 10px 0;
+  padding: 12px 14px;
+}
+
+.read-body .uts-logo-text {
+  display: none;
+}
+
+.read-body div {
+  height: auto !important;
+  max-height: none !important;
+}
+
+.read-body img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.read-body svg:not(mjx-container svg) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Wide content scrolls sideways instead of widening the page. Tables sit in a
+   .read-scroll wrapper (added by the build, with a min-width for 4+ columns). */
+.read-body .read-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 6px 0;
+}
+
+.read-body .read-scroll > table {
+  margin: 0;
+  overflow-wrap: normal;
+}
+
+/* columns already get a min-width; let headers wrap instead of running into the next one */
+.read-body .read-scroll :is(td, th) {
+  white-space: normal !important;
+}
+
+.read-body mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Inline formulas wider than the column shrink to fit (display formulas scroll) */
+.read-body mjx-container:not([display="true"]) {
+  max-width: calc(100% - 1.5em);
+}
+
+.read-body span[style*="nowrap"] > mjx-container {
+  max-width: calc(100% - 2.5em);
+}
+
+/* MathJax's hidden screen-reader copy is clipped but would still widen the page */
+.read-body mjx-container mjx-assistive-mml {
+  width: 100% !important;
+}
+
+.read-body mjx-container:not([display="true"]) > svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Inside (scrolling) tables formulas keep their natural size */
+.read-body :is(td, th) mjx-container,
+.read-body :is(td, th) mjx-container > svg {
+  max-width: none;
+}
+
+.read-body :is(p, li, div):not(:is(td, th) *) {
+  overflow-wrap: anywhere;
+}
+
+.read-body :where(ul, ol) {
+  padding-left: 1.3em;
+}
+
+/* Same as the deck's .reveal ul.text-list (slides.css) */
+.read-body ul.text-list {
+  display: block;
+  list-style: none;
+  margin: 2px 0;
+  padding: 0;
+}
+
+.read-body ul.text-list > li {
+  position: relative;
+  padding-left: 1.1em;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.read-body ul.text-list > li::before {
+  content: "•";
+  position: absolute;
+  left: 0.2em;
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+}
+
+/* Phones: side-by-side columns stack, flex rows wrap */
+@media (max-width: 640px) {
+  .read-body [style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .read-body [style*="display: flex"],
+  .read-body [style*="display:flex"] {
+    flex-wrap: wrap;
+  }
+
+  .read-body [style*="display: flex"] > *,
+  .read-body [style*="display:flex"] > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* flex rows with a gap are side-by-side cards or columns: one per line */
+  .read-body [style*="display: flex"][style*="gap"] > *,
+  .read-body [style*="display:flex"][style*="gap"] > * {
+    flex: 1 1 100% !important;
+  }
+}
