@@ -1,3 +1,6 @@
+/* Chinese text uses the bundled FandolKai (fonts/kai.css), identical on every platform. */
+@import url("fonts/kai.css");
+
 :root {
   --slide-width: 1024px;
   --slide-height: 768px;
@@ -23,18 +26,22 @@
   --font-table: 17px;
   --font-caption: 14px;
   --line-height-base: 1.55;
+  --font-stack: "FandolKai", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Reveal theme fonts (headings use --r-heading-font). */
+  --r-main-font: var(--font-stack);
+  --r-heading-font: var(--font-stack);
 }
 
 body {
   background-color: #090d16;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: var(--font-stack);
   color: var(--theme-text);
   margin: 0;
   padding: 0;
 }
 
 .reveal {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: var(--font-stack);
   font-size: var(--font-body);
   line-height: var(--line-height-base);
   color: var(--theme-text);

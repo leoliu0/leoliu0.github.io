@@ -156,5 +156,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     window.addEventListener("resize", autoFitAllSlides);
+
+    // The bundled Kai web font changes text size when it arrives; refit then.
+    if (document.fonts) {
+      document.fonts.addEventListener("loadingdone", function () {
+        autoFitAllSlides();
+        if (Reveal.getCurrentSlide()) autoFitSlide(Reveal.getCurrentSlide());
+      });
+    }
   }
 });
