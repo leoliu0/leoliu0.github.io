@@ -39,15 +39,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const maxW = 812;
     const maxH = 768;
 
-    // Measure total natural dimensions of everything inside body
+    // Measure total natural dimensions of everything inside body, in slide pixels:
+    // Reveal scales the whole slide to the window (about 0.5 on a phone), so screen
+    // pixels from getBoundingClientRect are divided by that scale.
     let maxBottom = 0;
     let maxRight = 0;
     const bodyRect = body.getBoundingClientRect();
+    const k = bodyRect.width / body.offsetWidth || 1;
 
     body.querySelectorAll("*").forEach(el => {
       const r = el.getBoundingClientRect();
-      const bottomRel = r.bottom - bodyRect.top;
-      const rightRel = r.right - bodyRect.left;
+      const bottomRel = (r.bottom - bodyRect.top) / k;
+      const rightRel = (r.right - bodyRect.left) / k;
       if (bottomRel > maxBottom) maxBottom = bottomRel;
       if (rightRel > maxRight) maxRight = rightRel;
     });
@@ -156,6 +159,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     window.addEventListener("resize", autoFitAllSlides);
+    // A slide fitted before its images arrived would overflow once they load.
+    window.addEventListener("load", autoFitAllSlides);
 
     // Site build: point the "阅读模式" link (.deck-read-link) at the current slide, in the
     // language being viewed (vertical index 1 is the English twin).
