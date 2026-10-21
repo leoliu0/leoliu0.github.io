@@ -29,83 +29,80 @@ z
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 14.29 117.77 
-L 215.90 117.77 
-L 215.90 16.28 
-L 14.29 16.28 
+    <path d="M 15.09 117.77 
+L 207.09 117.77 
+L 207.09 15.93 
+L 15.09 15.93 
 z
 " style="fill: #ffffff"/>
    </g>
    <g id="matplotlib.axis_1"/>
    <g id="matplotlib.axis_2"/>
    <g id="line2d_1">
-    <path d="M 14.29 117.71 
-L 29.22 117.52 
-L 39.49 117.17 
-L 47.89 116.66 
-L 54.42 116.06 
-L 60.96 115.24 
-L 66.56 114.31 
-L 72.16 113.15 
-L 77.76 111.73 
-L 82.43 110.32 
-L 87.09 108.71 
-L 91.76 106.88 
-L 96.43 104.82 
-L 101.09 102.52 
-L 105.76 100.00 
-L 110.43 97.23 
-L 115.10 94.24 
-L 119.76 91.01 
-L 125.36 86.85 
-L 130.96 82.39 
-L 136.56 77.64 
-L 142.16 72.63 
-L 148.70 66.47 
-L 155.23 60.01 
-L 162.70 52.30 
-L 171.10 43.28 
-L 180.43 32.88 
-L 190.70 21.09 
-L 202.83 6.78 
-L 209.33 -1 
-L 209.33 -1 
-" clip-path="url(#pb7a05db368)" style="fill: none; stroke: #1e3a8a; stroke-width: 2.8; stroke-linecap: round"/>
+    <path d="M 15.09 116.87 
+L 25.09 116.31 
+L 34.09 115.61 
+L 42.09 114.78 
+L 50.09 113.74 
+L 57.09 112.63 
+L 64.09 111.31 
+L 71.09 109.76 
+L 78.09 107.98 
+L 85.09 105.94 
+L 92.09 103.65 
+L 99.09 101.08 
+L 106.09 98.25 
+L 113.09 95.15 
+L 120.09 91.78 
+L 127.09 88.14 
+L 134.09 84.24 
+L 141.09 80.10 
+L 148.09 75.71 
+L 156.09 70.42 
+L 164.09 64.86 
+L 172.09 59.03 
+L 181.09 52.19 
+L 190.09 45.08 
+L 200.09 36.89 
+L 211.09 27.58 
+L 221 18.95 
+L 221 18.95 
+" clip-path="url(#pdda6a3b2e5)" style="fill: none; stroke: #1e3a8a; stroke-width: 2.8; stroke-linecap: round"/>
    </g>
    <g id="line2d_2">
-    <path d="M 73.09 127.59 
-L 187.90 38.13 
-" clip-path="url(#pb7a05db368)" style="fill: none; stroke: #ea580c; stroke-width: 1.6; stroke-linecap: square"/>
+    <path d="M 59.40 124.14 
+L 199.70 49.53 
+" clip-path="url(#pdda6a3b2e5)" style="fill: none; stroke: #ea580c; stroke-width: 1.6; stroke-linecap: square"/>
    </g>
    <g id="line2d_3">
-    <path d="M 14.29 86.13 
-L 126.30 86.13 
-" clip-path="url(#pb7a05db368)" style="fill: none; stroke-dasharray: 3,3; stroke-dashoffset: 0; stroke: #94a3b8"/>
+    <path d="M 15.09 88.80 
+L 125.86 88.80 
+" clip-path="url(#pdda6a3b2e5)" style="fill: none; stroke-dasharray: 3,3; stroke-dashoffset: 0; stroke: #94a3b8"/>
    </g>
    <g id="line2d_4">
-    <path d="M 126.30 117.77 
-L 126.30 86.13 
-" clip-path="url(#pb7a05db368)" style="fill: none; stroke-dasharray: 3,3; stroke-dashoffset: 0; stroke: #94a3b8"/>
+    <path d="M 125.86 117.77 
+L 125.86 88.80 
+" clip-path="url(#pdda6a3b2e5)" style="fill: none; stroke-dasharray: 3,3; stroke-dashoffset: 0; stroke: #94a3b8"/>
    </g>
    <g id="line2d_5">
-    <path d="M 126.30 86.13 
-L 159.90 86.13 
-L 159.90 59.95 
-" clip-path="url(#pb7a05db368)" style="fill: none; stroke-dasharray: 7,4.2; stroke-dashoffset: 0; stroke: #334155; stroke-width: 1.4"/>
+    <path d="M 125.86 88.80 
+L 162.78 88.80 
+L 162.78 69.16 
+" clip-path="url(#pdda6a3b2e5)" style="fill: none; stroke-dasharray: 7,4.2; stroke-dashoffset: 0; stroke: #334155; stroke-width: 1.4"/>
    </g>
    <g id="patch_3">
-    <path d="M 14.29 117.77 
-L 14.29 16.28 
+    <path d="M 15.09 117.77 
+L 15.09 15.93 
 " style="fill: none; stroke: #334155; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
-    <path d="M 14.29 117.77 
-L 215.90 117.77 
+    <path d="M 15.09 117.77 
+L 207.09 117.77 
 " style="fill: none; stroke: #334155; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_1">
     <!-- B -->
-    <g style="fill: #334155" transform="translate(2.581249 89.24718) scale(0.11 -0.11)">
+    <g style="fill: #334155" transform="translate(2.693934 91.913743) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-42" d="M 646 0 
 L 2138 0 
@@ -138,7 +135,7 @@ z
    </g>
    <g id="text_2">
     <!-- A -->
-    <g style="fill: #334155" transform="translate(122.952468 132.823379) scale(0.11 -0.11)">
+    <g style="fill: #334155" transform="translate(122.513125 132.845628) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-41" d="M 26 0 
 L 621 0 
@@ -165,7 +162,7 @@ z
    </g>
    <g id="text_3">
     <!-- 期权价格 -->
-    <g style="fill: #334155" transform="translate(14.288889 13.063861) scale(0.11 -0.11)">
+    <g style="fill: #334155" transform="translate(15.090385 13.041584) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-671f" d="M 1139 915 
 C 947 486 608 58 250 -230 
@@ -397,7 +394,7 @@ z
    </g>
    <g id="text_4">
     <!-- 基础资产价格 -->
-    <g style="fill: #334155" transform="translate(149.902222 132.823379) scale(0.11 -0.11)">
+    <g style="fill: #334155" transform="translate(141.085769 132.845628) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-57fa" d="M 4378 5370 
 L 4378 4755 
@@ -618,7 +615,7 @@ z
    </g>
    <g id="text_5">
     <!-- 斜率 = Δ -->
-    <g style="fill: #dc2626" transform="translate(164.378815 77.882099) scale(0.12 -0.12)">
+    <g style="fill: #dc2626" transform="translate(167.948249 83.150225) scale(0.12 -0.12)">
      <defs>
       <path id="NotoSansCJKsc-Medium-659c" d="M 2406 1517 
 C 2618 1088 2835 525 2906 173 
@@ -813,15 +810,15 @@ C -1.56 2.68 -0.80 3 0 3
 z
 " style="stroke: #ffffff; stroke-width: 1.2"/>
     </defs>
-    <g clip-path="url(#pb7a05db368)">
-     <use xlink:href="#m0aa0df7ba6" x="126.296296" y="86.129367" style="fill: #1e3a8a; stroke: #ffffff; stroke-width: 1.2"/>
+    <g clip-path="url(#pdda6a3b2e5)">
+     <use xlink:href="#m0aa0df7ba6" x="125.856953" y="88.795931" style="fill: #1e3a8a; stroke: #ffffff; stroke-width: 1.2"/>
     </g>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pb7a05db368">
-   <rect x="14.288889" y="16.283448" width="201.613333" height="101.485517"/>
+  <clipPath id="pdda6a3b2e5">
+   <rect x="15.090385" y="15.925" width="191.995385" height="101.843966"/>
   </clipPath>
  </defs>
 </svg>

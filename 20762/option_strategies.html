@@ -115,7 +115,7 @@ const TXT = {
   zh: {
     title: "期权策略构建器：到期损益一目了然",
     presetLabel: "策略：",
-    groups: ["期权 + 股票", "差价策略", "组合策略", "做空波动率对比（行权价 $5.25–$6.25）", "自己搭"],
+    groups: ["期权 + 股票", "差价策略", "组合策略", "做空波动率对比（行权价 $80–$120）", "自己搭"],
     names: {
       cc: "备兑看涨期权", rcc: "反向备兑看涨期权", pp: "保护性看跌期权", rpp: "反向保护性看跌期权",
       bullc: "牛市差价：看涨（借方）", bullp: "牛市差价：看跌（贷方）",
@@ -137,7 +137,7 @@ const TXT = {
       bearp: "买入高行权价、卖出低行权价看跌：温和看跌，先付权利金。",
       bearc: "买入高行权价、卖出低行权价看涨：先收权利金，温和看跌。",
       bfc: "买入 K₁、K₃，卖出 2 份 K₂ 看涨：押股价留在 K₂ 附近，亏损有限。",
-      bfp: "用看跌期权，损益与看涨蝶式相同（权利金由平价关系得出，r = 0）。",
+      bfp: "用看跌期权（权利金 $4、$8、$14），损益与看涨蝶式相同（买卖权平价，r = 0）。",
       rbf: "与蝶式相反：押股价大幅离开 K₂。",
       cal: "卖出近月、买入远月看涨（同一行权价）：近月到期时股价在 K 附近最赚。远月按 BS 估值。",
       rcal: "与日历差价相反：买入近月、卖出远月。",
@@ -147,10 +147,10 @@ const TXT = {
       strap: "买入 2 份看涨、1 份看跌：偏多，上行斜率是下行的两倍。",
       strangle: "买入低行权价看跌和高行权价看涨：比跨式便宜，但要更大波动才赚。",
       sstrangle: "卖出低行权价看跌和高行权价看涨：K₁ 与 K₂ 之间都赚，两侧亏损无限。",
-      svStraddle: "利润在 $5.75 处最高，两侧亏损无限。",
-      svStrangle: "$5.50 到 $6.00 之间收益持平，两侧亏损无限。",
-      svButterfly: "卖出跨式，再买入外侧宽跨式封住亏损：尖峰收益，亏损有限。",
-      svCondor: "卖出宽跨式，再买入更外侧期权封住亏损：平顶收益，四者中最小。",
+      svStraddle: "利润在 $100 处最高（+16），两侧亏损无限。",
+      svStrangle: "$90 到 $110 之间收益持平（+8），两侧亏损无限。",
+      svButterfly: "卖出跨式，再买入外侧宽跨式封住亏损：尖峰收益（+8），亏损有限（−2）。",
+      svCondor: "卖出宽跨式，再买入更外侧期权封住亏损：平顶收益（+5），四者中最小。",
       custom: "用下面的“添加”加腿；权利金默认取市场报价。",
     },
     lblS0: "现价 S₀ ($)", lblBs: "显示到期前价值（BS，r = 0）", lblSigma: "σ (%)", lblT: "距近月到期 T (月)",
@@ -170,7 +170,7 @@ const TXT = {
   en: {
     title: "Option strategy builder: payoff at expiry",
     presetLabel: "Strategy:",
-    groups: ["Options + stock", "Spreads", "Combinations", "Short-volatility comparison (strikes $5.25–$6.25)", "Your own"],
+    groups: ["Options + stock", "Spreads", "Combinations", "Short-volatility comparison (strikes $80–$120)", "Your own"],
     names: {
       cc: "Covered call", rcc: "Reverse covered call", pp: "Protective put", rpp: "Reverse protective put",
       bullc: "Bull spread: calls (debit)", bullp: "Bull spread: puts (credit)",
@@ -192,7 +192,7 @@ const TXT = {
       bearp: "Buy the high-strike put, sell the low-strike put: mildly bearish, premium paid up front.",
       bearc: "Buy the high-strike call, sell the low-strike call: premium received up front, mildly bearish.",
       bfc: "Buy K₁ and K₃, sell two K₂ calls: bets the stock stays near K₂, loss is limited.",
-      bfp: "Built from puts, same payoff as the call butterfly (premiums from put-call parity, r = 0).",
+      bfp: "Built from puts (premiums $4, $8, $14), same payoff as the call butterfly (put-call parity, r = 0).",
       rbf: "The opposite of the butterfly: bets the stock moves far from K₂.",
       cal: "Sell the near call, buy the far call (same strike): best if the stock is near K when the near call expires. The far call is valued by BS.",
       rcal: "The opposite of the calendar spread: buy near, sell far.",
@@ -202,10 +202,10 @@ const TXT = {
       strap: "Buy 2 calls and 1 put: bullish tilt, the upside slope is twice the downside.",
       strangle: "Buy a low-strike put and a high-strike call: cheaper than a straddle, needs a bigger move.",
       sstrangle: "Sell a low-strike put and a high-strike call: profit between K₁ and K₂, unlimited loss outside.",
-      svStraddle: "Profit peaks at $5.75, unlimited loss on both sides.",
-      svStrangle: "Flat maximum profit between $5.50 and $6.00, unlimited loss on both sides.",
-      svButterfly: "Short straddle plus a bought outer strangle to cap the loss: sharp peak, limited loss.",
-      svCondor: "Short strangle plus bought outer options to cap the loss: flat top, the smallest of the four.",
+      svStraddle: "Profit peaks at $100 (+16), unlimited loss on both sides.",
+      svStrangle: "Flat maximum profit (+8) between $90 and $110, unlimited loss on both sides.",
+      svButterfly: "Short straddle plus a bought outer strangle to cap the loss: sharp peak (+8), limited loss (−2).",
+      svCondor: "Short strangle plus bought outer options to cap the loss: flat top (+5), the smallest of the four.",
       custom: "Use “Add” below to add legs; premiums default to the market quotes.",
     },
     lblS0: "S₀ ($)", lblBs: "Value before expiry (BS, r = 0)", lblSigma: "σ (%)", lblT: "Time left T (months)",
@@ -226,49 +226,39 @@ const TXT = {
 document.documentElement.lang = LANG === "en" ? "en" : "zh-CN";
 document.title = TXT.title;
 
-// ---------------------------------------------------------------- markets and presets
-// Quotes of the lecture's examples (no dividends). Premiums by strike; life = months to expiry.
-//   m48  slides 5, 8 (covered call, protective put); the put follows from put-call parity, r = 0
-//   m30  slide 12-v1 (bull spreads; also used for the bear spreads)
-//   m61  slide 16 (butterfly); the puts follow from put-call parity, r = 0
-//   m100 straddle, strangle examples (slides 20-v1, 22-v1); strip, strap and the K = 90 / 110 quotes complete the table
-//   m575 slides 23-v1, 24: strikes 5.25 ... 6.25, illustrative premiums (put-call parity, r = 0)
-const MARKETS = {
-  m48:  { S0: 48,  life: 3, call: { 50: 1 },                put: { 50: 3 } },
-  m30:  { S0: 30,  life: 3, call: { 20: 13, 40: 2 },        put: { 20: 2, 40: 10 } },
-  m61:  { S0: 61,  life: 6, call: { 55: 10, 60: 7, 65: 5 }, put: { 55: 4, 60: 6, 65: 9 } },
-  m100: { S0: 100, life: 3, call: { 90: 12, 100: 5, 110: 3 }, put: { 90: 2, 100: 5, 110: 13 } },
-  m575: { S0: 5.75, life: 3,
-          call: { 5.25: 0.62, 5.5: 0.4, 5.75: 0.25, 6: 0.15, 6.25: 0.13 },
-          put:  { 5.25: 0.12, 5.5: 0.15, 5.75: 0.25, 6: 0.4, 6.25: 0.63 } },
-};
+// ---------------------------------------------------------------- the market and presets
+// One market for every preset, the lecture's: S0 = 100, no dividends, r = 0, sigma = 20%, 1 year.
+// Premiums are the Black-Scholes prices (21.19 / 13.59 / 7.97 / 4.29 / 2.15 for K = 80 ... 120)
+// rounded to whole dollars; put-call parity c - p = 100 - K holds exactly. life = months to expiry.
+const SIGMA = 0.2;
+const MARKET = { S0: 100, life: 12, call: { 80: 21, 90: 14, 100: 8, 110: 4, 120: 2 }, put: { 80: 1, 90: 4, 100: 8, 110: 14, 120: 22 } };
 const L = (side, type, K, qty = 1, o = {}) => ({ side, type, K, qty, ...o });
 const CAL_NEAR = { exp: 3, prem: 3.99 }, CAL_FAR = { exp: 6, prem: 5.64 };   // BS, sigma 20%, K = S0 = 100, r = 0
 const PRESETS = [
-  { id: "cc",  group: 0, market: "m48", legs: [L(1, "stock"), L(-1, "call", 50)] },
-  { id: "rcc", group: 0, market: "m48", legs: [L(-1, "stock"), L(1, "call", 50)] },
-  { id: "pp",  group: 0, market: "m48", legs: [L(1, "stock"), L(1, "put", 50)] },
-  { id: "rpp", group: 0, market: "m48", legs: [L(-1, "stock"), L(-1, "put", 50)] },
-  { id: "bullc", group: 1, market: "m30", legs: [L(1, "call", 20), L(-1, "call", 40)] },
-  { id: "bullp", group: 1, market: "m30", legs: [L(1, "put", 20), L(-1, "put", 40)] },
-  { id: "bearp", group: 1, market: "m30", legs: [L(1, "put", 40), L(-1, "put", 20)] },
-  { id: "bearc", group: 1, market: "m30", legs: [L(1, "call", 40), L(-1, "call", 20)] },
-  { id: "bfc", group: 1, market: "m61", legs: [L(1, "call", 55), L(-1, "call", 60, 2), L(1, "call", 65)] },
-  { id: "bfp", group: 1, market: "m61", legs: [L(1, "put", 55), L(-1, "put", 60, 2), L(1, "put", 65)] },
-  { id: "rbf", group: 1, market: "m61", legs: [L(-1, "call", 55), L(1, "call", 60, 2), L(-1, "call", 65)] },
-  { id: "cal",  group: 1, market: "m100", legs: [L(-1, "call", 100, 1, CAL_NEAR), L(1, "call", 100, 1, CAL_FAR)] },
-  { id: "rcal", group: 1, market: "m100", legs: [L(1, "call", 100, 1, CAL_NEAR), L(-1, "call", 100, 1, CAL_FAR)] },
-  { id: "straddle",  group: 2, market: "m100", legs: [L(1, "call", 100), L(1, "put", 100)] },
-  { id: "sstraddle", group: 2, market: "m100", legs: [L(-1, "call", 100), L(-1, "put", 100)] },
-  { id: "strip",  group: 2, market: "m100", legs: [L(1, "call", 100), L(1, "put", 100, 2)] },
-  { id: "strap",  group: 2, market: "m100", legs: [L(1, "call", 100, 2), L(1, "put", 100)] },
-  { id: "strangle",  group: 2, market: "m100", legs: [L(1, "put", 90), L(1, "call", 110)] },
-  { id: "sstrangle", group: 2, market: "m100", legs: [L(-1, "put", 90), L(-1, "call", 110)] },
-  { id: "svStraddle", group: 3, market: "m575", legs: [L(-1, "call", 5.75), L(-1, "put", 5.75)] },
-  { id: "svStrangle", group: 3, market: "m575", legs: [L(-1, "call", 6), L(-1, "put", 5.5)] },
-  { id: "svButterfly", group: 3, market: "m575", legs: [L(-1, "call", 5.75), L(-1, "put", 5.75), L(1, "call", 6), L(1, "put", 5.5)] },
-  { id: "svCondor", group: 3, market: "m575", legs: [L(-1, "call", 6), L(-1, "put", 5.5), L(1, "call", 6.25), L(1, "put", 5.25)] },
-  { id: "custom", group: 4, market: "m100", legs: [] },
+  { id: "cc",  group: 0, legs: [L(1, "stock"), L(-1, "call", 100)] },
+  { id: "rcc", group: 0, legs: [L(-1, "stock"), L(1, "call", 100)] },
+  { id: "pp",  group: 0, legs: [L(1, "stock"), L(1, "put", 100)] },
+  { id: "rpp", group: 0, legs: [L(-1, "stock"), L(-1, "put", 100)] },
+  { id: "bullc", group: 1, legs: [L(1, "call", 90), L(-1, "call", 110)] },
+  { id: "bullp", group: 1, legs: [L(1, "put", 90), L(-1, "put", 110)] },
+  { id: "bearp", group: 1, legs: [L(1, "put", 110), L(-1, "put", 90)] },
+  { id: "bearc", group: 1, legs: [L(1, "call", 110), L(-1, "call", 90)] },
+  { id: "bfc", group: 1, legs: [L(1, "call", 90), L(-1, "call", 100, 2), L(1, "call", 110)] },
+  { id: "bfp", group: 1, legs: [L(1, "put", 90), L(-1, "put", 100, 2), L(1, "put", 110)] },
+  { id: "rbf", group: 1, legs: [L(-1, "call", 90), L(1, "call", 100, 2), L(-1, "call", 110)] },
+  { id: "cal",  group: 1, legs: [L(-1, "call", 100, 1, CAL_NEAR), L(1, "call", 100, 1, CAL_FAR)] },
+  { id: "rcal", group: 1, legs: [L(1, "call", 100, 1, CAL_NEAR), L(-1, "call", 100, 1, CAL_FAR)] },
+  { id: "straddle",  group: 2, legs: [L(1, "call", 100), L(1, "put", 100)] },
+  { id: "sstraddle", group: 2, legs: [L(-1, "call", 100), L(-1, "put", 100)] },
+  { id: "strip",  group: 2, legs: [L(1, "call", 100), L(1, "put", 100, 2)] },
+  { id: "strap",  group: 2, legs: [L(1, "call", 100, 2), L(1, "put", 100)] },
+  { id: "strangle",  group: 2, legs: [L(1, "put", 90), L(1, "call", 110)] },
+  { id: "sstrangle", group: 2, legs: [L(-1, "put", 90), L(-1, "call", 110)] },
+  { id: "svStraddle", group: 3, legs: [L(-1, "call", 100), L(-1, "put", 100)] },
+  { id: "svStrangle", group: 3, legs: [L(-1, "call", 110), L(-1, "put", 90)] },
+  { id: "svButterfly", group: 3, legs: [L(-1, "call", 100), L(-1, "put", 100), L(1, "call", 110), L(1, "put", 90)] },
+  { id: "svCondor", group: 3, legs: [L(-1, "call", 110), L(-1, "put", 90), L(1, "call", 120), L(1, "put", 80)] },
+  { id: "custom", group: 4, legs: [] },
 ];
 
 // ---------------------------------------------------------------- maths
@@ -286,20 +276,12 @@ function bs(S, K, tau, sigma, isCall) {
   const call = S * ncdf(d1) - K * ncdf(d1 - v);
   return isCall ? call : call - S + K;
 }
-// Sigma (to 0.1%) that makes BS prices closest to the quoted premiums, least squares.
-function fitSigma(S0, opts) {
-  let best = 0.2, bestErr = Infinity;
-  for (let s = 0.02; s <= 2; s += 0.001) {
-    const err = opts.reduce((e, o) => e + (bs(S0, o.K, o.exp / 12, s, o.type === "call") - o.prem) ** 2, 0);
-    if (err < bestErr) { bestErr = err; best = s; }
-  }
-  return Math.round(best * 1000) / 1000;
-}
+
 
 // ---------------------------------------------------------------- state
 const $ = id => document.getElementById(id);
 const round2 = x => Math.round(x * 100) / 100;
-let S = { preset: "", market: MARKETS.m100, S0: 100, sigma: 0.25, T: 3, bsOn: false, legs: [] };
+let S = { preset: "", market: MARKET, S0: MARKET.S0, sigma: SIGMA, T: 12, bsOn: false, legs: [] };
 
 const quote = l => S.market[l.type] && S.market[l.type][l.K];
 // Default premium: the market quote at the market's expiry, otherwise Black-Scholes at sigma.
@@ -324,13 +306,11 @@ const horizon = () => optionLegs().reduce((h, l) => Math.min(h, l.exp), Infinity
 function loadPreset(id) {
   const p = PRESETS.find(x => x.id === id);
   S.preset = id;
-  S.market = MARKETS[p.market];
-  S.S0 = S.market.S0;
+  S.market = MARKET;
+  S.S0 = MARKET.S0;
+  S.sigma = SIGMA;
   S.legs = p.legs.map(makeLeg);
-  const opts = optionLegs().length ? optionLegs()
-    : ["call", "put"].flatMap(t => Object.entries(S.market[t]).map(([K, prem]) => ({ type: t, K: +K, prem, exp: S.market.life })));
-  S.sigma = fitSigma(S.S0, opts);
-  S.T = Number.isFinite(horizon()) ? horizon() : S.market.life;
+  S.T = Number.isFinite(horizon()) ? horizon() : MARKET.life;
 }
 
 // Value of one unit of a leg when T months remain until the first expiry (T = 0: at that expiry).

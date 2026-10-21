@@ -30,8 +30,8 @@ z
   <g id="axes_1">
    <g id="patch_2">
     <path d="M 3.3 130.03 
-L 109.10 130.03 
-L 109.10 18.31 
+L 105.08 130.03 
+L 105.08 18.31 
 L 3.3 18.31 
 z
 " style="fill: #ffffff"/>
@@ -39,52 +39,52 @@ z
    <g id="matplotlib.axis_1"/>
    <g id="matplotlib.axis_2"/>
    <g id="line2d_1">
-    <path d="M 23.45 55.64 
-L 26.41 61.40 
-L 29.05 66.05 
-L 31.68 70.28 
-L 34.31 74.08 
-L 36.62 77.05 
-L 38.92 79.68 
-L 41.23 81.99 
-L 43.53 83.97 
-L 45.50 85.41 
-L 47.48 86.60 
-L 49.45 87.55 
-L 51.43 88.25 
-L 53.40 88.72 
-L 55.38 88.94 
-L 57.35 88.92 
-L 59.33 88.66 
-L 61.30 88.15 
-L 63.28 87.40 
-L 65.25 86.41 
-L 67.23 85.18 
-L 69.20 83.71 
-L 71.51 81.68 
-L 73.81 79.33 
-L 76.11 76.64 
-L 78.42 73.63 
-L 81.05 69.78 
-L 83.68 65.50 
-L 86.32 60.78 
-L 88.95 55.64 
-L 88.95 55.64 
-" clip-path="url(#p0a04c819df)" style="fill: none; stroke: #1e3a8a; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 28.74 47.88 
+L 31.30 55.72 
+L 33.60 62.07 
+L 35.90 67.75 
+L 37.95 72.23 
+L 40.00 76.18 
+L 41.79 79.20 
+L 43.58 81.81 
+L 45.37 84.02 
+L 46.90 85.59 
+L 48.43 86.86 
+L 49.97 87.83 
+L 51.50 88.50 
+L 52.78 88.83 
+L 54.06 88.96 
+L 55.34 88.88 
+L 56.62 88.59 
+L 57.90 88.09 
+L 59.17 87.38 
+L 60.71 86.26 
+L 62.24 84.84 
+L 63.78 83.12 
+L 65.57 80.74 
+L 67.36 77.95 
+L 69.15 74.76 
+L 71.19 70.61 
+L 73.24 65.93 
+L 75.28 60.72 
+L 77.59 54.22 
+L 79.63 47.88 
+L 79.63 47.88 
+" clip-path="url(#pda4b1bb236)" style="fill: none; stroke: #1e3a8a; stroke-width: 2.6; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
-    <path d="M 56.20 130.03 
-L 56.20 18.31 
+    <path d="M 54.19 130.03 
+L 54.19 18.31 
 " style="fill: none; stroke: #334155; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
     <path d="M 3.3 74.17 
-L 109.10 74.17 
+L 105.08 74.17 
 " style="fill: none; stroke: #334155; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_1">
     <!-- ΔΠ -->
-    <g style="fill: #334155" transform="translate(37.159133 29.507525) scale(0.12 -0.12)">
+    <g style="fill: #334155" transform="translate(35.242002 29.507525) scale(0.12 -0.12)">
      <defs>
       <path id="NotoSansCJKsc-Regular-394" d="M 211 0 
 L 3987 0 
@@ -121,7 +121,7 @@ z
    </g>
    <g id="text_2">
     <!-- ΔS -->
-    <g style="fill: #334155" transform="translate(92.819388 87.831936) scale(0.12 -0.12)">
+    <g style="fill: #334155" transform="translate(88.841342 87.831936) scale(0.12 -0.12)">
      <defs>
       <path id="NotoSansCJKsc-Regular-53" d="M 1946 -83 
 C 2925 -83 3539 506 3539 1248 
@@ -149,7 +149,7 @@ z
    </g>
    <g id="text_3">
     <!-- ΘΔt -->
-    <g style="fill: #1e3a8a" transform="translate(59.979337 105.221146) scale(0.11 -0.11)">
+    <g style="fill: #1e3a8a" transform="translate(57.822565 105.221146) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-398" d="M 1568 2214 
 L 3181 2214 
@@ -197,7 +197,7 @@ z
    </g>
    <g id="text_4">
     <!-- 不动： -->
-    <g style="fill: #dc2626" transform="translate(19.422092 102.431763) scale(0.11 -0.11)">
+    <g style="fill: #dc2626" transform="translate(17.55289 102.431763) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-4e0d" d="M 3578 3059 
 C 4339 2547 5299 1792 5754 1299 
@@ -287,7 +287,7 @@ z
      <use xlink:href="#NotoSansCJKsc-Regular-ff1a" transform="translate(199.999969 0)"/>
     </g>
     <!-- 小亏 -->
-    <g style="fill: #dc2626" transform="translate(30.422092 114.582294) scale(0.11 -0.11)">
+    <g style="fill: #dc2626" transform="translate(28.55289 114.582294) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-5c0f" d="M 2970 5286 
 L 2970 154 
@@ -346,7 +346,7 @@ z
    </g>
    <g id="text_5">
     <!-- 大动： -->
-    <g style="fill: #16a34a" transform="translate(78.74648 35.071174) scale(0.11 -0.11)">
+    <g style="fill: #16a34a" transform="translate(80.094167 30.142351) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-5927" d="M 2950 5370 
 C 2944 4864 2950 4218 2854 3539 
@@ -372,7 +372,7 @@ z
      <use xlink:href="#NotoSansCJKsc-Regular-ff1a" transform="translate(199.999969 0)"/>
     </g>
     <!-- 赚 -->
-    <g style="fill: #16a34a" transform="translate(89.74648 47.221706) scale(0.11 -0.11)">
+    <g style="fill: #16a34a" transform="translate(91.094167 42.292882) scale(0.11 -0.11)">
      <defs>
       <path id="NotoSansCJKsc-Regular-8d5a" d="M 1318 4115 
 L 1318 2374 
@@ -484,7 +484,7 @@ z
    </g>
    <g id="text_6">
     <!-- Γ &gt; 0：买保险 -->
-    <g style="fill: #1e3a8a" transform="translate(19.246339 13.403308) scale(0.12 -0.12)">
+    <g style="fill: #1e3a8a" transform="translate(17.233352 13.403308) scale(0.12 -0.12)">
      <defs>
       <path id="NotoSansCJKsc-Medium-393" d="M 621 0 
 L 1363 0 
@@ -704,16 +704,16 @@ C -1.56 2.68 -0.80 3 0 3
 z
 " style="stroke: #ffffff; stroke-width: 1.2"/>
     </defs>
-    <g clip-path="url(#p0a04c819df)">
-     <use xlink:href="#m0c1bc98d0d" x="56.200714" y="88.959804" style="fill: #1e3a8a; stroke: #ffffff; stroke-width: 1.2"/>
+    <g clip-path="url(#pda4b1bb236)">
+     <use xlink:href="#m0c1bc98d0d" x="54.187727" y="88.959804" style="fill: #1e3a8a; stroke: #ffffff; stroke-width: 1.2"/>
     </g>
    </g>
   </g>
   <g id="axes_2">
    <g id="patch_5">
     <path d="M 125.5 130.03 
-L 231.30 130.03 
-L 231.30 18.31 
+L 227.28 130.03 
+L 227.28 18.31 
 L 125.5 18.31 
 z
 " style="fill: #ffffff"/>
@@ -721,66 +721,66 @@ z
    <g id="matplotlib.axis_3"/>
    <g id="matplotlib.axis_4"/>
    <g id="line2d_3">
-    <path d="M 145.65 92.71 
-L 148.61 86.95 
-L 151.25 82.29 
-L 153.88 78.07 
-L 156.51 74.27 
-L 158.82 71.30 
-L 161.12 68.66 
-L 163.43 66.35 
-L 165.73 64.38 
-L 167.70 62.94 
-L 169.68 61.75 
-L 171.65 60.80 
-L 173.63 60.09 
-L 175.60 59.63 
-L 177.58 59.41 
-L 179.55 59.43 
-L 181.53 59.69 
-L 183.50 60.20 
-L 185.48 60.94 
-L 187.45 61.93 
-L 189.43 63.16 
-L 191.40 64.64 
-L 193.71 66.66 
-L 196.01 69.02 
-L 198.31 71.71 
-L 200.62 74.72 
-L 203.25 78.57 
-L 205.88 82.85 
-L 208.52 87.56 
-L 211.15 92.71 
-L 211.15 92.71 
-" clip-path="url(#pdf448814ff)" style="fill: none; stroke: #1e3a8a; stroke-width: 2.6; stroke-linecap: round"/>
+    <path d="M 150.94 100.47 
+L 153.50 92.63 
+L 155.80 86.28 
+L 158.10 80.60 
+L 160.15 76.12 
+L 162.20 72.17 
+L 163.99 69.15 
+L 165.78 66.53 
+L 167.57 64.33 
+L 169.10 62.76 
+L 170.63 61.49 
+L 172.17 60.52 
+L 173.70 59.84 
+L 174.98 59.51 
+L 176.26 59.39 
+L 177.54 59.47 
+L 178.82 59.76 
+L 180.10 60.26 
+L 181.37 60.96 
+L 182.91 62.09 
+L 184.44 63.50 
+L 185.98 65.22 
+L 187.77 67.60 
+L 189.56 70.39 
+L 191.35 73.59 
+L 193.39 77.74 
+L 195.44 82.42 
+L 197.48 87.63 
+L 199.79 94.13 
+L 201.83 100.47 
+L 201.83 100.47 
+" clip-path="url(#pbef50c4d8d)" style="fill: none; stroke: #1e3a8a; stroke-width: 2.6; stroke-linecap: round"/>
    </g>
    <g id="patch_6">
-    <path d="M 178.40 130.03 
-L 178.40 18.31 
+    <path d="M 176.39 130.03 
+L 176.39 18.31 
 " style="fill: none; stroke: #334155; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_7">
     <path d="M 125.5 74.17 
-L 231.30 74.17 
+L 227.28 74.17 
 " style="fill: none; stroke: #334155; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_7">
     <!-- ΔΠ -->
-    <g style="fill: #334155" transform="translate(180.919796 29.507525) scale(0.12 -0.12)">
+    <g style="fill: #334155" transform="translate(178.810952 29.507525) scale(0.12 -0.12)">
      <use xlink:href="#NotoSansCJKsc-Regular-394"/>
      <use xlink:href="#NotoSansCJKsc-Regular-3a0" transform="translate(65.599991 0)"/>
     </g>
    </g>
    <g id="text_8">
     <!-- ΔS -->
-    <g style="fill: #334155" transform="translate(215.019388 87.831936) scale(0.12 -0.12)">
+    <g style="fill: #334155" transform="translate(211.041342 87.831936) scale(0.12 -0.12)">
      <use xlink:href="#NotoSansCJKsc-Regular-394"/>
      <use xlink:href="#NotoSansCJKsc-Regular-53" transform="translate(65.599991 0)"/>
     </g>
    </g>
    <g id="text_9">
     <!-- ΘΔt -->
-    <g style="fill: #1e3a8a" transform="translate(182.179337 49.361146) scale(0.11 -0.11)">
+    <g style="fill: #1e3a8a" transform="translate(180.022565 49.361146) scale(0.11 -0.11)">
      <use xlink:href="#NotoSansCJKsc-Regular-398"/>
      <use xlink:href="#NotoSansCJKsc-Regular-394" transform="translate(74.199982 0)"/>
      <use xlink:href="#NotoSansCJKsc-Regular-74" transform="translate(139.799973 0)"/>
@@ -788,32 +788,32 @@ L 231.30 74.17
    </g>
    <g id="text_10">
     <!-- 不动： -->
-    <g style="fill: #16a34a" transform="translate(141.622092 39.999998) scale(0.11 -0.11)">
+    <g style="fill: #16a34a" transform="translate(139.75289 39.999998) scale(0.11 -0.11)">
      <use xlink:href="#NotoSansCJKsc-Regular-4e0d"/>
      <use xlink:href="#NotoSansCJKsc-Regular-52a8" transform="translate(99.999985 0)"/>
      <use xlink:href="#NotoSansCJKsc-Regular-ff1a" transform="translate(199.999969 0)"/>
     </g>
     <!-- 小赚 -->
-    <g style="fill: #16a34a" transform="translate(152.622092 52.150529) scale(0.11 -0.11)">
+    <g style="fill: #16a34a" transform="translate(150.75289 52.150529) scale(0.11 -0.11)">
      <use xlink:href="#NotoSansCJKsc-Regular-5c0f"/>
      <use xlink:href="#NotoSansCJKsc-Regular-8d5a" transform="translate(99.999985 0)"/>
     </g>
    </g>
    <g id="text_11">
     <!-- 大动： -->
-    <g style="fill: #dc2626" transform="translate(200.94648 107.360586) scale(0.11 -0.11)">
+    <g style="fill: #dc2626" transform="translate(202.294167 112.28941) scale(0.11 -0.11)">
      <use xlink:href="#NotoSansCJKsc-Regular-5927"/>
      <use xlink:href="#NotoSansCJKsc-Regular-52a8" transform="translate(99.999985 0)"/>
      <use xlink:href="#NotoSansCJKsc-Regular-ff1a" transform="translate(199.999969 0)"/>
     </g>
     <!-- 亏 -->
-    <g style="fill: #dc2626" transform="translate(211.94648 119.511117) scale(0.11 -0.11)">
+    <g style="fill: #dc2626" transform="translate(213.294167 124.439941) scale(0.11 -0.11)">
      <use xlink:href="#NotoSansCJKsc-Regular-4e8f"/>
     </g>
    </g>
    <g id="text_12">
     <!-- Γ &lt; 0：卖保险 -->
-    <g style="fill: #1e3a8a" transform="translate(141.446339 13.403308) scale(0.12 -0.12)">
+    <g style="fill: #1e3a8a" transform="translate(139.433352 13.403308) scale(0.12 -0.12)">
      <defs>
       <path id="NotoSansCJKsc-Medium-3c" d="M 3405 877 
 L 3405 1504 
@@ -896,18 +896,18 @@ z
     </g>
    </g>
    <g id="line2d_4">
-    <g clip-path="url(#pdf448814ff)">
-     <use xlink:href="#m0c1bc98d0d" x="178.400714" y="59.386863" style="fill: #1e3a8a; stroke: #ffffff; stroke-width: 1.2"/>
+    <g clip-path="url(#pbef50c4d8d)">
+     <use xlink:href="#m0c1bc98d0d" x="176.387727" y="59.386863" style="fill: #1e3a8a; stroke: #ffffff; stroke-width: 1.2"/>
     </g>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p0a04c819df">
-   <rect x="3.3" y="18.313333" width="105.801429" height="111.72"/>
+  <clipPath id="pda4b1bb236">
+   <rect x="3.3" y="18.313333" width="101.775455" height="111.72"/>
   </clipPath>
-  <clipPath id="pdf448814ff">
-   <rect x="125.5" y="18.313333" width="105.801429" height="111.72"/>
+  <clipPath id="pbef50c4d8d">
+   <rect x="125.5" y="18.313333" width="101.775455" height="111.72"/>
   </clipPath>
  </defs>
 </svg>

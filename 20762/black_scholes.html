@@ -129,7 +129,7 @@ const TXT = {
     greekTabs: ["Delta", "Gamma", "Theta", "Vega", "Rho"],
     sameBoth: "看涨与看跌相同", greekX: "股价 S ($)", maturity: t => `T = ${t} 年`,
     greekHead: (s, t) => `S₀ = ${s}、T = ${t} 年的希腊字母`, greekCols: ["", "看涨", "看跌"],
-    greekRows: ["Delta Δ", "Gamma Γ", "Theta 每年", "Theta 每日 (÷365)", "Theta 每交易日 (÷252)",
+    greekRows: ["Delta Δ", "Gamma Γ", "Theta 每年", "Theta 每交易日 (÷252)",
                 "Vega 每 1.00", "Vega 每 1%", "Rho 每 1.00", "Rho 每 1%"],
     hints: [
       "试试：拖动图上的股价（或改 K、σ）看 d₁、d₂ 和价格怎么变；深度实值时价值贴近内在价值，时间价值在 S₀ 接近 K 时最大；把 q 改成 3%，看涨变便宜、看跌变贵。",
@@ -170,7 +170,7 @@ const TXT = {
     greekTabs: ["Delta", "Gamma", "Theta", "Vega", "Rho"],
     sameBoth: "same for call and put", greekX: "Stock price S ($)", maturity: t => `T = ${t} yr`,
     greekHead: (s, t) => `Greeks at S₀ = ${s}, T = ${t} yr`, greekCols: ["", "Call", "Put"],
-    greekRows: ["Delta Δ", "Gamma Γ", "Theta per year", "Theta per day (÷365)", "Theta per trading day (÷252)",
+    greekRows: ["Delta Δ", "Gamma Γ", "Theta per year", "Theta per trading day (÷252)",
                 "Vega per 1.00", "Vega per 1%", "Rho per 1.00", "Rho per 1%"],
     hints: [
       "Try: drag the stock price on the chart (or change K, σ) and watch d₁, d₂ and the price; deep in the money the value hugs the intrinsic value and time value peaks near S₀ = K; set q to 3%: the call gets cheaper, the put dearer.",
@@ -522,7 +522,7 @@ function sideGreeks(p) {
   const b = bs(p), c = b.theta.call, u = b.theta.put;
   const rows = [
     [b.delta.call, b.delta.put, 4], [b.gamma, b.gamma, 5],
-    [c, u, 4], [c / 365, u / 365, 5], [c / 252, u / 252, 5],
+    [c, u, 4], [c / 252, u / 252, 5],
     [b.vega, b.vega, 4], [b.vega / 100, b.vega / 100, 4],
     [b.rho.call, b.rho.put, 4], [b.rho.call / 100, b.rho.put / 100, 4],
   ];
