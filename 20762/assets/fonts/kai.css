@@ -1,11 +1,13 @@
 /* FandolKai (楷体), GPL + font exception (see COPYING, README), subset to the characters the
    decks use by ../../../make_kai_subset.py. Only CJK punctuation, ideographs and fullwidth forms
    use it (unicode-range must match KAI_RANGES there); Latin text keeps the system sans font.
-   Regular weight only: bold Chinese text is synthesised by the browser. */
+   Regular weight only: bold Chinese text is synthesised by the browser.
+   font-display: block keeps Chinese text hidden while the font downloads (up to 3 s) instead of
+   drawing it in the device's own font first and then switching. */
 @font-face {
   font-family: "FandolKai";
   src: url("FandolKai-Regular.subset.woff2") format("woff2");
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
   unicode-range: U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE4F, U+FF00-FFEF;
 }
